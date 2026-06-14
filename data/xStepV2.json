@@ -3,17 +3,11 @@
     "name": "xStep V2",
     "author": "IIINePtunEIII",
     "creators": ["IIINePtuneEIII"],
-    "verifier": ,
+    "verifier": "Stetkos",
     "verification": "https://www.youtube.com/watch?v=K9rBb0HVvMg",
     "percentToQualify": "100",
     "password": "no copy for u",
     "records": [
-        {
-            "user": "Stetkos",
-            "link": "https://www.youtube.com/watch?v=K9rBb0HVvMg",
-            "percent": 100,
-            "hz": 60
-        },
          {
             "user": "trumandigma",
             "link": "https://www.youtube.com/watch?v=K9rBb0HVvMg",

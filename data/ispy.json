@@ -3,11 +3,16 @@
     "name": "iSpyWithMyLittleEye",
     "author": "Voxicat",
     "creators": ["Voxicat"],
-    "verifier": "trumandigma",
+    "verifier": ,
     "verification": "https://www.youtube.com/watch?v=Ow7nDnZTbDw",
     "percentToQualify": "84",
     "password": "idk",
     "records": [
-        
+         {
+            "user": "trumandigma",
+            "link": "https://www.youtube.com/watch?v=Ow7nDnZTbDw",
+            "percent": 100,
+            "hz": 120
+        },
     ]
 }

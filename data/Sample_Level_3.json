@@ -1,24 +1,12 @@
 {
-    "id": 57436521,
+    "id": 0,
     "name": "Theory of Everything 2",
-    "author": "Different Publisher",
+    "author": "Robtop",
     "creators": ["Robtop"],
     "verifier": "trumandigma",
-    "verification": "https://www.youtube.com/watch?v=ISTl28wKSXc",
-    "percentToQualify": "100",
-    "password": "46290",
+    "verification": "https://www.youtube.com/watch?v=1YI4oUUiV80",
+    "percentToQualify": "82",
+    "password": "Locked",
     "records": [
-        {
-            "user": "Sample_Victor_1",
-            "link": "https://www.youtube.com/watch?v=MgJeijBGKHU",
-            "percent": 100,
-            "hz": 360
-        },
-        {
-            "user": "Sample_Victor_2",
-            "link": "https://www.youtube.com/watch?v=MgJeijBGKHU",
-            "percent": 100,
-            "hz": 120
-        }
     ]
 }

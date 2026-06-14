@@ -9,6 +9,12 @@
     "password": "no copy for u",
     "records": [
         {
+            "user": "Stetkos",
+            "link": "https://www.youtube.com/watch?v=K9rBb0HVvMg",
+            "percent": 100,
+            "hz": 60
+        },
+         {
             "user": "trumandigma",
             "link": "https://www.youtube.com/watch?v=K9rBb0HVvMg",
             "percent": 100,

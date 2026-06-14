@@ -1,24 +1,19 @@
 {
     "id": 57436521,
-    "name": "Theory of Everything 2",
-    "author": "Different Publisher",
-    "creators": ["Robtop"],
-    "verifier": "trumandigma",
-    "verification": "https://www.youtube.com/watch?v=ISTl28wKSXc",
+    "name": "xStep V2",
+    "author": "IIINePtunEIII",
+    "creators": ["IIINePtuneEIII"],
+    "verifier": "Stetkos",
+    "verification": "https://www.youtube.com/watch?v=K9rBb0HVvMg",
     "percentToQualify": "100",
-    "password": "46290",
+    "password": "no copy for u",
     "records": [
         {
-            "user": "Sample_Victor_1",
-            "link": "https://www.youtube.com/watch?v=MgJeijBGKHU",
-            "percent": 100,
-            "hz": 360
-        },
-        {
-            "user": "Sample_Victor_2",
-            "link": "https://www.youtube.com/watch?v=MgJeijBGKHU",
+            "user": "trumandigma",
+            "link": "https://www.youtube.com/watch?v=K9rBb0HVvMg",
             "percent": 100,
             "hz": 120
         }
+        
     ]
 }

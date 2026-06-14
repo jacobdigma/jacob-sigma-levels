@@ -4,21 +4,10 @@
     "author": "IIINePtunEIIII",
     "creators": ["IIINePtunEIIII"],
     "verifier": "Stetkos",
-    "verification": "https://www.youtube.com/watch?v=ISTl28wKSXc",
-    "percentToQualify": "100",
-    "password": "46290",
+    "verification": "https://www.youtube.com/watch?v=Kkrp9G-vYeE",
+    "percentToQualify": "88",
+    "password": "Locked",
     "records": [
-        {
-            "user": "Sample_Victor_1",
-            "link": "https://www.youtube.com/watch?v=MgJeijBGKHU",
-            "percent": 100,
-            "hz": 360
-        },
-        {
-            "user": "Sample_Victor_2",
-            "link": "https://www.youtube.com/watch?v=MgJeijBGKHU",
-            "percent": 100,
-            "hz": 120
-        }
+       
     ]
 }

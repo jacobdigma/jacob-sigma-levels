@@ -3,6 +3,7 @@
     "name": "Verity",
     "author": "Serponge",
     "creators": ["Serponge"],
+    "verifier": "trumandigma",
     "verification": "https://www.youtube.com/watch?v=p15w9MB2eAc",
     "percentToQualify": "79",
     "password": "idk",

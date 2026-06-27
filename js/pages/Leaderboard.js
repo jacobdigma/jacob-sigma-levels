@@ -3,11 +3,26 @@ import { localize } from '../util.js';
 
 import Spinner from '../components/Spinner.js';
 
-// Globální konfigurace balíčků
+// Globální konfigurace balíčků - přesně podle tvého Packs.js
 const packsConfig = [
-    { name: "Sapphire Pack", color: "#0070ff", points: 15, levels: ["Verity", "B", "Deadlocked"] },
-    { name: "Ruby Pack", color: "#ff0000", points: 25, levels: ["Theory of Everything 2", "Blackfire Backfire"] },
-    { name: "Quantum Pack", color: "#00ffcc", points: 50, levels: ["Speed Racer", "Clubstep"] }
+    { 
+        name: "Neptune Pack 1", 
+        color: "#0070ff", 
+        points: 50, 
+        levels: ["xStep V2", "Clutterfunk V2", "Electroman Adventures V2"] 
+    },
+    { 
+        name: "Digma Pack", 
+        color: "#ff0000", 
+        points: 75, 
+        levels: ["m tolot", "Speed Racer", "Blackfire Backfire"] 
+    },
+    { 
+        name: "RobTop Pack", 
+        color: "#00ffcc", 
+        points: 100, 
+        levels: ["Deadlocked", "Theory of Everything 2", "Clubstep"] 
+    }
 ];
 
 // Pomocná funkce pro ověření, zda hráč splnil konkrétní balíček
@@ -56,7 +71,7 @@ export default {
                 player.total += bonusPoints;
             });
             
-            // Seřazení žebříčku podle bodů
+            // Seřazení žebříčku podle nových bodů
             leaderboard.sort((a, b) => b.total - a.total);
         }
 
@@ -99,7 +114,7 @@ export default {
                         <h1>#{{ selected + 1 }} {{ entry.user }}</h1>
                         <h3>{{ entry.total }}</h3>
                         
-                        <!-- DYNAMICKÉ BALÍČKY (Čistý styl bez rozbití okolního CSS) -->
+                        <!-- SEKCIE BALÍČKŮ V PROFILU -->
                         <div v-if="hasAnyPack(entry)" style="margin-top: 15px; margin-bottom: 25px;">
                             <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 10px;">Completed Packs</h2>
                             <div style="display: flex; flex-wrap: wrap; gap: 10px;">

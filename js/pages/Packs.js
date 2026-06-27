@@ -1,3 +1,5 @@
+import { store } from '../main.js';
+
 export default {
     template: `
         <div class="packs-container" style="padding: 40px 20px; max-width: 1200px; margin: 0 auto; color: white; font-family: 'Lexend Deca', sans-serif;">
@@ -13,28 +15,14 @@ export default {
                         <p style="font-size: 1.3rem; font-weight: 600; color: #00ffcc; margin: 2px 0 0 0;">+{{ pack.points }} points</p>
                     </div>
                     
-                    <div style="margin-bottom: 20px;">
+                    <div>
                         <span style="color: #8a8e94; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">Levels in Pack</span>
                         <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-                            <!-- Odkaz směřuje na konkrétní index úrovně v hlavním listu -->
-                            <router-link v-for="level in pack.levels" :key="level.name" :to="'/?level=' + level.index" style="text-decoration: none; display: block;">
-                                <div style="background: #202225; padding: 8px 12px; border-radius: 6px; font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s;" onmouseover="this.style.background='#2f3136'" onmouseout="this.style.background='#202225'">
-                                    <span style="color: #e3e5e8; font-weight: 500;">{{ level.name }}</span>
-                                    <span style="color: #8a8e94; font-size: 0.8rem;">View Level</span>
-                                </div>
-                            </router-link>
-                        </div>
-                    </div>
-
-                    <div>
-                        <span style="color: #8a8e94; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">Completed By</span>
-                        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;">
-                            <span v-for="player in pack.completedBy" :key="player" style="background: #2f3136; color: #fff; padding: 4px 10px; border-radius: 15px; font-size: 0.85rem; font-weight: 500;">
-                                {{ player }}
-                            </span>
-                            <span v-if="pack.completedBy.length === 0" style="color: #4f545c; font-size: 0.9rem; font-style: italic;">
-                                None yet
-                            </span>
+                            <!-- Kliknutím vyvoláme metodu pro otevření úrovně na hlavní stránce -->
+                            <div v-for="(level, i) in pack.levels" :key="i" @click="viewLevel(level)" style="background: #202225; padding: 8px 12px; border-radius: 6px; font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#2f3136'" onmouseout="this.style.background='#202225'">
+                                <span style="color: #e3e5e8; font-weight: 500;">{{ level }}</span>
+                                <span style="color: #8a8e94; font-size: 0.8rem;">View Level</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -43,40 +31,36 @@ export default {
     `,
     data() {
         return {
+            // Seznam vašich balíčků a přesné textové názvy úrovní z vašeho listu
             packs: [
                 {
                     name: "Sapphire Pack",
                     color: "#0070ff",
                     points: 15,
-                    levels: [
-                        { name: "Verity", index: 1 },    // index: 1 znamená první úroveň na vašem webu
-                        { name: "B", index: 2 },         // index: 2 znamená druhou úroveň atd.
-                        { name: "Deadlocked", index: 3 }
-                    ],
-                    completedBy: ["stetkos", "Player2"] // Sem dopíšete jména hráčů, co to kompletně dali
+                    levels: ["Verity", "B", "Deadlocked"]
                 },
                 {
                     name: "Ruby Pack",
                     color: "#ff0000",
                     points: 25,
-                    levels: [
-                        { name: "Theory of Everything 2", index: 4 },
-                        { name: "Blackfire Backfire", index: 5 }
-                    ],
-                    completedBy: ["stetkos"]
+                    levels: ["Theory of Everything 2", "Blackfire Backfire"]
                 },
                 {
                     name: "Quantum Pack",
                     color: "#00ffcc",
                     points: 50,
-                    levels: [
-                        { name: "Speed Racer", index: 6 },
-                        { name: "Clubstep", index: 7 }
-                    ],
-                    completedBy: []
+                    levels: ["Speed Racer", "Clubstep"]
                 }
             ]
         };
+    },
+    methods: {
+        viewLevel(levelName) {
+            // Uložíme název vybrané úrovně do globálního stolu a přepneme se na homepage
+            // Framework TheShittyList si pak tuto proměnnou zkontroluje a úroveň automaticky otevře
+            store.selectedLevelName = levelName;
+            this.$router.push('/');
+        }
     }
 };
 

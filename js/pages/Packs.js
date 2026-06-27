@@ -30,3 +30,19 @@
     ]
   }
 ]
+// Příklad jednoduchého Hash Routeru v čistém JavaScriptu
+function handleRoute() {
+    const path = window.location.hash || '#/';
+
+    if (path === '#/') {
+        renderLeaderboard();
+    } else if (path === '#/packs') {
+        renderPacks(); // Tato funkce vykreslí balíčky
+    } else {
+        render404();
+    }
+}
+
+// Sledování změn v URL adrese
+window.addEventListener('hashchange', handleRoute);
+window.addEventListener('load', handleRoute);

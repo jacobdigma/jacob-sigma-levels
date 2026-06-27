@@ -56,12 +56,9 @@ export default {
     async mounted() {
         try {
             const res = await fetchList();
-            // Pokud fetchList vrátí pole objektů s chybovým stavem, vytáhneme čistá data
             if (Array.isArray(res)) {
                 this.listData = res;
-            } else if (res && Array.isArray(res[0])) {
-                this.listData = res[0];
-            } else if (res && res.list) {
+            } else if (res && Array.isArray(res.list)) {
                 this.listData = res.list;
             }
         } catch (e) {
@@ -69,38 +66,32 @@ export default {
         }
     },
     methods: {
-           methods: {
         getLevelRank(levelName) {
-            if (!this.listData || this.listData.length === 0) return "...";
+            if (!this.listData || this.listData.length === 0) {
+                return this.getBackupRank(levelName);
+            }
             
-            // Hledáme shodu názvu napříč celým listem
             const index = this.listData.findIndex(l => {
                 if (!l) return false;
-                
-                // Šablona může vracet buď čistý text, nebo objekt { name: "..." }, nebo objekt { level: "..." }
                 const nameToTest = typeof l === 'string' ? l : (l.name || l.level || '');
-                
                 return nameToTest.toLowerCase().trim() === levelName.toLowerCase().trim();
             });
             
-            // Pokud najde index, vrátí reálnou pozici (index + 1), jinak jako poslední záchranu zkusíme fixní pozice, ať tam nesvítí otazník
-            if (index !== -1) {
-                return index + 1;
-            } else {
-                // ZÁCHRANNÝ SYSTÉM: Pokud se názvy někde liší, kód natvrdo vrátí správné pozice podle abecedy/vašeho listu
-                const backupRanks = {
-                    "deadlocked": 3,
-                    "theory of everything 2": 4,
-                    "blackfire backfire": 5,
-                    "speed racer": 6,
-                    "clubstep": 7,
-                    "electroman adventures v2": 9,
-                    "xstep v2": 12,
-                    "clutterfunk v2": 13,
-                    "m tolot": 14
-                };
-                return backupRanks[levelName.toLowerCase().trim()] || "?";
-            }
+            return index !== -1 ? index + 1 : this.getBackupRank(levelName);
+        },
+        getBackupRank(levelName) {
+            const backupRanks = {
+                "deadlocked": 3,
+                "theory of everything 2": 4,
+                "blackfire backfire": 5,
+                "speed racer": 6,
+                "clubstep": 7,
+                "electroman adventures v2": 9,
+                "xstep v2": 12,
+                "clutterfunk v2": 13,
+                "m tolot": 14
+            };
+            return backupRanks[levelName.toLowerCase().trim()] || "?";
         }
     }
-
+};

@@ -2,11 +2,13 @@ import routes from './routes.js';
 
 export const store = Vue.reactive({
     dark: JSON.parse(localStorage.getItem('dark')) || false,
+    selectedLevelName: null, // TENTO ŘÁDEK PŘIDEJTE PRO PŘESMĚROVÁNÍ Z BALÍČKŮ
     toggleDark() {
         this.dark = !this.dark;
         localStorage.setItem('dark', JSON.stringify(this.dark));
     },
 });
+
 
 const app = Vue.createApp({
     data: () => ({ store }),

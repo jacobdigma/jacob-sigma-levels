@@ -87,8 +87,8 @@ export default {
                 "speed racer": 6,
                 "clubstep": 7,
                 "electroman adventures v2": 9,
-                "xstep v2": 12,
-                "clutterfunk v2": 13,
+                "xstep v2": 13,
+                "clutterfunk v2": 10,
                 "m tolot": 14
             };
             return backupRanks[levelName.toLowerCase().trim()] || "?";

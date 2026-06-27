@@ -19,7 +19,6 @@ export default {
                         <span style="color: #8a8e94; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">Levels in Pack</span>
                         <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
                             <div v-for="(levelName, i) in pack.levels" :key="i" style="background: #202225; padding: 10px 14px; border-radius: 6px; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
-                                <!-- Spočítá a zobrazí pozici automaticky -->
                                 <span style="color: #8a8e94; font-weight: 600; min-width: 35px;">#{{ getLevelRank(levelName) }}</span>
                                 <span style="color: #e3e5e8; font-weight: 500;">{{ levelName }}</span>
                             </div>
@@ -31,7 +30,7 @@ export default {
     `,
     data() {
         return {
-            listData: [], // Sem bezpečně uložíme načtené úrovně
+            listData: [],
             packs: [
                 {
                     name: "Neptune Pack 1",
@@ -56,26 +55,32 @@ export default {
     },
     async mounted() {
         try {
-            // Správné ošetření asynchronního požadavku z content.js
             const res = await fetchList();
+            // Pokud fetchList vrátí pole objektů s chybovým stavem, vytáhneme čistá data
             if (Array.isArray(res)) {
                 this.listData = res;
             } else if (res && Array.isArray(res[0])) {
                 this.listData = res[0];
+            } else if (res && res.list) {
+                this.listData = res.list;
             }
         } catch (e) {
-            console.error("Nepodařilo se automaticky načíst pozice úrovní:", e);
+            console.error(e);
         }
     },
     methods: {
-        // Funkce se podívá do listData a zjistí přesný index úrovně podle jména
         getLevelRank(levelName) {
             if (!this.listData || this.listData.length === 0) return "...";
             
-            // Vyhledá shodu jména úrovně (ignoruje mezery na začátku/konci)
-            const index = this.listData.findIndex(l => l.level && l.level.toLowerCase().trim() === levelName.toLowerCase().trim());
+            const index = this.listData.findIndex(l => {
+                if (!l) return false;
+                
+                // Zkusíme najít text názvu levelu ve všech možných proměnných šablony
+                const nameToTest = l.level || l.name || (typeof l === 'string' ? l : '');
+                
+                return nameToTest.toLowerCase().trim() === levelName.toLowerCase().trim();
+            });
             
-            // Pokud najde, vrátí pozici (index + 1), jinak vrátí otazník
             return index !== -1 ? index + 1 : "?";
         }
     }

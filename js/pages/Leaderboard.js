@@ -70,12 +70,12 @@ export default {
         // Skrytí načítacího kolečka
         this.loading = false;
     },
-    template: `
+        template: `
         <main v-if="loading">
             <Spinner></Spinner>
         </main>
         <main v-else class="page-leaderboard-container">
-            <div class="div class="page-leaderboard">
+            <div class="page-leaderboard">
                 <div class="error-container">
                     <p class="error" v-if="err.length > 0">
                         Leaderboard may be incorrect, as the following levels could not be loaded: {{ err.join(', ') }}
@@ -101,11 +101,11 @@ export default {
                 </div>
                 
                 <div class="player-container">
-                    <div class="div class="player" v-if="entry">
+                    <div class="player" v-if="entry">
                         <h1>#{{ selected + 1 }} {{ entry.user }}</h1>
                         <h3>{{ entry.total }}</h3>
                         
-                        <!-- NOVÁ SEKCE: COMPLETED PACKS PRO PROFILE HRÁČE -->
+                        <!-- COMPLETED PACKS SECTION -->
                         <div v-if="hasAnyPack(entry)" style="margin-top: 25px; margin-bottom: 25px; background: #111214; padding: 15px; border-radius: 8px;">
                             <h2 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; color: #8a8e94; text-transform: uppercase; letter-spacing: 0.5px;">Completed Packs</h2>
                             <div style="display: flex; flex-wrap: wrap; gap: 10px;">
@@ -167,6 +167,7 @@ export default {
             </div>
         </main>
     `,
+
     methods: {
         localize,
         hasCompletedPack(entry, pack) {

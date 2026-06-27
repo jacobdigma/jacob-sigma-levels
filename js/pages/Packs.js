@@ -34,22 +34,22 @@ export default {
             // Seznam vašich balíčků a přesné textové názvy úrovní z vašeho listu
             packs: [
                 {
-                    name: "Sapphire Pack",
+                    name: "Neptune Pack 1",
                     color: "#0070ff",
-                    points: 15,
-                    levels: ["Verity", "B", "Deadlocked"]
-                },
-                {
-                    name: "Ruby Pack",
-                    color: "#ff0000",
-                    points: 25,
-                    levels: ["Theory of Everything 2", "Blackfire Backfire"]
-                },
-                {
-                    name: "Quantum Pack",
-                    color: "#00ffcc",
                     points: 50,
-                    levels: ["Speed Racer", "Clubstep"]
+                    levels: ["xStep V2", "Clutterfunk V2", "Electroman Adventures V2"]
+                },
+                {
+                    name: "Digma Pack",
+                    color: "#ff0000",
+                    points: 75,
+                    levels: ["m tolot", "Speed Racer", "Blackfire Backfire"]
+                },
+                {
+                    name: "RobTop Pack",
+                    color: "#00ffcc",
+                    points: 100,
+                    levels: ["Deadlocked", "Theory of Everything 2", "Clubstep"]
                 }
             ]
         };

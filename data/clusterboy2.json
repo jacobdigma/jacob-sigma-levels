@@ -8,6 +8,11 @@
     "percentToQualify": "88",
     "password": "Locked",
     "records": [
-       
+        {
+            "user": "trumandigma",
+            "link": "https://www.youtube.com/watch?v=2kE93FgLRcs",
+            "percent": 100,
+            "hz": 120
+        }
     ]
 }

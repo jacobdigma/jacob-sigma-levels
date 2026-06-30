@@ -7,7 +7,7 @@ export default {
             </div>
             
             <div class="rules-div" style="display: flex; flex-direction: column; gap: 30px;">
-                <!-- Verze 1.4.0 -->
+                <!-- Version 1.4.0 -->
                 <div class="update-entry" style="border-left: 4px solid #4ba3ff; padding-left: 20px; margin-bottom: 10px;">
                     <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px;">
                         <h2 class="type-title" style="font-size: 1.6rem; font-weight: bold; margin: 0; color: var(--text-color);">Verze 1.4.0</h2>
@@ -19,11 +19,11 @@ export default {
                     </ul>
                 </div>
 
-                <!-- Verze 1.3.0 -->
+                <!-- Version 1.3.0 -->
                 <div class="update-entry" style="border-left: 4px solid var(--border-color); padding-left: 20px;">
                     <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px;">
                         <h2 class="type-title" style="font-size: 1.6rem; font-weight: bold; margin: 0; color: var(--text-color); opacity: 0.8;">Verze 1.3.0</h2>
-                        <span class="type-body" style="font-size: 0.9rem; color: var(--text-color); opacity: 0.5;">15. 05. 2026</span>
+                        <span class="type-body" style="font-size: 0.9rem; color: var(--text-color); opacity: 0.5;">27. 06. 2026</span>
                     </div>
                     <ul class="type-body" style="list-style-type: square; padding-left: 20px; line-height: 1.8; color: var(--text-color); opacity: 0.8; font-size: 1.05rem;">
                         <li style="margin-bottom: 8px;">Added Packs</li>

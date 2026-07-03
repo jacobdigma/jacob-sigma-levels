@@ -13,7 +13,7 @@ const packsConfig = [
         name: "Digna Pack",
         color: "#ff0000",
         points: 75,
-        levels: ["n tolot", "Speed Racer", "Blackfire Backfire"]
+        levels: ["m tolot", "Speed Racer", "Blackfire Backfire"]
     },
     {
         name: "RobTop Pack",

@@ -10,7 +10,7 @@ const packsConfig = [
         levels: ["xStep V2", "Clutterfunk V2", "Electroman Adventures V2"]
     },
     {
-        name: "Digma Pack",
+        name: "Digna Pack",
         color: "#ff0000",
         points: 75,
         levels: ["n tolot", "Speed Racer", "Blackfire Backfire"]
@@ -77,7 +77,7 @@ export default {
                 </div>
             </div>
 
-            <!-- PROSTŘEDNÍ PANEL: Detail hráče (PŘESNÝ POINTERCRATE STYL) -->
+            <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
             <div class="player-container surface">
                 <div v-if="entry" class="player">
                     <h1 class="type-title player-name">{{ entry.name }}</h1>
@@ -108,7 +108,6 @@ export default {
                         </div>
                     </div>
 
-                    <!-- SEZNAM DÉMONŮ JAKO JEDEN ODSTAVEC TEXTU ODDĚLENÝ POMMLČKAMI -->
                     <h2 class="type-title section-title-pointercrate">Demons completed</h2>
                     <div v-if="sortedDemons.length === 0" class="type-body no-data">None</div>
                     
@@ -118,7 +117,6 @@ export default {
                         </template>
                     </div>
 
-                    <!-- SEZNAM VERIFIKACÍ (POINTERCRATE STYL) -->
                     <h2 class="type-title section-title-pointercrate" style="margin-top: 30px;">Demons verified</h2>
                     <div v-if="verifiedDemons.length === 0" class="type-body no-data">None</div>
                     <div v-else class="pointercrate-demons-paragraph">
@@ -127,7 +125,6 @@ export default {
                         </template>
                     </div>
 
-                    <!-- SEKCE PROGRESS (POINTERCRATE STYL) -->
                     <h2 class="type-title section-title-pointercrate" style="margin-top: 30px;">Progress on</h2>
                     <div v-if="!entry.progressed || entry.progressed.length === 0" class="type-body no-data">None</div>
                     <div v-else class="pointercrate-demons-paragraph">
@@ -140,7 +137,7 @@ export default {
                 <div v-else class="player no-data"><p class="type-body">Select a player to view stats.</p></div>
             </div>
 
-            <!-- PRAVÝ PANEL: Výběr řazení a splněné balíčky -->
+            <!-- PRAVÝ PANEL -->
             <div class="packs-container surface">
                 <div style="margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 15px;">
                     <p class="type-body stats-label" style="text-align: center;">Order completed demons</p>
@@ -190,10 +187,10 @@ export default {
         entry() {
             if (this.filteredLeaderboard.length === 0) return null;
             if (!this.selectedPlayerName) {
-                return this.filteredLeaderboard;
+                return this.filteredLeaderboard[0];
             }
             const found = this.filteredLeaderboard.find(p => p.name === this.selectedPlayerName);
-            return found || this.filteredLeaderboard;
+            return found || this.filteredLeaderboard[0];
         },
         combinedDemons() {
             if (!this.entry) return [];
@@ -213,7 +210,6 @@ export default {
             }
             return list;
         },
-        // Seznam pouze verifikovaných démonů pro samostatnou sekci
         verifiedDemons() {
             if (!this.entry || !this.entry.verified) return [];
             const list = [];
@@ -229,14 +225,13 @@ export default {
             });
             return list.sort((a, b) => a.level.localeCompare(b.level));
         },
-        // Abecední řazení uvnitř skupin (Main -> Extended -> Legacy)
         sortedDemons() {
             const mainList = this.combinedDemons.filter(d => d.listRank.startsWith('#')).sort((a, b) => a.level.localeCompare(b.level));
             const extendedList = this.combinedDemons.filter(d => d.listRank === 'Extended').sort((a, b) => a.level.localeCompare(b.level));
             const legacyList = this.combinedDemons.filter(d => d.listRank === 'Legacy').sort((a, b) => a.level.localeCompare(b.level));
             return [...mainList, ...extendedList, ...legacyList];
         },
-        // Automatický výpočet nejtěžšího démona podle nejmenšího ranku (nejvyšší pozice)
+        // BEZPEČNÝ VÝPOČET NEJTĚŽŠÍHO DÉMONA (Zabraňuje zaseknutí loading screenu)
         hardestDemon() {
             if (!this.combinedDemons || this.combinedDemons.length === 0) return 'None';
             const sortedByDifficulty = [...this.combinedDemons].sort((a, b) => {
@@ -244,12 +239,11 @@ export default {
                 const rB = b.rank || 9999;
                 return rA - rB;
             });
-            return sortedByDifficulty[0].level;
+            return sortedByDifficulty[0] ? sortedByDifficulty[0].level : 'None';
         },
         stats() {
             const counts = { main: 0, extended: 0, legacy: 0 };
             const allDemons = [...this.combinedDemons, ...this.verifiedDemons];
-            // Odstraníme duplicity pro případ, že level zároveň splnil i verifikoval
             const uniqueLevels = [];
             const uniqueDemons = allDemons.filter(d => {
                 if (uniqueLevels.includes(d.level)) return false;
@@ -315,7 +309,7 @@ export default {
             leaderboard.sort((a, b) => b.total - a.total);
             
             if (leaderboard.length > 0) {
-                this.selectedPlayerName = leaderboard.name;
+                this.selectedPlayerName = leaderboard[0].name;
             }
         }
         

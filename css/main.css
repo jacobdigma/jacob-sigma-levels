@@ -96,7 +96,7 @@ input[type="checkbox"] {
 }
 
 /* ==========================================================================
-   POINTERCRATE LEADERBOARD DESIGN - ČISTÁ VERZE BEZ JMÉNA HRÁČE
+   POINTERCRATE STATS VIEWER - ABSOLUTNĚ PŘESNÝ DESIGN
    ========================================================================== */
 
 .page-leaderboard-container {
@@ -119,57 +119,70 @@ input[type="checkbox"] {
     box-sizing: border-box !important;
 }
 
-.board-container table, 
-.player-container table {
+.board-container table {
     width: 100% !important;
     border-collapse: collapse !important;
 }
 
-.board-container tr, 
-.player-container tr {
+.board-container tr {
     border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
 }
 
-.board-container td, 
-.player-container td {
+.board-container td {
     padding: 12px 8px !important;
     vertical-align: middle !important;
 }
 
-/* Oprava šířek a zarovnání */
 .board-container td.rank { width: 50px !important; }
 .board-container td.total { text-align: right !important; width: 90px !important; color: #4ba3ff !important; font-weight: bold !important; }
-.player-container td.score-val { text-align: right !important; width: 110px !important; }
 
-/* STYLY TEXTŮ A ODKAZŮ */
-.player-container .demon-link {
-    text-decoration: none !important;
+/* ODSTAVEC S DÉMONY (STYL POINTERCRATE) */
+.pointercrate-demons-paragraph {
+    text-align: left !important;
+    line-height: 1.8 !important;
     font-size: 1.05rem !important;
+    margin-top: 10px !important;
+    color: #fff !important;
+    word-wrap: break-word !important;
+}
+
+/* Odkazy na démony uvnitř odstavce */
+.pointercrate-demon-inline-link {
+    text-decoration: none !important;
+    display: inline !important;
     transition: opacity 0.2s !important;
 }
-.player-container .demon-link:hover {
+.pointercrate-demon-inline-link:hover {
+    text-decoration: underline !important;
     opacity: 0.8 !important;
 }
 
-/* Main list: Tučně a svítivě bíle */
-.player-container .main, 
-.player-container .score-text.main {
+/* 1. Main list: Tučně a čistě bíle */
+.pointercrate-demon-inline-link.main,
+.pointercrate-demon-inline-link[class*="#"] {
     font-weight: 800 !important;
     color: #ffffff !important;
 }
 
-/* Extended list: Normální tloušťka a čistě bíle */
-.player-container .extended, 
-.player-container .score-text.extended {
+/* 2. Extended list: Normální tloušťka a čistě bíle */
+.pointercrate-demon-inline-link.extended {
     font-weight: 400 !important;
     color: #ffffff !important;
 }
 
-/* Legacy list: Normální tloušťka a tmavě šedá */
-.player-container .legacy, 
-.player-container .score-text.legacy {
+/* 3. Legacy list: Kurzíva a šedá barva */
+.pointercrate-demon-inline-link.legacy {
     font-weight: 400 !important;
+    font-style: italic !important;
     color: #777777 !important;
+}
+
+/* Pomlčky mezi démony */
+.pointercrate-separator {
+    color: rgba(255, 255, 255, 0.4) !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    padding: 0 2px !important;
 }
 
 /* Vyhledávání a navigace */
@@ -203,38 +216,24 @@ input[type="checkbox"] {
     background: rgba(75, 163, 255, 0.15) !important;
 }
 
-/* Detaily hráče a statistiky */
-.player-name { font-size: 2.8rem !important; text-align: center !important; margin: 0 0 5px 0 !important; color: #fff !important; font-weight: 800 !important; }
-.player-total { font-size: 1.6rem !important; text-align: center !important; color: #4ba3ff !important; margin: 0 0 30px 0 !important; }
+/* Nadpisy, statistiky a mřížka jako v Pointercrate */
+.player-name { font-size: 2.5rem !important; text-align: center !important; margin: 0 0 20px 0 !important; color: #fff !important; font-weight: 800; text-transform: uppercase; }
+.pointercrate-stat-val { font-size: 1.6rem !important; margin: 0 !important; color: #fff !important; font-weight: bold !important; }
 
 .player-stats-grid {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    gap: 20px !important;
-    margin: 25px 0 !important;
-    border-top: 1px solid rgba(255,255,255,0.08) !important;
-    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
-    padding: 20px 0 !important;
+    gap: 15px !important;
+    margin: 10px 0 !important;
+    border-top: 1px solid rgba(255,255,255,0.06) !important;
+    padding-top: 15px !important;
     text-align: center !important;
 }
 
-.stats-label { opacity: 0.4 !important; margin-bottom: 6px !important; font-size: 0.9rem !important; text-transform: uppercase !important; }
-.section-title { font-size: 1.5rem !important; margin-top: 35px !important; margin-bottom: 20px !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important; padding-bottom: 10px !important; text-transform: uppercase !important; }
+.stats-label { opacity: 0.4 !important; margin: 0 0 4px 0 !important; font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 0.5px; color: #fff !important; }
+.section-title-pointercrate { font-size: 1.1rem !important; margin-top: 35px !important; margin-bottom: 10px !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important; padding-bottom: 6px !important; text-transform: none !important; color: #fff !important; font-weight: bold !important; text-align: left !important; }
 
-.level-name { display: flex !important; align-items: center !important; gap: 8px !important; flex-wrap: wrap !important; }
-
-.verifier-badge {
-    font-size: 0.7rem !important;
-    background: rgba(75,163,255,0.15) !important;
-    color: #4ba3ff !important;
-    padding: 2px 6px !important;
-    border-radius: 3px !important;
-    font-weight: bold !important;
-    border: 1px solid rgba(75,163,255,0.3) !important;
-    text-transform: uppercase !important;
-}
-
-/* Balíčky */
+/* Balíčky vpravo */
 .pack-item {
     background: #13131a !important;
     padding: 12px 16px !important;
@@ -246,4 +245,4 @@ input[type="checkbox"] {
     margin-bottom: 10px !important;
 }
 .packs-container h3 { text-align: center !important; margin-top: 0 !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important; padding-bottom: 12px !important; text-transform: uppercase !important; }
-.no-data { text-align: center !important; opacity: 0.5 !important; padding: 20px !important; }
+.no-data { text-align: left !important; opacity: 0.4 !important; padding: 5px 0 !important; color: #fff !important; }

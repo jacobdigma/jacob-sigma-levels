@@ -2,7 +2,6 @@ import { fetchLeaderboard } from '../content.js';
 import { localize } from '../util.js';
 import Spinner from '../components/Spinner.js';
 
-// Globální konfigurace balíčků - přesně podle tvého kódu
 const packsConfig = [
     {
         name: "Neptune Pack 1",
@@ -24,17 +23,12 @@ const packsConfig = [
     }
 ];
 
-// Pomocná funkce pro ověření balíčků
 function checkPackCompletion(entry, pack) {
     if (!entry) return false;
     const playerLevels = [];
-    if (entry.completed) {
-        entry.completed.forEach(score => playerLevels.push(score.level));
-    }
-    if (entry.verified) {
-        entry.verified.forEach(score => playerLevels.push(score.level));
-    }
-    return pack.levels.every(neededLevel => playerLevels.includes(neededLevel));
+    if (entry.completed) entry.completed.forEach(s => playerLevels.push(s.level));
+    if (entry.verified) entry.verified.forEach(s => playerLevels.push(s.level));
+    return pack.levels.every(lvl => playerLevels.includes(lvl));
 }
 
 export default {
@@ -42,27 +36,26 @@ export default {
         Spinner,
     },
     template: `
-        <main v-if="loading" class="surface" style="display: flex; justify-content: center; padding: 50px;">
+        <main v-if="loading" class="surface">
             <Spinner />
         </main>
         
         <main v-else class="page-leaderboard-container" style="display: grid; grid-template-columns: 290px 1fr 290px; gap: 20px; max-width: 1400px; margin: 40px auto; padding: 0 20px; align-items: start;">
             
-            <!-- LEVÝ PANEL: Seznam hráčů (board-container) -->
+            <!-- LEVÝ PANEL -->
             <div class="board-container" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
-                <!-- Vyhledávání -->
                 <div style="padding: 0 10px;">
                     <input type="text" v-model="search" placeholder="Enter to search..." class="type-body" style="width: 100%; padding: 8px 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-color); box-sizing: border-box;">
                 </div>
 
                 <div v-if="err.length > 0" class="error-container" style="padding: 0 10px;">
                     <p class="type-body-sm">
-                        Leaderboard may be incorrect, as the following levels could not be loaded: {{ err.join(', ') }}
+                        Leaderboard may be incorrect: {{ err.join(', ') }}
                     </p>
                 </div>
                 
                 <table class="board" style="width: 100%;">
-                    <tr v-for="(player, index) in paginatedLeaderboard" 
+                    <tr v-for="player in paginatedLeaderboard" 
                         :key="player.name"
                         :class="{ active: entry && entry.name === player.name }">
                         <td class="rank">
@@ -79,7 +72,6 @@ export default {
                     </tr>
                 </table>
 
-                <!-- Stránkování ve stylu Pointercrate -->
                 <div style="display: flex; justify-content: space-between; padding: 10px 15px; border-top: 1px solid var(--border-color);">
                     <button @click="prevPage" class="type-body" :disabled="page === 1" style="background: transparent; border: none; color: var(--text-color); cursor: pointer; font-weight: bold;">PREVIOUS</button>
                     <span class="type-body" style="opacity: 0.6; font-size: 0.9rem;">Page {{ page }}</span>
@@ -87,13 +79,12 @@ export default {
                 </div>
             </div>
 
-            <!-- PROSTŘEDNÍ PANEL: Detail hráče (player-container) -->
+            <!-- PROSTŘEDNÍ PANEL -->
             <div class="player-container" style="width: 100%;">
                 <div v-if="entry" class="player">
                     <h1 class="type-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 5px;">{{ entry.name }}</h1>
                     <h2 class="type-title" style="font-size: 1.5rem; text-align: center; color: #4ba3ff; margin-bottom: 25px;">{{ localize(entry.total) }}</h2>
 
-                    <!-- Statistiky typů démonů -->
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 15px 0; text-align: center;">
                         <div>
                             <p class="type-body" style="opacity: 0.5; margin: 0 0 5px 0;">Demonlist Rank</p>
@@ -107,7 +98,6 @@ export default {
                         </div>
                     </div>
 
-                    <!-- SPOJENÝ SEZNAM COMPLETED A VERIFIED DÉMONŮ -->
                     <h2 class="type-title" style="font-size: 1.4rem; margin-top: 30px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Demons completed</h2>
                     <div v-if="combinedDemons.length === 0" class="type-body" style="text-align: center; opacity: 0.5; padding: 15px;">
                         No completed demons.
@@ -129,7 +119,6 @@ export default {
                         </tr>
                     </table>
 
-                    <!-- SEKCE PROGRESS (Pokud hráč nějaký má) -->
                     <div v-if="entry.progressed && entry.progressed.length > 0">
                         <h2 class="type-title" style="font-size: 1.4rem; margin-top: 30px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Progress on</h2>
                         <table class="table" style="width: 100%;">
@@ -147,12 +136,9 @@ export default {
                         </table>
                     </div>
                 </div>
-                <div v-else class="player" style="text-align: center; opacity: 0.5; padding: 40px;">
-                    <p class="type-body">Select a player to view stats.</p>
-                </div>
             </div>
 
-            <!-- PRAVÝ PANEL: Balíčky (Packs) -->
+            <!-- PRAVÝ PANEL -->
             <div class="player-container" style="width: 100%; padding: 20px; box-sizing: border-box;">
                 <h3 class="type-title" style="font-size: 1.2rem; margin-top: 0; margin-bottom: 15px; text-align: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Completed Packs</h3>
                 
@@ -164,3 +150,33 @@ export default {
                         <span class="type-body" style="font-size: 0.8rem; opacity: 0.7;">+{{ pack.points }} pts</span>
                     </div>
                 </div>
+                <div v-else class="type-body" style="text-align: center; opacity: 0.4; padding: 10px 0; font-size: 0.9rem;">
+                    No packs completed.
+                </div>
+            </div>
+            
+        </main>
+    `,
+    data() {
+        return {
+            leaderboard: [],
+            loading: true,
+            selectedPlayerName: null, 
+            err: [],
+            packsConfig: packsConfig,
+            search: '',
+            page: 1,
+            pageSize: 15,
+            mainListLimit: 50,      
+            extendedListLimit: 100,  
+        };
+    },
+    computed: {
+        filteredLeaderboard() {
+            if (!this.search) return this.leaderboard;
+            return this.leaderboard.filter(player => 
+                player.name.toLowerCase().includes(this.search.toLowerCase())
+            );
+        },
+        paginatedLeaderboard() {
+            const start = (this.page - 1) * this.pageSize;

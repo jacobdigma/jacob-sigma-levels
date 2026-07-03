@@ -36,82 +36,120 @@ export default {
         Spinner,
     },
     template: `
-        <main v-if="loading" class="surface">
+        <main v-if="loading" class="surface" style="display: flex; justify-content: center; padding: 50px;">
             <Spinner />
         </main>
+        
         <main v-else class="page-leaderboard-container">
-            <!-- LEVÝ PANEL -->
-            <div class="board-container">
+            
+            <!-- LEVÝ PANEL: Seznam hráčů -->
+            <div class="board-container surface">
                 <div class="search-box">
                     <input type="text" v-model="search" placeholder="Enter to search..." class="type-body">
                 </div>
+
                 <div v-if="err.length > 0" class="error-container">
-                    <p class="type-body-sm">Leaderboard may be incorrect: {{ err.join(', ') }}</p>
+                    <p class="type-body-sm" style="color: #ff5555;">Leaderboard may be incorrect: {{ err.join(', ') }}</p>
                 </div>
+                
                 <table class="board">
-                    <tr v-for="player in paginatedLeaderboard" :key="player.name" :class="{ active: entry && entry.name === player.name }">
-                        <td class="rank"><p class="type-label-lg">#{{ leaderboard.indexOf(player) + 1 }}</p></td>
-                        <td class="user"><button @click="selectPlayer(player)"><span class="type-label-lg">{{ player.name }}</span></button></td>
-                        <td class="total"><p class="type-label-lg">{{ localize(player.total) }}</p></td>
+                    <tr v-for="player in paginatedLeaderboard" 
+                        :key="player.name"
+                        :class="{ active: entry && entry.name === player.name }"
+                        @click="selectPlayer(player)"
+                        style="cursor: pointer;">
+                        <td class="rank">
+                            <p class="type-label-lg">#{{ leaderboard.indexOf(player) + 1 }}</p>
+                        </td>
+                        <td class="user">
+                            <span class="type-label-lg" style="color: #fff; font-weight: 600;">{{ player.name }}</span>
+                        </td>
+                        <td class="total">
+                            <p class="type-label-lg">{{ localize(player.total) }}</p>
+                        </td>
                     </tr>
                 </table>
+
                 <div class="pagination">
                     <button @click="prevPage" class="type-body" :disabled="page === 1">PREVIOUS</button>
                     <span class="type-body">Page {{ page }}</span>
                     <button @click="nextPage" class="type-body" :disabled="page * pageSize >= filteredLeaderboard.length">NEXT</button>
                 </div>
             </div>
-            <!-- PROSTŘEDNÍ PANEL -->
-            <div class="player-container">
+
+            <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
+            <div class="player-container surface">
                 <div v-if="entry" class="player">
                     <h1 class="type-title player-name">{{ entry.name }}</h1>
                     <h2 class="type-title player-total">{{ localize(entry.total) }} p</h2>
+
                     <div class="player-stats-grid">
                         <div>
                             <p class="type-body stats-label">Demonlist Rank</p>
-                            <h3 class="type-title">#{{ leaderboard.indexOf(entry) + 1 }}</h3>
+                            <h3 class="type-title" style="color: #fff;">#{{ leaderboard.indexOf(entry) + 1 }}</h3>
                         </div>
                         <div>
                             <p class="type-body stats-label">Demonlist Stats</p>
-                            <h3 class="type-body stats-value">{{ stats.main }} Main, {{ stats.extended }} Extended, {{ stats.legacy }} Legacy</h3>
+                            <h3 class="type-body stats-value" style="color: #fff;">
+                                {{ stats.main }} Main, {{ stats.extended }} Extended, {{ stats.legacy }} Legacy
+                            </h3>
                         </div>
                     </div>
+
                     <h2 class="type-title section-title">Demons completed</h2>
                     <div v-if="combinedDemons.length === 0" class="type-body no-data">No completed demons.</div>
                     <table v-else class="table">
-                        <tr v-for="demon in combinedDemons" :key="demon.level">
-                            <td class="rank-type"><p class="type-body" :class="demon.listRank.toLowerCase()">{{ demon.listRank }}</p></td>
-                            <td class="level-name">
-                                <a class="type-label-lg" target="_blank" :href="demon.link">{{ demon.level }}</a>
+                        <tr v-for="demon in sortedDemons" :key="demon.level">
+                            <td class="level-name" style="padding: 12px 10px;">
+                                <a class="type-label-lg" target="_blank" :href="demon.link" :class="demon.listRank.toLowerCase()">
+                                    {{ demon.level }}
+                                </a>
+                                <span style="color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-left: 5px;" :class="demon.listRank.toLowerCase()">
+                                    by {{ entry.name }}
+                                </span>
                                 <span v-if="demon.isVerified" class="verifier-badge">VERIFIER</span>
                             </td>
-                            <td class="score-val"><p class="type-body">+{{ localize(demon.score) }}</p></td>
+                            <td class="score-val" style="padding: 12px 10px; text-align: right;">
+                                <p class="type-body" :class="demon.listRank.toLowerCase()">+{{ localize(demon.score) }}</p>
+                            </td>
                         </tr>
                     </table>
+
+                    <!-- SEKCE PROGRESS -->
                     <div v-if="entry.progressed && entry.progressed.length > 0">
                         <h2 class="type-title section-title">Progress on</h2>
                         <table class="table">
                             <tr v-for="score in entry.progressed" :key="score.level">
-                                <td class="rank-type"><p class="type-body legacy">{{ getRankLabel(score.rank) }}</p></td>
-                                <td class="level-name"><a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }} ({{ score.percent }}%)</a></td>
-                                <td class="score-val"><p class="type-body">+{{ localize(score.score) }}</p></td>
+                                <td class="level-name" style="padding: 12px 10px;">
+                                    <a class="type-label-lg" target="_blank" :href="score.link" :class="getRankLabel(score.rank).toLowerCase()">
+                                        {{ score.level }} ({{ score.percent }}%)
+                                    </a>
+                                    <span style="color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-left: 5px;" :class="getRankLabel(score.rank).toLowerCase()">
+                                        by {{ entry.name }}
+                                    </span>
+                                </td>
+                                <td class="score-val" style="padding: 12px 10px; text-align: right;">
+                                    <p class="type-body" :class="getRankLabel(score.rank).toLowerCase()">+{{ localize(score.score) }}</p>
+                                </td>
                             </tr>
                         </table>
                     </div>
                 </div>
                 <div v-else class="player no-data"><p class="type-body">Select a player to view stats.</p></div>
             </div>
-            <!-- PRAVÝ PANEL -->
-            <div class="packs-container">
-                <h3 class="type-title">Completed Packs</h3>
+
+            <!-- PRAVÝ PANEL: Balíčky -->
+            <div class="packs-container surface">
+                <h3 class="type-title" style="color: #fff;">Completed Packs</h3>
                 <div v-if="entry && hasAnyPack(entry)" class="packs-list">
                     <div v-for="pack in packsConfig" :key="pack.name" v-show="hasCompletedPack(entry, pack)" :style="{ borderLeft: '4px solid ' + pack.color }" class="pack-item">
                         <span class="type-label-lg" :style="{ color: pack.color }">{{ pack.name }}</span>
-                        <span class="type-body">+{{ pack.points }} pts</span>
+                        <span class="type-body" style="color: #fff;">+{{ pack.points }} pts</span>
                     </div>
                 </div>
                 <div v-else class="type-body no-data">No packs completed.</div>
             </div>
+            
         </main>
     `,
     data() {
@@ -178,7 +216,14 @@ export default {
                 });
             }
             
-            return list.sort((a, b) => b.score - a.score);
+            return list;
+        },
+        // SPECIÁLNÍ POINTERCRATE ŘAZENÍ: Abecedně uvnitř skupin (Main -> Extended -> Legacy)
+        sortedDemons() {
+            const mainList = this.combinedDemons.filter(d => d.listRank.startsWith('#')).sort((a, b) => a.level.localeCompare(b.level));
+            const extendedList = this.combinedDemons.filter(d => d.listRank === 'Extended').sort((a, b) => a.level.localeCompare(b.level));
+            const legacyList = this.combinedDemons.filter(d => d.listRank === 'Legacy').sort((a, b) => a.level.localeCompare(b.level));
+            return [...mainList, ...extendedList, ...legacyList];
         },
         stats() {
             const counts = { main: 0, extended: 0, legacy: 0 };

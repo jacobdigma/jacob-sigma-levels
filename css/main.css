@@ -96,7 +96,7 @@ input[type="checkbox"] {
 }
 
 /* ==========================================================================
-   POINTERCRATE LEADERBOARD DESIGN - OPRAVA MAČKÁNÍ TEXTU
+   POINTERCRATE LEADERBOARD DESIGN - FINÁLNÍ VERZE
    ========================================================================== */
 
 .page-leaderboard-container {
@@ -136,11 +136,29 @@ input[type="checkbox"] {
     vertical-align: middle !important;
 }
 
-/* Oprava šířek buněk */
+/* Oprava šířek a zarovnání */
 .board-container td.rank { width: 50px !important; }
 .board-container td.total { text-align: right !important; width: 90px !important; color: #4ba3ff !important; font-weight: bold !important; }
-.player-container td.rank-type { width: 85px !important; }
-.player-container td.score-val { text-align: right !important; width: 110px !important; font-weight: bold !important; }
+.player-container td.score-val { text-align: right !important; width: 110px !important; }
+
+/* STYLY TEXTŮ PODLE POINTERCRATE (UŽ ŽÁDNÁ ČÍSLA LEVELŮ) */
+/* Main list: Tučně a svítivě bíle */
+.player-container .main {
+    font-weight: 800 !important;
+    color: #ffffff !important;
+}
+
+/* Extended list: Normální tloušťka a bíle */
+.player-container .extended {
+    font-weight: 400 !important;
+    color: #eeeeee !important;
+}
+
+/* Legacy list: Normální tloušťka a tmavě šedá */
+.player-container .legacy {
+    font-weight: 400 !important;
+    color: #777777 !important;
+}
 
 /* Vyhledávání a navigace */
 .search-box input {
@@ -161,7 +179,7 @@ input[type="checkbox"] {
     border-top: 1px solid rgba(255,255,255,0.08) !important;
 }
 
-.pagination button, .board td.user button {
+.pagination button {
     background: transparent !important;
     border: none !important;
     color: #fff !important;
@@ -191,21 +209,21 @@ input[type="checkbox"] {
 .stats-label { opacity: 0.4 !important; margin-bottom: 6px !important; font-size: 0.9rem !important; text-transform: uppercase !important; }
 .section-title { font-size: 1.5rem !important; margin-top: 35px !important; margin-bottom: 20px !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important; padding-bottom: 10px !important; text-transform: uppercase !important; }
 
-.level-name { display: flex !important; align-items: center !important; gap: 12px !important; flex-wrap: wrap !important; }
-.level-name a { color: #fff !important; text-decoration: none !important; font-weight: bold !important; }
+.level-name { display: flex !important; align-items: center !important; gap: 8px !important; flex-wrap: wrap !important; }
+.level-name a { text-decoration: none !important; }
 
 .verifier-badge {
     font-size: 0.7rem !important;
     background: rgba(75,163,255,0.15) !important;
     color: #4ba3ff !important;
-    padding: 3px 8px !important;
+    padding: 2px 6px !important;
     border-radius: 3px !important;
     font-weight: bold !important;
     border: 1px solid rgba(75,163,255,0.3) !important;
     text-transform: uppercase !important;
 }
 
-/* Balíčky vpravo */
+/* Balíčky */
 .pack-item {
     background: #13131a !important;
     padding: 12px 16px !important;
@@ -218,3 +236,4 @@ input[type="checkbox"] {
 }
 .packs-container h3 { text-align: center !important; margin-top: 0 !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important; padding-bottom: 12px !important; text-transform: uppercase !important; }
 .no-data { text-align: center !important; opacity: 0.5 !important; padding: 20px !important; }
+

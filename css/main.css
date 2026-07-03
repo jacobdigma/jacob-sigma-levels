@@ -96,7 +96,7 @@ input[type="checkbox"] {
 }
 
 /* ==========================================================================
-   POINTERCRATE LEADERBOARD DESIGN - FINÁLNÍ VERZE
+   POINTERCRATE LEADERBOARD DESIGN - ČISTÁ VERZE BEZ JMÉNA HRÁČE
    ========================================================================== */
 
 .page-leaderboard-container {
@@ -141,21 +141,33 @@ input[type="checkbox"] {
 .board-container td.total { text-align: right !important; width: 90px !important; color: #4ba3ff !important; font-weight: bold !important; }
 .player-container td.score-val { text-align: right !important; width: 110px !important; }
 
-/* STYLY TEXTŮ PODLE POINTERCRATE (UŽ ŽÁDNÁ ČÍSLA LEVELŮ) */
+/* STYLY TEXTŮ A ODKAZŮ */
+.player-container .demon-link {
+    text-decoration: none !important;
+    font-size: 1.05rem !important;
+    transition: opacity 0.2s !important;
+}
+.player-container .demon-link:hover {
+    opacity: 0.8 !important;
+}
+
 /* Main list: Tučně a svítivě bíle */
-.player-container .main {
+.player-container .main, 
+.player-container .score-text.main {
     font-weight: 800 !important;
     color: #ffffff !important;
 }
 
-/* Extended list: Normální tloušťka a bíle */
-.player-container .extended {
+/* Extended list: Normální tloušťka a čistě bíle */
+.player-container .extended, 
+.player-container .score-text.extended {
     font-weight: 400 !important;
-    color: #eeeeee !important;
+    color: #ffffff !important;
 }
 
 /* Legacy list: Normální tloušťka a tmavě šedá */
-.player-container .legacy {
+.player-container .legacy, 
+.player-container .score-text.legacy {
     font-weight: 400 !important;
     color: #777777 !important;
 }
@@ -210,7 +222,6 @@ input[type="checkbox"] {
 .section-title { font-size: 1.5rem !important; margin-top: 35px !important; margin-bottom: 20px !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important; padding-bottom: 10px !important; text-transform: uppercase !important; }
 
 .level-name { display: flex !important; align-items: center !important; gap: 8px !important; flex-wrap: wrap !important; }
-.level-name a { text-decoration: none !important; }
 
 .verifier-badge {
     font-size: 0.7rem !important;
@@ -236,4 +247,3 @@ input[type="checkbox"] {
 }
 .packs-container h3 { text-align: center !important; margin-top: 0 !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important; padding-bottom: 12px !important; text-transform: uppercase !important; }
 .no-data { text-align: center !important; opacity: 0.5 !important; padding: 20px !important; }
-

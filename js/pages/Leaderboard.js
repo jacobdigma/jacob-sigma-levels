@@ -42,7 +42,6 @@ export default {
         
         <main v-else class="page-leaderboard-container" style="display: grid; grid-template-columns: 290px 1fr 290px; gap: 20px; max-width: 1400px; margin: 40px auto; padding: 0 20px; align-items: start;">
             
-            <!-- LEVÝ PANEL -->
             <div class="board-container" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
                 <div style="padding: 0 10px;">
                     <input type="text" v-model="search" placeholder="Enter to search..." class="type-body" style="width: 100%; padding: 8px 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-color); box-sizing: border-box;">
@@ -79,7 +78,6 @@ export default {
                 </div>
             </div>
 
-            <!-- PROSTŘEDNÍ PANEL -->
             <div class="player-container" style="width: 100%;">
                 <div v-if="entry" class="player">
                     <h1 class="type-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 5px;">{{ entry.name }}</h1>
@@ -138,7 +136,6 @@ export default {
                 </div>
             </div>
 
-            <!-- PRAVÝ PANEL -->
             <div class="player-container" style="width: 100%; padding: 20px; box-sizing: border-box;">
                 <h3 class="type-title" style="font-size: 1.2rem; margin-top: 0; margin-bottom: 15px; text-align: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Completed Packs</h3>
                 
@@ -180,3 +177,115 @@ export default {
         },
         paginatedLeaderboard() {
             const start = (this.page - 1) * this.pageSize;
+            const end = this.page * this.pageSize;
+            return this.filteredLeaderboard.slice(start, end);
+        },
+        entry() {
+            if (this.filteredLeaderboard.length === 0) return null;
+            if (!this.selectedPlayerName) {
+                return this.filteredLeaderboard[0];
+            }
+            const found = this.filteredLeaderboard.find(p => p.name === this.selectedPlayerName);
+            return found || this.filteredLeaderboard[0];
+        },
+        combinedDemons() {
+            if (!this.entry) return [];
+            const list = [];
+            
+            if (this.entry.completed) {
+                this.entry.completed.forEach(s => {
+                    list.push({
+                        level: s.level,
+                        score: s.score,
+                        link: s.link,
+                        rank: s.rank,
+                        isVerified: false,
+                        listRank: this.getRankLabel(s.rank)
+                    });
+                });
+            }
+            
+            if (this.entry.verified) {
+                this.entry.verified.forEach(s => {
+                    list.push({
+                        level: s.level,
+                        score: s.score,
+                        link: s.link,
+                        rank: s.rank,
+                        isVerified: true,
+                        listRank: this.getRankLabel(s.rank)
+                    });
+                });
+            }
+            
+            return list.sort((a, b) => b.score - a.score);
+        },
+        stats() {
+            const counts = { main: 0, extended: 0, legacy: 0 };
+            this.combinedDemons.forEach(d => {
+                if (d.listRank.startsWith('#')) counts.main++;
+                else if (d.listRank === 'Extended') counts.extended++;
+                else if (d.listRank === 'Legacy') counts.legacy++;
+            });
+            return counts;
+        }
+    },
+    watch: {
+        search() {
+            this.page = 1;
+        }
+    },
+    methods: {
+        localize,
+        hasCompletedPack(entry, pack) {
+            return checkPackCompletion(entry, pack);
+        },
+        hasAnyPack(entry) {
+            return this.packsConfig.some(pack => this.hasCompletedPack(entry, pack));
+        },
+        selectPlayer(player) {
+            this.selectedPlayerName = player.name;
+        },
+        prevPage() {
+            if (this.page > 1) this.page--;
+        },
+        nextPage() {
+            if (this.page * this.pageSize < this.filteredLeaderboard.length) this.page++;
+        },
+        getRankLabel(rank) {
+            if (!rank) return 'Legacy';
+            if (rank <= this.mainListLimit) {
+                return '#' + rank;
+            } else if (rank <= this.extendedListLimit) {
+                return 'Extended';
+            } else {
+                return 'Legacy';
+            }
+        }
+    },
+    async mounted() {
+        const [leaderboard, err] = await fetchLeaderboard();
+        
+        if (leaderboard) {
+            leaderboard.forEach(player => {
+                let bonusPoints = 0;
+                packsConfig.forEach(pack => {
+                    if (checkPackCompletion(player, pack)) {
+                        bonusPoints += pack.points;
+                    }
+                });
+                player.total += bonusPoints;
+            });
+            
+            leaderboard.sort((a, b) => b.total - a.total);
+            
+            if (leaderboard.length > 0) {
+                this.selectedPlayerName = leaderboard[0].name;
+            }
+        }
+        
+        this.leaderboard = leaderboard;
+        this.err = err;
+        this.loading = false;
+    },
+};

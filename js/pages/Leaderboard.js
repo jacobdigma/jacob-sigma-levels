@@ -86,11 +86,11 @@ export default {
                     <div class="player-stats-grid">
                         <div>
                             <p class="type-body stats-label">Demonlist Rank</p>
-                            <h3 class="type-title" style="color: #fff;">#{{ leaderboard.indexOf(entry) + 1 }}</h3>
+                            <h3 class="type-title" style="color: #fff; font-weight: bold;">#{{ leaderboard.indexOf(entry) + 1 }}</h3>
                         </div>
                         <div>
                             <p class="type-body stats-label">Demonlist Stats</p>
-                            <h3 class="type-body stats-value" style="color: #fff;">
+                            <h3 class="type-body stats-value" style="color: #fff; font-weight: bold;">
                                 {{ stats.main }} Main, {{ stats.extended }} Extended, {{ stats.legacy }} Legacy
                             </h3>
                         </div>
@@ -100,17 +100,14 @@ export default {
                     <div v-if="combinedDemons.length === 0" class="type-body no-data">No completed demons.</div>
                     <table v-else class="table">
                         <tr v-for="demon in sortedDemons" :key="demon.level">
-                            <td class="level-name" style="padding: 12px 10px;">
-                                <a class="type-label-lg" target="_blank" :href="demon.link" :class="demon.listRank.toLowerCase()">
+                            <td class="level-name" style="padding: 14px 10px;">
+                                <a class="type-label-lg demon-link" target="_blank" :href="demon.link" :class="demon.listRank.toLowerCase()">
                                     {{ demon.level }}
                                 </a>
-                                <span style="color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-left: 5px;" :class="demon.listRank.toLowerCase()">
-                                    by {{ entry.name }}
-                                </span>
                                 <span v-if="demon.isVerified" class="verifier-badge">VERIFIER</span>
                             </td>
-                            <td class="score-val" style="padding: 12px 10px; text-align: right;">
-                                <p class="type-body" :class="demon.listRank.toLowerCase()">+{{ localize(demon.score) }}</p>
+                            <td class="score-val" style="padding: 14px 10px; text-align: right;">
+                                <p class="type-body score-text" :class="demon.listRank.toLowerCase()">+{{ localize(demon.score) }}</p>
                             </td>
                         </tr>
                     </table>
@@ -120,16 +117,13 @@ export default {
                         <h2 class="type-title section-title">Progress on</h2>
                         <table class="table">
                             <tr v-for="score in entry.progressed" :key="score.level">
-                                <td class="level-name" style="padding: 12px 10px;">
-                                    <a class="type-label-lg" target="_blank" :href="score.link" :class="getRankLabel(score.rank).toLowerCase()">
+                                <td class="level-name" style="padding: 14px 10px;">
+                                    <a class="type-label-lg demon-link" target="_blank" :href="score.link" :class="getRankLabel(score.rank).toLowerCase()">
                                         {{ score.level }} ({{ score.percent }}%)
                                     </a>
-                                    <span style="color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-left: 5px;" :class="getRankLabel(score.rank).toLowerCase()">
-                                        by {{ entry.name }}
-                                    </span>
                                 </td>
-                                <td class="score-val" style="padding: 12px 10px; text-align: right;">
-                                    <p class="type-body" :class="getRankLabel(score.rank).toLowerCase()">+{{ localize(score.score) }}</p>
+                                <td class="score-val" style="padding: 14px 10px; text-align: right;">
+                                    <p class="type-body score-text" :class="getRankLabel(score.rank).toLowerCase()">+{{ localize(score.score) }}</p>
                                 </td>
                             </tr>
                         </table>
@@ -140,11 +134,11 @@ export default {
 
             <!-- PRAVÝ PANEL: Balíčky -->
             <div class="packs-container surface">
-                <h3 class="type-title" style="color: #fff;">Completed Packs</h3>
+                <h3 class="type-title" style="color: #fff; font-weight: bold;">Completed Packs</h3>
                 <div v-if="entry && hasAnyPack(entry)" class="packs-list">
                     <div v-for="pack in packsConfig" :key="pack.name" v-show="hasCompletedPack(entry, pack)" :style="{ borderLeft: '4px solid ' + pack.color }" class="pack-item">
-                        <span class="type-label-lg" :style="{ color: pack.color }">{{ pack.name }}</span>
-                        <span class="type-body" style="color: #fff;">+{{ pack.points }} pts</span>
+                        <span class="type-label-lg" :style="{ color: pack.color }" style="font-weight: bold;">{{ pack.name }}</span>
+                        <span class="type-body" style="color: #fff; font-weight: bold;">+{{ pack.points }} pts</span>
                     </div>
                 </div>
                 <div v-else class="type-body no-data">No packs completed.</div>
@@ -218,7 +212,6 @@ export default {
             
             return list;
         },
-        // SPECIÁLNÍ POINTERCRATE ŘAZENÍ: Abecedně uvnitř skupin (Main -> Extended -> Legacy)
         sortedDemons() {
             const mainList = this.combinedDemons.filter(d => d.listRank.startsWith('#')).sort((a, b) => a.level.localeCompare(b.level));
             const extendedList = this.combinedDemons.filter(d => d.listRank === 'Extended').sort((a, b) => a.level.localeCompare(b.level));

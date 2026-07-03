@@ -77,64 +77,79 @@ export default {
                 </div>
             </div>
 
-            <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
+            <!-- PROSTŘEDNÍ PANEL: Detail hráče (PŘESNÝ POINTERCRATE STYL) -->
             <div class="player-container surface">
                 <div v-if="entry" class="player">
                     <h1 class="type-title player-name">{{ entry.name }}</h1>
-                    <h2 class="type-title player-total">{{ localize(entry.total) }} p</h2>
-
+                    
                     <div class="player-stats-grid">
                         <div>
-                            <p class="type-body stats-label">Demonlist Rank</p>
-                            <h3 class="type-title" style="color: #fff; font-weight: bold;">#{{ leaderboard.indexOf(entry) + 1 }}</h3>
+                            <p class="type-body stats-label">Demonlist rank</p>
+                            <h3 class="type-title pointercrate-stat-val">#{{ leaderboard.indexOf(entry) + 1 }}</h3>
                         </div>
                         <div>
-                            <p class="type-body stats-label">Demonlist Stats</p>
-                            <h3 class="type-body stats-value" style="color: #fff; font-weight: bold;">
-                                {{ stats.main }} Main, {{ stats.extended }} Extended, {{ stats.legacy }} Legacy
-                            </h3>
+                            <p class="type-body stats-label">Demonlist score</p>
+                            <h3 class="type-title pointercrate-stat-val" style="color: #4ba3ff;">{{ localize(entry.total) }}</h3>
                         </div>
                     </div>
 
-                    <h2 class="type-title section-title">Demons completed</h2>
-                    <div v-if="combinedDemons.length === 0" class="type-body no-data">No completed demons.</div>
-                    <table v-else class="table">
-                        <tr v-for="demon in sortedDemons" :key="demon.level">
-                            <td class="level-name" style="padding: 14px 10px;">
-                                <a class="type-label-lg demon-link" target="_blank" :href="demon.link" :class="demon.listRank.toLowerCase()">
-                                    {{ demon.level }}
-                                </a>
-                                <span v-if="demon.isVerified" class="verifier-badge">VERIFIER</span>
-                            </td>
-                            <td class="score-val" style="padding: 14px 10px; text-align: right;">
-                                <p class="type-body score-text" :class="demon.listRank.toLowerCase()">+{{ localize(demon.score) }}</p>
-                            </td>
-                        </tr>
-                    </table>
-
-                    <!-- SEKCE PROGRESS -->
-                    <div v-if="entry.progressed && entry.progressed.length > 0">
-                        <h2 class="type-title section-title">Progress on</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.progressed" :key="score.level">
-                                <td class="level-name" style="padding: 14px 10px;">
-                                    <a class="type-label-lg demon-link" target="_blank" :href="score.link" :class="getRankLabel(score.rank).toLowerCase()">
-                                        {{ score.level }} ({{ score.percent }}%)
-                                    </a>
-                                </td>
-                                <td class="score-val" style="padding: 14px 10px; text-align: right;">
-                                    <p class="type-body score-text" :class="getRankLabel(score.rank).toLowerCase()">+{{ localize(score.score) }}</p>
-                                </td>
-                            </tr>
-                        </table>
+                    <div class="player-stats-grid" style="margin-top: 15px; border-top: none;">
+                        <div>
+                            <p class="type-body stats-label">Demonlist stats</p>
+                            <h4 class="type-body" style="color: #fff; font-size: 1.05rem; font-weight: 600; margin: 0;">
+                                {{ stats.main }} Main, {{ stats.extended }} Extended, {{ stats.legacy }} Legacy
+                            </h4>
+                        </div>
+                        <div>
+                            <p class="type-body stats-label">Hardest demon</p>
+                            <h4 class="type-body" style="color: #fff; font-size: 1.05rem; font-weight: 600; margin: 0;">
+                                {{ hardestDemon }}
+                            </h4>
+                        </div>
                     </div>
+
+                    <!-- SEZNAM DÉMONŮ JAKO JEDEN ODSTAVEC TEXTU ODDĚLENÝ POMMLČKAMI -->
+                    <h2 class="type-title section-title-pointercrate">Demons completed</h2>
+                    <div v-if="sortedDemons.length === 0" class="type-body no-data">None</div>
+                    
+                    <div v-else class="pointercrate-demons-paragraph">
+                        <template v-for="(demon, idx) in sortedDemons">
+                            <a :href="demon.link" target="_blank" class="pointercrate-demon-inline-link" :class="demon.listRank.toLowerCase()">{{ demon.level }}</a><span v-if="idx < sortedDemons.length - 1" class="pointercrate-separator"> - </span>
+                        </template>
+                    </div>
+
+                    <!-- SEZNAM VERIFIKACÍ (POINTERCRATE STYL) -->
+                    <h2 class="type-title section-title-pointercrate" style="margin-top: 30px;">Demons verified</h2>
+                    <div v-if="verifiedDemons.length === 0" class="type-body no-data">None</div>
+                    <div v-else class="pointercrate-demons-paragraph">
+                        <template v-for="(demon, idx) in verifiedDemons">
+                            <a :href="demon.link" target="_blank" class="pointercrate-demon-inline-link" :class="demon.listRank.toLowerCase()">{{ demon.level }}</a><span v-if="idx < verifiedDemons.length - 1" class="pointercrate-separator"> - </span>
+                        </template>
+                    </div>
+
+                    <!-- SEKCE PROGRESS (POINTERCRATE STYL) -->
+                    <h2 class="type-title section-title-pointercrate" style="margin-top: 30px;">Progress on</h2>
+                    <div v-if="!entry.progressed || entry.progressed.length === 0" class="type-body no-data">None</div>
+                    <div v-else class="pointercrate-demons-paragraph">
+                        <template v-for="(score, idx) in entry.progressed">
+                            <a :href="score.link" target="_blank" class="pointercrate-demon-inline-link" :class="getRankLabel(score.rank).toLowerCase()">{{ score.level }} ({{ score.percent }}%)</a><span v-if="idx < entry.progressed.length - 1" class="pointercrate-separator"> - </span>
+                        </template>
+                    </div>
+
                 </div>
                 <div v-else class="player no-data"><p class="type-body">Select a player to view stats.</p></div>
             </div>
 
-            <!-- PRAVÝ PANEL: Balíčky -->
+            <!-- PRAVÝ PANEL: Výběr řazení a splněné balíčky -->
             <div class="packs-container surface">
-                <h3 class="type-title" style="color: #fff; font-weight: bold;">Completed Packs</h3>
+                <div style="margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 15px;">
+                    <p class="type-body stats-label" style="text-align: center;">Order completed demons</p>
+                    <div style="background: #13131a; padding: 10px; border-radius: 4px; text-align: center; color: #fff; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); font-size: 0.95rem;">
+                        Alphabetical
+                    </div>
+                </div>
+
+                <h3 class="type-title" style="color: #fff; font-size: 1.1rem;">Completed Packs</h3>
                 <div v-if="entry && hasAnyPack(entry)" class="packs-list">
                     <div v-for="pack in packsConfig" :key="pack.name" v-show="hasCompletedPack(entry, pack)" :style="{ borderLeft: '4px solid ' + pack.color }" class="pack-item">
                         <span class="type-label-lg" :style="{ color: pack.color }" style="font-weight: bold;">{{ pack.name }}</span>
@@ -175,10 +190,10 @@ export default {
         entry() {
             if (this.filteredLeaderboard.length === 0) return null;
             if (!this.selectedPlayerName) {
-                return this.filteredLeaderboard[0];
+                return this.filteredLeaderboard;
             }
             const found = this.filteredLeaderboard.find(p => p.name === this.selectedPlayerName);
-            return found || this.filteredLeaderboard[0];
+            return found || this.filteredLeaderboard;
         },
         combinedDemons() {
             if (!this.entry) return [];
@@ -196,31 +211,53 @@ export default {
                     });
                 });
             }
-            
-            if (this.entry.verified) {
-                this.entry.verified.forEach(s => {
-                    list.push({
-                        level: s.level,
-                        score: s.score,
-                        link: s.link,
-                        rank: s.rank,
-                        isVerified: true,
-                        listRank: this.getRankLabel(s.rank)
-                    });
-                });
-            }
-            
             return list;
         },
+        // Seznam pouze verifikovaných démonů pro samostatnou sekci
+        verifiedDemons() {
+            if (!this.entry || !this.entry.verified) return [];
+            const list = [];
+            this.entry.verified.forEach(s => {
+                list.push({
+                    level: s.level,
+                    score: s.score,
+                    link: s.link,
+                    rank: s.rank,
+                    isVerified: true,
+                    listRank: this.getRankLabel(s.rank)
+                });
+            });
+            return list.sort((a, b) => a.level.localeCompare(b.level));
+        },
+        // Abecední řazení uvnitř skupin (Main -> Extended -> Legacy)
         sortedDemons() {
             const mainList = this.combinedDemons.filter(d => d.listRank.startsWith('#')).sort((a, b) => a.level.localeCompare(b.level));
             const extendedList = this.combinedDemons.filter(d => d.listRank === 'Extended').sort((a, b) => a.level.localeCompare(b.level));
             const legacyList = this.combinedDemons.filter(d => d.listRank === 'Legacy').sort((a, b) => a.level.localeCompare(b.level));
             return [...mainList, ...extendedList, ...legacyList];
         },
+        // Automatický výpočet nejtěžšího démona podle nejmenšího ranku (nejvyšší pozice)
+        hardestDemon() {
+            if (!this.combinedDemons || this.combinedDemons.length === 0) return 'None';
+            const sortedByDifficulty = [...this.combinedDemons].sort((a, b) => {
+                const rA = a.rank || 9999;
+                const rB = b.rank || 9999;
+                return rA - rB;
+            });
+            return sortedByDifficulty[0].level;
+        },
         stats() {
             const counts = { main: 0, extended: 0, legacy: 0 };
-            this.combinedDemons.forEach(d => {
+            const allDemons = [...this.combinedDemons, ...this.verifiedDemons];
+            // Odstraníme duplicity pro případ, že level zároveň splnil i verifikoval
+            const uniqueLevels = [];
+            const uniqueDemons = allDemons.filter(d => {
+                if (uniqueLevels.includes(d.level)) return false;
+                uniqueLevels.push(d.level);
+                return true;
+            });
+            
+            uniqueDemons.forEach(d => {
                 if (d.listRank.startsWith('#')) counts.main++;
                 else if (d.listRank === 'Extended') counts.extended++;
                 else if (d.listRank === 'Legacy') counts.legacy++;
@@ -278,7 +315,7 @@ export default {
             leaderboard.sort((a, b) => b.total - a.total);
             
             if (leaderboard.length > 0) {
-                this.selectedPlayerName = leaderboard[0].name;
+                this.selectedPlayerName = leaderboard.name;
             }
         }
         

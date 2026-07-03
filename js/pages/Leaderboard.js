@@ -2,7 +2,7 @@ import { fetchLeaderboard } from '../content.js';
 import { localize } from '../util.js';
 import Spinner from '../components/Spinner.js';
 
-// Globální konfigurace balíčků - přesně podle vašeho kódu
+// Globální konfigurace balíčků - přesně podle tvého kódu
 const packsConfig = [
     {
         name: "Neptune Pack 1",

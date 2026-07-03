@@ -10,7 +10,7 @@ const packsConfig = [
         levels: ["xStep V2", "Clutterfunk V2", "Electroman Adventures V2"]
     },
     {
-        name: "Digna Pack",
+        name: "Digma Pack",
         color: "#ff0000",
         points: 75,
         levels: ["n tolot", "Speed Racer", "Blackfire Backfire"]

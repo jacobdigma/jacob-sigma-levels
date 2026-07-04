@@ -172,7 +172,10 @@ export default {
             this.loading = false;
         }
     },
-    methods: {
+       methods: {
+        selectPlayer(index) {
+            this.selected = index;
+        },
         hasAnyPack(player) {
             return this.packs.some(pack => checkPackCompletion(player, pack));
         },

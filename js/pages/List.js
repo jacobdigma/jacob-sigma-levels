@@ -1,4 +1,5 @@
 import Spinner from '../components/Spinner.js';
+import { embed } from '../util.js';
 
 export default {
     components: { Spinner },

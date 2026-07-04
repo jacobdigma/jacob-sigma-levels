@@ -3,7 +3,7 @@ import Spinner from '../components/Spinner.js';
 export default {
     components: { Spinner },
     template: `
-        <main style="background: #f0f2f5; padding: 20px; min-height: 100vh; display: flex; gap: 20px; align-items: flex-start; font-family: sans-serif; box-sizing: border-box;">
+        <main style="background: #f0f2f5; padding: 20px; min-height: 100vh; display: flex; gap: 20px; align-items: flex-start; font-family: Arial, sans-serif; box-sizing: border-box;">
             
             <!-- LEVÝ PANEL: Seznam hráčů -->
             <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 15px; width: 320px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); box-sizing: border-box; flex-shrink: 0;">
@@ -23,52 +23,52 @@ export default {
             <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
                 <div v-if="entry">
-                    <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800;">{{ entry.name }}</h1>
+                    <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800; text-align: center;">{{ entry.name }}</h1>
                     
-                    <div style="display: flex; gap: 40px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8;">
+                    <div style="display: flex; gap: 40px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8; justify-content: center; text-align: center;">
                         <div>
                             <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist rank</p>
-                            <h3 style="color: #000000; margin: 0; font-size: 1.8rem; font-weight: 700;">#{{ leaderboard.indexOf(entry) + 1 }}</h3>
+                            <h3 style="color: #000000; margin: 0; font-size: 1.8rem; font-weight: 700;">{{ leaderboard.indexOf(entry) + 1 }}</h3>
                         </div>
                         <div>
                             <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist score</p>
-                            <h3 style="color: #0070ff; margin: 0; font-size: 1.8rem; font-weight: 700;">{{ entry.total.toLocaleString() }}</h3>
+                            <h3 style="color: #000000; margin: 0; font-size: 1.8rem; font-weight: 700;">{{ entry.total.toLocaleString() }}</h3>
                         </div>
                     </div>
 
-                    <div style="display: flex; gap: 40px; padding: 20px 0; border-bottom: 1px solid #e1e4e8;">
+                    <div style="display: flex; gap: 40px; padding: 20px 0; border-bottom: 1px solid #e1e4e8; justify-content: center; text-align: center;">
                         <div>
                             <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist stats</p>
                             <h4 style="color: #000000; font-size: 1.1rem; font-weight: 600; margin: 0;">{{ entry.stats }}</h4>
                         </div>
                         <div>
                             <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Hardest demon</p>
-                            <h4 style="color: #2bba74; font-size: 1.1rem; font-weight: 700; margin: 0;">{{ entry.hardest }}</h4>
+                            <h4 style="color: #000000; font-size: 1.1rem; font-weight: 700; margin: 0;">{{ entry.hardest }}</h4>
                         </div>
                     </div>
 
-                    <!-- SLOUČENÉ SEKCE COMPLETED & VERIFIED (BEZ "BY", S ÚPRAVOU STYLU) -->
-                    <h2 style="color: #000000; font-size: 1.4rem; margin: 25px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #0070ff; font-weight: 700;">Demons completed & verified</h2>
-                    <div v-if="entry.demons.length === 0" style="color: #65676b; font-style: italic;">None</div>
-                    <div v-else style="line-height: 2; font-size: 1.05rem; word-wrap: break-word;">
+                    <!-- SLOUČENÉ SEKCE COMPLETED & VERIFIED PODLE FOTKY -->
+                    <h2 style="color: #000000; font-size: 1.6rem; margin: 25px 0 15px 0; text-align: center; font-weight: 700;">Demons completed</h2>
+                    <div v-if="entry.demons.length === 0" style="color: #65676b; font-style: italic; text-align: center;">None</div>
+                    <div v-else style="line-height: 2.2; text-align: center; color: #000000; word-wrap: break-word; padding: 0 10px;">
                         <template v-for="(demon, idx) in entry.demons">
-                            <span>
+                            <span style="display: inline-block;">
                                 <a :href="demon.link" target="_blank" :style="getLevelStyle(demon.type)">{{ demon.level }}</a> 
-                                <span v-if="demon.isVerified" style="color: #2bba74; font-size: 0.85rem; font-weight: bold; margin-left: 5px; background: #eafaf1; padding: 2px 6px; border-radius: 4px;">Verified</span>
+                                <span v-if="demon.isVerified" style="color: #2bba74; font-size: 0.85rem; font-weight: bold; margin-left: 5px; background: #eafaf1; padding: 2px 6px; border-radius: 4px; vertical-align: middle;">Verified</span>
                             </span>
-                            <span v-if="idx < entry.demons.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
+                            <span v-if="idx < entry.demons.length - 1" style="color: #333; margin: 0 6px;"> - </span>
                         </template>
                     </div>
 
-                    <!-- PROGRESS SEKCE (TAKÉ PODPORUJE STYLOVÁNÍ) -->
-                    <h2 style="color: #000000; font-size: 1.4rem; margin: 30px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #ff9000; font-weight: 700;">Progress on</h2>
-                    <div v-if="entry.progress.length === 0" style="color: #65676b; font-style: italic;">None</div>
-                    <div v-else style="line-height: 2; font-size: 1.05rem; word-wrap: break-word;">
+                    <!-- PROGRESS SEKCE -->
+                    <h2 style="color: #000000; font-size: 1.6rem; margin: 35px 0 15px 0; text-align: center; font-weight: 700;">Progress on</h2>
+                    <div v-if="entry.progress.length === 0" style="color: #65676b; font-style: italic; text-align: center;">None</div>
+                    <div v-else style="line-height: 2.2; text-align: center; color: #000000; word-wrap: break-word; padding: 0 10px;">
                         <template v-for="(p, idx) in entry.progress">
-                            <span>
-                                <a :href="p.link" target="_blank" :style="getLevelStyle(p.type || 'extended')">{{ p.level }} ({{ p.percent }}%)</a> 
+                            <span style="display: inline-block;">
+                                <a :href="p.link" target="_blank" :style="getLevelStyle(p.type)">{{ p.level }} ({{ p.percent }}%)</a> 
                             </span>
-                            <span v-if="idx < entry.progress.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
+                            <span v-if="idx < entry.progress.length - 1" style="color: #333; margin: 0 6px;"> - </span>
                         </template>
                     </div>
                 </div>
@@ -84,26 +84,41 @@ export default {
                 {
                     name: "trumandigma",
                     total: 1580.986,
-                    stats: "2 Main, 1 Extended, 0 Legacy",
-                    hardest: "Crescendo",
+                    stats: "49 Main, 33 Extended, 45 Legacy",
+                    hardest: "Society",
                     demons: [
-                        { level: "Crescendo", link: "https://youtube.com", type: "main", isVerified: false },
-                        { level: "Verity", link: "https://youtube.com", type: "extended", isVerified: false },
-                        { level: "iSpyWithMyLittleEye", link: "#", type: "legacy", isVerified: true }
+                        { level: "Abyss of Darkness", link: "#", type: "main", isVerified: false },
+                        { level: "Aerial Gleam", link: "#", type: "legacy", isVerified: false },
+                        { level: "Acheron", link: "#", type: "main", isVerified: false },
+                        { level: "Akashic Records", link: "#", type: "legacy", isVerified: false },
+                        { level: "Amalgam", link: "#", type: "legacy", isVerified: false },
+                        { level: "Anathema", link: "#", type: "main", isVerified: false },
+                        { level: "andromeda", link: "#", type: "main", isVerified: false },
+                        { level: "Apocalyptic Trilogy", link: "#", type: "main", isVerified: false },
+                        { level: "Arctic Lights", link: "#", type: "legacy", isVerified: false },
+                        { level: "arcturus", link: "#", type: "legacy", isVerified: false },
+                        { level: "Avernus", link: "#", type: "main", isVerified: false },
+                        { level: "Belladonna", link: "#", type: "main", isVerified: false },
+                        { level: "BOOBAWAMBA", link: "#", type: "main", isVerified: false },
+                        { level: "Collapse", link: "#", type: "main", isVerified: false },
+                        { level: "COMBUSTION", link: "#", type: "main", isVerified: false },
+                        { level: "LIMBO", link: "#", type: "main", isVerified: false }
                     ],
                     progress: [
-                        { level: "Blackfire", percent: 85, link: "#", type: "main" }
+                        { level: "Blackfire", percent: 85, link: "#", type: "main" },
+                        { level: "KOCMOC", percent: 64, link: "#", type: "extended" }
                     ]
                 },
                 // HRÁČ 2: stetkos
                 {
                     name: "stetkos",
                     total: 945.120,
-                    stats: "1 Main, 1 Extended, 0 Legacy",
+                    stats: "12 Main, 25 Extended, 8 Legacy",
                     hardest: "Verity",
                     demons: [
-                        { level: "Verity", link: "https://youtube.com", type: "main", isVerified: true },
-                        { level: "Crescendo", link: "https://youtube.com", type: "extended", isVerified: false }
+                        { level: "Verity", link: "#", type: "main", isVerified: true },
+                        { level: "Crescendo", link: "#", type: "extended", isVerified: false },
+                        { level: "Artificial Ascent", link: "#", type: "legacy", isVerified: false }
                     ],
                     progress: [
                         { level: "Deadlocked", percent: 72, link: "#", type: "extended" }
@@ -125,13 +140,30 @@ export default {
     methods: {
         getLevelStyle(type) {
             if (type === 'main') {
-                return { color: '#000000', fontWeight: 'bold', textDecoration: 'none' };
+                return { 
+                    color: '#000000', 
+                    fontWeight: 'bold', 
+                    fontSize: '1.15rem', 
+                    textDecoration: 'none' 
+                };
             }
             if (type === 'legacy') {
-                return { color: '#7a7a7a', fontWeight: 'normal', textDecoration: 'none' };
+                return { 
+                    color: '#9ba3af', 
+                    fontWeight: 'normal', 
+                    fontSize: '0.9rem', 
+                    fontStyle: 'italic', 
+                    textDecoration: 'none' 
+                };
             }
-            // default extended (normal/černý)
-            return { color: '#000000', fontWeight: 'normal', textDecoration: 'none' };
+            // default extended (normal velikost, normal tloušťka, černý)
+            return { 
+                color: '#000000', 
+                fontWeight: 'normal', 
+                fontSize: '1rem', 
+                textDecoration: 'none' 
+            };
         }
     }
 };
+

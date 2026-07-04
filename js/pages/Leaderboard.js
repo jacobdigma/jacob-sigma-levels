@@ -116,12 +116,22 @@ export default {
                     stats: "12 Main, 25 Extended, 8 Legacy",
                     hardest: "Verity",
                     demons: [
-                        { level: "Verity", link: "#", type: "main", isVerified: true },
+                        { level: "Clutterfunk V2", link: "#", type: "extended", isVerified: false },
                         { level: "Crescendo", link: "#", type: "extended", isVerified: false },
-                        { level: "Artificial Ascent", link: "#", type: "legacy", isVerified: false }
+                        { level: "Demon Forest", link: "#", type: "legacy", isVerified: false },
+                        { level: "Demon Mixed", link: "#", type: "legacy", isVerified: false },
+                        { level: "m tolot", link: "#", type: "extended", isVerified: false },
+                        { level: "Phjork", link: "#", type: "legacy", isVerified: false },
+                        { level: "Platinum Adventure", link: "#", type: "legacy", isVerified: false },
+                        { level: "Shiver", link: "#", type: "legacy", isVerified: false }
+                        { level: "The Lightning Road", link: "#", type: "legacy", isVerified: false }
+                        { level: "The Nightmare", link: "#", type: "legacy", isVerified: false }
+                        { level: "Theory of Every V2", link: "#", type: "main", isVerified: false }
+                        { level: "xStep V2", link: "#", type: "extended", isVerified: false }
+                        
                     ],
                     progress: [
-                        { level: "Deadlocked", percent: 72, link: "#", type: "extended" }
+                        { level: "Deadlocked", percent: 79, link: "#", type: "extended" }
                     ]
                 }
             ]

@@ -145,7 +145,7 @@ export default {
                         
                     ],
                     progress: [
-                        { level: "Deadlocked", percent: 79, link: "#", type: "extended" }
+                        
                     ]
                 }
             ]

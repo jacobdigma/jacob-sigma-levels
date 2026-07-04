@@ -116,7 +116,7 @@ export default {
             
         </main>
     `,
-    data() {
+       data() {
         return {
             leaderboard: [],
             packs: packsConfig,
@@ -177,6 +177,9 @@ export default {
         }
     },
     methods: {
+        localize(val) {
+            return Number(val).toLocaleString();
+        },
         selectPlayer(index) {
             this.selected = index;
         },
@@ -194,4 +197,3 @@ export default {
         }
     }
 };
-

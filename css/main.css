@@ -95,108 +95,115 @@ input[type="checkbox"] {
     margin: 0;
 }
 
-/* --- POINTERCRATE STATS VIEWER - ABSOLUTNĚ PŘESNÝ BÍLÝ DESIGN --- */
+/* --- ABSOLUTNÍ OPRAVA NAMAČKANÉHO TEXTU V DETAILU HRÁČE --- */
 
-.page-leaderboard-container {
-    display: grid !important;
-    grid-template-columns: 320px 1fr 300px !important;
-    gap: 30px !important;
-    max-width: 1400px !important;
-    margin: 40px auto !important;
-    align-items: start !important;
+/* Resetujeme pevné pozice, které způsobovaly překrývání textů */
+.player-container, 
+.player-container .player,
+.player-container .player-stats-grid,
+.player-container div {
+    position: static !important;
+    height: auto !important;
+    width: auto !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-/* Přebarvení tří hlavních panelů na bílou */
-.page-leaderboard-container .board-container,
-.page-leaderboard-container .player-container,
-.page-leaderboard-container .packs-container {
-    background: #ffffff !important;
+/* Celý prostřední panel roztáhneme a dáme mu bílé pozadí */
+.page-leaderboard-container .player-container {
+    flex: 1 !important;
+    background-color: #ffffff !important;
     border: 1px solid #e1e4e8 !important;
     border-radius: 8px !important;
     padding: 25px !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
-    box-sizing: border-box !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+    text-align: left !important;
 }
 
-.board-container table {
-    width: 100% !important;
-    border-collapse: collapse !important;
+/* Hlavní jméno hráče dostane prostor */
+.player-container h1.player-name {
+    color: #000000 !important;
+    font-size: 2.2rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 20px !important;
+    display: block !important;
+}
+/* Srovnání statistik (Rank, Score) pěkně do flexboxu s mezerami */
+.player-container .player-stats-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 40px !important;
+    padding: 15px 0 !important;
+    border-bottom: 1px solid #e1e4e8 !important;
+    margin-bottom: 15px !important;
 }
 
-.board-container tr {
-    border-bottom: 1px solid #f0f0f0 !important;
-    cursor: pointer !important;
+/* Každá jednotlivá statistika uvnitř gridu */
+.player-container .player-stats-grid div {
+    display: block !important;
+    flex: unset !important;
 }
 
-/* Zvýraznění aktivního/najetého hráče v tabulce */
-.board-container tr.active,
-.board-container tr:hover {
-    background-color: #e6f0ff !important;
+/* Šedé popisky (Demonlist rank, atd.) */
+.player-container .stats-label {
+    color: #65676b !important;
+    font-size: 0.9rem !important;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+    margin-bottom: 5px !important;
 }
 
-.board-container td {
-    padding: 12px 8px !important;
-    vertical-align: middle !important;
-}
-.board-container td.rank { width: 50px !important; }
-
-/* Skóre v tabulce nalevo – pěkně modré a zarovnané doprava */
-.board-container td.total { 
-    text-align: right !important; 
-    width: 90px !important; 
-}
-.board-container td.total p {
-    color: #0070ff !important; 
-    font-weight: bold !important;
+/* Modrá čísla a hodnoty statistik */
+.player-container h3, 
+.player-container h4 {
+    color: #0070ff !important;
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
     margin: 0 !important;
 }
 
-/* Jméno hráče v tabulce nalevo na černo */
-.board-container td.user span {
+/* Úprava zelené barvy pro nejtěžšího démona (Hardest demon) */
+.player-container h4 {
+    color: #2bba74 !important;
+    font-size: 1.1rem !important;
+}
+
+/* Nadpisy sekcí (Demons completed, Demons verified, Progress on) */
+.player-container h2 {
     color: #000000 !important;
-    font-weight: 600 !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    margin: 25px 0 15px 0 !important;
+    padding-bottom: 8px !important;
+    border-bottom: 2px solid #0070ff !important;
+    display: block !important;
 }
 
-/* Vyhledávací pole v levém panelu */
-.page-leaderboard-container .search-box input {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    border: 1px solid #ccd1d9 !important;
+/* Samotný odstavec s démony, který se teď krásně zalomí a nebude se mačkat */
+.demons-list-paragraph,
+.player-container .demons-list-paragraph {
+    display: block !important;
+    line-height: 2 !important;
+    font-size: 1.05rem !important;
+    color: #333333 !important;
+    word-wrap: break-word !important;
 }
 
-/* Úprava textů a nadpisů v prostředním a pravém panelu na černo */
-.player-container h1, .player-container h2, .player-container h4, .player-container p,
-.packs-container h3, .packs-container p {
-    color: #000000 !important;
-}
-
-/* Zpřesnění barvy pro statistiky */
-.player-container .stats-label {
-    color: #65676b !important;
-}
-
-/* Skóre hráče a rank v detailu na modro */
-.player-container h3 {
-    color: #0070ff !important;
-    margin: 5px 0 0 0 !important;
-}
-
-/* Odkazy na démony uvnitř odstavců na modro */
+/* Odkazy na jednotlivé démony */
 .player-container a {
     color: #0070ff !important;
     text-decoration: none !important;
     font-weight: 600 !important;
-}
-.player-container a:hover {
-    text-decoration: underline !important;
+    display: inline !important;
 }
 
-/* --- MAGICKÝ TRIK: Automatické připsání "by player" za každý level --- */
-.player-container span a::after {
+/* --- MAGICKÝ CSS TRIK: Automatické zobrazení jména "by player" za každým levelem --- */
+.player-container a::after {
     content: " by player" !important;
     color: #65676b !important;
-    font-size: 0.9rem !important;
-    font-weight: 400 !important;
+    font-size: 0.95rem !important;
+    font-weight: normal !important;
     margin-left: 3px !important;
     display: inline !important;
 }

@@ -3,9 +3,24 @@ import { localize } from '../util.js';
 import Spinner from '../components/Spinner.js';
 
 const packsConfig = [
-    { name: "Neptune Pack 1", color: "#0070ff", points: 50, levels: ["xStep V2", "Clutterfunk V2", "Electroman Adventures V2"] },
-    { name: "Digna Pack", color: "#ff0000", points: 75, levels: ["n tolot", "Speed Racer", "Blackfire Backfire"] },
-    { name: "RobTop Pack", color: "#00ffcc", points: 100, levels: ["Deadlocked", "Theory of Everything 2", "Clubstep"] }
+    {
+        name: "Neptune Pack 1",
+        color: "#0070ff",
+        points: 50,
+        levels: ["xStep V2", "Clutterfunk V2", "Electroman Adventures V2"]
+    },
+    {
+        name: "Digna Pack",
+        color: "#ff0000",
+        points: 75,
+        levels: ["n tolot", "Speed Racer", "Blackfire Backfire"]
+    },
+    {
+        name: "RobTop Pack",
+        color: "#00ffcc",
+        points: 100,
+        levels: ["Deadlocked", "Theory of Everything 2", "Clubstep"]
+    }
 ];
 
 function checkPackCompletion(entry, pack) {
@@ -17,170 +32,289 @@ function checkPackCompletion(entry, pack) {
 }
 
 export default {
-    components: { Spinner },
+    components: {
+        Spinner,
+    },
     template: `
-        <main v-if="loading" style="display: flex; justify-content: center; padding: 50px; background: #fff;"><Spinner /></main>
+        <main v-if="loading" class="surface" style="display: flex; justify-content: center; padding: 50px;">
+            <Spinner />
+        </main>
         
-        <main v-else style="background: #f0f2f5; padding: 20px; min-height: 100vh; display: flex; gap: 20px; align-items: flex-start; font-family: sans-serif; box-sizing: border-box;">
+        <main v-else class="page-leaderboard-container">
             
-            <!-- LEVÝ PANEL -->
-            <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 15px; width: 300px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); box-sizing: border-box; flex-shrink: 0;">
-                <div style="margin-bottom: 15px;">
-                    <input type="text" v-model="search" placeholder="Enter to search..." style="width: 100%; padding: 10px; border: 1px solid #ccd1d9; border-radius: 4px; background: #fff; color: #000; font-size: 0.95rem; box-sizing: border-box;">
+            <!-- LEVÝ PANEL: Seznam hráčů -->
+            <div class="board-container surface">
+                <div class="search-box">
+                    <input type="text" v-model="search" placeholder="Enter to search..." class="type-body">
                 </div>
-                <table style="width: 100%; border-collapse: collapse;">
-                    <tr v-for="(player, idx) in paginatedLeaderboard" :key="idx" @click="selected = idx"
-                        :style="{ cursor: 'pointer', background: selected === idx ? '#e6f0ff' : 'transparent', borderBottom: '1px solid #f0f0f0' }">
-                        <td style="padding: 12px 8px; width: 40px; color: #65676b; font-weight: bold;">#{{ (page - 1) * pageSize + idx + 1 }}</td>
-                        <td style="padding: 12px 8px; text-align: left; color: #000; font-weight: 600;">{{ player.name }}</td>
-                        <td style="padding: 12px 8px; text-align: right; color: #0070ff; font-weight: bold;">{{ localize(player.total) }}</td>
+
+                <div v-if="err.length > 0" class="error-container">
+                    <p class="type-body-sm" style="color: #ff5555;">Leaderboard may be incorrect: {{ err.join(', ') }}</p>
+                </div>
+                
+                <table class="board">
+                    <tr v-for="player in paginatedLeaderboard" 
+                        :key="player.name"
+                        :class="{ active: entry && entry.name === player.name }"
+                        @click="selectPlayer(player)"
+                        style="cursor: pointer;">
+                        <td class="rank">
+                            <p class="type-label-lg">#{{ leaderboard.indexOf(player) + 1 }}</p>
+                        </td>
+                        <td class="user">
+                            <span class="type-label-lg" style="color: #fff; font-weight: 600;">{{ player.name }}</span>
+                        </td>
+                        <td class="total">
+                            <p class="type-label-lg">{{ localize(player.total) }}</p>
+                        </td>
                     </tr>
                 </table>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 10px; border-top: 1px solid #f0f0f0;">
-                    <button @click="page--; selected = 0;" :disabled="page === 1" style="padding: 6px 12px; background: #f0f2f5; color: #000; border: 1px solid #ccd1d9; border-radius: 4px; cursor: pointer;">PREV</button>
-                    <span style="color: #4f5d73; font-weight: 600;">Page {{ page }}</span>
-                    <button @click="page++; selected = 0;" :disabled="page * pageSize >= filteredLeaderboard.length" style="padding: 6px 12px; background: #f0f2f5; color: #000; border: 1px solid #ccd1d9; border-radius: 4px; cursor: pointer;">NEXT</button>
+
+                <div class="pagination">
+                    <button @click="prevPage" class="type-body" :disabled="page === 1">PREVIOUS</button>
+                    <span class="type-body">Page {{ page }}</span>
+                    <button @click="nextPage" class="type-body" :disabled="page * pageSize >= filteredLeaderboard.length">NEXT</button>
                 </div>
             </div>
-            <!-- PROSTŘEDNÍ PANEL -->
-            <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
-                <div v-if="entry">
-                    <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800;">{{ entry.name }}</h1>
+
+            <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
+            <div class="player-container surface">
+                <div v-if="entry" class="player">
+                    <h1 class="type-title player-name">{{ entry.name }}</h1>
                     
-                    <div style="display: flex; gap: 40px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8;">
+                    <div class="player-stats-grid">
                         <div>
-                            <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist rank</p>
-                            <h3 style="color: #000000; margin: 0; font-size: 1.8rem; font-weight: 700;">#{{ leaderboard.indexOf(entry) + 1 }}</h3>
+                            <p class="type-body stats-label">Demonlist rank</p>
+                            <h3 class="type-title pointercrate-stat-val">#{{ leaderboard.indexOf(entry) + 1 }}</h3>
                         </div>
                         <div>
-                            <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist score</p>
-                            <h3 style="color: #0070ff; margin: 0; font-size: 1.8rem; font-weight: 700;">{{ localize(entry.total) }}</h3>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; gap: 40px; padding: 20px 0; border-bottom: 1px solid #e1e4e8;">
-                        <div>
-                            <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist stats</p>
-                            <h4 style="color: #000000; font-size: 1.1rem; font-weight: 600; margin: 0;">{{ stats.main }} Main, {{ stats.extended }} Extended, {{ stats.legacy }} Legacy</h4>
-                        </div>
-                        <div>
-                            <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Hardest demon</p>
-                            <h4 style="color: #2bba74; font-size: 1.1rem; font-weight: 700; margin: 0;">{{ hardestDemon }}</h4>
+                            <p class="type-body stats-label">Demonlist score</p>
+                            <h3 class="type-title pointercrate-stat-val" style="color: #4ba3ff;">{{ localize(entry.total) }}</h3>
                         </div>
                     </div>
 
-                    <!-- SLOUČENO: Completed & Verified Demons -->
-                    <h2 style="color: #000000; font-size: 1.4rem; margin: 25px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #0070ff; font-weight: 700;">Demons completed & verified</h2>
-                    <div v-if="allDemons.length === 0" style="color: #65676b; font-style: italic;">None</div>
-                    <div v-else style="line-height: 2; font-size: 1.05rem; color: #333; word-wrap: break-word;">
-                        <template v-for="(demon, idx) in allDemons">
-                            <span>
-                                <a :href="demon.link" target="_blank" style="color: #0070ff; font-weight: 600; text-decoration: none;">{{ demon.level }}</a> 
-                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ entry.name }}</span>
-                                <span v-if="demon.isVerified" style="color: #2bba74; font-size: 0.85rem; font-weight: bold; margin-left: 5px; background: #eafaf1; padding: 2px 6px; border-radius: 4px;">Verified</span>
-                            </span>
-                            <span v-if="idx < allDemons.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
+                    <div class="player-stats-grid" style="margin-top: 15px; border-top: none;">
+                        <div>
+                            <p class="type-body stats-label">Demonlist stats</p>
+                            <h4 class="type-body" style="color: #fff; font-size: 1.05rem; font-weight: 600; margin: 0;">
+                                {{ stats.main }} Main, {{ stats.extended }} Extended, {{ stats.legacy }} Legacy
+                            </h4>
+                        </div>
+                        <div>
+                            <p class="type-body stats-label">Hardest demon</p>
+                            <h4 class="type-body" style="color: #fff; font-size: 1.05rem; font-weight: 600; margin: 0;">
+                                {{ hardestDemon }}
+                            </h4>
+                        </div>
+                    </div>
+
+                    <h2 class="type-title section-title-pointercrate">Demons completed</h2>
+                    <div v-if="sortedDemons.length === 0" class="type-body no-data">None</div>
+                    
+                    <div v-else class="pointercrate-demons-paragraph">
+                        <template v-for="(demon, idx) in sortedDemons">
+                            <a :href="demon.link" target="_blank" class="pointercrate-demon-inline-link" :class="demon.listRank.toLowerCase()">{{ demon.level }}</a><span v-if="idx < sortedDemons.length - 1" class="pointercrate-separator"> - </span>
                         </template>
                     </div>
 
-                    <!-- PROGRESS SEKCE -->
-                    <h2 style="color: #000000; font-size: 1.4rem; margin: 30px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #ff9000; font-weight: 700;">Progress on</h2>
-                    <div v-if="!entry.progressed || entry.progressed.length === 0" style="color: #65676b; font-style: italic;">None</div>
-                    <div v-else style="line-height: 2; font-size: 1.05rem; color: #333; word-wrap: break-word;">
+                    <h2 class="type-title section-title-pointercrate" style="margin-top: 30px;">Demons verified</h2>
+                    <div v-if="verifiedDemons.length === 0" class="type-body no-data">None</div>
+                    <div v-else class="pointercrate-demons-paragraph">
+                        <template v-for="(demon, idx) in verifiedDemons">
+                            <a :href="demon.link" target="_blank" class="pointercrate-demon-inline-link" :class="demon.listRank.toLowerCase()">{{ demon.level }}</a><span v-if="idx < verifiedDemons.length - 1" class="pointercrate-separator"> - </span>
+                        </template>
+                    </div>
+
+                    <h2 class="type-title section-title-pointercrate" style="margin-top: 30px;">Progress on</h2>
+                    <div v-if="!entry.progressed || entry.progressed.length === 0" class="type-body no-data">None</div>
+                    <div v-else class="pointercrate-demons-paragraph">
                         <template v-for="(score, idx) in entry.progressed">
-                            <span>
-                                <a :href="score.link" target="_blank" style="color: #ff9000; font-weight: 600; text-decoration: none;">{{ score.level }} ({{ score.percent }}%)</a> 
-                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ entry.name }}</span>
-                            </span>
-                            <span v-if="idx < entry.progressed.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
+                            <a :href="score.link" target="_blank" class="pointercrate-demon-inline-link" :class="getRankLabel(score.rank).toLowerCase()">{{ score.level }} ({{ score.percent }}%)</a><span v-if="idx < entry.progressed.length - 1" class="pointercrate-separator"> - </span>
                         </template>
                     </div>
+
                 </div>
-                <div v-else style="color: #65676b; text-align: center; padding: 40px 0;"><p>Select a player to view stats.</p></div>
+                <div v-else class="player no-data"><p class="type-body">Select a player to view stats.</p></div>
             </div>
+
             <!-- PRAVÝ PANEL -->
-            <div style="width: 260px; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; box-sizing: border-box; flex-shrink: 0; color: #000000;">
-                <div style="margin-bottom: 25px; border-bottom: 1px solid #e1e4e8; padding-bottom: 15px;">
-                    <p style="text-align: center; color: #65676b; font-size: 0.85rem; text-transform: uppercase; font-weight: 600; margin: 0 0 10px 0;">Order completed demons</p>
-                    <div style="background: #f0f2f5; padding: 10px; border-radius: 4px; text-align: center; color: #000000; font-weight: bold; border: 1px solid #ccd1d9; font-size: 0.95rem;">Alphabetical</div>
-                </div>
-                <h3 style="color: #000000; font-size: 1.2rem; margin: 0 0 15px 0; font-weight: 700;">Completed Packs</h3>
-                <div v-if="entry && hasAnyPack(entry)" style="display: flex; flex-direction: column; gap: 10px;">
-                    <div v-for="pack in packs" :key="pack.name" v-show="hasCompletedPack(entry, pack)" :style="{ borderLeft: '4px solid ' + pack.color }" style="background: #f8f9fa; border: 1px solid #e1e4e8; padding: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: bold;" :style="{ color: pack.color }">{{ pack.name }}</span>
-                        <span style="color: #000; font-weight: bold; font-size: 0.9rem;">+{{ pack.points }} pts</span>
+            <div class="packs-container surface">
+                <div style="margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 15px;">
+                    <p class="type-body stats-label" style="text-align: center;">Order completed demons</p>
+                    <div style="background: #13131a; padding: 10px; border-radius: 4px; text-align: center; color: #fff; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); font-size: 0.95rem;">
+                        Alphabetical
                     </div>
                 </div>
-                <div v-else style="color: #65676b; font-style: italic;">No packs completed.</div>
+
+                <h3 class="type-title" style="color: #fff; font-size: 1.1rem;">Completed Packs</h3>
+                <div v-if="entry && hasAnyPack(entry)" class="packs-list">
+                    <div v-for="pack in packsConfig" :key="pack.name" v-show="hasCompletedPack(entry, pack)" :style="{ borderLeft: '4px solid ' + pack.color }" class="pack-item">
+                        <span class="type-label-lg" :style="{ color: pack.color }" style="font-weight: bold;">{{ pack.name }}</span>
+                        <span class="type-body" style="color: #fff; font-weight: bold;">+{{ pack.points }} pts</span>
+                    </div>
+                </div>
+                <div v-else class="type-body no-data">No packs completed.</div>
             </div>
+            
         </main>
     `,
     data() {
         return {
             leaderboard: [],
-            packs: packsConfig,
             loading: true,
-            selected: 0,
+            selectedPlayerName: null, 
             err: [],
-            page: 1,
-            pageSize: 20,
+            packsConfig: packsConfig,
             search: '',
+            page: 1,
+            pageSize: 15,
+            mainListLimit: 50,      
+            extendedListLimit: 100,  
         };
     },
     computed: {
         filteredLeaderboard() {
             if (!this.search) return this.leaderboard;
-            const query = this.search.toLowerCase();
-            return this.leaderboard.filter(player => player.name.toLowerCase().includes(query));
+            return this.leaderboard.filter(player => 
+                player.name.toLowerCase().includes(this.search.toLowerCase())
+            );
         },
         paginatedLeaderboard() {
             const start = (this.page - 1) * this.pageSize;
-            const end = start + this.pageSize;
+            const end = this.page * this.pageSize;
             return this.filteredLeaderboard.slice(start, end);
         },
         entry() {
-            if (!this.paginatedLeaderboard || this.paginatedLeaderboard.length === 0) return null;
-            return this.paginatedLeaderboard[this.selected];
+            if (this.filteredLeaderboard.length === 0) return null;
+            if (!this.selectedPlayerName) {
+                return this.filteredLeaderboard[0];
+            }
+            const found = this.filteredLeaderboard.find(p => p.name === this.selectedPlayerName);
+            return found || this.filteredLeaderboard[0];
         },
-        allDemons() {
+        combinedDemons() {
             if (!this.entry) return [];
-            const completed = this.entry.completed ? this.entry.completed.map(d => ({ ...d, isVerified: false })) : [];
-            const verified = this.entry.verified ? this.entry.verified.map(d => ({ ...d, isVerified: true })) : [];
-            return [...completed, ...verified].sort((a, b) => a.level.localeCompare(b.level));
+            const list = [];
+            
+            if (this.entry.completed) {
+                this.entry.completed.forEach(s => {
+                    list.push({
+                        level: s.level,
+                        score: s.score,
+                        link: s.link,
+                        rank: s.rank,
+                        isVerified: false,
+                        listRank: this.getRankLabel(s.rank)
+                    });
+                });
+            }
+            return list;
         },
+        verifiedDemons() {
+            if (!this.entry || !this.entry.verified) return [];
+            const list = [];
+            this.entry.verified.forEach(s => {
+                list.push({
+                    level: s.level,
+                    score: s.score,
+                    link: s.link,
+                    rank: s.rank,
+                    isVerified: true,
+                    listRank: this.getRankLabel(s.rank)
+                });
+            });
+            return list.sort((a, b) => a.level.localeCompare(b.level));
+        },
+        sortedDemons() {
+            const mainList = this.combinedDemons.filter(d => d.listRank.startsWith('#')).sort((a, b) => a.level.localeCompare(b.level));
+            const extendedList = this.combinedDemons.filter(d => d.listRank === 'Extended').sort((a, b) => a.level.localeCompare(b.level));
+            const legacyList = this.combinedDemons.filter(d => d.listRank === 'Legacy').sort((a, b) => a.level.localeCompare(b.level));
+            return [...mainList, ...extendedList, ...legacyList];
+        },
+        // BEZPEČNÝ VÝPOČET NEJTĚŽŠÍHO DÉMONA (Zabraňuje zaseknutí loading screenu)
         hardestDemon() {
-            if (!this.entry || !this.entry.completed || this.entry.completed.length === 0) return 'None';
-            const sortedByRank = [...this.entry.completed].sort((a, b) => a.rank - b.rank);
-            return sortedByRank.length > 0 ? sortedByRank[0].level : 'None';
+            if (!this.combinedDemons || this.combinedDemons.length === 0) return 'None';
+            const sortedByDifficulty = [...this.combinedDemons].sort((a, b) => {
+                const rA = a.rank || 9999;
+                const rB = b.rank || 9999;
+                return rA - rB;
+            });
+            return sortedByDifficulty[0] ? sortedByDifficulty[0].level : 'None';
         },
         stats() {
-            if (!this.entry) return { main: 0, extended: 0, legacy: 0 };
-            const comp = this.entry.completed || [];
-            return {
-                main: comp.filter(d => d.listRank === 'Main').length,
-                extended: comp.filter(d => d.listRank === 'Extended').length,
-                legacy: comp.filter(d => d.listRank === 'Legacy').length,
-            };
+            const counts = { main: 0, extended: 0, legacy: 0 };
+            const allDemons = [...this.combinedDemons, ...this.verifiedDemons];
+            const uniqueLevels = [];
+            const uniqueDemons = allDemons.filter(d => {
+                if (uniqueLevels.includes(d.level)) return false;
+                uniqueLevels.push(d.level);
+                return true;
+            });
+            
+            uniqueDemons.forEach(d => {
+                if (d.listRank.startsWith('#')) counts.main++;
+                else if (d.listRank === 'Extended') counts.extended++;
+                else if (d.listRank === 'Legacy') counts.legacy++;
+            });
+            return counts;
+        }
+    },
+    watch: {
+        search() {
+            this.page = 1;
+        }
+    },
+    methods: {
+        localize,
+        hasCompletedPack(entry, pack) {
+            return checkPackCompletion(entry, pack);
+        },
+        hasAnyPack(entry) {
+            return this.packsConfig.some(pack => this.hasCompletedPack(entry, pack));
+        },
+        selectPlayer(player) {
+            this.selectedPlayerName = player.name;
+        },
+        prevPage() {
+            if (this.page > 1) this.page--;
+        },
+        nextPage() {
+            if (this.page * this.pageSize < this.filteredLeaderboard.length) this.page++;
+        },
+        getRankLabel(rank) {
+            if (!rank) return 'Legacy';
+            if (rank <= this.mainListLimit) {
+                return '#' + rank;
+            } else if (rank <= this.extendedListLimit) {
+                return 'Extended';
+            } else {
+                return 'Legacy';
+            }
         }
     },
     async mounted() {
-        try {
-            this.leaderboard = await fetchLeaderboard();
-            this.loading = false;
-        } catch (e) {
-            this.err.push(e.toString());
-            this.loading = false;
+        const [leaderboard, err] = await fetchLeaderboard();
+        
+        if (leaderboard) {
+            leaderboard.forEach(player => {
+                let bonusPoints = 0;
+                packsConfig.forEach(pack => {
+                    if (checkPackCompletion(player, pack)) {
+                        bonusPoints += pack.points;
+                    }
+                });
+                player.total += bonusPoints;
+            });
+            
+            leaderboard.sort((a, b) => b.total - a.total);
+            
+            if (leaderboard.length > 0) {
+                this.selectedPlayerName = leaderboard[0].name;
+            }
         }
+        
+        this.leaderboard = leaderboard;
+        this.err = err;
+        this.loading = false;
     },
-       methods: {
-        selectPlayer(index) {
-            this.selected = index;
-        },
-        hasAnyPack(player) {
-            return this.packs.some(pack => checkPackCompletion(player, pack));
-        },
-        hasCompletedPack(player, pack) {
-            return checkPackCompletion(player, pack);
-        }
-    }
 };

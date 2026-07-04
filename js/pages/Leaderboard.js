@@ -112,7 +112,7 @@ export default {
                 // HRÁČ 2: stetkos
                 {
                     name: "stetkos",
-                    total: 1500,
+                    total: 1575,
                     stats: "1 Main, 4 Extended, 7 Legacy",
                     hardest: "Theory of Every V2",
                     demons: [

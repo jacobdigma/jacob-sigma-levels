@@ -12,7 +12,7 @@ export default {
                 <div class="update-entry" style="border-left: 4px solid #2bba74; padding-left: 20px; margin-bottom: 10px;">
                     <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px;">
                         <h2 class="type-title" style="font-size: 1.6rem; font-weight: bold; margin: 0; color: var(--text-color);">Version 2.0.0</h2>
-                        <span class="type-body" style="font-size: 0.9rem; color: var(--text-color); opacity: 0.5;">Dnes</span>
+                        <span class="type-body" style="font-size: 0.9rem; color: var(--text-color); opacity: 0.5;">04. 07. 2026</span>
                     </div>
                     <ul class="type-body" style="list-style-type: square; padding-left: 20px; line-height: 1.8; color: var(--text-color); opacity: 0.8; font-size: 1.05rem;">
                         <li style="margin-bottom: 8px;">Complete new style of website.</li>

@@ -1,184 +1,155 @@
-import { store } from "../main.js";
-import { embed } from "../util.js";
-import { score } from "../score.js";
-import { fetchEditors, fetchList } from "../content.js";
-
-import Spinner from "../components/Spinner.js";
-import LevelAuthors from "../components/List/LevelAuthors.js";
-
-const roleIconMap = {
-    owner: "crown",
-    admin: "user-gear",
-    helper: "user-shield",
-    dev: "code",
-    trial: "user-lock",
-};
+import Spinner from '../components/Spinner.js';
 
 export default {
-    components: { Spinner, LevelAuthors },
+    components: { Spinner },
     template: `
-        <main v-if="loading">
-            <Spinner></Spinner>
-        </main>
-        <main v-else class="page-list">
-            <div class="list-container">
-                <table class="list" v-if="list">
-                    <tr v-for="([level, err], i) in list">
-                        <td class="rank">
-                            <p v-if="i + 1 <= 150" class="type-label-lg">#{{ i + 1 }}</p>
-                            <p v-else class="type-label-lg">Legacy</p>
-                        </td>
-                        <td class="level" :class="{ 'active': selected == i, 'error': !level }">
-                            <button @click="selected = i">
-                                <span class="type-label-lg">{{ level?.name || \`Error (\${err}.json)\` }}</span>
-                            </button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="level-container">
-                <div class="level" v-if="level">
-                    <h1>{{ level.name }}</h1>
-                    <LevelAuthors :author="level.author" :creators="level.creators" :verifier="level.verifier"></LevelAuthors>
-                    <iframe class="video" id="videoframe" :src="video" frameborder="0"></iframe>
-                    <ul class="stats">
-                        <li>
-                            <div class="type-title-sm">Points when completed</div>
-                            <p>{{ score(selected + 1, 100, level.percentToQualify) }}</p>
-                        </li>
-                        <li>
-                            <div class="type-title-sm">ID</div>
-                            <p>{{ level.id }}</p>
-                        </li>
-                        <li>
-                            <div class="type-title-sm">Password</div>
-                            <p>{{ level.password || 'Free to Copy' }}</p>
-                        </li>
-                    </ul>
-                    <h2>Records</h2>
-                    <p v-if="selected + 1 <= 75"><strong>{{ level.percentToQualify }}%</strong> or better to qualify</p>
-                    <p v-else-if="selected +1 <= 150"><strong>100%</strong> or better to qualify</p>
-                    <p v-else>This level does not accept new records.</p>
-                    <table class="records">
-                        <tr v-for="record in level.records" class="record">
-                            <td class="percent">
-                                <p>{{ record.percent }}%</p>
-                            </td>
-                            <td class="user">
-                                <a :href="record.link" target="_blank" class="type-label-lg">{{ record.user }}</a>
-                            </td>
-                            <td class="mobile">
-                                <img v-if="record.mobile" :src="\`/assets/phone-landscape\${store.dark ? '-dark' : ''}.svg\`" alt="Mobile">
-                            </td>
-                            <td class="hz">
-                                <p>{{ record.hz }}Hz</p>
-                            </td>
-                        </tr>
-                    </table>
+        <main style="background: #f0f2f5; padding: 20px; min-height: 100vh; display: flex; gap: 20px; align-items: flex-start; font-family: Arial, sans-serif; box-sizing: border-box;">
+            
+            <!-- LEVÝ PANEL: Kompletně předělaný seznam úrovní -->
+            <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 15px; width: 340px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); box-sizing: border-box; flex-shrink: 0; text-align: left;">
+                <div style="margin-bottom: 15px;">
+                    <input type="text" v-model="search" placeholder="Search level..." style="width: 100%; padding: 10px; border: 1px solid #ccd1d9; border-radius: 4px; background: #fff; color: #000; font-size: 0.95rem; box-sizing: border-box;">
                 </div>
-                <div v-else class="level" style="height: 100%; justify-content: center; align-items: center;">
-                    <p>(ノಠ益ಠ)ノ彡┻━┻</p>
-                </div>
-            </div>
-            <div class="meta-container">
-                <div class="meta">
-                    <div class="errors" v-show="errors.length > 0">
-                        <p class="error" v-for="error of errors">{{ error }}</p>
-                    </div>
-                    <div class="og">
-                        <p class="type-label-md">Website layout made by <a href="https://tsl.pages.dev/" target="_blank">TheShittyList</a></p>
-                    </div>
-                    <template v-if="editors">
-                        <h3>List Editors</h3>
-                        <ol class="editors">
-                            <li v-for="editor in editors">
-                                <img :src="\`/assets/\${roleIconMap[editor.role]}\${store.dark ? '-dark' : ''}.svg\`" :alt="editor.role">
-                                <a v-if="editor.link" class="type-label-lg link" target="_blank" :href="editor.link">{{ editor.name }}</a>
-                                <p v-else>{{ editor.name }}</p>
-                            </li>
-                        </ol>
+                
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <template v-for="(level, idx) in filteredList" :key="idx">
+                        
+                        <!-- ODSTAVEC: -- EXTENDED LIST -- -->
+                        <div v-if="level.isDivider" style="text-align: center; color: #9ba3af; font-weight: bold; font-size: 0.85rem; padding: 15px 0 10px 0; letter-spacing: 1px; border-bottom: 1px dashed #e1e4e8; margin-bottom: 5px;">
+                            {{ level.dividerText }}
+                        </div>
+
+                        <!-- KLASICKÝ ŘÁDEK LEVELU (Když to není dělicí čára) -->
+                        <div v-else @click="selected = list.indexOf(level)"
+                            :style="{ 
+                                cursor: 'pointer', 
+                                background: list[selected] === level ? '#0070ff' : 'transparent',
+                                borderRadius: '6px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '10px 12px',
+                                transition: 'background 0.2s'
+                            }">
+                            
+                            <!-- ČÍSLOVÁNÍ: Buď #číslo, nebo text "Legacy" -->
+                            <span :style="{ 
+                                width: level.type === 'legacy' ? '65px' : '45px', 
+                                fontWeight: 'bold', 
+                                color: list[selected] === level ? '#ffffff' : '#65676b',
+                                fontSize: level.type === 'legacy' ? '0.85rem' : '1rem'
+                            }">
+                                {{ level.type === 'legacy' ? 'Legacy' : '#' + level.rank }}
+                            </span>
+
+                            <!-- NÁZEV LEVELU SE SPECIFICKOU BARVOU PODLE TYPU -->
+                            <span :style="{ 
+                                fontWeight: level.type === 'main' ? 'bold' : 'normal', 
+                                color: list[selected] === level ? '#ffffff' : getListTextColor(level.type),
+                                fontSize: '1rem',
+                                flex: 1
+                            }">
+                                {{ level.name }}
+                            </span>
+                        </div>
+
                     </template>
-                    <h3>Submission Requirements</h3>
-                    <p>
-                        Achieved the record without using hacks (however, FPS bypass is allowed, up to 360fps)
-                    </p>
-                    <p>
-                        Achieved the record on the level that is listed on the site - please check the level ID before you submit a record
-                    </p>
-                    <p>
-                        Have either source audio or clicks/taps in the video. Edited audio only does not count
-                    </p>
-                    <p>
-                        The recording must have a previous attempt and entire death animation shown before the completion, unless the completion is on the first attempt. Everyplay records are exempt from this
-                    </p>
-                    <p>
-                        The recording must also show the player hit the endwall, or the completion will be invalidated.
-                    </p>
-                    <p>
-                        Do not use secret routes or bug routes
-                    </p>
-                    <p>
-                        Do not use easy modes, only a record of the unmodified level qualifies
-                    </p>
-                    <p>
-                        Once a level falls onto the Legacy List, we accept records for it for 24 hours after it falls off, then afterwards we never accept records for said level
-                    </p>
                 </div>
+            </div>
+
+            <!-- PROSTŘEDNÍ PANEL: Detail vybraného levelu -->
+            <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
+                <div v-if="entry" style="text-align: center;">
+                    <h1 style="color: #000000; font-size: 2.5rem; margin: 0 0 10px 0; font-weight: 800;">{{ entry.name }}</h1>
+                    <p style="color: #65676b; font-size: 1.1rem; margin: 0 0 25px 0;">by <span style="font-weight: bold; color: #000;">{{ entry.author }}</span></p>
+                    
+                    <div style="display: flex; gap: 40px; justify-content: center; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8; margin-bottom: 25px;">
+                        <div>
+                            <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">List Tier</p>
+                            <h3 style="color: #0070ff; margin: 0; font-size: 1.6rem; font-weight: 700; text-transform: capitalize;">{{ entry.type }} list</h3>
+                        </div>
+                        <div>
+                            <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Points</p>
+                            <h3 style="color: #2bba74; margin: 0; font-size: 1.6rem; font-weight: 700;">{{ entry.points }}</h3>
+                        </div>
+                    </div>
+                    <p style="color: #65676b; font-style: italic;">Records and video verification would be loaded here.</p>
+                </div>
+                <div v-else style="color: #65676b; text-align: center; padding: 40px 0;"><p>Select a level to view details.</p></div>
             </div>
         </main>
     `,
-    data: () => ({
-        list: [],
-        editors: [],
-        loading: true,
-        selected: 0,
-        errors: [],
-        roleIconMap,
-        store
-    }),
-    computed: {
-        level() {
-            return this.list[this.selected][0];
-        },
-        video() {
-            if (!this.level.showcase) {
-                return embed(this.level.verification);
-            }
-
-            return embed(
-                this.toggledShowcase
-                    ? this.level.showcase
-                    : this.level.verification
-            );
-        },
+    data() {
+        return {
+            selected: 0,
+            search: '',
+            list: [
+                // --- MAIN LIST (Tučné a černé) ---
+                { rank: 1, name: "Verity", author: "Gamer", points: 100, type: "main" },
+                { rank: 2, name: "B", author: "MotleyOrc", points: 90, type: "main" },
+                { rank: 3, name: "Deadlocked", author: "RobTop", points: 80, type: "main" },
+                { rank: 4, name: "Theory of Everything 2", author: "RobTop", points: 75, type: "main" },
+                
+                // --- EXTENDED LIST (Normální písmo a o něco světlejší černo/šedá) ---
+                { rank: 5, name: "Blackfire Backfire", author: "Creator", points: 60, type: "extended" },
+                { rank: 6, name: "Darkstep", author: "Creator", points: 55, type: "extended" },
+                { rank: 7, name: "Clubstep", author: "RobTop", points: 50, type: "extended" },
+                { rank: 8, name: "Speed Racer", author: "ZenthicAlpha", points: 45, type: "extended" },
+                { rank: 9, name: "Theory of Every V2", author: "Neptune", points: 40, type: "extended" },
+                
+                // --- LEGACY LIST (Bez čísel, nápis Legacy a text do šeda) ---
+                { rank: 10, name: "Electroman Adventures V2", author: "Neptune", points: 0, type: "legacy" },
+                { rank: 11, name: "Clutterfunk V2", author: "Neptune", points: 0, type: "legacy" },
+                { rank: 12, name: "iSpyWithMyLittleEye", author: "Vidx", points: 0, type: "legacy" },
+                { rank: 13, name: "Crescendo", author: "Serponge", points: 0, type: "legacy" },
+                { rank: 14, name: "xStep V2", author: "Neptune", points: 0, type: "legacy" },
+                { rank: 15, name: "m tolot", author: "Creator", points: 0, type: "legacy" }
+            ]
+        };
     },
-    async mounted() {
-        // Hide loading spinner
-        this.list = await fetchList();
-        this.editors = await fetchEditors();
-
-        // Error handling
-        if (!this.list) {
-            this.errors = [
-                "Failed to load list. Retry in a few minutes or notify list staff.",
-            ];
-        } else {
-            this.errors.push(
-                ...this.list
-                    .filter(([_, err]) => err)
-                    .map(([_, err]) => {
-                        return `Failed to load level. (${err}.json)`;
-                    })
-            );
-            if (!this.editors) {
-                this.errors.push("Failed to load list editors.");
+    computed: {
+        filteredList() {
+            // Filtrování podle vyhledávání
+            let result = this.list;
+            if (this.search) {
+                const query = this.search.toLowerCase();
+                return result.filter(lvl => lvl.name.toLowerCase().includes(query));
             }
-        }
 
-        this.loading = false;
+            // Pokud nevyhledáváme, sestavíme seznam s oddělovači
+            let displayList = [];
+            let hasExtendedDivider = false;
+            let hasLegacyDivider = false;
+
+            result.forEach((level) => {
+                if (level.type === 'extended' && !hasExtendedDivider) {
+                    displayList.push({ isDivider: true, dividerText: "-- EXTENDED LIST --" });
+                    hasExtendedDivider = true;
+                }
+                if (level.type === 'legacy' && !hasLegacyDivider) {
+                    displayList.push({ isDivider: true, dividerText: "-- LEGACY LIST --" });
+                    hasLegacyDivider = true;
+                }
+                displayList.push(level);
+            });
+
+            return displayList;
+        },
+        entry() {
+            return this.list[this.selected] || null;
+        }
     },
     methods: {
-        embed,
-        score,
-    },
+        getListTextColor(type) {
+            if (type === 'main') {
+                return '#000000'; // Čistě černá pro Main list
+            }
+            if (type === 'extended') {
+                return '#4b5563'; // Světlejší černo/šedá (CoolGray) pro Extended
+            }
+            if (type === 'legacy') {
+                return '#9ca3af'; // Šedá pro Legacy list
+            }
+            return '#000000';
+        }
+    }
 };

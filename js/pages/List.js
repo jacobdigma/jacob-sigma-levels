@@ -96,11 +96,11 @@ export default {
                 { rank: 10, name: "Electroman Adventures V2", author: "Neptune", points: 500, type: "main" },
                 
                 // --- EXTENDED LIST (Normální písmo a o něco světlejší černo/šedá) ---
-                { rank: 11, name: "Clutterfunk V2", author: "Neptune", points: 0, type: "extended" },
-                { rank: 12, name: "iSpyWithMyLittleEye", author: "Vidx", points: 0, type: "extended" },
-                { rank: 13, name: "Crescendo", author: "Serponge", points: 0, type: "extended" },
-                { rank: 14, name: "xStep V2", author: "Neptune", points: 0, type: "extended" },
-                { rank: 15, name: "m tolot", author: "Creator", points: 0, type: "extended" },
+                { rank: 11, name: "Clutterfunk V2", author: "Neptune", points: 300, type: "extended" },
+                { rank: 12, name: "iSpyWithMyLittleEye", author: "Vidx", points: 275, type: "extended" },
+                { rank: 13, name: "Crescendo", author: "Serponge", points: 250, type: "extended" },
+                { rank: 14, name: "xStep V2", author: "Neptune", points: 225, type: "extended" },
+                { rank: 15, name: "m tolot", author: "Stetkos", points: 200, type: "extended" },
                 
                 // --- LEGACY LIST (Bez čísel, nápis Legacy a text do šeda) ---
                   { rank: 16, name: "Shiver", author: "SpKale", points: 0, type: "legacy" },

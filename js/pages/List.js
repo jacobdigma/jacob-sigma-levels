@@ -114,24 +114,24 @@ export default {
                 { rank: 7, name: "Clubstep", author: "RobTop", points: 575, type: "main", verification: "", records: [] },
                 { rank: 8, name: "Speed Racer", author: "ZenthicAlpha", points: 550, type: "main", verification: "", records: [] },
                 { rank: 9, name: "Electrodynamix", author: "RobTop", points: 525, type: "main", verification: "", records: [] },
-                { rank: 9, name: "Theory of Every V2", author: "Neptune", points: 525, type: "main", verification: "", records: [] },
-                { rank: 10, name: "Electroman Adventures V2", author: "Neptune", points: 500, type: "main", verification: "", records: [] },
+                { rank: 10, name: "Theory of Every V2", author: "Neptune", points: 525, type: "main", verification: "", records: [] },
+                { rank: 11, name: "Electroman Adventures V2", author: "Neptune", points: 500, type: "main", verification: "", records: [] },
 
                 // --- EXTENDED LIST (Normální písmo a o něco světlejší černo/šedá) ---
-                { rank: 11, name: "Clutterfunk V2", author: "Neptune", points: 475, type: "extended", verification: "", records: [{ user: "trumandigma", percent: 100, link: "https://www.youtube.com/watch?v=2kE93FgLRcs" }] },
-                { rank: 12, name: "iSpyWithMyLittleEye", author: "Voxicat", points: 450, type: "extended", verification: "", records: [] },
-                { rank: 13, name: "Crescendo", author: "Serponge", points: 350, type: "extended", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
-                { rank: 14, name: "xStep V2", author: "Neptune", points: 250, type: "extended", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
-                { rank: 15, name: "m tolot", author: "Stetkos", points: 150, type: "extended", verification: "", records: [] },
+                { rank: 12, name: "Clutterfunk V2", author: "Neptune", points: 475, type: "extended", verification: "", records: [{ user: "trumandigma", percent: 100, link: "https://www.youtube.com/watch?v=2kE93FgLRcs" }] },
+                { rank: 13, name: "iSpyWithMyLittleEye", author: "Voxicat", points: 450, type: "extended", verification: "", records: [] },
+                { rank: 14, name: "Crescendo", author: "Serponge", points: 350, type: "extended", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                { rank: 15, name: "xStep V2", author: "Neptune", points: 250, type: "extended", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                { rank: 16, name: "m tolot", author: "Stetkos", points: 150, type: "extended", verification: "", records: [] },
 
                 // --- LEGACY LIST (Bez čísel, nápis Legacy a text do šeda) ---
-                { rank: 16, name: "Shiver", author: "SpKale", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 17, name: "Phjork", author: "Cerufiffy", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 18, name: "Demon Forest", author: "Ketis", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 19, name: "Demon Mixed", author: "RealOggy", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 20, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 21, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 22, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
+                { rank: 17, name: "Shiver", author: "SpKale", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 18, name: "Phjork", author: "Cerufiffy", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 19, name: "Demon Forest", author: "Ketis", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 20, name: "Demon Mixed", author: "RealOggy", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 21, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 22, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 23, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
             ]
         };
     },

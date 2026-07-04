@@ -83,7 +83,7 @@ export default {
                 // HRÁČ 1: trumandigma
                 {
                     name: "trumandigma",
-                    total: 1580.986,
+                    total: 7175,
                     stats: "9 Main, 4 Extended, 4 Legacy",
                     hardest: "Verity",
                     demons: [

@@ -144,6 +144,7 @@ export default {
         },
         allDemons() {
             if (!this.entry) return [];
+            // Bereme data přímo z pole verified, které tvůj systém používá
             const verified = this.entry.verified || [];
             return verified.map(d => ({ 
                 level: d.level || d, 
@@ -156,7 +157,8 @@ export default {
             const verified = this.entry.verified || [];
             if (verified.length === 0) return 'None';
             const sortedByRank = [...verified].sort((a, b) => (a.rank || 0) - (b.rank || 0));
-            return sortedByRank[0] ? (sortedByRank[0].level || sortedByRank[0]) : 'None';
+            const hardest = sortedByRank[0];
+            return hardest ? (hardest.level || hardest) : 'None';
         },
         stats() {
             if (!this.entry) return { main: 0, extended: 0, legacy: 0 };
@@ -204,4 +206,3 @@ export default {
         }
     }
 };
-

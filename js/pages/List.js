@@ -103,53 +103,49 @@ export default {
             selected: 0,
             search: '',
             list: [
-// --- MAIN LIST (Tučné a černé) ---
-                { rank: 1, name: "Verity", author: "Serponge", points: 850, type: "main" },
-                { rank: 2, name: "B", author: "MotleyOrc", points: 800, type: "main" },
-                { rank: 3, name: "Deadlocked", author: "RobTop", points: 750, type: "main" },
-                { rank: 4, name: "Theory of Everything 2", author: "RobTop", points: 700, type: "main" },
-                { rank: 5, name: "Blackfire Backfire", author: "kira9999", points: 650, type: "main" },
-                { rank: 6, name: "Darkstep", author: "Alex", points: 600, type: "main" },
-                { rank: 7, name: "Clubstep", author: "RobTop", points: 575, type: "main" },
-                { rank: 8, name: "Speed Racer", author: "ZenthicAlpha", points: 550, type: "main" },
-                { rank: 9, name: "Electrodynamix", author: "RobTop", points: 525, type: "main" },
-                { rank: 9, name: "Theory of Every V2", author: "Neptune", points: 525, type: "main" },
-                { rank: 10, name: "Electroman Adventures V2", author: "Neptune", points: 500, type: "main" },
-                
-                // --- EXTENDED LIST (Normální písmo a o něco světlejší černo/šedá) ---
-                { rank: 11, name: "Clutterfunk V2", author: "Neptune", points: 475, type: "extended" },
-                { rank: 12, name: "iSpyWithMyLittleEye", author: "Vidx", points: 450, type: "extended" },
-                { rank: 13, name: "Crescendo", author: "Serponge", points: 350, type: "extended" },
-                { rank: 14, name: "xStep V2", author: "Neptune", points: 250, type: "extended" },
-                { rank: 15, name: "m tolot", author: "Stetkos", points: 150, type: "extended" },
-                
-                // --- LEGACY LIST (Bez čísel, nápis Legacy a text do šeda) ---
-                  { rank: 16, name: "Shiver", author: "SpKale", points: 0, type: "legacy" },
-                  { rank: 17, name: "Phjork", author: "Cerufiffy", points: 0, type: "legacy" },
-                  { rank: 18, name: "Demon Forest", author: "Ketis", points: 0, type: "legacy" },
-                  { rank: 19, name: "Demon Mixed", author: "RealOggy", points: 0, type: "legacy" },
-                  { rank: 20, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy" },
-                  { rank: 21, name: "The Nightmare", author: "Jax", points: 0, type: "legacy" },
-                  { rank: 22, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy" }
+                // --- MAIN LIST (Tučné a černé) ---
+                { rank: 1, name: "Verity", author: "Serponge", points: 850, type: "main", verification: "https://youtube.com", records: [] },
+                { rank: 2, name: "B", author: "MotleyOrc", points: 800, type: "main", verification: "https://youtube.com", records: [] },
+                { rank: 3, name: "Deadlocked", author: "RobTop", points: 750, type: "main", verification: "", records: [{ user: "Stetkos", percent: 79, link: "https://www.youtube.com/watch?v=81Iryy_Wc5o" }] },
+                { rank: 4, name: "Theory of Everything 2", author: "RobTop", points: 700, type: "main", verification: "", records: [] },
+                { rank: 5, name: "Blackfire Backfire", author: "kira9999", points: 650, type: "main", verification: "", records: [] },
+                { rank: 6, name: "Darkstep", author: "Alex", points: 600, type: "main", verification: "", records: [] },
+                { rank: 7, name: "Clubstep", author: "RobTop", points: 575, type: "main", verification: "", records: [] },
+                { rank: 8, name: "Speed Racer", author: "ZenthicAlpha", points: 550, type: "main", verification: "", records: [] },
+                { rank: 9, name: "Electrodynamix", author: "RobTop", points: 525, type: "main", verification: "", records: [] },
+                { rank: 9, name: "Theory of Every V2", author: "Neptune", points: 525, type: "main", verification: "", records: [] },
+                { rank: 10, name: "Electroman Adventures V2", author: "Neptune", points: 500, type: "main", verification: "", records: [] },
 
+                // --- EXTENDED LIST (Normální písmo a o něco světlejší černo/šedá) ---
+                { rank: 11, name: "Clutterfunk V2", author: "Neptune", points: 475, type: "extended", verification: "", records: [{ user: "trumandigma", percent: 100, link: "https://www.youtube.com/watch?v=2kE93FgLRcs" }] },
+                { rank: 12, name: "iSpyWithMyLittleEye", author: "Voxicat", points: 450, type: "extended", verification: "", records: [] },
+                { rank: 13, name: "Crescendo", author: "Serponge", points: 350, type: "extended", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                { rank: 14, name: "xStep V2", author: "Neptune", points: 250, type: "extended", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                { rank: 15, name: "m tolot", author: "Stetkos", points: 150, type: "extended", verification: "", records: [] },
+
+                // --- LEGACY LIST (Bez čísel, nápis Legacy a text do šeda) ---
+                { rank: 16, name: "Shiver", author: "SpKale", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 17, name: "Phjork", author: "Cerufiffy", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 18, name: "Demon Forest", author: "Ketis", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 19, name: "Demon Mixed", author: "RealOggy", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 20, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 21, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 22, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
             ]
         };
     },
     computed: {
         filteredList() {
-            // Filtrování podle vyhledávání
-            let result = this.list;
             if (this.search) {
                 const query = this.search.toLowerCase();
-                return result.filter(lvl => lvl.name.toLowerCase().includes(query));
+                return this.list.filter(lvl => lvl.name.toLowerCase().includes(query));
             }
 
-            // Pokud nevyhledáváme, sestavíme seznam s oddělovači
             let displayList = [];
             let hasExtendedDivider = false;
             let hasLegacyDivider = false;
 
-            result.forEach((level) => {
+            this.list.forEach((level) => {
                 if (level.type === 'extended' && !hasExtendedDivider) {
                     displayList.push({ isDivider: true, dividerText: "-- EXTENDED LIST --" });
                     hasExtendedDivider = true;
@@ -167,20 +163,24 @@ export default {
             return this.list[this.selected] || null;
         }
     },
-     methods: {
+    methods: {
         getListTextColor(type) {
-            if (type === 'main') {
-                return '#000000'; // Čistě černá pro Main list
-            }
-            if (type === 'extended') {
-                return '#4b5563'; // Světlejší černo/šedá (CoolGray)
-            }
-            if (type === 'legacy') {
-                return '#9ca3af'; // Šedá pro Legacy list
-            }
+            if (type === 'main') return '#000000';
+            if (type === 'extended') return '#4b5563';
+            if (type === 'legacy') return '#9ca3af';
             return '#000000';
         },
-        // --- TADY PŘIDEJ TENTO JEDEN ŘÁDEK ---
-        embed,
+        getEmbedUrl(url) {
+            if (!url) return '';
+            let videoId = '';
+            if (url.includes('://youtube.com')) {
+                videoId = url.split('v=')[1];
+                if (videoId && videoId.includes('&')) videoId = videoId.split('&')[0];
+            } else if (url.includes('youtu.be/')) {
+                videoId = url.split('youtu.be/')[1];
+                if (videoId && videoId.includes('?')) videoId = videoId.split('?')[0];
+            }
+            return videoId ? 'https://youtube.com' + videoId : url;
+        }
     }
-
+};

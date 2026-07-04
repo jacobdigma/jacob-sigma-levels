@@ -83,7 +83,7 @@ export default {
                 // HRÁČ 1: trumandigma
                 {
                     name: "trumandigma",
-                    total: 7175,
+                    total: 7500,
                     stats: "9 Main, 4 Extended, 4 Legacy",
                     hardest: "Verity",
                     demons: [
@@ -95,6 +95,7 @@ export default {
                         { level: "Darkstep", link: "#", type: "main", isVerified: false },
                         { level: "Deadlocked", link: "#", type: "main", isVerified: false },
                         { level: "Demon Forest", link: "#", type: "legacy", isVerified: false },
+                        { level: "Electrodynamix", link: "#", type: "main", isVerified: false },
                         { level: "Electroman Adventures V2", link: "#", type: "main", isVerified: false },
                         { level: "iSpyWithMyLittleEye", link: "#", type: "extended", isVerified: false },
                         { level: "Phjork", link: "#", type: "legacy", isVerified: false },

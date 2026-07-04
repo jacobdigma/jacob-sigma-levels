@@ -95,42 +95,40 @@ input[type="checkbox"] {
     margin: 0;
 }
 
-/* --- BÍLÝ STYL PRO LEADERBOARD --- */
-.page-leaderboard-container, 
-#leaderboard-ui {
-    background: #f0f2f5 !important;
-    color: #000000 !important;
-}
-
-/* Všechny tři hlavní panely na bílé pozadí */
-.board-container, 
-.player-container, 
-.packs-container {
-    background: #ffffff !important;
-    color: #000000 !important;
+/* Změna pozadí pouze pro kontejnery uvnitř leaderboardu */
+.page-leaderboard-container .surface {
+    background-color: #ffffff !important;
     border: 1px solid #e1e4e8 !important;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
 }
 
-/* Texty, nadpisy a ranky na černou */
-.player-name, .main-title, .section-title, .board td, .stats-label, h1, h2, h3, h4 {
+/* Černý text pouze pro texty uvnitř panelů leaderboardu */
+.page-leaderboard-container .surface h1,
+.page-leaderboard-container .surface h2,
+.page-leaderboard-container .surface h3,
+.page-leaderboard-container .surface h4,
+.page-leaderboard-container .surface p,
+.page-leaderboard-container .surface span,
+.page-leaderboard-container .surface td {
     color: #000000 !important;
 }
 
-/* Vstupní vyhledávací pole */
-.search-box input {
-    background: #ffffff !important;
+/* Výjimka pro skóre a odkazy – ty musí zůstat modré */
+.page-leaderboard-container .surface td.total p,
+.page-leaderboard-container .surface .pointercrate-stat-val,
+.page-leaderboard-container .surface a {
+    color: #0070ff !important;
+}
+
+/* Vyhledávací políčko v leaderboardu */
+.page-leaderboard-container .search-box input {
+    background-color: #ffffff !important;
     color: #000000 !important;
     border: 1px solid #ccd1d9 !important;
 }
 
-/* Úprava odkazů na démony (přidání fiktivního textu "by player" pomocí CSS) */
-.player-container a {
-    color: #0070ff !important;
-    font-weight: 600;
-}
-
-/* Aktivní vybraný řádek hráče */
-.board tr.active, .board tr:hover {
-    background: #e6f0ff !important;
+/* Efekt při najetí myší na hráče v tabulce */
+.page-leaderboard-container .board tr:hover,
+.page-leaderboard-container .board tr.active {
+    background-color: #e6f0ff !important;
 }

@@ -112,9 +112,9 @@ export default {
                 // HRÁČ 2: stetkos
                 {
                     name: "stetkos",
-                    total: 945.120,
-                    stats: "12 Main, 25 Extended, 8 Legacy",
-                    hardest: "Verity",
+                    total: 1500,
+                    stats: "1 Main, 4 Extended, 7 Legacy",
+                    hardest: "Theory of Every V2",
                     demons: [
                         { level: "Clutterfunk V2", link: "#", type: "extended", isVerified: false },
                         { level: "Crescendo", link: "#", type: "extended", isVerified: false },

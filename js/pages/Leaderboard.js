@@ -123,11 +123,25 @@ export default {
                         { level: "m tolot", link: "#", type: "extended", isVerified: false },
                         { level: "Phjork", link: "#", type: "legacy", isVerified: false },
                         { level: "Platinum Adventure", link: "#", type: "legacy", isVerified: false },
-                        { level: "Shiver", link: "#", type: "legacy", isVerified: false }
-                        { level: "The Lightning Road", link: "#", type: "legacy", isVerified: false }
-                        { level: "The Nightmare", link: "#", type: "legacy", isVerified: false }
-                        { level: "Theory of Every V2", link: "#", type: "main", isVerified: false }
+                        { level: "Shiver", link: "#", type: "legacy", isVerified: false },
+                        { level: "The Lightning Road", link: "#", type: "legacy", isVerified: false },
+                        { level: "The Nightmare", link: "#", type: "legacy", isVerified: false },
+                        { level: "Theory of Every V2", link: "#", type: "main", isVerified: false },
                         { level: "xStep V2", link: "#", type: "extended", isVerified: false }
+                        
+                    ],
+                    progress: [
+                        { level: "Deadlocked", percent: 79, link: "#", type: "extended" }
+                    ]
+                },
+                 {
+                    name: "Krystof",
+                    total: 0,
+                    stats: "0 Main, 0 Extended, 1 Legacy",
+                    hardest: "Platinum Adventure",
+                    demons: [
+
+                        { level: "Platinum Adventure", link: "#", type: "legacy", isVerified: false }
                         
                     ],
                     progress: [

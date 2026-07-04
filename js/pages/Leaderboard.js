@@ -1,5 +1,4 @@
 import { fetchLeaderboard } from '../content.js';
-import { localize } from '../util.js';
 import Spinner from '../components/Spinner.js';
 
 const packsConfig = [
@@ -11,10 +10,13 @@ const packsConfig = [
 function checkPackCompletion(entry, pack) {
     if (!entry) return false;
     const playerLevels = [];
-    if (entry.completed) entry.completed.forEach(s => playerLevels.push(s.level));
-    if (entry.verified) entry.verified.forEach(s => playerLevels.push(s.level));
+    const completed = entry.completed || entry.levels || [];
+    const verified = entry.verified || [];
+    completed.forEach(s => playerLevels.push(s.level || s));
+    verified.forEach(s => playerLevels.push(s.level || s));
     return pack.levels.every(lvl => playerLevels.includes(lvl));
 }
+
 export default {
     components: { Spinner },
     template: `
@@ -22,7 +24,7 @@ export default {
         
         <main v-else style="background: #f0f2f5; padding: 20px; min-height: 100vh; display: flex; gap: 20px; align-items: flex-start; font-family: sans-serif; box-sizing: border-box;">
             
-            <!-- LEVÝ PANEL -->
+            <!-- LEVÝ PANEL: Seznam hráčů -->
             <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 15px; width: 320px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); box-sizing: border-box; flex-shrink: 0;">
                 <div style="margin-bottom: 15px;">
                     <input type="text" v-model="search" placeholder="Enter to search..." style="width: 100%; padding: 10px; border: 1px solid #ccd1d9; border-radius: 4px; color: #000; background: #fff; box-sizing: border-box;">
@@ -31,8 +33,8 @@ export default {
                     <tr v-for="(player, idx) in paginatedLeaderboard" :key="idx" @click="selectPlayer(idx)"
                         :style="{ cursor: 'pointer', background: selected === idx ? '#e6f0ff' : 'transparent', borderBottom: '1px solid #f0f0f0' }">
                         <td style="padding: 12px 8px; width: 40px; color: #65676b; font-weight: bold;">#{{ (page - 1) * pageSize + idx + 1 }}</td>
-                        <td style="padding: 12px 8px; text-align: left; color: #000; font-weight: 600;">{{ player.name }}</td>
-                        <td style="padding: 12px 8px; text-align: right; color: #0070ff; font-weight: bold;">{{ localize(player.total) }}</td>
+                        <td style="padding: 12px 8px; text-align: left; color: #000; font-weight: 600;">{{ getPlayerName(player) }}</td>
+                        <td style="padding: 12px 8px; text-align: right; color: #0070ff; font-weight: bold;">{{ formatScore(player) }}</td>
                     </tr>
                 </table>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 10px; border-top: 1px solid #f0f0f0;">
@@ -42,10 +44,10 @@ export default {
                 </div>
             </div>
 
-            <!-- PROSTŘEDNÍ PANEL -->
+            <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
                 <div v-if="entry">
-                    <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800;">{{ entry.name }}</h1>
+                    <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800;">{{ getPlayerName(entry) }}</h1>
                     
                     <div style="display: flex; gap: 40px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8;">
                         <div>
@@ -54,7 +56,7 @@ export default {
                         </div>
                         <div>
                             <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist score</p>
-                            <h3 style="color: #0070ff; margin: 0; font-size: 1.8rem; font-weight: 700;">{{ localize(entry.total) }}</h3>
+                            <h3 style="color: #0070ff; margin: 0; font-size: 1.8rem; font-weight: 700;">{{ formatScore(entry) }}</h3>
                         </div>
                     </div>
 
@@ -69,14 +71,13 @@ export default {
                         </div>
                     </div>
 
-                    <!-- SLOUČENO DO JEDNOHO ODSTAVCE + REÁLNÁ JMÉNA HRÁČE -->
                     <h2 style="color: #000000; font-size: 1.4rem; margin: 25px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #0070ff; font-weight: 700;">Demons completed & verified</h2>
                     <div v-if="allDemons.length === 0" style="color: #65676b; font-style: italic;">None</div>
                     <div v-else style="line-height: 2; font-size: 1.05rem; color: #333; word-wrap: break-word;">
                         <template v-for="(demon, idx) in allDemons">
                             <span>
-                                <a :href="demon.link" target="_blank" style="color: #0070ff; font-weight: 600; text-decoration: none;">{{ demon.level }}</a> 
-                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ entry.name }}</span>
+                                <a :href="demon.link" target="_blank" style="color: #0070ff; font-weight: 600; text-decoration: none;">{{ demon.level || demon }}</a> 
+                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ getPlayerName(entry) }}</span>
                                 <span v-if="demon.isVerified" style="color: #2bba74; font-size: 0.85rem; font-weight: bold; margin-left: 5px; background: #eafaf1; padding: 2px 6px; border-radius: 4px;">Verified</span>
                             </span>
                             <span v-if="idx < allDemons.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
@@ -88,14 +89,13 @@ export default {
                     <div v-else style="line-height: 2; font-size: 1.05rem; color: #333; word-wrap: break-word;">
                         <template v-for="(score, idx) in entry.progressed">
                             <span>
-                                <a :href="score.link" target="_blank" style="color: #ff9000; font-weight: 600; text-decoration: none;">{{ score.level }} ({{ score.percent }}%)</a> 
-                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ entry.name }}</span>
+                                <a :href="score.link" target="_blank" style="color: #ff9000; font-weight: 600; text-decoration: none;">{{ score.level || score }} ({{ score.percent }}%)</a> 
+                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ getPlayerName(entry) }}</span>
                             </span>
                             <span v-if="idx < entry.progressed.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
                         </template>
                     </div>
                 </div>
-                <div v-else style="color: #65676b; text-align: center; padding: 40px 0;"><p>Select a player to view stats.</p></div>
             </div>
 
             <!-- PRAVÝ PANEL -->
@@ -113,10 +113,9 @@ export default {
                 </div>
                 <div v-else style="color: #65676b; font-style: italic;">No packs completed.</div>
             </div>
-            
         </main>
     `,
-           data() {
+    data() {
         return {
             leaderboard: [],
             packs: packsConfig,
@@ -133,7 +132,7 @@ export default {
             if (!this.search) return this.leaderboard;
             const query = this.search.toLowerCase();
             return this.leaderboard.filter(player => {
-                const name = typeof player === 'string' ? player : (player.name || player.player || '');
+                const name = player && (player.name || player.player || player.user || (typeof player === 'string' ? player : ''));
                 return name.toLowerCase().includes(query);
             });
         },
@@ -180,15 +179,19 @@ export default {
         }
     },
     methods: {
+        getPlayerName(player) {
+            if (!player) return 'Unknown';
+            return player.name || player.player || player.user || (typeof player === 'string' ? player : 'Unknown');
+        },
         formatScore(player) {
             if (!player) return '0';
-            if (typeof player === 'object' && player.total !== undefined) {
-                return localize(player.total);
+            let score = 0;
+            if (typeof player === 'object') {
+                score = player.total !== undefined ? player.total : (player.score !== undefined ? player.score : 0);
+            } else if (typeof player === 'number' || typeof player === 'string') {
+                score = player;
             }
-            if (typeof player === 'number' || typeof player === 'string') {
-                return localize(player);
-            }
-            return '0';
+            return Number(score).toLocaleString();
         },
         selectPlayer(index) {
             this.selected = index;
@@ -207,3 +210,4 @@ export default {
         }
     }
 };
+

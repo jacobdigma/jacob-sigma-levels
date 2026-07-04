@@ -116,7 +116,7 @@ export default {
             </div>
         </main>
     `,
-    data() {
+        data() {
         return {
             leaderboard: [],
             packs: packsConfig,
@@ -133,7 +133,7 @@ export default {
             if (!this.search) return this.leaderboard;
             const query = this.search.toLowerCase();
             return this.leaderboard.filter(player => {
-                const name = player && (player.name || player.player || player.user || (typeof player === 'string' ? player : ''));
+                const name = player && (player.user || player.name || (typeof player === 'string' ? player : ''));
                 return name.toLowerCase().includes(query);
             });
         },
@@ -148,25 +148,28 @@ export default {
         },
         allDemons() {
             if (!this.entry) return [];
-            const completed = this.entry.completed ? this.entry.completed.map(d => ({ ...(typeof d === 'string' ? { level: d } : d), isVerified: false })) : [];
-            const verified = this.entry.verified ? this.entry.verified.map(d => ({ ...(typeof d === 'string' ? { level: d } : d), isVerified: true })) : [];
-            return [...completed, ...verified].sort((a, b) => (a.level || '').localeCompare(b.level || ''));
+            // Tvůj systém ukládá vše do verified souborů, takže načteme toto pole
+            const verified = this.entry.verified || [];
+            return verified.map(d => ({ 
+                level: d.level || d, 
+                link: d.link || '#',
+                isVerified: true 
+            })).sort((a, b) => a.level.localeCompare(b.level));
         },
         hardestDemon() {
             if (!this.entry) return 'None';
-            const comp = this.entry.completed || [];
-            if (comp.length === 0) return 'None';
-            const sortedByRank = [...comp].sort((a, b) => (a.rank || 0) - (b.rank || 0));
-            const hardest = sortedByRank[0];
-            return hardest ? (hardest.level || hardest) : 'None';
+            const verified = this.entry.verified || [];
+            if (verified.length === 0) return 'None';
+            const sortedByRank = [...verified].sort((a, b) => (a.rank || 0) - (b.rank || 0));
+            return sortedByRank[0] ? (sortedByRank[0].level || sortedByRank[0]) : 'None';
         },
         stats() {
             if (!this.entry) return { main: 0, extended: 0, legacy: 0 };
-            const comp = this.entry.completed || [];
+            const verified = this.entry.verified || [];
             return {
-                main: comp.filter(d => d.listRank === 'Main').length,
-                extended: comp.filter(d => d.listRank === 'Extended').length,
-                legacy: comp.filter(d => d.listRank === 'Legacy').length,
+                main: verified.filter(d => d.listRank === 'Main' || (d.rank && d.rank <= 50)).length,
+                extended: verified.filter(d => d.listRank === 'Extended' || (d.rank && d.rank > 50 && d.rank <= 100)).length,
+                legacy: verified.filter(d => d.listRank === 'Legacy' || (d.rank && d.rank > 100)).length,
             };
         }
     },
@@ -182,16 +185,11 @@ export default {
     methods: {
         getPlayerName(player) {
             if (!player) return 'Unknown';
-            return player.name || player.player || player.user || (typeof player === 'string' ? player : 'Unknown');
+            return player.user || player.name || (typeof player === 'string' ? player : 'Unknown');
         },
         formatScore(player) {
             if (!player) return '0';
-            let score = 0;
-            if (typeof player === 'object') {
-                score = player.total !== undefined ? player.total : (player.score !== undefined ? player.score : 0);
-            } else if (typeof player === 'number' || typeof player === 'string') {
-                score = player;
-            }
+            let score = player.total !== undefined ? player.total : (player.score !== undefined ? player.score : 0);
             return Number(score).toLocaleString();
         },
         selectPlayer(index) {

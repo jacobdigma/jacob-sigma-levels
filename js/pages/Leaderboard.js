@@ -116,7 +116,7 @@ export default {
             
         </main>
     `,
-       data() {
+           data() {
         return {
             leaderboard: [],
             packs: packsConfig,
@@ -133,7 +133,7 @@ export default {
             if (!this.search) return this.leaderboard;
             const query = this.search.toLowerCase();
             return this.leaderboard.filter(player => {
-                const name = player.name || player.player || player || '';
+                const name = typeof player === 'string' ? player : (player.name || player.player || '');
                 return name.toLowerCase().includes(query);
             });
         },
@@ -148,14 +148,17 @@ export default {
         },
         allDemons() {
             if (!this.entry) return [];
-            const completed = this.entry.completed ? this.entry.completed.map(d => ({ ...d, isVerified: false })) : [];
-            const verified = this.entry.verified ? this.entry.verified.map(d => ({ ...d, isVerified: true })) : [];
-            return [...completed, ...verified].sort((a, b) => a.level.localeCompare(b.level));
+            const completed = this.entry.completed ? this.entry.completed.map(d => ({ ...(typeof d === 'string' ? { level: d } : d), isVerified: false })) : [];
+            const verified = this.entry.verified ? this.entry.verified.map(d => ({ ...(typeof d === 'string' ? { level: d } : d), isVerified: true })) : [];
+            return [...completed, ...verified].sort((a, b) => (a.level || '').localeCompare(b.level || ''));
         },
         hardestDemon() {
-            if (!this.entry || !this.entry.completed || this.entry.completed.length === 0) return 'None';
-            const sortedByRank = [...this.entry.completed].sort((a, b) => a.rank - b.rank);
-            return sortedByRank.length > 0 ? sortedByRank[0].level : 'None';
+            if (!this.entry) return 'None';
+            const comp = this.entry.completed || [];
+            if (comp.length === 0) return 'None';
+            const sortedByRank = [...comp].sort((a, b) => (a.rank || 0) - (b.rank || 0));
+            const hardest = sortedByRank[0];
+            return hardest ? (hardest.level || hardest) : 'None';
         },
         stats() {
             if (!this.entry) return { main: 0, extended: 0, legacy: 0 };
@@ -177,8 +180,15 @@ export default {
         }
     },
     methods: {
-        localize(val) {
-            return Number(val).toLocaleString();
+        formatScore(player) {
+            if (!player) return '0';
+            if (typeof player === 'object' && player.total !== undefined) {
+                return localize(player.total);
+            }
+            if (typeof player === 'number' || typeof player === 'string') {
+                return localize(player);
+            }
+            return '0';
         },
         selectPlayer(index) {
             this.selected = index;

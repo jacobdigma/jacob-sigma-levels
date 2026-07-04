@@ -86,10 +86,10 @@ export default {
                 "blackfire backfire": 5,
                 "speed racer": 8,
                 "clubstep": 7,
-                "electroman adventures v2": 10,
-                "xstep v2": 14,
-                "clutterfunk v2": 11,
-                "m tolot": 15
+                "electroman adventures v2": 11,
+                "xstep v2": 15,
+                "clutterfunk v2": 12,
+                "m tolot": 16
             };
             return backupRanks[levelName.toLowerCase().trim()] || "?";
         }

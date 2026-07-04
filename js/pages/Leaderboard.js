@@ -17,8 +17,8 @@ export default {
                     <tr v-for="(player, idx) in paginatedLeaderboard" :key="idx" @click="selectPlayer(idx)"
                         :style="{ cursor: 'pointer', background: selected === idx ? '#e6f0ff' : 'transparent', borderBottom: '1px solid #f0f0f0' }">
                         <td style="padding: 12px 8px; width: 40px; color: #65676b; font-weight: bold;">#{{ (page - 1) * pageSize + idx + 1 }}</td>
-                        <td style="padding: 12px 8px; text-align: left; color: #000; font-weight: 600;">{{ player.user }}</td>
-                        <td style="padding: 12px 8px; text-align: right; color: #0070ff; font-weight: bold;">{{ formatScore(player.total) }}</td>
+                        <td style="padding: 12px 8px; text-align: left; color: #000; font-weight: 600;">{{ getPlayerName(player) }}</td>
+                        <td style="padding: 12px 8px; text-align: right; color: #0070ff; font-weight: bold;">{{ formatScore(player) }}</td>
                     </tr>
                 </table>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 10px; border-top: 1px solid #f0f0f0;">
@@ -31,7 +31,7 @@ export default {
             <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
                 <div v-if="entry">
-                    <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800;">{{ entry.user }}</h1>
+                    <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800;">{{ getPlayerName(entry) }}</h1>
                     
                     <div style="display: flex; gap: 40px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8;">
                         <div>
@@ -40,7 +40,7 @@ export default {
                         </div>
                         <div>
                             <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist score</p>
-                            <h3 style="color: #0070ff; margin: 0; font-size: 1.8rem; font-weight: 700;">{{ formatScore(entry.total) }}</h3>
+                            <h3 style="color: #0070ff; margin: 0; font-size: 1.8rem; font-weight: 700;">{{ formatScore(entry) }}</h3>
                         </div>
                     </div>
 
@@ -55,14 +55,14 @@ export default {
                         </div>
                     </div>
 
-                    <!-- PROPOJENO PŘÍMO S REÁLNÝMI REKORDY ZE SOUBORŮ -->
+                    <!-- ODSTAVEC PRO DÉMONY S JMÉNY -->
                     <h2 style="color: #000000; font-size: 1.4rem; margin: 25px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #0070ff; font-weight: 700;">Demons completed & verified</h2>
                     <div v-if="allDemons.length === 0" style="color: #65676b; font-style: italic;">None</div>
                     <div v-else style="line-height: 2; font-size: 1.05rem; color: #333; word-wrap: break-word;">
                         <template v-for="(demon, idx) in allDemons">
                             <span>
                                 <a :href="demon.link" target="_blank" style="color: #0070ff; font-weight: 600; text-decoration: none;">{{ demon.level }}</a> 
-                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ entry.user }}</span>
+                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ getPlayerName(entry) }}</span>
                             </span>
                             <span v-if="idx < allDemons.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
                         </template>
@@ -74,7 +74,7 @@ export default {
                         <template v-for="(score, idx) in progressDemons">
                             <span>
                                 <a :href="score.link" target="_blank" style="color: #ff9000; font-weight: 600; text-decoration: none;">{{ score.level }} ({{ score.percent }}%)</a> 
-                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ entry.user }}</span>
+                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ getPlayerName(entry) }}</span>
                             </span>
                             <span v-if="idx < progressDemons.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
                         </template>
@@ -86,6 +86,7 @@ export default {
     data() {
         return {
             leaderboard: [],
+            packs: packsConfig,
             loading: true,
             selected: 0,
             err: [],
@@ -99,7 +100,7 @@ export default {
             if (!this.search) return this.leaderboard;
             const query = this.search.toLowerCase();
             return this.leaderboard.filter(player => {
-                const name = player && player.user ? player.user : '';
+                const name = player && typeof player === 'object' ? (player.user || player.name || '') : String(player);
                 return name.toLowerCase().includes(query);
             });
         },
@@ -114,7 +115,6 @@ export default {
         },
         allDemons() {
             if (!this.entry || !this.entry.verified) return [];
-            // Filtrujeme 100% dokončené levely ze složky data
             return this.entry.verified
                 .filter(d => d.percent === 100 || d.percent === undefined)
                 .map(d => ({
@@ -125,7 +125,6 @@ export default {
         },
         progressDemons() {
             if (!this.entry || !this.entry.verified) return [];
-            // Filtrujeme levely, kde má hráč progress pod 100%
             return this.entry.verified
                 .filter(d => d.percent && d.percent < 100)
                 .map(d => ({
@@ -141,11 +140,11 @@ export default {
         },
         stats() {
             if (!this.entry || !this.entry.verified) return { main: 0, extended: 0, legacy: 0 };
-            const compCount = this.allDemons.length;
+            const verified = this.entry.verified || [];
             return {
-                main: compCount,
-                extended: 0,
-                legacy: 0
+                main: verified.filter(d => d.listRank === 'Main' || (d.rank && d.rank <= 50)).length,
+                extended: verified.filter(d => d.listRank === 'Extended' || (d.rank && d.rank > 50 && d.rank <= 100)).length,
+                legacy: verified.filter(d => d.listRank === 'Legacy' || (d.rank && d.rank > 100)).length,
             };
         }
     },
@@ -159,8 +158,18 @@ export default {
         }
     },
     methods: {
-        formatScore(score) {
-            if (score === undefined || score === null) return '0';
+        getPlayerName(player) {
+            if (!player) return 'Unknown';
+            return player.user || player.name || (typeof player === 'string' ? player : 'Unknown');
+        },
+        formatScore(player) {
+            if (!player) return '0';
+            let score = 0;
+            if (typeof player === 'object') {
+                score = player.total !== undefined ? player.total : (player.score !== undefined ? player.score : 0);
+            } else if (typeof player === 'number' || typeof player === 'string') {
+                score = player;
+            }
             return Number(score).toLocaleString();
         },
         selectPlayer(index) {
@@ -171,6 +180,12 @@ export default {
         },
         nextPage() {
             if (this.page * this.pageSize < this.filteredLeaderboard.length) { this.page++; this.selected = 0; }
+        },
+        hasAnyPack(player) {
+            return this.packs.some(pack => checkPackCompletion(player, pack));
+        },
+        hasCompletedPack(player, pack) {
+            return checkPackCompletion(player, pack);
         }
     }
 };

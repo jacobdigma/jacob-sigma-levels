@@ -56,27 +56,46 @@ export default {
                 </div>
             </div>
 
-            <!-- PROSTŘEDNÍ PANEL: Detail vybraného levelu -->
+                       <!-- PROSTŘEDNÍ PANEL: Opravený pro dynamická videa a rekordy -->
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
-                <div v-if="entry" style="text-align: center;">
-                    <h1 style="color: #000000; font-size: 2.5rem; margin: 0 0 10px 0; font-weight: 800;">{{ entry.name }}</h1>
-                    <p style="color: #65676b; font-size: 1.1rem; margin: 0 0 25px 0;">by <span style="font-weight: bold; color: #000;">{{ entry.author }}</span></p>
-                    
-                    <div style="display: flex; gap: 40px; justify-content: center; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8; margin-bottom: 25px;">
+                <div v-if="entry">
+                    <div style="text-align: center; margin-bottom: 25px;">
+                        <h1 style="color: #000000; font-size: 2.5rem; margin: 0 0 5px 0; font-weight: 800;">{{ entry.name }}</h1>
+                        <p style="color: #65676b; font-size: 1.1rem; margin: 0;">by <span style="font-weight: bold; color: #000;">{{ entry.author || 'Unknown' }}</span></p>
+                    </div>
+
+                    <!-- REÁLNÉ YOUTUBE VIDEO ZE SOUBORU LEVELU -->
+                    <div v-if="entry.verification" style="width: 100%; max-width: 800px; margin: 0 auto 25px auto; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <iframe style="width: 100%; height: 100%; border: none;" :src="embed(entry.verification)" allowfullscreen></iframe>
+                    </div>
+
+                    <div style="display: flex; gap: 40px; justify-content: center; padding: 20px 0; border-top: 1px solid #e1e4e8; border-bottom: 1px solid #e1e4e8; margin-bottom: 25px; text-align: center;">
                         <div>
                             <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">List Tier</p>
-                            <h3 style="color: #0070ff; margin: 0; font-size: 1.6rem; font-weight: 700; text-transform: capitalize;">{{ entry.type }} list</h3>
+                            <h3 style="color: #0070ff; margin: 0; font-size: 1.5rem; font-weight: 700; text-transform: uppercase;">{{ entry.type || 'Main' }} list</h3>
                         </div>
                         <div>
                             <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Points</p>
-                            <h3 style="color: #2bba74; margin: 0; font-size: 1.6rem; font-weight: 700;">{{ entry.points }}</h3>
+                            <h3 style="color: #2bba74; margin: 0; font-size: 1.5rem; font-weight: 700;">{{ entry.points }}</h3>
                         </div>
                     </div>
-                    <p style="color: #65676b; font-style: italic;">Records and video verification would be loaded here.</p>
+
+                    <!-- REÁLNÉ REKORDY HRÁČŮ Z POLÍČKA RECORDS -->
+                    <h2 style="color: #000000; font-size: 1.4rem; margin: 25px 0 15px 0; font-weight: 700; border-bottom: 2px solid #0070ff; padding-bottom: 5px;">Records</h2>
+                    <div v-if="!entry.records || entry.records.length === 0" style="color: #65676b; font-style: italic;">None</div>
+                    <div v-else style="display: flex; flex-direction: column; gap: 10px;">
+                        <div v-for="record in entry.records" style="background: #f8f9fa; border: 1px solid #e1e4e8; padding: 12px 15px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <span style="font-weight: bold; color: #000;">{{ record.user }}</span>
+                                <span style="color: #65676b; margin-left: 10px;">{{ record.percent }}%</span>
+                            </div>
+                            <a v-if="record.link" :href="record.link" target="_blank" style="color: #0070ff; font-weight: bold; text-decoration: none;">Watch Video</a>
+                        </div>
+                    </div>
                 </div>
                 <div v-else style="color: #65676b; text-align: center; padding: 40px 0;"><p>Select a level to view details.</p></div>
             </div>
-        </main>
+
     `,
     data() {
         return {

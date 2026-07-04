@@ -1,6 +1,18 @@
 import { fetchLeaderboard } from '../content.js';
 import Spinner from '../components/Spinner.js';
 
+const packsConfig = [
+    { name: "Neptune Pack 1", color: "#0070ff", points: 50, levels: ["xStep V2", "Clutterfunk V2", "Electroman Adventures V2"] },
+    { name: "Digna Pack", color: "#ff0000", points: 75, levels: ["n tolot", "Speed Racer", "Blackfire Backfire"] },
+    { name: "RobTop Pack", color: "#00ffcc", points: 100, levels: ["Deadlocked", "Theory of Everything 2", "Clubstep"] }
+];
+
+function checkPackCompletion(entry, pack) {
+    if (!entry || !entry.verified) return false;
+    const playerLevels = entry.verified.map(s => s.level || s);
+    return pack.levels.every(lvl => playerLevels.includes(lvl));
+}
+
 export default {
     components: { Spinner },
     template: `
@@ -55,7 +67,6 @@ export default {
                         </div>
                     </div>
 
-                    <!-- ODSTAVEC PRO DÉMONY S JMÉNY -->
                     <h2 style="color: #000000; font-size: 1.4rem; margin: 25px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #0070ff; font-weight: 700;">Demons completed & verified</h2>
                     <div v-if="allDemons.length === 0" style="color: #65676b; font-style: italic;">None</div>
                     <div v-else style="line-height: 2; font-size: 1.05rem; color: #333; word-wrap: break-word;">
@@ -80,6 +91,22 @@ export default {
                         </template>
                     </div>
                 </div>
+            </div>
+
+            <!-- PRAVÝ PANEL: Kompletně integrované balíčky -->
+            <div style="width: 260px; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; box-sizing: border-box; flex-shrink: 0; color: #000000;">
+                <div style="margin-bottom: 25px; border-bottom: 1px solid #e1e4e8; padding-bottom: 15px;">
+                    <p style="text-align: center; color: #65676b; font-size: 0.85rem; text-transform: uppercase; font-weight: 600; margin: 0 0 10px 0;">Order completed demons</p>
+                    <div style="background: #f0f2f5; padding: 10px; border-radius: 4px; text-align: center; color: #000000; font-weight: bold; border: 1px solid #ccd1d9; font-size: 0.95rem;">Alphabetical</div>
+                </div>
+                <h3 style="color: #000000; font-size: 1.2rem; margin: 0 0 15px 0; font-weight: 700;">Completed Packs</h3>
+                <div v-if="entry && hasAnyPack(entry)" style="display: flex; flex-direction: column; gap: 10px;">
+                    <div v-for="pack in packs" :key="pack.name" v-show="hasCompletedPack(entry, pack)" :style="{ borderLeft: '4px solid ' + pack.color }" style="background: #f8f9fa; border: 1px solid #e1e4e8; padding: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: bold;" :style="{ color: pack.color }">{{ pack.name }}</span>
+                        <span style="color: #000; font-weight: bold; font-size: 0.9rem;">+{{ pack.points }} pts</span>
+                    </div>
+                </div>
+                <div v-else style="color: #65676b; font-style: italic;">No packs completed.</div>
             </div>
         </main>
     `,
@@ -121,7 +148,7 @@ export default {
                     level: d.level || "Unknown Level",
                     link: d.link || "#"
                 }))
-                .sort((a, b) => a.level.localeCompare(b.level));
+                .sort((a, b) => (a.level || '').localeCompare(b.level || ''));
         },
         progressDemons() {
             if (!this.entry || !this.entry.verified) return [];
@@ -132,11 +159,12 @@ export default {
                     link: d.link || "#",
                     percent: d.percent
                 }))
-                .sort((a, b) => a.level.localeCompare(b.level));
+                .sort((a, b) => (a.level || '').localeCompare(b.level || ''));
         },
         hardestDemon() {
             if (!this.allDemons || this.allDemons.length === 0) return 'None';
-            return this.allDemons[0].level;
+            const first = this.allDemons[0];
+            return first ? first.level : 'None';
         },
         stats() {
             if (!this.entry || !this.entry.verified) return { main: 0, extended: 0, legacy: 0 };
@@ -189,3 +217,4 @@ export default {
         }
     }
 };
+

@@ -84,12 +84,12 @@ export default {
                 "deadlocked": 3,
                 "theory of everything 2": 4,
                 "blackfire backfire": 5,
-                "speed racer": 6,
+                "speed racer": 8,
                 "clubstep": 7,
-                "electroman adventures v2": 9,
-                "xstep v2": 13,
-                "clutterfunk v2": 10,
-                "m tolot": 14
+                "electroman adventures v2": 10,
+                "xstep v2": 14,
+                "clutterfunk v2": 11,
+                "m tolot": 15
             };
             return backupRanks[levelName.toLowerCase().trim()] || "?";
         }

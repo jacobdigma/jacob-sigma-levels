@@ -84,7 +84,7 @@ export default {
             search: '',
             list: [
 // --- MAIN LIST (Tučné a černé) ---
-                { rank: 1, name: "Verity", author: "Serponge", points: 1000, type: "main" },
+                { rank: 1, name: "Verity", author: "Serponge", points: 850, type: "main" },
                 { rank: 2, name: "B", author: "MotleyOrc", points: 800, type: "main" },
                 { rank: 3, name: "Deadlocked", author: "RobTop", points: 750, type: "main" },
                 { rank: 4, name: "Theory of Everything 2", author: "RobTop", points: 700, type: "main" },
@@ -92,6 +92,7 @@ export default {
                 { rank: 6, name: "Darkstep", author: "Alex", points: 600, type: "main" },
                 { rank: 7, name: "Clubstep", author: "RobTop", points: 575, type: "main" },
                 { rank: 8, name: "Speed Racer", author: "ZenthicAlpha", points: 550, type: "main" },
+                { rank: 9, name: "Electrodynamix", author: "RobTop", points: 525, type: "main" },
                 { rank: 9, name: "Theory of Every V2", author: "Neptune", points: 525, type: "main" },
                 { rank: 10, name: "Electroman Adventures V2", author: "Neptune", points: 500, type: "main" },
                 

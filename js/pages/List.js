@@ -166,18 +166,20 @@ export default {
             return this.list[this.selected] || null;
         }
     },
-    methods: {
+     methods: {
         getListTextColor(type) {
             if (type === 'main') {
                 return '#000000'; // Čistě černá pro Main list
             }
             if (type === 'extended') {
-                return '#4b5563'; // Světlejší černo/šedá (CoolGray) pro Extended
+                return '#4b5563'; // Světlejší černo/šedá (CoolGray)
             }
             if (type === 'legacy') {
                 return '#9ca3af'; // Šedá pro Legacy list
             }
             return '#000000';
-        }
+        },
+        // --- TADY PŘIDEJ TENTO JEDEN ŘÁDEK ---
+        embed,
     }
-};
+

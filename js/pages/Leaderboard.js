@@ -84,8 +84,8 @@ export default {
                 {
                     name: "trumandigma",
                     total: 1580.986,
-                    stats: "49 Main, 33 Extended, 45 Legacy",
-                    hardest: "Society",
+                    stats: "9 Main, 4 Extended, 4 Legacy",
+                    hardest: "Verity",
                     demons: [
                         { level: "B", link: "#", type: "main", isVerified: false },
                         { level: "Blackfire Backfire", link: "#", type: "main", isVerified: false },
@@ -101,12 +101,12 @@ export default {
                         { level: "Platinum Adventure", link: "#", type: "legacy", isVerified: false },
                         { level: "Shiver", link: "#", type: "legacy", isVerified: false },
                         { level: "Speed Racer", link: "#", type: "main", isVerified: false },
-                        { level: "The Lightning Road", link: "#", type: "main", isVerified: false },
-                        { level: "The ", link: "#", type: "main", isVerified: false }
+                        { level: "Theory of Everything 2", link: "#", type: "main", isVerified: false },
+                        { level: "Verity ", link: "#", type: "main", isVerified: false },
+                        { level: "xStep V2 ", link: "#", type: "extended", isVerified: false }
                     ],
                     progress: [
-                        { level: "Blackfire", percent: 85, link: "#", type: "main" },
-                        { level: "KOCMOC", percent: 64, link: "#", type: "extended" }
+                        
                     ]
                 },
                 // HRÁČ 2: stetkos

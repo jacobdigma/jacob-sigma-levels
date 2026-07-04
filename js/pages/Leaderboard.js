@@ -1,36 +1,28 @@
 import { fetchLeaderboard } from '../content.js';
+import { localize } from '../util.js';
 import Spinner from '../components/Spinner.js';
 
-const packsConfig = [
-    { name: "Neptune Pack 1", color: "#0070ff", points: 50, levels: ["xStep V2", "Clutterfunk V2", "Electroman Adventures V2"] },
-    { name: "Digna Pack", color: "#ff0000", points: 75, levels: ["n tolot", "Speed Racer", "Blackfire Backfire"] },
-    { name: "RobTop Pack", color: "#00ffcc", points: 100, levels: ["Deadlocked", "Theory of Everything 2", "Clubstep"] }
-];
-
-function checkPackCompletion(entry, pack) {
-    if (!entry || !entry.verified) return false;
-    const playerLevels = entry.verified.map(s => s.level || s);
-    return pack.levels.every(lvl => playerLevels.includes(lvl));
-}
-
 export default {
-    components: { Spinner },
+    components: {
+        Spinner,
+    },
     template: `
-        <main v-if="loading" style="display: flex; justify-content: center; padding: 50px; background: #fff;"><Spinner /></main>
-        
+        <main v-if="loading" style="display: flex; justify-content: center; padding: 50px; background: #fff;">
+            <Spinner />
+        </main>
         <main v-else style="background: #f0f2f5; padding: 20px; min-height: 100vh; display: flex; gap: 20px; align-items: flex-start; font-family: sans-serif; box-sizing: border-box;">
             
-            <!-- LEVÝ PANEL: Seznam hráčů -->
+            <!-- LEVÝ PANEL: Seznam hráčů (OPRAVENÉ PŘEPÍNÁNÍ) -->
             <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 15px; width: 320px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); box-sizing: border-box; flex-shrink: 0;">
                 <div style="margin-bottom: 15px;">
-                    <input type="text" v-model="search" placeholder="Enter to search..." style="width: 100%; padding: 10px; border: 1px solid #ccd1d9; border-radius: 4px; color: #000; background: #fff; box-sizing: border-box;">
+                    <input type="text" v-model="search" placeholder="Enter to search..." style="width: 100%; padding: 10px; border: 1px solid #ccd1d9; border-radius: 4px; background: #fff; color: #000; font-size: 0.95rem; box-sizing: border-box;">
                 </div>
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr v-for="(player, idx) in paginatedLeaderboard" :key="idx" @click="selectPlayer(idx)"
                         :style="{ cursor: 'pointer', background: selected === idx ? '#e6f0ff' : 'transparent', borderBottom: '1px solid #f0f0f0' }">
                         <td style="padding: 12px 8px; width: 40px; color: #65676b; font-weight: bold;">#{{ (page - 1) * pageSize + idx + 1 }}</td>
-                        <td style="padding: 12px 8px; text-align: left; color: #000; font-weight: 600;">{{ getPlayerName(player) }}</td>
-                        <td style="padding: 12px 8px; text-align: right; color: #0070ff; font-weight: bold;">{{ formatScore(player) }}</td>
+                        <td style="padding: 12px 8px; text-align: left; color: #000; font-weight: 600;">{{ player.name }}</td>
+                        <td style="padding: 12px 8px; text-align: right; color: #0070ff; font-weight: bold;">{{ localize(player.total) }}</td>
                     </tr>
                 </table>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 10px; border-top: 1px solid #f0f0f0;">
@@ -40,10 +32,10 @@ export default {
                 </div>
             </div>
 
-            <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
+            <!-- PROSTŘEDNÍ PANEL: Detail (BÍLÝ DESIGN A ČERNÝ TEXT) -->
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
                 <div v-if="entry">
-                    <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800;">{{ getPlayerName(entry) }}</h1>
+                    <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800;">{{ entry.name }}</h1>
                     
                     <div style="display: flex; gap: 40px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8;">
                         <div>
@@ -52,7 +44,7 @@ export default {
                         </div>
                         <div>
                             <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist score</p>
-                            <h3 style="color: #0070ff; margin: 0; font-size: 1.8rem; font-weight: 700;">{{ formatScore(entry) }}</h3>
+                            <h3 style="color: #0070ff; margin: 0; font-size: 1.8rem; font-weight: 700;">{{ localize(entry.total) }}</h3>
                         </div>
                     </div>
 
@@ -67,53 +59,41 @@ export default {
                         </div>
                     </div>
 
+                    <!-- SLOUČENO: Completed & Verified Demons + JMÉNA HRÁČE -->
                     <h2 style="color: #000000; font-size: 1.4rem; margin: 25px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #0070ff; font-weight: 700;">Demons completed & verified</h2>
                     <div v-if="allDemons.length === 0" style="color: #65676b; font-style: italic;">None</div>
                     <div v-else style="line-height: 2; font-size: 1.05rem; color: #333; word-wrap: break-word;">
                         <template v-for="(demon, idx) in allDemons">
                             <span>
                                 <a :href="demon.link" target="_blank" style="color: #0070ff; font-weight: 600; text-decoration: none;">{{ demon.level }}</a> 
-                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ getPlayerName(entry) }}</span>
+                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ entry.name }}</span>
+                                <span v-if="demon.isVerified" style="color: #2bba74; font-size: 0.85rem; font-weight: bold; margin-left: 5px; background: #eafaf1; padding: 2px 6px; border-radius: 4px;">Verified</span>
                             </span>
                             <span v-if="idx < allDemons.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
                         </template>
                     </div>
 
+                    <!-- PROGRESS SEKCE S JMÉNY -->
                     <h2 style="color: #000000; font-size: 1.4rem; margin: 30px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #ff9000; font-weight: 700;">Progress on</h2>
-                    <div v-if="progressDemons.length === 0" style="color: #65676b; font-style: italic;">None</div>
+                    <div v-if="!entry.progressed || entry.progressed.length === 0" style="color: #65676b; font-style: italic;">None</div>
                     <div v-else style="line-height: 2; font-size: 1.05rem; color: #333; word-wrap: break-word;">
-                        <template v-for="(score, idx) in progressDemons">
+                        <template v-for="(score, idx) in entry.progressed">
                             <span>
                                 <a :href="score.link" target="_blank" style="color: #ff9000; font-weight: 600; text-decoration: none;">{{ score.level }} ({{ score.percent }}%)</a> 
-                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ getPlayerName(entry) }}</span>
+                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ entry.name }}</span>
                             </span>
-                            <span v-if="idx < progressDemons.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
+                            <span v-if="idx < entry.progressed.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
                         </template>
                     </div>
                 </div>
+                <div v-else style="color: #65676b; text-align: center; padding: 40px 0;"><p>Select a player to view stats.</p></div>
             </div>
-
-            <!-- PRAVÝ PANEL: Kompletně integrované balíčky -->
-            <div style="width: 260px; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; box-sizing: border-box; flex-shrink: 0; color: #000000;">
-                <div style="margin-bottom: 25px; border-bottom: 1px solid #e1e4e8; padding-bottom: 15px;">
-                    <p style="text-align: center; color: #65676b; font-size: 0.85rem; text-transform: uppercase; font-weight: 600; margin: 0 0 10px 0;">Order completed demons</p>
-                    <div style="background: #f0f2f5; padding: 10px; border-radius: 4px; text-align: center; color: #000000; font-weight: bold; border: 1px solid #ccd1d9; font-size: 0.95rem;">Alphabetical</div>
-                </div>
-                <h3 style="color: #000000; font-size: 1.2rem; margin: 0 0 15px 0; font-weight: 700;">Completed Packs</h3>
-                <div v-if="entry && hasAnyPack(entry)" style="display: flex; flex-direction: column; gap: 10px;">
-                    <div v-for="pack in packs" :key="pack.name" v-show="hasCompletedPack(entry, pack)" :style="{ borderLeft: '4px solid ' + pack.color }" style="background: #f8f9fa; border: 1px solid #e1e4e8; padding: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: bold;" :style="{ color: pack.color }">{{ pack.name }}</span>
-                        <span style="color: #000; font-weight: bold; font-size: 0.9rem;">+{{ pack.points }} pts</span>
-                    </div>
-                </div>
-                <div v-else style="color: #65676b; font-style: italic;">No packs completed.</div>
-            </div>
+            
         </main>
     `,
     data() {
         return {
             leaderboard: [],
-            packs: packsConfig,
             loading: true,
             selected: 0,
             err: [],
@@ -126,10 +106,7 @@ export default {
         filteredLeaderboard() {
             if (!this.search) return this.leaderboard;
             const query = this.search.toLowerCase();
-            return this.leaderboard.filter(player => {
-                const name = player && typeof player === 'object' ? (player.user || player.name || '') : String(player);
-                return name.toLowerCase().includes(query);
-            });
+            return this.leaderboard.filter(player => player.name.toLowerCase().includes(query));
         },
         paginatedLeaderboard() {
             const start = (this.page - 1) * this.pageSize;
@@ -141,38 +118,22 @@ export default {
             return this.paginatedLeaderboard[this.selected];
         },
         allDemons() {
-            if (!this.entry || !this.entry.verified) return [];
-            return this.entry.verified
-                .filter(d => d.percent === 100 || d.percent === undefined)
-                .map(d => ({
-                    level: d.level || "Unknown Level",
-                    link: d.link || "#"
-                }))
-                .sort((a, b) => (a.level || '').localeCompare(b.level || ''));
-        },
-        progressDemons() {
-            if (!this.entry || !this.entry.verified) return [];
-            return this.entry.verified
-                .filter(d => d.percent && d.percent < 100)
-                .map(d => ({
-                    level: d.level || "Unknown Level",
-                    link: d.link || "#",
-                    percent: d.percent
-                }))
-                .sort((a, b) => (a.level || '').localeCompare(b.level || ''));
+            if (!this.entry) return [];
+            const completed = this.entry.completed ? this.entry.completed.map(d => ({ ...d, isVerified: false })) : [];
+            const verified = this.entry.verified ? this.entry.verified.map(d => ({ ...d, isVerified: true })) : [];
+            return [...completed, ...verified].sort((a, b) => a.level.localeCompare(b.level));
         },
         hardestDemon() {
-            if (!this.allDemons || this.allDemons.length === 0) return 'None';
-            const first = this.allDemons[0];
-            return first ? first.level : 'None';
+            if (!this.entry || !this.entry.completed || this.entry.completed.length === 0) return 'None';
+            const sortedByRank = [...this.entry.completed].sort((a, b) => a.rank - b.rank);
+            return sortedByRank.length > 0 ? sortedByRank[0].level : 'None';
         },
         stats() {
-            if (!this.entry || !this.entry.verified) return { main: 0, extended: 0, legacy: 0 };
-            const verified = this.entry.verified || [];
+            if (!this.entry) return { main: 0, extended: 0, legacy: 0 };
             return {
-                main: verified.filter(d => d.listRank === 'Main' || (d.rank && d.rank <= 50)).length,
-                extended: verified.filter(d => d.listRank === 'Extended' || (d.rank && d.rank > 50 && d.rank <= 100)).length,
-                legacy: verified.filter(d => d.listRank === 'Legacy' || (d.rank && d.rank > 100)).length,
+                main: this.entry.completed ? this.entry.completed.filter(d => d.listRank === 'Main').length : 0,
+                extended: this.entry.completed ? this.entry.completed.filter(d => d.listRank === 'Extended').length : 0,
+                legacy: this.entry.completed ? this.entry.completed.filter(d => d.listRank === 'Legacy').length : 0,
             };
         }
     },
@@ -186,20 +147,6 @@ export default {
         }
     },
     methods: {
-        getPlayerName(player) {
-            if (!player) return 'Unknown';
-            return player.user || player.name || (typeof player === 'string' ? player : 'Unknown');
-        },
-        formatScore(player) {
-            if (!player) return '0';
-            let score = 0;
-            if (typeof player === 'object') {
-                score = player.total !== undefined ? player.total : (player.score !== undefined ? player.score : 0);
-            } else if (typeof player === 'number' || typeof player === 'string') {
-                score = player;
-            }
-            return Number(score).toLocaleString();
-        },
         selectPlayer(index) {
             this.selected = index;
         },
@@ -208,13 +155,6 @@ export default {
         },
         nextPage() {
             if (this.page * this.pageSize < this.filteredLeaderboard.length) { this.page++; this.selected = 0; }
-        },
-        hasAnyPack(player) {
-            return this.packs.some(pack => checkPackCompletion(player, pack));
-        },
-        hasCompletedPack(player, pack) {
-            return checkPackCompletion(player, pack);
         }
     }
 };
-

@@ -158,163 +158,93 @@ export default {
             
         </main>
     `,
-    data() {
+        data() {
         return {
             leaderboard: [],
             loading: true,
-            selectedPlayerName: null, 
+            selected: 0,
             err: [],
-            packsConfig: packsConfig,
-            search: '',
             page: 1,
-            pageSize: 15,
-            mainListLimit: 50,      
-            extendedListLimit: 100,  
+            pageSize: 20,
+            search: '',
         };
     },
     computed: {
         filteredLeaderboard() {
             if (!this.search) return this.leaderboard;
-            return this.leaderboard.filter(player => 
-                player.name.toLowerCase().includes(this.search.toLowerCase())
-            );
+            const query = this.search.toLowerCase();
+            return this.leaderboard.filter(player => {
+                const name = player.name || player.player || player.user || player || '';
+                return name.toLowerCase().includes(query);
+            });
         },
         paginatedLeaderboard() {
             const start = (this.page - 1) * this.pageSize;
-            const end = this.page * this.pageSize;
+            const end = start + this.pageSize;
             return this.filteredLeaderboard.slice(start, end);
         },
         entry() {
-            if (this.filteredLeaderboard.length === 0) return null;
-            if (!this.selectedPlayerName) {
-                return this.filteredLeaderboard[0];
-            }
-            const found = this.filteredLeaderboard.find(p => p.name === this.selectedPlayerName);
-            return found || this.filteredLeaderboard[0];
+            if (!this.paginatedLeaderboard || this.paginatedLeaderboard.length === 0) return null;
+            return this.paginatedLeaderboard[this.selected];
         },
-        combinedDemons() {
-            if (!this.entry) return [];
-            const list = [];
-            
-            if (this.entry.completed) {
-                this.entry.completed.forEach(s => {
-                    list.push({
-                        level: s.level,
-                        score: s.score,
-                        link: s.link,
-                        rank: s.rank,
-                        isVerified: false,
-                        listRank: this.getRankLabel(s.rank)
-                    });
-                });
-            }
-            return list;
+        sortedDemons() {
+            if (!this.entry || !this.entry.completed) return [];
+            return [...this.entry.completed].sort((a, b) => a.level.localeCompare(b.level));
         },
         verifiedDemons() {
             if (!this.entry || !this.entry.verified) return [];
-            const list = [];
-            this.entry.verified.forEach(s => {
-                list.push({
-                    level: s.level,
-                    score: s.score,
-                    link: s.link,
-                    rank: s.rank,
-                    isVerified: true,
-                    listRank: this.getRankLabel(s.rank)
-                });
-            });
-            return list.sort((a, b) => a.level.localeCompare(b.level));
+            return [...this.entry.verified].sort((a, b) => a.level.localeCompare(b.level));
         },
-        sortedDemons() {
-            const mainList = this.combinedDemons.filter(d => d.listRank.startsWith('#')).sort((a, b) => a.level.localeCompare(b.level));
-            const extendedList = this.combinedDemons.filter(d => d.listRank === 'Extended').sort((a, b) => a.level.localeCompare(b.level));
-            const legacyList = this.combinedDemons.filter(d => d.listRank === 'Legacy').sort((a, b) => a.level.localeCompare(b.level));
-            return [...mainList, ...extendedList, ...legacyList];
-        },
-        // BEZPEČNÝ VÝPOČET NEJTĚŽŠÍHO DÉMONA (Zabraňuje zaseknutí loading screenu)
         hardestDemon() {
-            if (!this.combinedDemons || this.combinedDemons.length === 0) return 'None';
-            const sortedByDifficulty = [...this.combinedDemons].sort((a, b) => {
-                const rA = a.rank || 9999;
-                const rB = b.rank || 9999;
-                return rA - rB;
-            });
-            return sortedByDifficulty[0] ? sortedByDifficulty[0].level : 'None';
+            if (!this.entry || !this.entry.completed || this.entry.completed.length === 0) return 'None';
+            const sortedByRank = [...this.entry.completed].sort((a, b) => a.rank - b.rank);
+            return sortedByRank ? sortedByRank[0].level : 'None';
         },
         stats() {
-            const counts = { main: 0, extended: 0, legacy: 0 };
-            const allDemons = [...this.combinedDemons, ...this.verifiedDemons];
-            const uniqueLevels = [];
-            const uniqueDemons = allDemons.filter(d => {
-                if (uniqueLevels.includes(d.level)) return false;
-                uniqueLevels.push(d.level);
-                return true;
-            });
-            
-            uniqueDemons.forEach(d => {
-                if (d.listRank.startsWith('#')) counts.main++;
-                else if (d.listRank === 'Extended') counts.extended++;
-                else if (d.listRank === 'Legacy') counts.legacy++;
-            });
-            return counts;
-        }
-    },
-    watch: {
-        search() {
-            this.page = 1;
-        }
-    },
-    methods: {
-        localize,
-        hasCompletedPack(entry, pack) {
-            return checkPackCompletion(entry, pack);
-        },
-        hasAnyPack(entry) {
-            return this.packsConfig.some(pack => this.hasCompletedPack(entry, pack));
-        },
-        selectPlayer(player) {
-            this.selectedPlayerName = player.name;
-        },
-        prevPage() {
-            if (this.page > 1) this.page--;
-        },
-        nextPage() {
-            if (this.page * this.pageSize < this.filteredLeaderboard.length) this.page++;
-        },
-        getRankLabel(rank) {
-            if (!rank) return 'Legacy';
-            if (rank <= this.mainListLimit) {
-                return '#' + rank;
-            } else if (rank <= this.extendedListLimit) {
-                return 'Extended';
-            } else {
-                return 'Legacy';
-            }
+            if (!this.entry) return { main: 0, extended: 0, legacy: 0 };
+            return {
+                main: this.entry.completed ? this.entry.completed.filter(d => d.listRank === 'Main').length : 0,
+                extended: this.entry.completed ? this.entry.completed.filter(d => d.listRank === 'Extended').length : 0,
+                legacy: this.entry.completed ? this.entry.completed.filter(d => d.listRank === 'Legacy').length : 0,
+            };
         }
     },
     async mounted() {
-        const [leaderboard, err] = await fetchLeaderboard();
-        
-        if (leaderboard) {
-            leaderboard.forEach(player => {
-                let bonusPoints = 0;
-                packsConfig.forEach(pack => {
-                    if (checkPackCompletion(player, pack)) {
-                        bonusPoints += pack.points;
-                    }
-                });
-                player.total += bonusPoints;
-            });
-            
-            leaderboard.sort((a, b) => b.total - a.total);
-            
-            if (leaderboard.length > 0) {
-                this.selectedPlayerName = leaderboard[0].name;
-            }
+        try {
+            this.leaderboard = await fetchLeaderboard();
+            this.loading = false;
+        } catch (e) {
+            this.err.push(e.toString());
+            this.loading = false;
         }
-        
-        this.leaderboard = leaderboard;
-        this.err = err;
-        this.loading = false;
+    },
+    methods: {
+        selectPlayer(index) {
+            this.selected = index;
+        },
+        prevPage() {
+            if (this.page > 1) {
+                this.page--;
+                this.selected = 0;
+            }
+        },
+        nextPage() {
+            if (this.page * this.pageSize < this.filteredLeaderboard.length) {
+                this.page++;
+                this.selected = 0;
+            }
+        },
+        hasAnyPack(player) {
+            return packsConfig.some(pack => checkPackCompletion(player, pack));
+        },
+        hasCompletedPack(player, pack) {
+            return checkPackCompletion(player, pack);
+        },
+        getRankLabel(rank) {
+            if (rank <= 50) return 'Main';
+            if (rank <= 100) return 'Extended';
+            return 'Legacy';
+        }
     },
 };
+

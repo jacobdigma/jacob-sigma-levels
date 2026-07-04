@@ -3,7 +3,7 @@ export default {
         <div id="updatelog-ui" class="surface" style="max-width: 940px; margin: 40px auto; padding: 30px; border-radius: 8px;">
             <div id="title-div" style="margin-bottom: 40px; text-align: center; border-bottom: 1px solid var(--border-color); padding-bottom: 20px;">
                 <h1 class="main-title type-title" style="font-size: 2.5rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Update Log</h1>
-                <p class="type-body" style="color: var(--text-color); opacity: 0.6;">JDL newest version: v1.4.0</p>
+                <p class="type-body" style="color: var(--text-color); opacity: 0.6;">JDL newest version: v2.0.0</p>
             </div>
             
             <div class="rules-div" style="display: flex; flex-direction: column; gap: 30px;">

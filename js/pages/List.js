@@ -83,26 +83,34 @@ export default {
             selected: 0,
             search: '',
             list: [
-                // --- MAIN LIST (Tučné a černé) ---
-                { rank: 1, name: "Verity", author: "Gamer", points: 100, type: "main" },
-                { rank: 2, name: "B", author: "MotleyOrc", points: 90, type: "main" },
-                { rank: 3, name: "Deadlocked", author: "RobTop", points: 80, type: "main" },
-                { rank: 4, name: "Theory of Everything 2", author: "RobTop", points: 75, type: "main" },
+// --- MAIN LIST (Tučné a černé) ---
+                { rank: 1, name: "Verity", author: "Serponge", points: 1000, type: "main" },
+                { rank: 2, name: "B", author: "MotleyOrc", points: 800, type: "main" },
+                { rank: 3, name: "Deadlocked", author: "RobTop", points: 750, type: "main" },
+                { rank: 4, name: "Theory of Everything 2", author: "RobTop", points: 700, type: "main" },
+                { rank: 5, name: "Blackfire Backfire", author: "kira9999", points: 650, type: "main" },
+                { rank: 6, name: "Darkstep", author: "Alex", points: 600, type: "main" },
+                { rank: 7, name: "Clubstep", author: "RobTop", points: 575, type: "main" },
+                { rank: 8, name: "Speed Racer", author: "ZenthicAlpha", points: 550, type: "main" },
+                { rank: 9, name: "Theory of Every V2", author: "Neptune", points: 525, type: "main" },
+                { rank: 10, name: "Electroman Adventures V2", author: "Neptune", points: 500, type: "main" },
                 
                 // --- EXTENDED LIST (Normální písmo a o něco světlejší černo/šedá) ---
-                { rank: 5, name: "Blackfire Backfire", author: "Creator", points: 60, type: "extended" },
-                { rank: 6, name: "Darkstep", author: "Creator", points: 55, type: "extended" },
-                { rank: 7, name: "Clubstep", author: "RobTop", points: 50, type: "extended" },
-                { rank: 8, name: "Speed Racer", author: "ZenthicAlpha", points: 45, type: "extended" },
-                { rank: 9, name: "Theory of Every V2", author: "Neptune", points: 40, type: "extended" },
+                { rank: 11, name: "Clutterfunk V2", author: "Neptune", points: 0, type: "extended" },
+                { rank: 12, name: "iSpyWithMyLittleEye", author: "Vidx", points: 0, type: "extended" },
+                { rank: 13, name: "Crescendo", author: "Serponge", points: 0, type: "extended" },
+                { rank: 14, name: "xStep V2", author: "Neptune", points: 0, type: "extended" },
+                { rank: 15, name: "m tolot", author: "Creator", points: 0, type: "extended" },
                 
                 // --- LEGACY LIST (Bez čísel, nápis Legacy a text do šeda) ---
-                { rank: 10, name: "Electroman Adventures V2", author: "Neptune", points: 0, type: "legacy" },
-                { rank: 11, name: "Clutterfunk V2", author: "Neptune", points: 0, type: "legacy" },
-                { rank: 12, name: "iSpyWithMyLittleEye", author: "Vidx", points: 0, type: "legacy" },
-                { rank: 13, name: "Crescendo", author: "Serponge", points: 0, type: "legacy" },
-                { rank: 14, name: "xStep V2", author: "Neptune", points: 0, type: "legacy" },
-                { rank: 15, name: "m tolot", author: "Creator", points: 0, type: "legacy" }
+                  { rank: 16, name: "Shiver", author: "SpKale", points: 0, type: "legacy" },
+                  { rank: 17, name: "Phjork", author: "Cerufiffy", points: 0, type: "legacy" },
+                  { rank: 18, name: "Demon Forest", author: "Ketis", points: 0, type: "legacy" },
+                  { rank: 19, name: "Demon Mixed", author: "RealOggy", points: 0, type: "legacy" },
+                  { rank: 20, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy" },
+                  { rank: 21, name: "The Nightmare", author: "Jax", points: 0, type: "legacy" },
+                  { rank: 22, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy" }
+
             ]
         };
     },

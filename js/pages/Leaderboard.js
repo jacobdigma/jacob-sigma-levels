@@ -10,9 +10,7 @@ const packsConfig = [
 function checkPackCompletion(entry, pack) {
     if (!entry) return false;
     const playerLevels = [];
-    const completed = entry.completed || entry.levels || [];
     const verified = entry.verified || [];
-    completed.forEach(s => playerLevels.push(s.level || s));
     verified.forEach(s => playerLevels.push(s.level || s));
     return pack.levels.every(lvl => playerLevels.includes(lvl));
 }
@@ -48,8 +46,7 @@ export default {
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
                 <div v-if="entry">
                     <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800;">{{ getPlayerName(entry) }}</h1>
-                    <pre style="background: #f8f9fa; padding: 10px; font-size: 0.8rem; color: red; display: block !important;">{{ JSON.stringify(entry) }}</pre>
-
+                    
                     <div style="display: flex; gap: 40px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8;">
                         <div>
                             <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist rank</p>
@@ -79,7 +76,6 @@ export default {
                             <span>
                                 <a :href="demon.link" target="_blank" style="color: #0070ff; font-weight: 600; text-decoration: none;">{{ demon.level || demon }}</a> 
                                 <span style="color: #65676b; font-size: 0.95rem;"> by {{ getPlayerName(entry) }}</span>
-                                <span v-if="demon.isVerified" style="color: #2bba74; font-size: 0.85rem; font-weight: bold; margin-left: 5px; background: #eafaf1; padding: 2px 6px; border-radius: 4px;">Verified</span>
                             </span>
                             <span v-if="idx < allDemons.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
                         </template>
@@ -116,7 +112,7 @@ export default {
             </div>
         </main>
     `,
-        data() {
+    data() {
         return {
             leaderboard: [],
             packs: packsConfig,
@@ -148,13 +144,12 @@ export default {
         },
         allDemons() {
             if (!this.entry) return [];
-            // Tvůj systém ukládá vše do verified souborů, takže načteme toto pole
             const verified = this.entry.verified || [];
             return verified.map(d => ({ 
                 level: d.level || d, 
                 link: d.link || '#',
-                isVerified: true 
-            })).sort((a, b) => a.level.localeCompare(b.level));
+                isVerified: false 
+            })).sort((a, b) => (a.level || '').localeCompare(b.level || ''));
         },
         hardestDemon() {
             if (!this.entry) return 'None';

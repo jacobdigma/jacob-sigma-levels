@@ -5,7 +5,7 @@ export default {
     template: `
         <main style="background: #f0f2f5; padding: 20px; min-height: 100vh; display: flex; gap: 20px; align-items: flex-start; font-family: sans-serif; box-sizing: border-box;">
             
-            <!-- LEVÝ PANEL: Seznam hráčů (MANUÁLNÍ A 100% FUNKČNÍ) -->
+            <!-- LEVÝ PANEL: Seznam hráčů -->
             <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 15px; width: 320px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); box-sizing: border-box; flex-shrink: 0;">
                 <div style="margin-bottom: 15px;">
                     <input type="text" v-model="search" placeholder="Search player..." style="width: 100%; padding: 10px; border: 1px solid #ccd1d9; border-radius: 4px; background: #fff; color: #000; font-size: 0.95rem; box-sizing: border-box;">
@@ -14,7 +14,7 @@ export default {
                     <tr v-for="(player, idx) in filteredLeaderboard" :key="idx" @click="selected = leaderboard.indexOf(player)"
                         :style="{ cursor: 'pointer', background: leaderboard[selected] === player ? '#e6f0ff' : 'transparent', borderBottom: '1px solid #f0f0f0' }">
                         <td style="padding: 12px 8px; width: 40px; color: #65676b; font-weight: bold;">#{{ leaderboard.indexOf(player) + 1 }}</td>
-                        <td style="padding: 12px 8px; text-align: left; color: #000; font-weight: 600;">{{ player.name }}</td>
+                        <td style="padding: 12px 8px; text-align: left; color: #000000; font-weight: 600;">{{ player.name }}</td>
                         <td style="padding: 12px 8px; text-align: right; color: #0070ff; font-weight: bold;">{{ player.total.toLocaleString() }}</td>
                     </tr>
                 </table>
@@ -47,28 +47,26 @@ export default {
                         </div>
                     </div>
 
-                    <!-- SLOUČENÉ SEKCE COMPLETED & VERIFIED -->
+                    <!-- SLOUČENÉ SEKCE COMPLETED & VERIFIED (BEZ "BY", S ÚPRAVOU STYLU) -->
                     <h2 style="color: #000000; font-size: 1.4rem; margin: 25px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #0070ff; font-weight: 700;">Demons completed & verified</h2>
                     <div v-if="entry.demons.length === 0" style="color: #65676b; font-style: italic;">None</div>
-                    <div v-else style="line-height: 2; font-size: 1.05rem; color: #333; word-wrap: break-word;">
+                    <div v-else style="line-height: 2; font-size: 1.05rem; word-wrap: break-word;">
                         <template v-for="(demon, idx) in entry.demons">
                             <span>
-                                <a :href="demon.link" target="_blank" style="color: #0070ff; font-weight: 600; text-decoration: none;">{{ demon.level }}</a> 
-                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ entry.name }}</span>
+                                <a :href="demon.link" target="_blank" :style="getLevelStyle(demon.type)">{{ demon.level }}</a> 
                                 <span v-if="demon.isVerified" style="color: #2bba74; font-size: 0.85rem; font-weight: bold; margin-left: 5px; background: #eafaf1; padding: 2px 6px; border-radius: 4px;">Verified</span>
                             </span>
                             <span v-if="idx < entry.demons.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
                         </template>
                     </div>
 
-                    <!-- PROGRESS SEKCE -->
+                    <!-- PROGRESS SEKCE (TAKÉ PODPORUJE STYLOVÁNÍ) -->
                     <h2 style="color: #000000; font-size: 1.4rem; margin: 30px 0 15px 0; padding-bottom: 8px; border-bottom: 2px solid #ff9000; font-weight: 700;">Progress on</h2>
                     <div v-if="entry.progress.length === 0" style="color: #65676b; font-style: italic;">None</div>
-                    <div v-else style="line-height: 2; font-size: 1.05rem; color: #333; word-wrap: break-word;">
+                    <div v-else style="line-height: 2; font-size: 1.05rem; word-wrap: break-word;">
                         <template v-for="(p, idx) in entry.progress">
                             <span>
-                                <a :href="p.link" target="_blank" style="color: #ff9000; font-weight: 600; text-decoration: none;">{{ p.level }} ({{ p.percent }}%)</a> 
-                                <span style="color: #65676b; font-size: 0.95rem;"> by {{ entry.name }}</span>
+                                <a :href="p.link" target="_blank" :style="getLevelStyle(p.type || 'extended')">{{ p.level }} ({{ p.percent }}%)</a> 
                             </span>
                             <span v-if="idx < entry.progress.length - 1" style="color: #ccd1d9; margin: 0 8px;"> • </span>
                         </template>
@@ -89,12 +87,12 @@ export default {
                     stats: "2 Main, 1 Extended, 0 Legacy",
                     hardest: "Crescendo",
                     demons: [
-                        { level: "Crescendo", link: "https://youtube.com", isVerified: false },
-                        { level: "Verity", link: "https://youtube.com", isVerified: false },
-                        { level: "iSpyWithMyLittleEye", link: "#", isVerified: true }
+                        { level: "Crescendo", link: "https://youtube.com", type: "main", isVerified: false },
+                        { level: "Verity", link: "https://youtube.com", type: "extended", isVerified: false },
+                        { level: "iSpyWithMyLittleEye", link: "#", type: "legacy", isVerified: true }
                     ],
                     progress: [
-                        { level: "Blackfire", percent: 85, link: "#" }
+                        { level: "Blackfire", percent: 85, link: "#", type: "main" }
                     ]
                 },
                 // HRÁČ 2: stetkos
@@ -104,11 +102,11 @@ export default {
                     stats: "1 Main, 1 Extended, 0 Legacy",
                     hardest: "Verity",
                     demons: [
-                        { level: "Verity", link: "https://youtube.com", isVerified: true },
-                        { level: "Crescendo", link: "https://youtube.com", isVerified: false }
+                        { level: "Verity", link: "https://youtube.com", type: "main", isVerified: true },
+                        { level: "Crescendo", link: "https://youtube.com", type: "extended", isVerified: false }
                     ],
                     progress: [
-                        { level: "Deadlocked", percent: 72, link: "#" }
+                        { level: "Deadlocked", percent: 72, link: "#", type: "extended" }
                     ]
                 }
             ]
@@ -122,6 +120,18 @@ export default {
         },
         entry() {
             return this.leaderboard[this.selected] || null;
+        }
+    },
+    methods: {
+        getLevelStyle(type) {
+            if (type === 'main') {
+                return { color: '#000000', fontWeight: 'bold', textDecoration: 'none' };
+            }
+            if (type === 'legacy') {
+                return { color: '#7a7a7a', fontWeight: 'normal', textDecoration: 'none' };
+            }
+            // default extended (normal/černý)
+            return { color: '#000000', fontWeight: 'normal', textDecoration: 'none' };
         }
     }
 };

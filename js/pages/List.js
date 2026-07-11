@@ -164,35 +164,32 @@ export default {
             return this.list[this.selected] || null;
         }
     },
-    methods: {
-        getListTextColor(type) {
-            if (type === 'main') return '#000000';
-            if (type === 'extended') return '#4b5563';
-            if (type === 'legacy') return '#9ca3af';
-            return '#000000';
-        },
-
-               getEmbedUrl(url) {
+        methods: {
+        getEmbedUrl(url) {
             if (!url) return '';
             
-            // Pokud už odkaz obsahuje embed, rovnou ho vrátíme
             if (url.includes('/embed/')) {
                 return url;
             }
             
-            // Zkusíme vytáhnout ID videa z klasického YouTube odkazu (?v=ID)
-            const urlParams = new URLSearchParams(url.split('?')[1]);
-            const videoId = urlParams.get('v');
-            
-            if (videoId) {
-                return 'https://youtube.com' + videoId;
+            try {
+                const urlObj = new URL(url);
+                if (urlObj.hostname.includes('youtu.be')) {
+                    return 'https://youtube.com' + urlObj.pathname;
+                }
+                const videoId = urlObj.searchParams.get('v');
+                if (videoId) {
+                    return 'https://youtube.com/' + videoId;
+                }
+            } catch (e) {
+                // Pokud to není validní URL, zkusíme regulární výraz jako zálohu
+                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                const match = url.match(regExp);
+                if (match && match[2].length === 11) {
+                    return 'https://youtube.com/' + match[2];
+                }
             }
-            
-            // Pokud je to zkrácený odkaz youtu.be/ID
-            if (url.includes('youtu.be/')) {
-                const shortId = url.split('youtu.be/')[1];
-                return 'https://youtube.com' + shortId;
-            }
-            
             return url;
         }
+    }
+};

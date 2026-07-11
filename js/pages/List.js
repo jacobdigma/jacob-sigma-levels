@@ -164,7 +164,7 @@ export default {
             return this.list[this.selected] || null;
         }
     },
-     methods: {
+    methods: {
         getListTextColor(type) {
             if (type === 'main') return '#000000';
             if (type === 'extended') return '#4b5563';
@@ -178,8 +178,8 @@ export default {
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
             const match = url.match(regExp);
             
-            // Pokud najdeme ID videa (které má vždy 11 znaků), složíme správný iframe odkaz
-            if (match && match[2].length === 11) {
+            // match[2] obsahuje přesně to čisté 11místné ID videa
+            if (match && match[2] && match[2].length === 11) {
                 return 'https://youtube.com' + match[2];
             }
             

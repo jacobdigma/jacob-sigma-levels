@@ -107,33 +107,35 @@ export default {
             search: '',
             list: [
                 // --- MAIN LIST (Tučné a černé) ---
-                { rank: 1, name: "Verity", author: "Serponge", points: 850, type: "main", verification: "https://www.youtube.com/watch?v=p15w9MB2eAc", records: [] },
-                { rank: 2, name: "B", author: "MotleyOrc", points: 800, type: "main", verification: "https://www.youtube.com/watch?v=F2Y05OVWOc4", records: [] },
-                { rank: 3, name: "Deadlocked", author: "RobTop", points: 750, type: "main", verification: "https://www.youtube.com/watch?v=Ulylhr3KJPA", records: [{ user: "Stetkos", percent: 79, link: "https://www.youtube.com/watch?v=81Iryy_Wc5o" }] },
-                { rank: 4, name: "Theory of Everything 2", author: "RobTop", points: 700, type: "main", verification: "https://www.youtube.com/watch?v=1YI4oUUiV80", records: [] },
-                { rank: 5, name: "Blackfire Backfire", author: "kira9999", points: 650, type: "main", verification: "https://www.youtube.com/watch?v=2h1FgtfaP1k", records: [] },
-                { rank: 6, name: "Darkstep", author: "Alex", points: 600, type: "main", verification: "https://www.youtube.com/watch?v=M7h8FchVXLA", records: [] },
-                { rank: 7, name: "Clubstep", author: "RobTop", points: 575, type: "main", verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [] },
-                { rank: 8, name: "Speed Racer", author: "ZenthicAlpha", points: 550, type: "main", verification: "https://www.youtube.com/watch?v=R8RsJVKKd8w", records: [] },
-                { rank: 9, name: "Electrodynamix", author: "RobTop", points: 525, type: "main", verification: "https://www.youtube.com/watch?v=bXH5zDZtb-Y", records: [] },
-                { rank: 10, name: "Theory of Every V2", author: "Neptune", points: 525, type: "main", verification: "https://www.youtube.com/watch?v=EnHHIR7DX1E", records: [] },
+                { rank: 1, name: "Verity", author: "Serponge", points: 200, type: "main", verification: "https://www.youtube.com/watch?v=p15w9MB2eAc", records: [] },
+                { rank: 2, name: "B", author: "MotleyOrc", points: 190, type: "main", verification: "https://www.youtube.com/watch?v=F2Y05OVWOc4", records: [] },
+                { rank: 3, name: "Deadlocked", author: "RobTop", points: 180, type: "main", verification: "https://www.youtube.com/watch?v=Ulylhr3KJPA", records: [{ user: "Stetkos", percent: 79, link: "https://www.youtube.com/watch?v=81Iryy_Wc5o" }] },
+                { rank: 4, name: "Theory of Everything 2", author: "RobTop", points: 175, type: "main", verification: "https://www.youtube.com/watch?v=1YI4oUUiV80", records: [] },
+                { rank: 5, name: "Blackfire Backfire", author: "kira9999", points: 170, type: "main", verification: "https://www.youtube.com/watch?v=2h1FgtfaP1k", records: [] },
+                { rank: 6, name: "Darkstep", author: "Alex", points: 165, type: "main", verification: "https://www.youtube.com/watch?v=M7h8FchVXLA", records: [] },
+                { rank: 7, name: "Clubstep", author: "RobTop", points: 160, type: "main", verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [] },
+                { rank: 8, name: "Speed Racer", author: "ZenthicAlpha", points: 155, type: "main", verification: "https://www.youtube.com/watch?v=R8RsJVKKd8w", records: [] },
+                { rank: 9, name: "nouement", author: "Stetkos", points: 150, type: "main", verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [] },
+                { rank: 10, name: "Maymory", author: "ItzKiba", points: 145, type: "main", verification: "https://www.youtube.com/watch?v=VIGXsCeGy3M&t=18s", records: [] },
 
                 // --- EXTENDED LIST (Normální písmo a o něco světlejší černo/šedá) ---
-                { rank: 11, name: "Electroman Adventures V2", author: "Neptune", points: 500, type: "extended", verification: "https://www.youtube.com/watch?v=s40FsZS-bec", records: [] },
-                { rank: 12, name: "Clutterfunk V2", author: "Neptune", points: 475, type: "extended", verification: "https://www.youtube.com/watch?v=Kkrp9G-vYeE", records: [{ user: "trumandigma", percent: 100, link: "https://www.youtube.com/watch?v=2kE93FgLRcs" }] },
-                { rank: 13, name: "iSpyWithMyLittleEye", author: "Voxicat", points: 450, type: "extended", verification: "https://www.youtube.com/watch?v=Ow7nDnZTbDw", records: [] },
-                { rank: 14, name: "Crescendo", author: "Serponge", points: 350, type: "extended", verification: "https://www.youtube.com/watch?v=JSAoUfTR49Y", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
-                { rank: 15, name: "xStep V2", author: "Neptune", points: 250, type: "extended", verification: "https://www.youtube.com/watch?v=K9rBb0HVvMg", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
-                { rank: 16, name: "m tolot", author: "Stetkos", points: 150, type: "extended", verification: "#", records: [] },
+                { rank: 11, name: "Theory of Every V2", author: "Neptune", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=EnHHIR7DX1E", records: [] },
+                { rank: 12, name: "Electroman Adventures V2", author: "Neptune", points: 135, type: "extended", verification: "https://www.youtube.com/watch?v=s40FsZS-bec", records: [] },
+                { rank: 13, name: "Clutterfunk V2", author: "Neptune", points: 130, type: "extended", verification: "https://www.youtube.com/watch?v=Kkrp9G-vYeE", records: [{ user: "trumandigma", percent: 100, link: "https://www.youtube.com/watch?v=2kE93FgLRcs" }] },
+                { rank: 14, name: "Electrodynamix", author: "RobTop", points: 125, type: "main", verification: "https://www.youtube.com/watch?v=bXH5zDZtb-Y", records: [] },
+                { rank: 15, name: "iSpyWithMyLittleEye", author: "Voxicat", points: 120, type: "extended", verification: "https://www.youtube.com/watch?v=Ow7nDnZTbDw", records: [] },
+                { rank: 16, name: "Crescendo", author: "Serponge", points: 115, type: "extended", verification: "https://www.youtube.com/watch?v=JSAoUfTR49Y", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                { rank: 17, name: "xStep V2", author: "Neptune", points: 110, type: "extended", verification: "https://www.youtube.com/watch?v=K9rBb0HVvMg", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                { rank: 18, name: "m tolot", author: "Stetkos", points: 100, type: "extended", verification: "#", records: [] },
 
                 // --- LEGACY LIST (Bez čísel, nápis Legacy a text do šeda) ---
-                { rank: 17, name: "Shiver", author: "SpKale", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 18, name: "Phjork", author: "Cerufiffy", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 19, name: "Demon Forest", author: "Ketis", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 20, name: "Demon Mixed", author: "RealOggy", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 21, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 22, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 23, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
+                { rank: 19, name: "Shiver", author: "SpKale", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 20, name: "Phjork", author: "Cerufiffy", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 21, name: "Demon Forest", author: "Ketis", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 22, name: "Demon Mixed", author: "RealOggy", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 23, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 24, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 25, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
             ]
         };
     },

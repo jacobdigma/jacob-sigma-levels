@@ -191,5 +191,6 @@ export default {
             }
             
             return videoId ? 'https://youtube.com' + videoId : url;
+
         }
 };

@@ -21,31 +21,36 @@ export default {
             </div>
 
             <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
-            <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
-                <div v-if="entry">
-                    <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800; text-align: center;">{{ entry.name }}</h1>
-                    
-                    <div style="display: flex; gap: 40px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8; justify-content: center; text-align: center;">
-                        <div>
-                            <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist rank</p>
-                            <h3 style="color: #000000; margin: 0; font-size: 1.8rem; font-weight: 700;">{{ leaderboard.indexOf(entry) + 1 }}</h3>
-                        </div>
-                        <div>
-                            <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist score</p>
-                            <h3 style="color: #000000; margin: 0; font-size: 1.8rem; font-weight: 700;">{{ entry.total.toLocaleString() }}</h3>
-                        </div>
-                    </div>
+               <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
+    <div style="flex: 1; max-width: 440px; margin: 0 auto; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center; box-sizing: border-box;">
+        <div v-if="entry">
+            <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800; text-align: center;">{{ entry.name }}</h1>
+            
+            <!-- Hlavní statistiky skládané pod sebe -->
+            <div style="display: flex; flex-direction: column; gap: 20px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8;">
+                <div>
+                    <p style="color: #65676b; font-size: 0.8rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Demonlist rank</p>
+                    <h3 style="color: #000000; margin: 0; font-size: 1.8rem; font-weight: 700;">#{{ leaderboard.indexOf(entry) + 1 }}</h3>
+                </div>
+                <div>
+                    <p style="color: #65676b; font-size: 0.8rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Demonlist score</p>
+                    <h3 style="color: #000000; margin: 0; font-size: 1.8rem; font-weight: 700;">{{ entry.total.toLocaleString() }}</h3>
+                </div>
+            </div>
 
-                    <div style="display: flex; gap: 40px; padding: 20px 0; border-bottom: 1px solid #e1e4e8; justify-content: center; text-align: center;">
-                        <div>
-                            <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist stats</p>
-                            <h4 style="color: #000000; font-size: 1.1rem; font-weight: 600; margin: 0;">{{ entry.stats }}</h4>
-                        </div>
-                        <div>
-                            <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Hardest demon</p>
-                            <h4 style="color: #000000; font-size: 1.1rem; font-weight: 700; margin: 0;">{{ entry.hardest }}</h4>
-                        </div>
-                    </div>
+            <!-- Vedlejší statistiky skládané pod sebe -->
+            <div style="display: flex; flex-direction: column; gap: 20px; padding: 20px 0 0 0; text-align: center;">
+                <div>
+                    <p style="color: #65676b; font-size: 0.8rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Demonlist stats</p>
+                    <h4 style="color: #000000; font-size: 1.1rem; font-weight: 700; margin: 0;">{{ entry.stats }}</h4>
+                </div>
+                <div>
+                    <p style="color: #65676b; font-size: 0.8rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Hardest demon</p>
+                    <h4 style="color: #2563eb; font-size: 1.25rem; font-weight: 800; margin: 0;">{{ entry.hardest }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
 
                     <!-- SLOUČENÉ SEKCE COMPLETED & VERIFIED PODLE FOTKY -->
                     <h2 style="color: #000000; font-size: 1.6rem; margin: 25px 0 15px 0; text-align: center; font-weight: 700;">Demons completed</h2>

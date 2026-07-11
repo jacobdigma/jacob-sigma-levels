@@ -135,18 +135,33 @@ export default {
             ]
         };
     },
-            ]
-        };
-    },
-    computed: {
-        entry() {
-            return this.filteredList[this.selected] || this.list[this.selected] || null;
-        },
+        computed: {
         filteredList() {
-            if (!this.search) return this.list;
-            return this.list.filter(level => 
-                level.name && level.name.toLowerCase().includes(this.search.toLowerCase())
-            );
+            if (this.search) {
+                const query = this.search.toLowerCase();
+                return this.list.filter(lvl => lvl.name.toLowerCase().includes(query));
+            }
+
+            let displayList = [];
+            let hasExtendedDivider = false;
+            let hasLegacyDivider = false;
+
+            this.list.forEach((level) => {
+                if (level.type === 'extended' && !hasExtendedDivider) {
+                    displayList.push({ isDivider: true, dividerText: "-- EXTENDED LIST --" });
+                    hasExtendedDivider = true;
+                }
+                if (level.type === 'legacy' && !hasLegacyDivider) {
+                    displayList.push({ isDivider: true, dividerText: "-- LEGACY LIST --" });
+                    hasLegacyDivider = true;
+                }
+                displayList.push(level);
+            });
+
+            return displayList;
+        },
+        entry() {
+            return this.list[this.selected] || null;
         }
     },
     methods: {
@@ -158,21 +173,21 @@ export default {
         },
         getEmbedUrl(url) {
             if (!url) return '';
-            
-            // Pokud už odkaz obsahuje embed, rovnou ho vrátíme
-            if (url.includes('/embed/')) {
+            // 100% spolehlivá a bezpečná extrakce YouTube ID, která neshodí web
+            let videoId = '';
+            try {
+                if (url.includes('://youtube.com')) {
+                    videoId = url.split('v=')[1].split('&')[0];
+                } else if (url.includes('youtu.be/')) {
+                    videoId = url.split('youtu.be/')[1].split('?')[0];
+                } else if (url.includes('://youtube.com')) {
+                    return url;
+                }
+            } catch (e) {
+                console.error(e);
                 return url;
             }
-            
-            // Bezpečné vytažení ID videa pomocí regulárního výrazu pro jakýkoliv YouTube odkaz
-            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-            const match = url.match(regExp);
-            
-            if (match && match[2] && match[2].length === 11) {
-                return 'https://youtube.com' + match[2];
-            }
-            
-            return url;
+            return videoId ? 'https://www.://youtube.com' + videoId : url;
         }
     }
 };

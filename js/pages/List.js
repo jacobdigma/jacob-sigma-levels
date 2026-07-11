@@ -167,6 +167,7 @@ export default {
         }
     },
     methods: {
+        embed,
         getListTextColor(type) {
             if (type === 'main') return '#000000';
             if (type === 'extended') return '#4b5563';

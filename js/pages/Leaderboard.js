@@ -83,8 +83,8 @@ export default {
                 // HRÁČ 1: trumandigma
                 {
                     name: "trumandigma",
-                    total: 7500,
-                    stats: "9 Main, 5 Extended, 4 Legacy",
+                    total: 2130,
+                    stats: "8 Main, 6 Extended, 6 Legacy",
                     hardest: "Verity",
                     demons: [
                         { level: "B", link: "#", type: "main", isVerified: false },
@@ -95,7 +95,7 @@ export default {
                         { level: "Darkstep", link: "#", type: "main", isVerified: false },
                         { level: "Deadlocked", link: "#", type: "main", isVerified: false },
                         { level: "Demon Forest", link: "#", type: "legacy", isVerified: false },
-                        { level: "Electrodynamix", link: "#", type: "main", isVerified: false },
+                        { level: "Electrodynamix", link: "#", type: "extended", isVerified: false },
                         { level: "Electroman Adventures V2", link: "#", type: "extended", isVerified: false },
                         { level: "iSpyWithMyLittleEye", link: "#", type: "extended", isVerified: false },
                         { level: "Phjork", link: "#", type: "legacy", isVerified: false },
@@ -103,6 +103,8 @@ export default {
                         { level: "Shiver", link: "#", type: "legacy", isVerified: false },
                         { level: "Speed Racer", link: "#", type: "main", isVerified: false },
                         { level: "Theory of Everything 2", link: "#", type: "main", isVerified: false },
+                        { level: "The Lightning Road", link: "#", type: "legacy", isVerified: false },
+                        { level: "The Nightmare", link: "#", type: "legacy", isVerified: false },
                         { level: "Verity ", link: "#", type: "main", isVerified: false },
                         { level: "xStep V2 ", link: "#", type: "extended", isVerified: false }
                     ],
@@ -114,20 +116,22 @@ export default {
                 {
                     name: "stetkos",
                     total: 1825,
-                    stats: "1 Main, 4 Extended, 7 Legacy",
-                    hardest: "Theory of Every V2",
+                    stats: "2 Main, 5 Extended, 7 Legacy",
+                    hardest: "nouement",
                     demons: [
                         { level: "Clutterfunk V2", link: "#", type: "extended", isVerified: false },
                         { level: "Crescendo", link: "#", type: "extended", isVerified: false },
                         { level: "Demon Forest", link: "#", type: "legacy", isVerified: false },
                         { level: "Demon Mixed", link: "#", type: "legacy", isVerified: false },
                         { level: "m tolot", link: "#", type: "extended", isVerified: false },
+                        { level: "Maymory", link: "#", type: "main", isVerified: false },
+                        { level: "nouement", link: "#", type: "main", isVerified: false },
                         { level: "Phjork", link: "#", type: "legacy", isVerified: false },
                         { level: "Platinum Adventure", link: "#", type: "legacy", isVerified: false },
                         { level: "Shiver", link: "#", type: "legacy", isVerified: false },
                         { level: "The Lightning Road", link: "#", type: "legacy", isVerified: false },
                         { level: "The Nightmare", link: "#", type: "legacy", isVerified: false },
-                        { level: "Theory of Every V2", link: "#", type: "main", isVerified: false },
+                        { level: "Theory of Every V2", link: "#", type: "extended", isVerified: false },
                         { level: "xStep V2", link: "#", type: "extended", isVerified: false }
                         
                     ],

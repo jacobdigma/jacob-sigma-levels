@@ -171,7 +171,7 @@ export default {
             if (type === 'legacy') return '#9ca3af';
             return '#000000';
         },
-        getEmbedUrl(url) {
+               getEmbedUrl(url) {
             if (!url) return '';
             
             if (url.includes('/embed/')) {
@@ -194,3 +194,4 @@ export default {
         }
     }
 };
+

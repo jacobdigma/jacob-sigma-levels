@@ -173,21 +173,23 @@ export default {
         },
         getEmbedUrl(url) {
             if (!url) return '';
-            // 100% spolehlivá a bezpečná extrakce YouTube ID, která neshodí web
+            
+            if (url.includes('/embed/')) {
+                return url;
+            }
+            
             let videoId = '';
             try {
-                if (url.includes('://youtube.com')) {
+                if (url.includes('youtube.com')) {
                     videoId = url.split('v=')[1].split('&')[0];
                 } else if (url.includes('youtu.be/')) {
                     videoId = url.split('youtu.be/')[1].split('?')[0];
-                } else if (url.includes('://youtube.com')) {
-                    return url;
                 }
             } catch (e) {
                 console.error(e);
                 return url;
             }
-            return videoId ? 'https://www.://youtube.com' + videoId : url;
+            
+            return videoId ? 'https://youtube.com' + videoId : url;
         }
-    }
 };

@@ -208,10 +208,12 @@ input[type="checkbox"] {
     display: inline !important;
 }
 /* Tímto srovnáme celou stránku (sidebar + detail) vedle sebe a dolů */
+/* Tímto srovnáme celou stránku (sidebar + detail) vedle sebe a vycentrujeme ji */
 main {
     display: flex !important;
     gap: 30px !important;
     align-items: flex-start !important;
+    justify-content: center !important; /* TENTO ŘÁDEK TI TO HODÍ DOPROSTŘED STRÁNKY */
     min-height: calc(100vh - 100px) !important;
     padding: 30px !important;
     box-sizing: border-box !important;

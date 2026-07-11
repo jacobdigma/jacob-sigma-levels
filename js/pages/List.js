@@ -164,14 +164,15 @@ export default {
             return this.list[this.selected] || null;
         }
     },
-    methods: {
+     methods: {
         getListTextColor(type) {
             if (type === 'main') return '#000000';
             if (type === 'extended') return '#4b5563';
             if (type === 'legacy') return '#9ca3af';
             return '#000000';
         },
-               getEmbedUrl(url) {
+
+        getEmbedUrl(url) {
             if (!url) return '';
             // Bezpečné vytažení ID videa pomocí regulárního výrazu pro jakýkoliv YouTube odkaz
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -184,3 +185,5 @@ export default {
             
             return url;
         }
+    }
+};

@@ -171,7 +171,7 @@ export default {
             if (type === 'legacy') return '#9ca3af';
             return '#000000';
         },
-                getEmbedUrl(url) {
+        getEmbedUrl(url) {
             if (!url) return '';
             
             if (url.includes('/embed/')) {
@@ -181,7 +181,6 @@ export default {
             let videoId = '';
             try {
                 if (url.includes('youtube.com')) {
-                    // Tady jsou tvé správné indexy [1] a, které z odkazu vystřihnou čisté ID videa
                     videoId = url.split('v=')[1].split('&')[0];
                 } else if (url.includes('youtu.be/')) {
                     videoId = url.split('youtu.be/')[1].split('?')[0];
@@ -191,7 +190,6 @@ export default {
                 return url;
             }
             
-            // Tímto správně složíme embed odkaz, který Firefox bezpečně povolí a přehraje
             return videoId ? 'https://youtube.com' + videoId : url;
         }
     }

@@ -180,7 +180,7 @@ export default {
                 return { 
                     color: '#9ba3af', 
                     fontWeight: 'normal', 
-                    fontSize: '0.9rem', 
+                    fontSize: '0.6rem', 
                     fontStyle: 'italic', 
                     textDecoration: 'none' 
                 };
@@ -189,7 +189,7 @@ export default {
             return { 
                 color: '#000000', 
                 fontWeight: 'normal', 
-                fontSize: '1rem', 
+                fontSize: '0.8rem', 
                 textDecoration: 'none' 
             };
         }

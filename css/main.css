@@ -112,14 +112,19 @@ input[type="checkbox"] {
 
 /* Celý prostřední panel roztáhneme a dáme mu bílé pozadí */
 .page-leaderboard-container .player-container {
-    flex: 1 !important;
+    flex: unset !important; /* Zrušíme bezbřehé roztahování */
+    width: 100% !important;
+    max-width: 750px !important; /* Tímto panel malinko zúžíme, původně byl moc široký */
+    min-height: calc(100vh - 120px) !important; /* Tímto ho natáhneme přes celou výšku obrazovky až dolů */
     background-color: #ffffff !important;
     border: 1px solid #e1e4e8 !important;
     border-radius: 8px !important;
     padding: 25px !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
     text-align: left !important;
+    box-sizing: border-box !important;
 }
+
 
 /* Hlavní jméno hráče dostane prostor */
 .player-container h1.player-name {

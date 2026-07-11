@@ -171,26 +171,38 @@ export default {
             if (type === 'legacy') return '#9ca3af';
             return '#000000';
         },
-               getEmbedUrl(url) {
+        getEmbedUrl(url) {
             if (!url) return '';
             
+            // Pokud už odkaz embed obsahuje, rovnou ho vrátíme
             if (url.includes('/embed/')) {
                 return url;
             }
             
-            let videoId = '';
             try {
-                if (url.includes('youtube.com')) {
-                    videoId = url.split('v=')[1].split('&')[0];
-                } else if (url.includes('youtu.be/')) {
-                    videoId = url.split('youtu.be/')[1].split('?')[0];
+                // Bezpečný prohlížečový vyhledávač adres
+                const parsedUrl = new URL(url);
+                
+                // 1. Klasický odkaz (://youtube.com)
+                if (parsedUrl.hostname.includes('youtube.com')) {
+                    const videoId = parsedUrl.searchParams.get('v');
+                    if (videoId) {
+                        return 'https://youtube.com' + videoId;
+                    }
+                }
+                
+                // 2. Zkrácený odkaz (youtu.be/p15w9mb2eac)
+                if (parsedUrl.hostname.includes('youtu.be')) {
+                    const videoId = parsedUrl.pathname.replace('/', '');
+                    if (videoId) {
+                        return 'https://youtube.com' + videoId;
+                    }
                 }
             } catch (e) {
-                console.error(e);
-                return url;
+                console.error("Chyba při zpracování URL:", e);
             }
             
-            return videoId ? 'https://youtube.com' + videoId : url;
+            return url;
         }
     }
 };

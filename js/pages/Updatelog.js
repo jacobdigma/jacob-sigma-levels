@@ -8,44 +8,59 @@ export default {
 
             <div class="rules-div" style="display: flex; flex-direction: column; gap: 30px; text-align: left;">
                 
-                <!-- Version 2.0.0 -->
-                <div class="update-entry" style="border-left: 4px solid #2bba74; padding-left: 20px; margin-bottom: 10px;">
-                    <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px;">
-                        <h2 class="type-title" style="font-size: 1.6rem; font-weight: bold; margin: 0; color: var(--text-color);">Version 2.0.0</h2>
-                        <span class="type-body" style="font-size: 0.9rem; color: var(--text-color); opacity: 0.5;">04. 07. 2026</span>
+<div style="max-width: 600px; margin: 0 auto; padding: 20px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+    
+                <!-- VERZE 2.1.0 -->
+                <div style="margin-bottom: 35px; text-align: left;">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                        <h2 style="font-size: 1.6rem; font-weight: 800; color: #000000; margin: 0;">Version 2.1.0</h2>
+                        <span style="font-size: 0.85rem; color: #9ca3af; font-weight: 600;">11. 07. 2026</span>
                     </div>
-                    <ul class="type-body" style="list-style-type: square; padding-left: 20px; line-height: 1.8; color: var(--text-color); opacity: 0.8; font-size: 1.05rem;">
-                        <li style="margin-bottom: 8px;">Complete new style of website.</li>
-                        <li style="margin-bottom: 8px;">Main, extended, legacy system.</li>
-                        <li>Fixed stuck loading.</li>
+                    <ul style="list-style-type: none; padding-left: 0; margin: 0; line-height: 1.8; color: #374151; font-weight: 500;">
+                        <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Readded videos to list levels.</li>
+                        <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Made different font Sizes.</li>
+                        <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> and minor stuff like centering the leaderboard, and remaking points. (this update took 4 hours :cry:)</li>
                     </ul>
                 </div>
 
-                <!-- Version 1.4.0 -->
-                <div class="update-entry" style="border-left: 4px solid #4ba3ff; padding-left: 20px; margin-bottom: 10px;">
-                    <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px;">
-                        <h2 class="type-title" style="font-size: 1.6rem; font-weight: bold; margin: 0; color: var(--text-color);">Version 1.4.0</h2>
-                        <span class="type-body" style="font-size: 0.9rem; color: var(--text-color); opacity: 0.5;">30. 06. 2026</span>
+                <!-- VERZE 2.0.0 -->
+                <div style="margin-bottom: 35px; text-align: left;">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                        <h2 style="font-size: 1.6rem; font-weight: 800; color: #000000; margin: 0;">Version 2.0.0</h2>
+                        <span style="font-size: 0.85rem; color: #9ca3af; font-weight: 600;">04. 07. 2026</span>
                     </div>
-                    <ul class="type-body" style="list-style-type: square; padding-left: 20px; line-height: 1.8; color: var(--text-color); opacity: 0.8; font-size: 1.05rem;">
-                        <li style="margin-bottom: 8px;">Added Update log</li>
-                        <li>Added Progressed to Profiles</li>
+                    <ul style="list-style-type: none; padding-left: 0; margin: 0; line-height: 1.8; color: #374151; font-weight: 500;">
+                        <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Complete new style of website.</li>
+                        <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Main, extended, legacy system.</li>
+                        <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Fixed stuck loading.</li>
                     </ul>
                 </div>
 
-                <!-- Version 1.3.0 -->
-                <div class="update-entry" style="border-left: 4px solid var(--border-color); padding-left: 20px;">
-                    <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px;">
-                        <h2 class="type-title" style="font-size: 1.6rem; font-weight: bold; margin: 0; color: var(--text-color); opacity: 0.8;">Version 1.3.0</h2>
-                        <span class="type-body" style="font-size: 0.9rem; color: var(--text-color); opacity: 0.5;">27. 06. 2026</span>
+                <!-- VERZE 1.4.0 -->
+                <div style="margin-bottom: 35px; text-align: left;">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                        <h2 style="font-size: 1.6rem; font-weight: 800; color: #000000; margin: 0;">Version 1.4.0</h2>
+                        <span style="font-size: 0.85rem; color: #9ca3af; font-weight: 600;">30. 06. 2026</span>
                     </div>
-                    <ul class="type-body" style="list-style-type: square; padding-left: 20px; line-height: 1.8; color: var(--text-color); opacity: 0.8; font-size: 1.05rem;">
-                        <li style="margin-bottom: 8px;">Added Packs</li>
-                        <li>Fixed some bad Placements</li>
+                    <ul style="list-style-type: none; padding-left: 0; margin: 0; line-height: 1.8; color: #374151; font-weight: 500;">
+                        <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Added Update log.</li>
+                        <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Added Progressed to Profiles.</li>
+                    </ul>
+                </div>
+
+                <!-- VERZE 1.3.0 -->
+                <div style="margin-bottom: 35px; text-align: left;">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                        <h2 style="font-size: 1.6rem; font-weight: 800; color: #000000; margin: 0;">Version 1.3.0</h2>
+                        <span style="font-size: 0.85rem; color: #9ca3af; font-weight: 600;">27. 06. 2026</span>
+                    </div>
+                    <ul style="list-style-type: none; padding-left: 0; margin: 0; line-height: 1.8; color: #374151; font-weight: 500;">
+                        <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Added Packs.</li>
+                        <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Fixed some bad Placements.</li>
                     </ul>
                 </div>
 
             </div>
-        </div>
+        </main>
     `
 };

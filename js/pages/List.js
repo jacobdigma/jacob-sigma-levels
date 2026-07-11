@@ -193,7 +193,6 @@ export default {
             
             // Tímto správně složíme embed odkaz, který Firefox bezpečně povolí a přehraje
             return videoId ? 'https://youtube.com' + videoId : url;
-
         }
     }
 };

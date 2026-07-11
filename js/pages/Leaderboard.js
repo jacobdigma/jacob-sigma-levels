@@ -115,7 +115,7 @@ export default {
                 // HRÁČ 2: stetkos
                 {
                     name: "stetkos",
-                    total: 1825,
+                    total: 890,
                     stats: "2 Main, 5 Extended, 7 Legacy",
                     hardest: "nouement",
                     demons: [

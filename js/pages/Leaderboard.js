@@ -118,10 +118,11 @@ export default {
                 // HRÁČ 2: stetkos
                 {
                     name: "stetkos",
-                    total: 890,
+                    total: 1050,
                     stats: "1 Main, 6 Extended, 7 Legacy",
                     hardest: "nouement",
                     demons: [
+                        { level: "Clubstep", link: "#", type: "main", isVerified: false },
                         { level: "Clutterfunk V2", link: "#", type: "extended", isVerified: false },
                         { level: "Crescendo", link: "#", type: "extended", isVerified: false },
                         { level: "Demon Forest", link: "#", type: "legacy", isVerified: false },

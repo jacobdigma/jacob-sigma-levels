@@ -119,8 +119,8 @@ export default {
                 {
                     name: "stetkos",
                     total: 1050,
-                    stats: "1 Main, 6 Extended, 7 Legacy",
-                    hardest: "nouement",
+                    stats: "2 Main, 6 Extended, 7 Legacy",
+                    hardest: "Clubstep",
                     demons: [
                         { level: "Clubstep", link: "#", type: "main", isVerified: false },
                         { level: "Clutterfunk V2", link: "#", type: "extended", isVerified: false },

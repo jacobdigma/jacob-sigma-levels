@@ -115,7 +115,7 @@ export default {
                 { rank: 6, name: "Blackfire Backfire", author: "kira9999", points: 170, type: "main", verification: "https://www.youtube.com/watch?v=2h1FgtfaP1k", records: [] },
                 { rank: 7, name: "Darkstep", author: "Alex", points: 165, type: "main", verification: "https://www.youtube.com/watch?v=M7h8FchVXLA", records: [] },
                 { rank: 8, name: "Unnerfed nouement", author: "Stetkos", points: 160, type: "main", verification: "#", records: [] },
-                { rank: 9, name: "Clubstep", author: "RobTop", points: 160, type: "main", verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [] },
+                { rank: 9, name: "Clubstep", author: "RobTop", points: 160, type: "main", verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [{ user: "Stetkos", percent: 100, link: "#" }] },
                 { rank: 10, name: "Speed Racer", author: "ZenthicAlpha", points: 155, type: "main", verification: "https://www.youtube.com/watch?v=R8RsJVKKd8w", records: [] },
                 { rank: 11, name: "nouement", author: "Stetkos", points: 150, type: "main", verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [] },
                 

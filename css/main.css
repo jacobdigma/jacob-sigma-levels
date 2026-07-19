@@ -220,14 +220,25 @@ main {
 }
 
 /* Tímto natvrdo uzamkneme prostřední panel, aby šel až dolů a byl užší */
+/* Tímto natvrdo uzamkneme prostřední panel, vycentrujeme ho a dáme mu font Montserrat */
 main > div:nth-child(2) {
     flex: 1 !important;
-    max-width: 800px !important; /* Zúžení celého panelu */
-    min-height: calc(100vh - 160px) !important; /* Protažení až dolů k zemi */
+    max-width: 800px !important;
+    min-height: calc(100vh - 160px) !important;
     background-color: #ffffff !important;
     border: 1px solid #e1e4e8 !important;
     border-radius: 8px !important;
     padding: 30px !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
     box-sizing: border-box !important;
+    margin: 0 auto !important; 
+
+    /* NOVÝ FONT PRO CELÝ PROFIL HRÁČE: */
+    font-family: "Montserrat", sans-serif !important;
+    letter-spacing: -0.2px !important;
+}
+
+/* Pokud chceš Montserrat úplně pro celou kartu včetně seznamu hráčů, přidej ještě tohle: */
+.player-container {
+    font-family: "Montserrat", sans-serif !important;
 }

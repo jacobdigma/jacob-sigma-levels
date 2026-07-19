@@ -84,7 +84,7 @@ export default {
                 {
                     name: "trumandigma",
                     total: 2630,
-                    stats: "10 Main, 7 Extended, 6 Legacy",
+                    stats: "10 Main, 7 Extended, 7 Legacy",
                     hardest: "Verity",
                     demons: [
                         { level: "B", link: "#", type: "main", isVerified: false },
@@ -97,6 +97,7 @@ export default {
                         { level: "Demon Forest", link: "#", type: "legacy", isVerified: false },
                         { level: "Electrodynamix", link: "#", type: "extended", isVerified: false },
                         { level: "Electroman Adventures V2", link: "#", type: "extended", isVerified: false },
+                        { level: "Hexagon Force", link: "#", type: "legacy", isVerified: false },
                         { level: "iSpyWithMyLittleEye", link: "#", type: "extended", isVerified: false },
                         { level: "Maymory", link: "#", type: "extended", isVerified: false },
                         { level: "Unnerfed nouement", link: "#", type: "main", isVerified: false },

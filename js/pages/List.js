@@ -135,9 +135,10 @@ export default {
                 { rank: 21, name: "Phjork", author: "Cerufiffy", points: 0, type: "legacy", verification: "", records: [] },
                 { rank: 22, name: "Demon Forest", author: "Ketis", points: 0, type: "legacy", verification: "", records: [] },
                 { rank: 23, name: "Demon Mixed", author: "RealOggy", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 24, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 25, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 26, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
+                { rank: 24, name: "Hexagon Force", author: "RobTop", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 25, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 26, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 27, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
             ]
         };
     },

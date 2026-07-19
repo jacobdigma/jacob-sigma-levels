@@ -118,7 +118,7 @@ export default {
                 // HRÁČ 2: stetkos
                 {
                     name: "stetkos",
-                    total: 1050,
+                    total: 1129,
                     stats: "2 Main, 6 Extended, 7 Legacy",
                     hardest: "Clubstep",
                     demons: [
@@ -140,7 +140,7 @@ export default {
                         
                     ],
                     progress: [
-                        { level: "Deadlocked", percent: 79, link: "#", type: "extended" }
+                        { level: "Deadlocked", percent: 79, link: "#", type: "main" }
                     ]
                 },
                  {

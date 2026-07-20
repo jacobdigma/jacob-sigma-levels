@@ -122,8 +122,8 @@ export default {
                 // --- EXTENDED LIST (Normální písmo a o něco světlejší černo/šedá) ---
                 { rank: 12, name: "Maymory", author: "ItzKiba", points: 145, type: "extended", verification: "https://www.youtube.com/watch?v=VIGXsCeGy3M&t=18s", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
                 { rank: 13, name: "Theory of Every V2", author: "Neptune", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=EnHHIR7DX1E", records: [] },
-                { rank: 14, name: "Electroman Adventures V2", author: "Neptune", points: 135, type: "extended", verification: "https://www.youtube.com/watch?v=s40FsZS-bec", records: [] },
-                { rank: 15, name: "Clutterfunk V2", author: "Neptune", points: 130, type: "extended", verification: "https://www.youtube.com/watch?v=Kkrp9G-vYeE", records: [{ user: "trumandigma", percent: 100, link: "https://www.youtube.com/watch?v=2kE93FgLRcs" }] },
+                { rank: 14, name: "Clutterfunk V2", author: "Neptune", points: 135, type: "extended", verification: "https://www.youtube.com/watch?v=Kkrp9G-vYeE", records: [{ user: "trumandigma", percent: 100, link: "https://www.youtube.com/watch?v=2kE93FgLRcs" }] },
+                { rank: 15, name: "Electroman Adventures V2", author: "Neptune", points: 130, type: "extended", verification: "https://www.youtube.com/watch?v=s40FsZS-bec", records: [] },
                 { rank: 16, name: "Electrodynamix", author: "RobTop", points: 125, type: "extended", verification: "https://www.youtube.com/watch?v=bXH5zDZtb-Y", records: [] },
                 { rank: 17, name: "iSpyWithMyLittleEye", author: "Voxicat", points: 120, type: "extended", verification: "https://www.youtube.com/watch?v=Ow7nDnZTbDw", records: [] },
                 { rank: 18, name: "Crescendo", author: "Serponge", points: 115, type: "extended", verification: "https://www.youtube.com/watch?v=JSAoUfTR49Y", records: [{ user: "trumandigma", percent: 100, link: "#" }] },

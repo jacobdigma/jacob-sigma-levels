@@ -127,18 +127,18 @@ export default {
                 { rank: 16, name: "Electrodynamix", author: "RobTop", points: 125, type: "extended", verification: "https://www.youtube.com/watch?v=bXH5zDZtb-Y", records: [] },
                 { rank: 17, name: "iSpyWithMyLittleEye", author: "Voxicat", points: 120, type: "extended", verification: "https://www.youtube.com/watch?v=Ow7nDnZTbDw", records: [] },
                 { rank: 18, name: "Crescendo", author: "Serponge", points: 115, type: "extended", verification: "https://www.youtube.com/watch?v=JSAoUfTR49Y", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
-                { rank: 19, name: "xStep V2", author: "Neptune", points: 110, type: "extended", verification: "https://www.youtube.com/watch?v=K9rBb0HVvMg", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
-                { rank: 20, name: "m tolot", author: "Stetkos", points: 100, type: "extended", verification: "#", records: [] },
+                { rank: 19, name: "m tolot", author: "Stetkos", points: 110, type: "extended", verification: "#", records: [] },
+                { rank: 20, name: "xStep V2", author: "Neptune", points: 100, type: "extended", verification: "https://www.youtube.com/watch?v=K9rBb0HVvMg", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
 
                 // --- LEGACY LIST (Bez čísel, nápis Legacy a text do šeda) ---
-                { rank: 20, name: "Shiver", author: "SpKale", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 21, name: "Phjork", author: "Cerufiffy", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 22, name: "Demon Forest", author: "Ketis", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 23, name: "Demon Mixed", author: "RealOggy", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 24, name: "Hexagon Force", author: "RobTop", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 25, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 26, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 27, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
+                { rank: 21, name: "Shiver", author: "SpKale", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 22, name: "Phjork", author: "Cerufiffy", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 23, name: "Demon Forest", author: "Ketis", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 24, name: "Demon Mixed", author: "RealOggy", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 25, name: "Hexagon Force", author: "RobTop", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 26, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 27, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 28, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
             ]
         };
     },

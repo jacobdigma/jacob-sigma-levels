@@ -203,16 +203,27 @@ export default {
                                 isVerified: false
                             });
                         }
-                    } else {
+                                       } else {
+                        // --- JEDNODUCHÝ PROGRESS SYSTÉM PODLE TVÉHO VZORCE ---
+                        const currentPercent = parseInt(record.percent) || 0;
+                        
+                        // Bodová mezera (např. 200 - 185 = 15)
+                        const gap = 200 - level.points;
+                        
+                        // Začneš s body podle procent a odečteš mezeru (pokud by to šlo pod 0, dáme 0)
+                        const finalProgressPoints = Math.max(0, currentPercent - gap);
+                        
+                        // Přičteme body za progress k celkovému skóre hráče
+                        player.total += finalProgressPoints;
+
+                        // Zapíšeme do profilu pro zobrazení na webu
                         player.progress.push({
                             level: level.name,
-                            percent: record.percent,
+                            percent: currentPercent,
                             link: record.link || "#"
                         });
                     }
-                });
-            }
-        });
+
 
         // Převedeme posbíranou mapu hráčů na finální pole a vygenerujeme text "stats"
         this.rawLeaderboard = Object.values(playersMap).map(player => {

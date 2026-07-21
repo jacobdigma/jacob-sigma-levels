@@ -144,23 +144,19 @@ export default {
             ]
         };
     },
-    // AUTOMATICKÝ VÝPOČET BODŮ PŘI NAČTENÍ STRÁNKY
     mounted() {
-        // Vybereme pouze hlavní (main) a rozšířené (extended) úrovně z listu
         const activeLevels = this.list.filter(l => l.type === 'main' || l.type === 'extended');
         const totalActive = activeLevels.length;
 
         this.list.forEach(level => {
             if (level.type === 'legacy') {
-                level.points = 0; // Legacy mají vždy natvrdo 0 bodů
+                level.points = 0;
             } else {
                 const position = activeLevels.indexOf(level);
-                // Vzorec pro naprosto rovnoměrné rozprostření od 200 do 100 bodů
                 const calculatedPoints = totalActive > 1 
                     ? 200 - (position * (100 / (totalActive - 1))) 
                     : 200;
-                
-                level.points = Math.round(calculatedPoints); // Zaokrouhlíme na celá čísla
+                level.points = Math.round(calculatedPoints);
             }
         });
     },
@@ -184,18 +180,16 @@ export default {
                 });
                 return displayList;
             }
-            
             return this.list.filter(level => 
                 level.name && level.name.toLowerCase().includes(this.search.toLowerCase())
             );
         },
         entry() {
-            // Zajišťuje správný výběr aktivního levelu ze seznamu
             return this.list[this.selected] || null;
         }
     },
     methods: {
-        embed, // <-- TÍMTO ŘÍKÁME VUE, AŤ POUŽIJE TEN ČISTÝ IMPORT Z UTIL.JS
+        embed,
         getListTextColor(type) {
             if (type === 'main') return '#000000';
             if (type === 'extended') return '#4b5563';
@@ -203,3 +197,4 @@ export default {
             return '#000000';
         }
     }
+};

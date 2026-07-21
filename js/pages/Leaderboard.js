@@ -111,7 +111,7 @@ export default {
                 level.points = 0;
             } else {
                 const position = activeLevels.indexOf(level);
-                const calculatedPoints = totalActive > 1 ? 200 - (position * (100 / (totalActive - 1))) : 200;
+                const finalProgressPoints = Math.max(0, currentPercent - gap);
                 level.points = Math.round(calculatedPoints);
             }
         });

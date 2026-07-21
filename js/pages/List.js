@@ -141,78 +141,66 @@ export default {
                 { rank: 28, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
                 { rank: 29, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
             ]
+            ]
         };
     },
-        computed: {
-        filteredList() {
-            if (this.search) {
-                const query = this.search.toLowerCase();
-                return this.list.filter(lvl => lvl.name.toLowerCase().includes(query));
+    // AUTOMATICKÝ VÝPOČET BODŮ PŘI NAČTENÍ STRÁNKY
+    mounted() {
+        // Vybereme pouze hlavní (main) a rozšířené (extended) úrovně z listu
+        const activeLevels = this.list.filter(l => l.type === 'main' || l.type === 'extended');
+        const totalActive = activeLevels.length;
+
+        this.list.forEach(level => {
+            if (level.type === 'legacy') {
+                level.points = 0; // Legacy mají vždy natvrdo 0 bodů
+            } else {
+                const position = activeLevels.indexOf(level);
+                // Vzorec pro naprosto rovnoměrné rozprostření od 200 do 100 bodů
+                const calculatedPoints = totalActive > 1 
+                    ? 200 - (position * (100 / (totalActive - 1))) 
+                    : 200;
+                
+                level.points = Math.round(calculatedPoints); // Zaokrouhlíme na celá čísla
             }
+        });
+    },
+    computed: {
+        filteredList() {
+            if (!this.search) {
+                let displayList = [];
+                let hasExtendedDivider = false;
+                let hasLegacyDivider = false;
 
-            let displayList = [];
-            let hasExtendedDivider = false;
-            let hasLegacyDivider = false;
-
-            this.list.forEach((level) => {
-                if (level.type === 'extended' && !hasExtendedDivider) {
-                    displayList.push({ isDivider: true, dividerText: "-- EXTENDED LIST --" });
-                    hasExtendedDivider = true;
-                }
-                if (level.type === 'legacy' && !hasLegacyDivider) {
-                    displayList.push({ isDivider: true, dividerText: "-- LEGACY LIST --" });
-                    hasLegacyDivider = true;
-                }
-                displayList.push(level);
-            });
-
-            return displayList;
+                this.list.forEach(level => {
+                    if (level.type === 'extended' && !hasExtendedDivider) {
+                        displayList.push({ isDivider: true, dividerText: "--- EXTENDED LIST ---" });
+                        hasExtendedDivider = true;
+                    }
+                    if (level.type === 'legacy' && !hasLegacyDivider) {
+                        displayList.push({ isDivider: true, dividerText: "--- LEGACY LIST ---" });
+                        hasLegacyDivider = true;
+                    }
+                    displayList.push(level);
+                });
+                return displayList;
+            }
+            
+            return this.list.filter(level => 
+                level.name && level.name.toLowerCase().includes(this.search.toLowerCase())
+            );
         },
         entry() {
+            // Zajišťuje správný výběr aktivního levelu ze seznamu
             return this.list[this.selected] || null;
         }
     },
     methods: {
-        embed,
+        embed, // Používá tvůj neprůstřelný import z util.js na řádku 70
         getListTextColor(type) {
             if (type === 'main') return '#000000';
             if (type === 'extended') return '#4b5563';
             if (type === 'legacy') return '#9ca3af';
             return '#000000';
-        },
-        getEmbedUrl(url) {
-            if (!url) return '';
-            
-            // Pokud už odkaz embed obsahuje, rovnou ho vrátíme
-            if (url.includes('/embed/')) {
-                return url;
-            }
-            
-            try {
-                // Bezpečný prohlížečový vyhledávač adres
-                const parsedUrl = new URL(url);
-                
-                // 1. Klasický odkaz (://youtube.com)
-                if (parsedUrl.hostname.includes('youtube.com')) {
-                    const videoId = parsedUrl.searchParams.get('v');
-                    if (videoId) {
-                        return 'https://youtube.com' + videoId;
-                    }
-                }
-                
-                // 2. Zkrácený odkaz (youtu.be/p15w9mb2eac)
-                if (parsedUrl.hostname.includes('youtu.be')) {
-                    const videoId = parsedUrl.pathname.replace('/', '');
-                    if (videoId) {
-                        return 'https://youtube.com' + videoId;
-                    }
-                }
-            } catch (e) {
-                console.error("Chyba při zpracování URL:", e);
-            }
-            
-            return url;
         }
     }
 };
-

@@ -1,4 +1,5 @@
 import Spinner from '../components/Spinner.js';
+import list from './List.js'; // <-- TENTO ŘÁDEK SEM PŘIDEJ!
 
 export default {
     components: { Spinner },

@@ -201,23 +201,26 @@ export default {
             if (type === 'legacy') return '#9ca3af';
             return '#000000';
         },
-                  embed(url) {
+                 embed(url) {
             if (!url) return '';
             
+            // Pokud už odkaz obsahuje embed, rovnou ho vrátíme
             if (url.includes('/embed/')) {
                 return url;
             }
             
+            // Bezpečné vytažení ID videa pomocí regulárního výrazu pro jakýkoliv YouTube odkaz
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
             const match = url.match(regExp);
             
+            // match[2] obsahuje čisté 11místné ID videa (např. p15w9mb2eac)
             if (match && match[2] && match[2].length === 11) {
                 return 'https://youtube.com' + match[2];
             }
             
             return url;
         },
-
+          
         embed(id) {
             if (!id) return '';
             // Pokud je v ID jen obyčejný kód videa, složíme z něj perfektní odkaz s lomítkem i embedem!

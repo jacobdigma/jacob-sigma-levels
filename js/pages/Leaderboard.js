@@ -139,39 +139,41 @@ export default {
         };
 
         // Projdeme všechny levely z List.js a rozdělíme body, verifikace a splnění
+               // Projdeme všechny levely z List.js a rozdělíme body, verifikace a splnění
         levels.forEach(level => {
-            // 1. KONTROLA VERIFIKÁTORA
-                   // Projdeme všechny levely z List.js a rozdělíme body, verifikace a splnění
-            // Seznam reálných hráčů, kteří jako jediní mohou dostávat body za verifikaci
-            const allowedPlayers = ['trumandigma', 'stetkos']; 
+            // Seznam povolených reálných hráčů pro žebříček
+            const allowedPlayers = ['trumandigma', 'stetkos', 'earl12'];
 
             // 1. KONTROLA VERIFIKÁTORA
             if (level.verifier && level.verifier.trim() !== "") {
-                // Pokud verifikátor NENÍ na seznamu reálných hráčů, ignorujeme ho a nedáme mu body
-                if (!allowedPlayers.includes(level.verifier.toLowerCase())) {
-                    return; 
+                if (allowedPlayers.includes(level.verifier.toLowerCase())) {
+                    const player = getOrCreatePlayer(level.verifier);
+                    
+                    // Přičteme body za verifikaci
+                    player.total += level.points;
+                    
+                    if (level.type === 'main') player.mainCount++;
+                    if (level.type === 'extended') player.extendedCount++;
+                    if (level.type === 'legacy') player.legacyCount++;
+
+                    if (level.type !== 'legacy' && level.rank < player.hardestRank) {
+                        player.hardest = level.name;
+                        player.hardestRank = level.rank;
+                    }
+
+                    // Přidáme do seznamu dokončených
+                    const alreadyAdded = player.demons.some(d => d.level === level.name);
+                    if (!alreadyAdded) {
+                        player.demons.push({
+                            level: level.name,
+                            link: level.verification || "#",
+                            type: level.type,
+                            isVerified: false
+                        });
+                    }
                 }
-
-                const player = getOrCreatePlayer(level.verifier);
-                
-                player.total += level.points;
-                
-                if (level.type === 'main') player.mainCount++;
-                if (level.type === 'extended') player.extendedCount++;
-                if (level.type === 'legacy') player.legacyCount++;
-
-                if (level.type !== 'legacy' && level.rank < player.hardestRank) {
-                    player.hardest = level.name;
-                    player.hardestRank = level.rank;
-                }
-
-                player.demons.push({
-                    level: level.name,
-                    link: level.verification || "#",
-                    type: level.type,
-                    isVerified: false
-                });
             }
+
 
             // 2. KONTROLA REKORDŮ
             if (level.records && level.records.length > 0) {

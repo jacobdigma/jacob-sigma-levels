@@ -66,7 +66,7 @@ export default {
 
                     <!-- REALNÉ YOUTUBE VIDEO ZE SOUBORU LEVELŮ -->
                     <div v-if="entry.verification && entry.verification !== '#'" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 8px; margin-bottom: 25px;">
-                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" :src="entry.verification.includes('youtube.com') || entry.verification.includes('youtu.be') ? entry.verification : 'https://youtube.com' + entry.verification" allowfullscreen></iframe>
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" :src="getEmbedUrl(entry.verification)" allowfullscreen></iframe>
                     </div>
 
                     <!-- TYP LISTU A BODY -->

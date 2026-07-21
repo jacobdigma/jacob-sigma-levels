@@ -192,13 +192,17 @@ export default {
             return this.list[this.selected] || null;
         }
     },
-    methods: {
-        embed, // Používá tvůj neprůstřelný import z util.js na řádku 70
+      methods: {
         getListTextColor(type) {
             if (type === 'main') return '#000000';
             if (type === 'extended') return '#4b5563';
             if (type === 'legacy') return '#9ca3af';
             return '#000000';
+        },
+        embed(id) {
+            if (!id) return '';
+            // Pokud je v ID jen obyčejný kód videa, složíme z něj perfektní odkaz s lomítkem i embedem!
+            return 'https://youtube.com' + id;
         }
     }
 };

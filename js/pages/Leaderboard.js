@@ -79,125 +79,161 @@ export default {
         return {
             selected: 0,
             search: '',
-            leaderboard: [
-                // HRÁČ 1: trumandigma
-                {
-                    name: "trumandigma",
-                    total: 2440,
-                    stats: "10 Main, 7 Extended, 7 Legacy",
-                    hardest: "Verity",
-                    demons: [
-                        { level: "B", link: "#", type: "main", isVerified: false },
-                        { level: "Blackfire Backfire", link: "#", type: "main", isVerified: false },
-                        { level: "Clubstep", link: "#", type: "main", isVerified: false },
-                        { level: "Clutterfunk V2", link: "#", type: "extended", isVerified: false },
-                        { level: "Crescendo", link: "#", type: "extended", isVerified: false },
-                        { level: "Darkstep", link: "#", type: "main", isVerified: false },
-                        { level: "Deadlocked", link: "#", type: "main", isVerified: false },
-                        { level: "Demon Forest", link: "#", type: "legacy", isVerified: false },
-                        { level: "Electrodynamix", link: "#", type: "extended", isVerified: false },
-                        { level: "Electroman Adventures V2", link: "#", type: "extended", isVerified: false },
-                        { level: "Hexagon Force", link: "#", type: "legacy", isVerified: false },
-                        { level: "iSpyWithMyLittleEye", link: "#", type: "extended", isVerified: false },
-                        { level: "Maymory", link: "#", type: "extended", isVerified: false },
-                        { level: "Unnerfed nouement", link: "#", type: "main", isVerified: false },
-                        { level: "Phjork", link: "#", type: "legacy", isVerified: false },
-                        { level: "Platinum Adventure", link: "#", type: "legacy", isVerified: false },
-                        { level: "Shiver", link: "#", type: "legacy", isVerified: false },
-                        { level: "Skeletal Shenanigans", link: "#", type: "main", isVerified: false },
-                        { level: "Speed Racer", link: "#", type: "main", isVerified: false },
-                        { level: "Theory of Everything 2", link: "#", type: "main", isVerified: false },
-                        { level: "The Lightning Road", link: "#", type: "legacy", isVerified: false },
-                        { level: "The Nightmare", link: "#", type: "legacy", isVerified: false },
-                        { level: "Verity ", link: "#", type: "main", isVerified: false },
-                        { level: "xStep V2 ", link: "#", type: "extended", isVerified: false }
-                    ],
-                    progress: [
-                        
-                    ]
-                },
-                // HRÁČ 2: stetkos
-                {
-                    name: "stetkos",
-                    total: 1079,
-                    stats: "2 Main, 6 Extended, 7 Legacy",
-                    hardest: "Clubstep",
-                    demons: [
-                        { level: "Clubstep", link: "#", type: "main", isVerified: false },
-                        { level: "Clutterfunk V2", link: "#", type: "extended", isVerified: false },
-                        { level: "Crescendo", link: "#", type: "extended", isVerified: false },
-                        { level: "Demon Forest", link: "#", type: "legacy", isVerified: false },
-                        { level: "Demon Mixed", link: "#", type: "legacy", isVerified: false },
-                        { level: "m tolot", link: "#", type: "extended", isVerified: false },
-                        { level: "Maymory", link: "#", type: "extended", isVerified: false },
-                        { level: "nouement", link: "#", type: "main", isVerified: false },
-                        { level: "Phjork", link: "#", type: "legacy", isVerified: false },
-                        { level: "Platinum Adventure", link: "#", type: "legacy", isVerified: false },
-                        { level: "Shiver", link: "#", type: "legacy", isVerified: false },
-                        { level: "The Lightning Road", link: "#", type: "legacy", isVerified: false },
-                        { level: "The Nightmare", link: "#", type: "legacy", isVerified: false },
-                        { level: "Theory of Every V2", link: "#", type: "extended", isVerified: false },
-                        { level: "xStep V2", link: "#", type: "extended", isVerified: false }
-                        
-                    ],
-                    progress: [
-                        { level: "Deadlocked", percent: 79, link: "#", type: "main" }
-                    ]
-                },
-                 {
-                    name: "Krystof",
-                    total: 0,
-                    stats: "0 Main, 0 Extended, 1 Legacy",
-                    hardest: "Platinum Adventure",
-                    demons: [
-
-                        { level: "Platinum Adventure", link: "#", type: "legacy", isVerified: false }
-                        
-                    ],
-                    progress: [
-                        
-                    ]
-                }
-            ]
+            rawLeaderboard: [] // Tady budou uložena kompletně vygenerovaná data ze souboru List.js
         };
     },
     computed: {
-        filteredLeaderboard() {
-            if (!this.search) return this.leaderboard;
-            const query = this.search.toLowerCase();
-            return this.leaderboard.filter(player => player.name.toLowerCase().includes(query));
+        leaderboard() {
+            // Seřadíme hráče automaticky podle nejvyššího počtu bodů od prvního po posledního
+            return [...this.rawLeaderboard].sort((a, b) => b.total - a.total);
         },
         entry() {
-            return this.leaderboard[this.selected] || null;
+            if (!this.leaderboard || this.selected === null) return null;
+            return this.filteredLeaderboard[this.selected] || null;
+        },
+        filteredLeaderboard() {
+            if (!this.leaderboard) return [];
+            return this.leaderboard.filter(player => 
+                player.name && player.name.toLowerCase().includes(this.search.toLowerCase())
+            );
         }
+    },
+    mounted() {
+        // Naimportujeme si živý seznam levelů z List.js komponenty
+        const levels = list.data().list;
+        
+        // Spustíme ten stejný bodový výpočet jako v List.js, abychom měli přesná a aktuální data
+        const activeLevels = levels.filter(l => l.type === 'main' || l.type === 'extended');
+        const totalActive = activeLevels.length;
+        levels.forEach(level => {
+            if (level.type === 'legacy') {
+                level.points = 0;
+            } else {
+                const position = activeLevels.indexOf(level);
+                const calculatedPoints = totalActive > 1 ? 200 - (position * (100 / (totalActive - 1))) : 200;
+                level.points = Math.round(calculatedPoints);
+            }
+        });
+
+        // Vytvoříme si mapu pro shromažďování dat o hráčích
+        const playersMap = {};
+
+        // Funkce, která bezpečně přidá nebo najde hráče v mapě
+        const getOrCreatePlayer = (name) => {
+            const lowerName = name.toLowerCase();
+            if (!playersMap[lowerName]) {
+                playersMap[lowerName] = {
+                    name: name, // Zachováme původní velikost písmen
+                    total: 0,
+                    mainCount: 0,
+                    extendedCount: 0,
+                    legacyCount: 0,
+                    hardest: "None",
+                    hardestRank: 9999, // Pomocná hodnota pro výpočet nejtěžšího démona
+                    demons: [],
+                    progress: []
+                };
+            }
+            return playersMap[lowerName];
+        };
+
+        // Projdeme všechny levely z List.js a rozdělíme body, verifikace a splnění
+        levels.forEach(level => {
+            // 1. KONTROLA VERIFIKÁTORA
+            if (level.author) {
+                const player = getOrCreatePlayer(level.author);
+                
+                player.total += level.points;
+                
+                if (level.type === 'main') player.mainCount++;
+                if (level.type === 'extended') player.extendedCount++;
+                if (level.type === 'legacy') player.legacyCount++;
+
+                if (level.type !== 'legacy' && level.rank < player.hardestRank) {
+                    player.hardest = level.name;
+                    player.hardestRank = level.rank;
+                }
+
+                // TADY JE ZMĚNA: isVerified dáváme natvrdo na false, aby se štítek v HTML nikdy nezobrazil
+                player.demons.push({
+                    level: level.name,
+                    link: level.verification || "#",
+                    type: level.type,
+                    isVerified: false
+                });
+            }
+
+            // 2. KONTROLA REKORDŮ
+            if (level.records && level.records.length > 0) {
+                level.records.forEach(record => {
+                    if (!record.user) return;
+                    const player = getOrCreatePlayer(record.user);
+
+                    if (parseInt(record.percent) === 100) {
+                        player.total += level.points;
+                        
+                        if (level.type === 'main') player.mainCount++;
+                        if (level.type === 'extended') player.extendedCount++;
+                        if (level.type === 'legacy') player.legacyCount++;
+
+                        if (level.type !== 'legacy' && level.rank < player.hardestRank) {
+                            player.hardest = level.name;
+                            player.hardestRank = level.rank;
+                        }
+
+                        // Přidáme do demons, pokud už tam není zapsaný z verifikace
+                        const alreadyAdded = player.demons.some(d => d.level === level.name);
+                        if (!alreadyAdded) {
+                            player.demons.push({
+                                level: level.name,
+                                link: record.link || "#",
+                                type: level.type,
+                                isVerified: false
+                            });
+                        }
+                    } else {
+                        player.progress.push({
+                            level: level.name,
+                            percent: record.percent,
+                            link: record.link || "#"
+                        });
+                    }
+                });
+            }
+        });
+
+        // Převedeme posbíranou mapu hráčů na finální pole a vygenerujeme text "stats"
+        this.rawLeaderboard = Object.values(playersMap).map(player => {
+            player.stats = `${player.mainCount} Main, ${player.extendedCount} Extended, ${player.legacyCount} Legacy`;
+            return player;
+        });
     },
     methods: {
         getLevelStyle(type) {
             if (type === 'main') {
-                return { 
-                    color: '#000000', 
-                    fontWeight: 'bold', 
-                    fontSize: '1.18rem', 
-                    textDecoration: 'none' 
+                return {
+                    color: '#000000',
+                    fontWeight: 'bold',
+                    fontSize: '1.18rem',
+                    textDecoration: 'none'
                 };
             }
             if (type === 'legacy') {
-                return { 
-                    color: '#9ba3af', 
-                    fontWeight: 'normal', 
-                    fontSize: '0.8rem', 
-                    fontStyle: 'italic', 
-                    textDecoration: 'none' 
+                return {
+                    color: '#9ca3af',
+                    fontWeight: 'normal',
+                    fontSize: '0.8rem',
+                    fontStyle: 'italic',
+                    textDecoration: 'none'
                 };
             }
             // default extended (normal velikost, normal tloušťka, černý)
-            return { 
-                color: '#000000', 
-                fontWeight: 'normal', 
-                fontSize: '0.9rem', 
-                textDecoration: 'none' 
+            return {
+                color: '#000000',
+                fontWeight: 'normal',
+                fontSize: '0.9rem',
+                textDecoration: 'none'
             };
         }
     }
 };
-

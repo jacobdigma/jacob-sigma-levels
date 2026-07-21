@@ -146,7 +146,7 @@ export default {
                 };
             }
             return playersMap[lowerName];
-        };
+        }
 
 
             // 2. KONTROLA REKORDŮ

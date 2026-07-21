@@ -120,25 +120,26 @@ export default {
                 { rank: 11, name: "nouement", author: "Stetkos", points: 145, type: "main", verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [] },
                 
                 // --- EXTENDED LIST (Normální písmo a o něco světlejší černo/šedá) ---
-                { rank: 12, name: "Maymory", author: "ItzKiba", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=VIGXsCeGy3M&t=18s", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
-                { rank: 13, name: "Theory of Every V2", author: "Neptune", points: 135, type: "extended", verification: "https://www.youtube.com/watch?v=EnHHIR7DX1E", records: [] },
-                { rank: 14, name: "Clutterfunk V2", author: "Neptune", points: 130, type: "extended", verification: "https://www.youtube.com/watch?v=Kkrp9G-vYeE", records: [{ user: "trumandigma", percent: 100, link: "https://www.youtube.com/watch?v=2kE93FgLRcs" }] },
-                { rank: 15, name: "Electroman Adventures V2", author: "Neptune", points: 125, type: "extended", verification: "https://www.youtube.com/watch?v=s40FsZS-bec", records: [] },
-                { rank: 16, name: "Electrodynamix", author: "RobTop", points: 120, type: "extended", verification: "https://www.youtube.com/watch?v=bXH5zDZtb-Y", records: [] },
-                { rank: 17, name: "iSpyWithMyLittleEye", author: "Voxicat", points: 115, type: "extended", verification: "https://www.youtube.com/watch?v=Ow7nDnZTbDw", records: [] },
-                { rank: 18, name: "Crescendo", author: "Serponge", points: 110, type: "extended", verification: "https://www.youtube.com/watch?v=JSAoUfTR49Y", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
-                { rank: 19, name: "m tolot", author: "Stetkos", points: 105, type: "extended", verification: "#", records: [] },
-                { rank: 20, name: "xStep V2", author: "Neptune", points: 100, type: "extended", verification: "https://www.youtube.com/watch?v=K9rBb0HVvMg", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                { rank: 12, name: "Electro Rand", author: "Gwmadboy", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=MZYw7jL9BnQ", records: [] },
+                { rank: 13, name: "Maymory", author: "ItzKiba", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=VIGXsCeGy3M&t=18s", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                { rank: 14, name: "Theory of Every V2", author: "Neptune", points: 135, type: "extended", verification: "https://www.youtube.com/watch?v=EnHHIR7DX1E", records: [] },
+                { rank: 15, name: "Clutterfunk V2", author: "Neptune", points: 130, type: "extended", verification: "https://www.youtube.com/watch?v=Kkrp9G-vYeE", records: [{ user: "trumandigma", percent: 100, link: "https://www.youtube.com/watch?v=2kE93FgLRcs" }] },
+                { rank: 16, name: "Electroman Adventures V2", author: "Neptune", points: 125, type: "extended", verification: "https://www.youtube.com/watch?v=s40FsZS-bec", records: [] },
+                { rank: 17, name: "Electrodynamix", author: "RobTop", points: 120, type: "extended", verification: "https://www.youtube.com/watch?v=bXH5zDZtb-Y", records: [] },
+                { rank: 18, name: "iSpyWithMyLittleEye", author: "Voxicat", points: 115, type: "extended", verification: "https://www.youtube.com/watch?v=Ow7nDnZTbDw", records: [] },
+                { rank: 19, name: "Crescendo", author: "Serponge", points: 110, type: "extended", verification: "https://www.youtube.com/watch?v=JSAoUfTR49Y", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                { rank: 20, name: "m tolot", author: "Stetkos", points: 105, type: "extended", verification: "#", records: [] },
+                { rank: 21, name: "xStep V2", author: "Neptune", points: 100, type: "extended", verification: "https://www.youtube.com/watch?v=K9rBb0HVvMg", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
 
                 // --- LEGACY LIST (Bez čísel, nápis Legacy a text do šeda) ---
-                { rank: 21, name: "Shiver", author: "SpKale", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 22, name: "Phjork", author: "Cerufiffy", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 23, name: "Demon Forest", author: "Ketis", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 24, name: "Demon Mixed", author: "RealOggy", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 25, name: "Hexagon Force", author: "RobTop", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 26, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 27, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 28, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
+                { rank: 22, name: "Shiver", author: "SpKale", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 23, name: "Phjork", author: "Cerufiffy", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 24, name: "Demon Forest", author: "Ketis", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 25, name: "Demon Mixed", author: "RealOggy", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 26, name: "Hexagon Force", author: "RobTop", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 27, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 28, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 29, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
             ]
         };
     },

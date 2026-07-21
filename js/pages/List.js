@@ -201,6 +201,25 @@ export default {
             if (type === 'legacy') return '#9ca3af';
             return '#000000';
         },
+                  getEmbedUrl(url) {
+            if (!url) return '';
+            
+            // Pokud už je to embed kód, rovnou ho vrátíme
+            if (url.includes('/embed/')) return url;
+            
+            // Pokud je to klasický odkaz s v= nebo zkrácený, vytáhneme ID
+            if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                const match = url.match(regExp);
+                if (match && match[2].length === 11) {
+                    return 'https://youtube.com' + match[2];
+                }
+            }
+            
+            // Pokud je v databázi už jen to čisté 11místné ID, složíme ho natvrdo
+            return 'https://youtube.com' + url;
+        },
+
         embed(id) {
             if (!id) return '';
             // Pokud je v ID jen obyčejný kód videa, složíme z něj perfektní odkaz s lomítkem i embedem!

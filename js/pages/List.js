@@ -56,48 +56,50 @@ export default {
                     </template>
                 </div>
             </div>
-
-                       <!-- PROSTŘEDNÍ PANEL: Opravený pro dynamická videa a rekordy -->
+            <!-- PROSTŘEDNÍ PANEL: Opravený pro dynamická videa a rekordy -->
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
                 <div v-if="entry">
                     <div style="text-align: center; margin-bottom: 25px;">
                         <h1 style="color: #000000; font-size: 2.5rem; margin: 0 0 5px 0; font-weight: 800;">{{ entry.name }}</h1>
-                        <p style="color: #65676b; font-size: 1.1rem; margin: 0;">by <span style="font-weight: bold; color: #000;">{{ entry.author || 'Unknown' }}</span></p>
+                        <p style="color: #65676b; margin: 0; font-size: 1.1rem; font-weight: bold;">by {{ entry.author || 'Unknown' }}</p>
                     </div>
 
-                    <!-- REÁLNÉ YOUTUBE VIDEO ZE SOUBORU LEVELU -->
-                                       <div v-if="entry.verification && entry.verification !== '#'" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 8px; margin-bottom: 25px;">
+                    <!-- REALNÉ YOUTUBE VIDEO ZE SOUBORU LEVELŮ -->
+                    <div v-if="entry.verification && entry.verification !== '#'" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 8px; margin-bottom: 25px;">
                         <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" :src="'https://youtube.com' + entry.verification" allowfullscreen></iframe>
                     </div>
 
-                    </div>
-
-                    <div style="display: flex; gap: 40px; justify-content: center; padding: 20px 0; border-top: 1px solid #e1e4e8; border-bottom: 1px solid #e1e4e8; margin-bottom: 25px; text-align: center;">
+                    <!-- TYP LISTU A BODY -->
+                    <div style="display: flex; gap: 48px; justify-content: center; text-align: center; border-bottom: 1px solid #e1e4e8; padding-bottom: 20px; margin-bottom: 20px;">
                         <div>
-                            <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">List Tier</p>
-                            <h3 style="color: #0070ff; margin: 0; font-size: 1.5rem; font-weight: 700; text-transform: uppercase;">{{ entry.type || 'Main' }} list</h3>
+                            <p style="color: #65676b; font-size: 0.85rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">List Tier</p>
+                            <h3 style="color: #2563eb; margin: 0; font-size: 1.6rem; font-weight: 800; text-transform: uppercase;">{{ entry.type || 'Main' }} list</h3>
                         </div>
                         <div>
-                            <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Points</p>
-                            <h3 style="color: #2bba74; margin: 0; font-size: 1.5rem; font-weight: 700;">{{ entry.points }}</h3>
+                            <p style="color: #65676b; font-size: 0.85rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Points</p>
+                            <h3 style="color: #10b981; margin: 0; font-size: 1.6rem; font-weight: 800;">{{ entry.points }}</h3>
                         </div>
                     </div>
 
-                    <!-- REÁLNÉ REKORDY HRÁČŮ Z POLÍČKA RECORDS -->
-                    <h2 style="color: #000000; font-size: 1.4rem; margin: 25px 0 15px 0; font-weight: 700; border-bottom: 2px solid #0070ff; padding-bottom: 5px;">Records</h2>
+                    <!-- REKORDY -->
+                    <h2 style="color: #000000; font-size: 1.6rem; margin: 25px 0 15px 0; font-weight: 700;">Records</h2>
                     <div v-if="!entry.records || entry.records.length === 0" style="color: #65676b; font-style: italic;">None</div>
                     <div v-else style="display: flex; flex-direction: column; gap: 10px;">
-                        <div v-for="record in entry.records" style="background: #f8f9fa; border: 1px solid #e1e4e8; padding: 12px 15px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+                        <div v-for="record in entry.records" :key="record.user" style="display: flex; justify-content: space-between; padding: 12px 15px; background: #f8f9fa; border: 1px solid #e1e4e8; border-radius: 4px; align-items: center;">
                             <div>
                                 <span style="font-weight: bold; color: #000;">{{ record.user }}</span>
-                                <span style="color: #65676b; margin-left: 10px;">{{ record.percent }}%</span>
+                                <span style="color: #65676b; margin-left: 10px;">({{ record.percent }}%)</span>
                             </div>
-                            <a v-if="record.link" :href="record.link" target="_blank" style="color: #0070ff; font-weight: bold; text-decoration: none;">Watch Video</a>
+                            <a v-if="record.link" :href="record.link" target="_blank" style="color: #007bff; font-weight: bold; text-decoration: none;">Watch Video</a>
                         </div>
                     </div>
                 </div>
-                <div v-else style="color: #65676b; text-align: center; padding: 40px 0;"><p>Select a level to view details.</p></div>
+                
+                <div v-else style="display: flex; justify-content: center; align-items: center; min-height: 200px;">
+                    <p style="color: #65676b; font-style: italic;">Select a level to view details</p>
+                </div>
             </div>
+
 
     `,
     data() {

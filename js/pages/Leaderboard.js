@@ -179,53 +179,51 @@ export default {
             if (level.records && level.records.length > 0) {
                 level.records.forEach(record => {
                     if (!record.user) return;
-                    const player = getOrCreatePlayer(record.user);
+                    if (allowedPlayers.includes(record.user.toLowerCase())) {
+                        const player = getOrCreatePlayer(record.user);
 
-                    if (parseInt(record.percent) === 100) {
-                        player.total += level.points;
-                        
-                        if (level.type === 'main') player.mainCount++;
-                        if (level.type === 'extended') player.extendedCount++;
-                        if (level.type === 'legacy') player.legacyCount++;
+                        if (parseInt(record.percent) === 100) {
+                            player.total += level.points;
+                            
+                            if (level.type === 'main') player.mainCount++;
+                            if (level.type === 'extended') player.extendedCount++;
+                            if (level.type === 'legacy') player.legacyCount++;
 
-                        if (level.type !== 'legacy' && level.rank < player.hardestRank) {
-                            player.hardest = level.name;
-                            player.hardestRank = level.rank;
-                        }
+                            if (level.type !== 'legacy' && level.rank < player.hardestRank) {
+                                player.hardest = level.name;
+                                player.hardestRank = level.rank;
+                            }
 
-                        // Přidáme do demons, pokud už tam není zapsaný z verifikace
-                        const alreadyAdded = player.demons.some(d => d.level === level.name);
-                        if (!alreadyAdded) {
-                            player.demons.push({
+                            const alreadyAdded = player.demons.some(d => d.level === level.name);
+                            if (!alreadyAdded) {
+                                player.demons.push({
+                                    level: level.name,
+                                    link: record.link || "#",
+                                    type: level.type,
+                                    isVerified: false
+                                });
+                            }
+                        } else {
+                            // --- PROGRESS SYSTÉM PODLE TVÉHO VZORCE ---
+                            const currentPercent = parseInt(record.percent) || 0;
+                            const gap = 200 - level.points;
+                            
+                            // Se závorkou ) na správném místě!
+                            const finalProgressPoints = Math.max(0, currentPercent - gap);
+                            
+                            player.total += finalProgressPoints;
+
+                            player.progress.push({
                                 level: level.name,
-                                link: record.link || "#",
-                                type: level.type,
-                                isVerified: false
+                                percent: currentPercent,
+                                link: record.link || "#"
                             });
                         }
-                                       } else {
-                        // --- JEDNODUCHÝ PROGRESS SYSTÉM PODLE TVÉHO VZORCE ---
-                        const currentPercent = parseInt(record.percent) || 0;
-                        
-                        // Bodová mezera (např. 200 - 185 = 15)
-                        const gap = 200 - level.points;
-                        
-                        // Začneš s body podle procent a odečteš mezeru (pokud by to šlo pod 0, dáme 0)
-                        const finalProgressPoints = Math.max(0, currentPercent - gap);
-                        
-                        // Přičteme body za progress k celkovému skóre hráče
-                        player.total += finalProgressPoints;
-
-                        // Zapíšeme do profilu pro zobrazení na webu
-                        player.progress.push({
-                            level: level.name,
-                            percent: currentPercent,
-                            link: record.link || "#"
+                    }
                 });
-           }
-        }
-    }); 
-        // Převedeme posbíranou mapu hráčů na finální pole a vygenerujeme text "stats"
+            }
+        });
+
         this.rawLeaderboard = Object.values(playersMap).map(player => {
             player.stats = `${player.mainCount} Main, ${player.extendedCount} Extended, ${player.legacyCount} Legacy`;
             return player;
@@ -250,7 +248,6 @@ export default {
                     textDecoration: 'none'
                 };
             }
-            // default extended (normal velikost, normal tloušťka, černý)
             return {
                 color: '#000000',
                 fontWeight: 'normal',

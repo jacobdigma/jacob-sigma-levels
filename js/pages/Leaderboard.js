@@ -221,10 +221,10 @@ export default {
                             level: level.name,
                             percent: currentPercent,
                             link: record.link || "#"
-                        });
-                    }
-
-
+                });
+           }
+        }
+    }); 
         // Převedeme posbíranou mapu hráčů na finální pole a vygenerujeme text "stats"
         this.rawLeaderboard = Object.values(playersMap).map(player => {
             player.stats = `${player.mainCount} Main, ${player.extendedCount} Extended, ${player.legacyCount} Legacy`;

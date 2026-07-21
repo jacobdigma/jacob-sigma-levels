@@ -67,9 +67,7 @@ export default {
 
                     <!-- REÁLNÉ YOUTUBE VIDEO ZE SOUBORU LEVELU -->
                     <div v-if="entry.verification" style="width: 100%; max-width: 800px; margin: 0 auto 25px auto; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                                           <iframe style="width: 100%; height: 100%; border: none;" :src="embed(entry.verification)" allowfullscreen></iframe>
-
-
+                                          <iframe style="width: 100%; height: 100%; border: none;" :src="'https://youtube.com' + entry.verification" allowfullscreen></iframe>
 
                     </div>
 

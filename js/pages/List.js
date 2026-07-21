@@ -3,8 +3,8 @@ import { embed } from '../util.js';
 
 export default {
     components: { Spinner },
-    template: `
-        <main style="background: #f0f2f5; padding: 20px; min-height: 100vh; display: flex; gap: 20px; align-items: flex-start; font-family: Arial, sans-serif; box-sizing: border-box;">
+        template: `
+        <main style="background: #f4f2f5; padding: 20px; min-height: 100vh; display: flex; gap: 20px; align-items: flex-start; font-family: Arial, sans-serif; box-sizing: border-box;">
             
             <!-- LEVÝ PANEL: Kompletně předělaný seznam úrovní -->
             <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 15px; width: 340px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); box-sizing: border-box; flex-shrink: 0; text-align: left;">
@@ -66,7 +66,7 @@ export default {
 
                     <!-- REALNÉ YOUTUBE VIDEO ZE SOUBORU LEVELŮ -->
                     <div v-if="entry.verification && entry.verification !== '#'" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 8px; margin-bottom: 25px;">
-                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" :src="embed(entry.verification)" allowfullscreen></iframe>
+                       <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" :src="embed(entry.verification)" allowfullscreen></iframe>
                     </div>
 
                     <!-- TYP LISTU A BODY -->

@@ -141,7 +141,6 @@ export default {
                 { rank: 28, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
                 { rank: 29, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
             ]
-            ]
         };
     },
     // AUTOMATICKÝ VÝPOČET BODŮ PŘI NAČTENÍ STRÁNKY

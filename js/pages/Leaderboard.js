@@ -139,36 +139,36 @@ export default {
             return playersMap[lowerName];
         };
 
-        const allowedPlayers = ['trumandigma', 'stetkos', 'earl12'];
+        // 1. SEM PŘIDEJ JMÉNO TOHO NOVÉHO HRÁČE (všechna jména piš malými písmeny!)
+        const allowedPlayers = ['trumandigma', 'Earl12', 'Krystof'];
 
-        levels.forEach(level => {
-            // 1. KONTROLA VERIFIKÁTORA
-            if (level.verifier && level.verifier.trim() !== "") {
-                if (allowedPlayers.includes(level.verifier.toLowerCase())) {
-                    const player = getOrCreatePlayer(level.verifier);
-                    
-                    player.total += level.points;
-                    
-                    if (level.type === 'main') player.mainCount++;
-                    if (level.type === 'extended') player.extendedCount++;
-                    if (level.type === 'legacy') player.legacyCount++;
+        const playersMap = {};
 
-                    if (level.type !== 'legacy' && level.rank < player.hardestRank) {
-                        player.hardest = level.name;
-                        player.hardestRank = level.rank;
-                    }
-
-                    const alreadyAdded = player.demons.some(d => d.level === level.name);
-                    if (!alreadyAdded) {
-                        player.demons.push({
-                            level: level.name,
-                            link: level.verification || "#",
-                            type: level.type,
-                            isVerified: false
-                        });
-                    }
-                }
+        // Sjednocení jmen na správné herní jméno Earl12
+        const getOrCreatePlayer = (name) => {
+            let displayName = name;
+            // Pokud kód v datech narazí na staré jméno stetkos, přepíše ho na správné Earl12
+            if (name.toLowerCase() === 'stetkos') {
+                displayName = 'Earl12';
             }
+            
+            const lowerName = displayName.toLowerCase();
+            if (!playersMap[lowerName]) {
+                playersMap[lowerName] = {
+                    name: displayName,
+                    total: 0,
+                    mainCount: 0,
+                    extendedCount: 0,
+                    legacyCount: 0,
+                    hardest: "None",
+                    hardestRank: 9999,
+                    demons: [],
+                    progress: []
+                };
+            }
+            return playersMap[lowerName];
+        };
+
 
             // 2. KONTROLA REKORDŮ
             if (level.records && level.records.length > 0) {

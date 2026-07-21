@@ -66,7 +66,7 @@ export default {
 
                     <!-- REALNÉ YOUTUBE VIDEO ZE SOUBORU LEVELŮ -->
                     <div v-if="entry.verification && entry.verification !== '#'" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 8px; margin-bottom: 25px;">
-                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" :src="getEmbedUrl(entry.verification)" allowfullscreen></iframe>
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" :src="embed(entry.verification)" allowfullscreen></iframe>
                     </div>
 
                     <!-- TYP LISTU A BODY -->
@@ -201,20 +201,21 @@ export default {
             if (type === 'legacy') return '#9ca3af';
             return '#000000';
         },
-        getEmbedUrl(url) {
+                embed(url) {
             if (!url) return '';
             
-            if (url.includes('/embed/')) return url;
-            
-            if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-                const match = url.match(regExp);
-                if (match && match[2].length === 11) {
-                    return 'https://youtube.com' + match[2];
-                }
+            if (url.includes('/embed/')) {
+                return url;
             }
             
-            return 'https://youtube.com' + url;
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            
+            if (match && match[2] && match[2].length === 11) {
+                return 'https://youtube.com' + match[2];
+            }
+            
+            return url;
         },
 
         embed(id) {

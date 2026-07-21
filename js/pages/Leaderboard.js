@@ -99,7 +99,7 @@ export default {
             );
         }
     },
-        mounted() {
+    mounted() {
         const levels = list.data().list;
         
         const activeLevels = levels.filter(l => l.type === 'main' || l.type === 'extended');
@@ -114,8 +114,6 @@ export default {
             }
         });
 
-        const allowedPlayers = ['trumandigma', 'earl12', 'stetkos', 'krystof'];
-
         const playersMap = {};
 
         const getOrCreatePlayer = (name) => {
@@ -125,11 +123,10 @@ export default {
             if (name.toLowerCase() === 'stetkos') {
                 displayName = 'Earl12';
             }
-            // Sjednocení pro případ, že v datech bude krystof s malým nebo velkým
+            // Sjednocení pro Krystofa
             if (name.toLowerCase() === 'krystof') {
                 displayName = 'Krystof';
             }
-
             
             const lowerName = displayName.toLowerCase();
             if (!playersMap[lowerName]) {
@@ -146,8 +143,38 @@ export default {
                 };
             }
             return playersMap[lowerName];
-        }
+        };
 
+        const allowedPlayers = ['trumandigma', 'earl12', 'stetkos', 'krystof'];
+
+        levels.forEach(level => {
+            // 1. KONTROLA VERIFIKÁTORA
+            if (level.verifier && level.verifier.trim() !== "") {
+                if (allowedPlayers.includes(level.verifier.toLowerCase())) {
+                    const player = getOrCreatePlayer(level.verifier);
+                    
+                    player.total += level.points;
+                    
+                    if (level.type === 'main') player.mainCount++;
+                    if (level.type === 'extended') player.extendedCount++;
+                    if (level.type === 'legacy') player.legacyCount++;
+
+                    if (level.type !== 'legacy' && level.rank < player.hardestRank) {
+                        player.hardest = level.name;
+                        player.hardestRank = level.rank;
+                    }
+
+                    const alreadyAdded = player.demons.some(d => d.level === level.name);
+                    if (!alreadyAdded) {
+                        player.demons.push({
+                            level: level.name,
+                            link: level.verification || "#",
+                            type: level.type,
+                            isVerified: false
+                        });
+                    }
+                }
+            }
 
             // 2. KONTROLA REKORDŮ
             if (level.records && level.records.length > 0) {
@@ -178,7 +205,7 @@ export default {
                                 });
                             }
                         } else {
-                            // Definice proměnných pro progress systém - TADY TO CHYBĚLO!
+                            // PROGRESS SYSTÉM
                             const currentPercent = parseInt(record.percent) || 0;
                             const gap = 200 - level.points;
                             const finalProgressPoints = Math.max(0, currentPercent - gap);
@@ -201,7 +228,6 @@ export default {
             return player;
         });
     },
-
     methods: {
         getLevelStyle(type) {
             if (type === 'main') {

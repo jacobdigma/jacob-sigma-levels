@@ -127,8 +127,8 @@ export default {
                 { rank: 15, name: "Clutterfunk V2", author: "Neptune", verifier: "Earl12", points: 130, type: "extended", verification: "Kkrp9G-vYEE", records: [ { user: "trumandigma", percent: 100, link: "2KE9S_FgCRs" } ] },
                 { rank: 16, name: "Electroman Adventures V2", author: "Neptune", verifier: "trumandigma", points: 125, type: "extended", verification: "s4OFSZs-bec", records: [] },
                 { rank: 17, name: "Electrodynamix", author: "RobTop", verifier: "trumandigma", points: 120, type: "extended", verification: "bXh5zDZb-Y", records: [] },
-                { rank: 18, name: "iSpyWithMyLittleEye", author: "Voxicait", verifier: "trumandigma", points: 115, type: "extended", verification: "Qw7NDnZTDw", records: [] },
-                { rank: 19, name: "Crescendo", author: "Serponge", verifier: "Earl12", points: 110, type: "extended", verification: "1SAOuFTR49Y", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
+                { rank: 18, name: "iSpyWithMyLittleEye", author: "Voxicat", verifier: "trumandigma", points: 115, type: "extended", verification: "Qw7NDnZTDw", records: [] },
+                { rank: 19, name: "Crescendo", author: "MasK463", verifier: "Earl12", points: 110, type: "extended", verification: "1SAOuFTR49Y", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
                 { rank: 20, name: "m tolot", author: "Earl12", verifier: "Earl12", points: 105, type: "extended", verification: "#", records: [] },
                 { rank: 21, name: "xStep V2", author: "Neptune", verifier: "Earl12", points: 100, type: "extended", verification: "k9RbBKhVMfM", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
 

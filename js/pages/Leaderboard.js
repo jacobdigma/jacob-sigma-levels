@@ -114,43 +114,22 @@ export default {
             }
         });
 
+        const allowedPlayers = ['trumandigma', 'earl12', 'stetkos', 'krystof'];
+
         const playersMap = {};
 
         const getOrCreatePlayer = (name) => {
             let displayName = name;
-            if (name.toLowerCase() === 'earl12') {
-                displayName = 'stetkos';
-            }
             
-            const lowerName = displayName.toLowerCase();
-            if (!playersMap[lowerName]) {
-                playersMap[lowerName] = {
-                    name: displayName,
-                    total: 0,
-                    mainCount: 0,
-                    extendedCount: 0,
-                    legacyCount: 0,
-                    hardest: "None",
-                    hardestRank: 9999,
-                    demons: [],
-                    progress: []
-                };
-            }
-            return playersMap[lowerName];
-        };
-
-        // 1. SEM PŘIDEJ JMÉNO TOHO NOVÉHO HRÁČE (všechna jména piš malými písmeny!)
-        const allowedPlayers = ['trumandigma', 'Earl12', 'Krystof'];
-
-        const playersMap = {};
-
-        // Sjednocení jmen na správné herní jméno Earl12
-        const getOrCreatePlayer = (name) => {
-            let displayName = name;
-            // Pokud kód v datech narazí na staré jméno stetkos, přepíše ho na správné Earl12
+            // Sjednocení na herní jméno Earl12
             if (name.toLowerCase() === 'stetkos') {
                 displayName = 'Earl12';
             }
+            // Sjednocení pro případ, že v datech bude krystof s malým nebo velkým
+            if (name.toLowerCase() === 'krystof') {
+                displayName = 'Krystof';
+            }
+
             
             const lowerName = displayName.toLowerCase();
             if (!playersMap[lowerName]) {

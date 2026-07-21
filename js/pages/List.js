@@ -133,14 +133,14 @@ export default {
                 { rank: 21, name: "xStep V2", author: "Neptune", verifier: "Earl12", points: 100, type: "extended", verification: "https://www.youtube.com/watch?v=k9RbBKhVMfM", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
 
                 // --- LEGACY LIST ---
-                { rank: 22, name: "Shiver", author: "SpKale", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 23, name: "Phjork", author: "Cerufiffy", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 24, name: "Demon Forest", author: "Ketis", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 25, name: "Demon Mixed", author: "RealOggy", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 26, name: "Hexagon Force", author: "RobTop", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 27, name: "Platinum Adventure", author: "Jerry4", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 28, name: "The Nightmare", author: "Jax", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 29, name: "The Lightning Road", author: "Timeless Real", verifier: "", points: 0, type: "legacy", verification: "", records: [] }
+                { rank: 22, name: "Shiver", author: "SpKale", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                { rank: 23, name: "Phjork", author: "Cerufiffy", verifier: "trumandigma", points: 0, type: "legacy", verification: "", records: [{ user: "Earl12", percent: 100, link: "#" }] },
+                { rank: 24, name: "Demon Forest", author: "Ketis", verifier: "trumandigma", points: 0, type: "legacy", verification: "", records: [{ user: "Earl12", percent: 100, link: "#" }] },
+                { rank: 25, name: "Demon Mixed", author: "RealOggy", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 26, name: "Hexagon Force", author: "RobTop", verifier: "trumandigma", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 27, name: "Platinum Adventure", author: "Jerry4", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" },{ user: "Krystof", percent: 100, link: "#" }] },
+                { rank: 28, name: "The Nightmare", author: "Jax", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                { rank: 29, name: "The Lightning Road", author: "Timeless Real", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] }
             ]
         };
     },

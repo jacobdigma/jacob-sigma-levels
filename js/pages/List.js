@@ -106,40 +106,40 @@ export default {
             selected: 0,
             search: '',
             list: [
-                // --- MAIN LIST (Tučné a černé) ---
-                { rank: 1, name: "Verity", author: "Serponge", points: 200, type: "main", verification: "https://www.youtube.com/watch?v=p15w9MB2eAc", records: [] },
-                { rank: 2, name: "Skeletal Shenanigans", author: "YoReid", points: 195, type: "main", verification: "https://www.youtube.com/watch?v=mgzTHUKATqo", records: [] },
-                { rank: 3, name: "B", author: "MotleyOrc", points: 190, type: "main", verification: "https://www.youtube.com/watch?v=F2Y05OVWOc4", records: [] },
-                { rank: 4, name: "Deadlocked", author: "RobTop", points: 180, type: "main", verification: "https://www.youtube.com/watch?v=Ulylhr3KJPA", records: [{ user: "Stetkos", percent: 79, link: "https://www.youtube.com/watch?v=81Iryy_Wc5o" }] },
-                { rank: 5, name: "Theory of Everything 2", author: "RobTop", points: 175, type: "main", verification: "https://www.youtube.com/watch?v=1YI4oUUiV80", records: [] },
-                { rank: 6, name: "Blackfire Backfire", author: "kira9999", points: 170, type: "main", verification: "https://www.youtube.com/watch?v=2h1FgtfaP1k", records: [] },
-                { rank: 7, name: "Darkstep", author: "Alex", points: 165, type: "main", verification: "https://www.youtube.com/watch?v=M7h8FchVXLA", records: [] },
-                { rank: 8, name: "Unnerfed nouement", author: "Stetkos", points: 160, type: "main", verification: "#", records: [] },
-                { rank: 9, name: "Clubstep", author: "RobTop", points: 155, type: "main", verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [{ user: "Stetkos", percent: 100, link: "#" }] },
-                { rank: 10, name: "Speed Racer", author: "ZenthicAlpha", points: 150, type: "main", verification: "https://www.youtube.com/watch?v=R8RsJVKKd8w", records: [] },
-                { rank: 11, name: "nouement", author: "Stetkos", points: 145, type: "main", verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [] },
-                
-                // --- EXTENDED LIST (Normální písmo a o něco světlejší černo/šedá) ---
-                { rank: 12, name: "Electro Rand", author: "Gwmadboy", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=MZYw7jL9BnQ", records: [] },
-                { rank: 13, name: "Maymory", author: "ItzKiba", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=VIGXsCeGy3M&t=18s", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
-                { rank: 14, name: "Theory of Every V2", author: "Neptune", points: 135, type: "extended", verification: "https://www.youtube.com/watch?v=EnHHIR7DX1E", records: [] },
-                { rank: 15, name: "Clutterfunk V2", author: "Neptune", points: 130, type: "extended", verification: "https://www.youtube.com/watch?v=Kkrp9G-vYeE", records: [{ user: "trumandigma", percent: 100, link: "https://www.youtube.com/watch?v=2kE93FgLRcs" }] },
-                { rank: 16, name: "Electroman Adventures V2", author: "Neptune", points: 125, type: "extended", verification: "https://www.youtube.com/watch?v=s40FsZS-bec", records: [] },
-                { rank: 17, name: "Electrodynamix", author: "RobTop", points: 120, type: "extended", verification: "https://www.youtube.com/watch?v=bXH5zDZtb-Y", records: [] },
-                { rank: 18, name: "iSpyWithMyLittleEye", author: "Voxicat", points: 115, type: "extended", verification: "https://www.youtube.com/watch?v=Ow7nDnZTbDw", records: [] },
-                { rank: 19, name: "Crescendo", author: "Serponge", points: 110, type: "extended", verification: "https://www.youtube.com/watch?v=JSAoUfTR49Y", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
-                { rank: 20, name: "m tolot", author: "Stetkos", points: 105, type: "extended", verification: "#", records: [] },
-                { rank: 21, name: "xStep V2", author: "Neptune", points: 100, type: "extended", verification: "https://www.youtube.com/watch?v=K9rBb0HVvMg", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                // --- MAIN LIST ---
+                { rank: 1, name: "Verity", author: "Serponge", verifier: "trumandigma", points: 200, type: "main", verification: "p15w9mb2eac", records: [] },
+                { rank: 2, name: "Skeletal Shenanigans", author: "YoReid", verifier: "trumandigma", points: 195, type: "main", verification: "mgzTHUKatQo", records: [] },
+                { rank: 3, name: "B", author: "MotleyOrc", verifier: "trumandigma", points: 190, type: "main", verification: "F2Y0SOVWoC4", records: [] },
+                { rank: 4, name: "Deadlocked", author: "RobTop", verifier: "RobTop", points: 180, type: "main", verification: "Uly1hr3KJPA", records: [ { user: "Stetkos", percent: 79, link: "8Iryy_McSo" } ] },
+                { rank: 5, name: "Theory of Everything 2", author: "RobTop", verifier: "RobTop", points: 175, type: "main", verification: "IYI4ouUIV80", records: [] },
+                { rank: 6, name: "Blackfire Backfire", author: "kira9999", verifier: "", points: 170, type: "main", verification: "2h1fGtfap1k", records: [] },
+                { rank: 7, name: "Darkstep", author: "Alex", verifier: "", points: 165, type: "main", verification: "M7n8FchVXLA", records: [] },
+                { rank: 8, name: "Unnamed noument", author: "Stetkos", verifier: "Stetkos", points: 160, type: "main", verification: "#", records: [] },
+                { rank: 9, name: "Clubstep", author: "RobTop", verifier: "", points: 155, type: "main", verification: "Gok55hDxxg4", records: [ { user: "Stetkos", percent: 100, link: "#" } ] },
+                { rank: 10, name: "Speed Racer", author: "Zenthicalpha", verifier: "", points: 150, type: "main", verification: "R8RsJVKKd8w", records: [] },
+                { rank: 11, name: "Noument", author: "Stetkos", verifier: "Stetkos", points: 145, type: "main", verification: "w_rqtk3c1pE", records: [] },
 
-                // --- LEGACY LIST (Bez čísel, nápis Legacy a text do šeda) ---
-                { rank: 22, name: "Shiver", author: "SpKale", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 23, name: "Phjork", author: "Cerufiffy", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 24, name: "Demon Forest", author: "Ketis", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 25, name: "Demon Mixed", author: "RealOggy", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 26, name: "Hexagon Force", author: "RobTop", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 27, name: "Platinum Adventure", author: "Jerry4", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 28, name: "The Nightmare", author: "Jax", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 29, name: "The Lightning Road", author: "Timeless Real", points: 0, type: "legacy", verification: "", records: [] }
+                // --- EXTENDED LIST ---
+                { rank: 12, name: "Electro Rand", author: "GmwadBoy", verifier: "", points: 140, type: "extended", verification: "H2Ya7jL9BnQ", records: [] },
+                { rank: 13, name: "Phjork", author: "ItsKiba", verifier: "", points: 140, type: "extended", verification: "VIGXceGyJ_M", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
+                { rank: 14, name: "Theory of Every V2", author: "Neptune", verifier: "", points: 135, type: "extended", verification: "EHHIdR7DX1E", records: [] },
+                { rank: 15, name: "Clutterfunk V2", author: "Neptune", verifier: "", points: 130, type: "extended", verification: "Kkrp9G-vYEE", records: [ { user: "trumandigma", percent: 100, link: "2KE9S_FgCRs" } ] },
+                { rank: 16, name: "Electroman Adventures V2", author: "Neptune", verifier: "", points: 125, type: "extended", verification: "s4OFSZs-bec", records: [] },
+                { rank: 17, name: "Electrodynamix", author: "RobTop", verifier: "", points: 120, type: "extended", verification: "bXh5zDZb-Y", records: [] },
+                { rank: 18, name: "iSpyWithMyLittleEye", author: "Voxicait", verifier: "", points: 115, type: "extended", verification: "Qw7NDnZTDw", records: [] },
+                { rank: 19, name: "Crescendo", author: "Serponge", verifier: "", points: 110, type: "extended", verification: "1SAOuFTR49Y", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
+                { rank: 20, name: "m tolot", author: "Stetkos", verifier: "Stetkos", points: 105, type: "extended", verification: "#", records: [] },
+                { rank: 21, name: "xStep V2", author: "Neptune", verifier: "", points: 100, type: "extended", verification: "k9RbBKhVMfM", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
+
+                // --- LEGACY LIST ---
+                { rank: 22, name: "Shiver", author: "SpKale", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 23, name: "Phjork", author: "Cerufiffy", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 24, name: "Demon Forest", author: "Ketis", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 25, name: "Demon Mixed", author: "RealOggy", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 26, name: "Hexagon Force", author: "RobTop", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 27, name: "Platinum Adventure", author: "Jerry4", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 28, name: "The Nightmare", author: "Jax", verifier: "", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 29, name: "The Lightning Road", author: "Timeless Real", verifier: "", points: 0, type: "legacy", verification: "", records: [] }
             ]
         };
     },

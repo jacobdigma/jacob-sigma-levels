@@ -67,7 +67,8 @@ export default {
                     <div v-else style="line-height: 2.2; text-align: center; color: #000000; word-wrap: break-word; padding: 0 10px;">
                         <template v-for="(p, idx) in entry.progress">
                             <span style="display: inline-block;">
-                                <a :href="p.link" target="_blank" :style="getLevelStyle(p.type)">{{ p.level }} ({{ p.percent }}%)</a> 
+                            <a :href="p.link" target="_blank" :style="{ color: '#000000', fontStyle: 'normal', textDecoration: 'none', fontSize: '0.95rem', fontWeight: p.level.toLowerCase().includes('deadlocked') || p.level.toLowerCase().includes('verity') || p.level.toLowerCase().includes('skeletal') || p.level.toLowerCase().includes('b ') || p.level.toLowerCase().includes('theory') || p.level.toLowerCase().includes('blackfire') || p.level.toLowerCase().includes('darkstep') || p.level.toLowerCase().includes('unnamed') || p.level.toLowerCase().includes('clubstep') || p.level.toLowerCase().includes('speed') || p.level.toLowerCase().includes('noument') ? 'bold' : 'normal' }">{{ p.level }} ({{ p.percent }}%)</a>
+ 
                             </span>
                             <span v-if="idx < entry.progress.length - 1" style="color: #333; margin: 0 6px;"> - </span>
                         </template>

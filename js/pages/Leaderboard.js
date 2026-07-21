@@ -99,11 +99,9 @@ export default {
             );
         }
     },
-    mounted() {
-        // Naimportujeme si živý seznam levelů z List.js komponenty
+        mounted() {
         const levels = list.data().list;
         
-        // Spustíme ten stejný bodový výpočet jako v List.js, abychom měli přesná a aktuální data
         const activeLevels = levels.filter(l => l.type === 'main' || l.type === 'extended');
         const totalActive = activeLevels.length;
         levels.forEach(level => {
@@ -111,26 +109,29 @@ export default {
                 level.points = 0;
             } else {
                 const position = activeLevels.indexOf(level);
-                const finalProgressPoints = Math.max(0, currentPercent - gap);
+                const calculatedPoints = totalActive > 1 ? 200 - (position * (100 / (totalActive - 1))) : 200;
                 level.points = Math.round(calculatedPoints);
             }
         });
 
-        // Vytvoříme si mapu pro shromažďování dat o hráčích
         const playersMap = {};
 
-        // Funkce, která bezpečně přidá nebo najde hráče v mapě
         const getOrCreatePlayer = (name) => {
-            const lowerName = name.toLowerCase();
+            let displayName = name;
+            if (name.toLowerCase() === 'earl12') {
+                displayName = 'stetkos';
+            }
+            
+            const lowerName = displayName.toLowerCase();
             if (!playersMap[lowerName]) {
                 playersMap[lowerName] = {
-                    name: name, // Zachováme původní velikost písmen
+                    name: displayName,
                     total: 0,
                     mainCount: 0,
                     extendedCount: 0,
                     legacyCount: 0,
                     hardest: "None",
-                    hardestRank: 9999, // Pomocná hodnota pro výpočet nejtěžšího démona
+                    hardestRank: 9999,
                     demons: [],
                     progress: []
                 };
@@ -138,18 +139,14 @@ export default {
             return playersMap[lowerName];
         };
 
-        // Projdeme všechny levely z List.js a rozdělíme body, verifikace a splnění
-               // Projdeme všechny levely z List.js a rozdělíme body, verifikace a splnění
-        levels.forEach(level => {
-            // Seznam povolených reálných hráčů pro žebříček
-            const allowedPlayers = ['trumandigma', 'stetkos', 'earl12'];
+        const allowedPlayers = ['trumandigma', 'stetkos', 'earl12'];
 
+        levels.forEach(level => {
             // 1. KONTROLA VERIFIKÁTORA
             if (level.verifier && level.verifier.trim() !== "") {
                 if (allowedPlayers.includes(level.verifier.toLowerCase())) {
                     const player = getOrCreatePlayer(level.verifier);
                     
-                    // Přičteme body za verifikaci
                     player.total += level.points;
                     
                     if (level.type === 'main') player.mainCount++;
@@ -161,7 +158,6 @@ export default {
                         player.hardestRank = level.rank;
                     }
 
-                    // Přidáme do seznamu dokončených
                     const alreadyAdded = player.demons.some(d => d.level === level.name);
                     if (!alreadyAdded) {
                         player.demons.push({
@@ -173,7 +169,6 @@ export default {
                     }
                 }
             }
-
 
             // 2. KONTROLA REKORDŮ
             if (level.records && level.records.length > 0) {
@@ -204,11 +199,9 @@ export default {
                                 });
                             }
                         } else {
-                            // --- PROGRESS SYSTÉM PODLE TVÉHO VZORCE ---
+                            // Definice proměnných pro progress systém - TADY TO CHYBĚLO!
                             const currentPercent = parseInt(record.percent) || 0;
                             const gap = 200 - level.points;
-                            
-                            // Se závorkou ) na správném místě!
                             const finalProgressPoints = Math.max(0, currentPercent - gap);
                             
                             player.total += finalProgressPoints;
@@ -229,6 +222,7 @@ export default {
             return player;
         });
     },
+
     methods: {
         getLevelStyle(type) {
             if (type === 'main') {

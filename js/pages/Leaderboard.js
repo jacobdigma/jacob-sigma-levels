@@ -141,8 +141,18 @@ export default {
         // Projdeme všechny levely z List.js a rozdělíme body, verifikace a splnění
         levels.forEach(level => {
             // 1. KONTROLA VERIFIKÁTORA
-            if (level.author) {
-                const player = getOrCreatePlayer(level.author);
+                   // Projdeme všechny levely z List.js a rozdělíme body, verifikace a splnění
+            // Seznam reálných hráčů, kteří jako jediní mohou dostávat body za verifikaci
+            const allowedPlayers = ['trumandigma', 'stetkos']; 
+
+            // 1. KONTROLA VERIFIKÁTORA
+            if (level.verifier && level.verifier.trim() !== "") {
+                // Pokud verifikátor NENÍ na seznamu reálných hráčů, ignorujeme ho a nedáme mu body
+                if (!allowedPlayers.includes(level.verifier.toLowerCase())) {
+                    return; 
+                }
+
+                const player = getOrCreatePlayer(level.verifier);
                 
                 player.total += level.points;
                 
@@ -155,7 +165,6 @@ export default {
                     player.hardestRank = level.rank;
                 }
 
-                // TADY JE ZMĚNA: isVerified dáváme natvrdo na false, aby se štítek v HTML nikdy nezobrazil
                 player.demons.push({
                     level: level.name,
                     link: level.verification || "#",

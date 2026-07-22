@@ -59,10 +59,13 @@ export default {
             <!-- PROSTŘEDNÍ PANEL: Opravený pro dynamická videa a rekordy -->
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
                 <div v-if="entry">
-                    <div style="text-align: center; margin-bottom: 25px;">
+                                        <div style="text-align: center; margin-bottom: 25px;">
                         <h1 style="color: #000000; font-size: 2.5rem; margin: 0 0 5px 0; font-weight: 800;">{{ entry.name }}</h1>
-                        <p style="color: #65676b; margin: 0; font-size: 1.1rem; font-weight: bold;">by {{ entry.author || 'Unknown' }}</p>
+                        <p style="color: #65676b; margin: 0; font-size: 1.1rem; font-weight: bold;">by {{ entry.author }}</p>
+                        <!-- TENTO NOVÝ ŘÁDEK ZOBRAZÍ VERIFIKÁTORA -->
+                        <p v-if="entry.verifier" style="color: #16a34a; margin: 3px 0 0 0; font-size: 1rem; font-weight: 700; text-transform: lowercase; font-style: italic;">verified by {{ entry.verifier }}</p>
                     </div>
+
 
                     <!-- REALNÉ YOUTUBE VIDEO ZE SOUBORU LEVELŮ -->
                     <div v-if="entry.verification && entry.verification !== '#'" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 8px; margin-bottom: 25px;">

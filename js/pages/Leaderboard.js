@@ -194,7 +194,7 @@ export default {
                             if if (level.rank < player.hardestRank) {
                                 player.hardest = level.name;
                                 player.hardestRank = level.rank;
-                            }
+                            },
 
                             const alreadyAdded = player.demons.some(d => d.level === level.name);
                             if (!alreadyAdded) {

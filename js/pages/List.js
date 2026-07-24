@@ -111,17 +111,17 @@ export default {
             search: '',
             list: [
                 // --- MAIN LIST ---
-                { rank: 1, name: "Verity", author: "Serponge", verifier: "trumandigma", points: 200, type: "main", verification: "https://www.youtube.com/watch?v=dmD8T5zht7A", records: [] },
-                { rank: 2, name: "Skeletal Shenanigans", author: "YoReid", verifier: "trumandigma", points: 195, type: "main", verification: "https://www.youtube.com/watch?v=kO205r4sZKM", records: [] },
-                { rank: 3, name: "B", author: "MotleyOrc", verifier: "trumandigma", points: 190, type: "main", verification: "https://www.youtube.com/watch?v=sjmc5HaGrYc", records: [] },
-                { rank: 4, name: "Deadlocked", author: "RobTop", verifier: "trumandigma", points: 180, type: "main", verification: "https://www.youtube.com/watch?v=reZj2Xbt05Q", records: [ { user: "Earl12", percent: 79, link: "https://www.youtube.com/watch?v=81Iryy_Wc5o" } ] },
-                { rank: 5, name: "Theory of Everything 2", author: "RobTop", verifier: "trumandigma", points: 175, type: "main", verification: "https://www.youtube.com/watch?v=medoq_Znhaw", records: [] },
-                { rank: 6, name: "Blackfire Backfire", author: "kira9999", verifier: "trumandigma", points: 170, type: "main", verification: "https://www.youtube.com/watch?v=2h1FgtfaP1k", records: [] },
-                { rank: 7, name: "Darkstep", author: "Alex", verifier: "trumandigma", points: 165, type: "main", verification: "https://www.youtube.com/watch?v=6cFZYLraEJs", records: [] },
-                { rank: 8, name: "Unnerfed noument", author: "Stetkos", verifier: "trumandigma", points: 160, type: "main", verification: "#", records: [] },
-                { rank: 9, name: "Clubstep", author: "RobTop", verifier: "trumandigma", points: 155, type: "main", verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [ { user: "Earl12", percent: 100, link: "#" } ] },
-                { rank: 10, name: "Speed Racer", author: "Zenthicalpha", verifier: "trumandigma", points: 150, type: "main", verification: "https://www.youtube.com/watch?v=R8RsJVKKd8w", records: [] },
-                { rank: 11, name: "Noument", author: "Earl12", verifier: "Earl12", points: 145, type: "main", verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [] },
+                { rank: 1, name: "Verity", author: "Serponge", verifier: "trumandigma", points: 200, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=dmD8T5zht7A", records: [] },
+                { rank: 2, name: "Skeletal Shenanigans", author: "YoReid", verifier: "trumandigma", points: 195, type: "main", minimum: 64, verification: "https://www.youtube.com/watch?v=kO205r4sZKM", records: [] },
+                { rank: 3, name: "B", author: "MotleyOrc", verifier: "trumandigma", points: 190, type: "main", minimum: 61, verification: "https://www.youtube.com/watch?v=sjmc5HaGrYc", records: [] },
+                { rank: 4, name: "Deadlocked", author: "RobTop", verifier: "trumandigma", points: 180, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=reZj2Xbt05Q", records: [ { user: "Earl12", percent: 79, link: "https://www.youtube.com/watch?v=81Iryy_Wc5o" } ] },
+                { rank: 5, name: "Theory of Everything 2", author: "RobTop", verifier: "trumandigma", points: 175, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=medoq_Znhaw", records: [] },
+                { rank: 6, name: "Blackfire Backfire", author: "kira9999", verifier: "trumandigma", points: 170, type: "main", minimum: 69, verification: "https://www.youtube.com/watch?v=2h1FgtfaP1k", records: [] },
+                { rank: 7, name: "Darkstep", author: "Alex", verifier: "trumandigma", points: 165, type: "main", minimum: 70, verification: "https://www.youtube.com/watch?v=6cFZYLraEJs", records: [] },
+                { rank: 8, name: "Unnerfed noument", author: "Stetkos", verifier: "trumandigma", points: 160, type: "main", minimum: 75, verification: "#", records: [] },
+                { rank: 9, name: "Clubstep", author: "RobTop", verifier: "trumandigma", points: 155, type: "main", minimum: 78, verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [ { user: "Earl12", percent: 100, link: "#" } ] },
+                { rank: 10, name: "Speed Racer", author: "Zenthicalpha", verifier: "trumandigma", points: 150, type: "main", minimum: 71, verification: "https://www.youtube.com/watch?v=R8RsJVKKd8w", records: [] },
+                { rank: 11, name: "Noument", author: "Earl12", verifier: "Earl12", points: 145, type: "main", minimum: 75, verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [] },
 
                 // --- EXTENDED LIST ---
                 { rank: 12, name: "Electro Rand", author: "GmwadBoy", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=MZYw7jL9BnQ", records: [] },

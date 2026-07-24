@@ -85,7 +85,7 @@ export default {
                     </div>
 
                     <!-- REKORDY -->
-                    <h2 style="color: #000000; font-size: 1.6rem; margin: 25px 0 15px 0; font-weight: 700;">Records {{ entry.type === 'main' && entry.minimum ? '(' + entry.minimum + '%+)' : '' }}</h2>
+                    <h2 style="color: #000000; font-size: 1.6rem; margin: 25px 0 15px 0; font-weight: 700;">Records {{ entry.type === 'main' && entry.minimum ? '(' + entry.minimum + '%)' : '' }}</h2>
                     <div v-if="!entry.records || entry.records.length === 0" style="color: #65676b; font-style: italic;">None</div>
                     <div v-else style="display: flex; flex-direction: column; gap: 10px;">
                         <div v-for="record in entry.records" :key="record.user" style="display: flex; justify-content: space-between; padding: 12px 15px; background: #f8f9fa; border: 1px solid #e1e4e8; border-radius: 4px; align-items: center;">

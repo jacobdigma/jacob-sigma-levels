@@ -124,7 +124,7 @@ export default {
                 { rank: 11, name: "Unnerfed noument", author: "Stetkos", verifier: "trumandigma", points: 160, type: "main", minimum: 75, verification: "#", records: [{ user: "Earl12", percent: 78, link: "" }] },
 
                 // --- EXTENDED LIST ---
-                { rank: 12, name: "Noument", author: "Earl12", verifier: "Earl12", points: 145, type: "main", minimum: 75, verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [] },
+                { rank: 12, name: "Noument", author: "Earl12", verifier: "Earl12", points: 145, type: "extended", minimum: 75, verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [] },
                 { rank: 13, name: "Electro Rand", author: "GmwadBoy", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=MZYw7jL9BnQ", records: [] },
                 { rank: 14, name: "Maymory", author: "ItsKiba", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=EKP5rGdOf_o", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
                 { rank: 15, name: "Theory of Every V2", author: "Neptune", verifier: "Earl12", points: 135, type: "extended", verification: "https://www.youtube.com/watch?v=d39W_TzuGLs", records: [] },
@@ -134,9 +134,9 @@ export default {
                 { rank: 19, name: "iSpyWithMyLittleEye", author: "Voxicat", verifier: "trumandigma", points: 115, type: "extended", verification: "https://www.youtube.com/watch?v=Ow7nDnZTbDw", records: [] },
                 { rank: 20, name: "Crescendo", author: "MasK463", verifier: "Earl12", points: 110, type: "extended", verification: "https://www.youtube.com/watch?v=ndx5WJv-P3E", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
                 { rank: 21, name: "m tolot", author: "Earl12", verifier: "Earl12", points: 105, type: "extended", verification: "#", records: [] },
-                { rank: 22, name: "xStep V2", author: "Neptune", verifier: "Earl12", points: 100, type: "extended", verification: "https://www.youtube.com/watch?v=K9rBb0HVvMg", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
 
                 // --- LEGACY LIST ---
+                { rank: 22, name: "xStep V2", author: "Neptune", verifier: "Earl12", points: 0, type: "legacy", verification: "https://www.youtube.com/watch?v=K9rBb0HVvMg", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
                 { rank: 23, name: "Shiver", author: "SpKale", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
                 { rank: 24, name: "Phjork", author: "Cerufiffy", verifier: "trumandigma", points: 0, type: "legacy", verification: "", records: [{ user: "Earl12", percent: 100, link: "#" }] },
                 { rank: 25, name: "Demon Forest", author: "Ketis", verifier: "trumandigma", points: 0, type: "legacy", verification: "", records: [{ user: "Earl12", percent: 100, link: "#" }] },

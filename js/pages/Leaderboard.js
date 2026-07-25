@@ -268,7 +268,7 @@ export default {
             return player;
         });
 };
-     methods: {
+    methods: {
         getLevelStyle(type) {
             if (type === 'main') {
                 return {

@@ -263,7 +263,7 @@ export default {
                 }
             });
         });
-
+    mounted() {
         this.rawLeaderboard = Object.values(playersMap).map(player => {
             player.stats = `${player.mainCount} Main, ${player.extendedCount} Extended, ${player.legacyCount} Legacy`;
             return player;

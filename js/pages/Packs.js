@@ -34,19 +34,25 @@ export default {
             packs: [
                 {
                     name: "Neptune Pack 1",
-                    color: "#0070ff",
-                    points: 50,
+                    color: "#CD7F32",
+                    points: 25,
                     levels: ["xStep V2", "Clutterfunk V2", "Electroman Adventures V2"]
                 },
                 {
                     name: "Digma Pack",
-                    color: "#ff0000",
-                    points: 75,
+                    color: "#C0C0C0",
+                    points: 50,
                     levels: ["m tolot", "Speed Racer", "Blackfire Backfire"]
                 },
                 {
+                    name: "Nouement Pack",
+                    color: "#C0C0C0",
+                    points: 75,
+                    levels: ["Nouement", "Unnerfed Nouement", "Hellishment"]
+                },
+                {
                     name: "RobTop Pack",
-                    color: "#00ffcc",
+                    color: "#FFD700",
                     points: 100,
                     levels: ["Deadlocked", "Theory of Everything 2", "Clubstep"]
                 }

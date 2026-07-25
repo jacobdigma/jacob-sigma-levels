@@ -53,9 +53,12 @@ export default {
                     <h2 style="color: #000000; font-size: 1.6rem; margin: 25px 0 15px 0; text-align: center; font-weight: 700;">Demons completed</h2>
                     <div v-if="entry.demons.length === 0" style="color: #65676b; font-style: italic; text-align: center;">None</div>
                     <div v-else style="line-height: 2.2; text-align: center; color: #000000; word-wrap: break-word; padding: 0 10px;">
-                       <span v-for="(demon, idx) in [...entry.demons].sort((a, b) => a.level.localeCompare(b.level))" :key="idx" style="display: inline-block; margin-bottom: 5px;">
-    <a :href="demon.link" target="_blank" :style="getLevelStyle(demon.type)">{{ demon.level }}</a>
-</span>
+                        <span v-for="(demon, idx) in [...entry.demons].sort((a, b) => a.level.localeCompare(b.level))" :key="idx" style="display: inline-block; margin-bottom: 5px;">
+                            <a :href="demon.link" target="_blank" :style="getLevelStyle(demon.type)">{{ demon.level }}</a>
+                            <!-- TENTO ŘÁDEK PŘIDÁ POMPOUČKU S MEZERAMI ZA KAŽDÝ LEVEL KROMĚ POSLEDNÍHO -->
+                            <span v-if="idx < entry.demons.length - 1" style="color: #65676b; margin: 0 8px;">-</span>
+                        </span>
+
 
                             </span>
                             <span v-if="idx < entry.demons.length - 1" style="color: #333; margin: 0 6px;"> - </span>

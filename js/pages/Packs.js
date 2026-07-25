@@ -62,7 +62,7 @@ export default {
         }
     },
     methods: {
-        getLevelRank(levelName) {
+                getLevelRank(levelName) {
             if (!this.listData || this.listData.length === 0 || !levelName) {
                 return "?";
             }
@@ -72,12 +72,11 @@ export default {
                 l.name && l.name.toLowerCase().trim() === levelName.toLowerCase().trim()
             );
 
-            // Pokud level najdeme a není to Legacy (který nemá rank), vrátíme jeho skutečnou pozici #
+            // Pokud level najdeme, zkontrolujeme jeho typ
             if (foundLevel) {
-                return foundLevel.type === 'legacy' ? '' : '' + foundLevel.rank;
+                // OPRAVA: Pokud je to Legacy, vrátíme slovo Legacy, jinak klasické číslo pozice #
+                return foundLevel.type === 'legacy' ? 'Legacy' : '' + foundLevel.rank;
             }
 
             return "?";
         }
-    }
-};

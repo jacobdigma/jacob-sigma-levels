@@ -74,7 +74,7 @@ export default {
 
             // Pokud level najdeme a není to Legacy (který nemá rank), vrátíme jeho skutečnou pozici #
             if (foundLevel) {
-                return foundLevel.type === 'legacy' ? '' : '#' + foundLevel.rank;
+                return foundLevel.type === 'legacy' ? '' : '' + foundLevel.rank;
             }
 
             return "?";

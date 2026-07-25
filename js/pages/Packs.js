@@ -39,12 +39,12 @@ export default {
                 },
                 {
                     name: "Noument Pack",
-                    color: "#C0C0C0",
+                    color: "#FFD700",
                     levels: ["Noument", "Unnerfed noument", "Hellishment"]
                 },
                 {
                     name: "RobTop Pack",
-                    color: "#FFD700",
+                    color: "#0000FF",
                     levels: ["Deadlocked", "Theory of Everything 2", "Clubstep"]
                 }
             ]

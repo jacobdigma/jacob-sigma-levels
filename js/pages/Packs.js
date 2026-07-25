@@ -10,11 +10,6 @@ export default {
                 <div v-for="pack in packs" :key="pack.name" class="pack-card" :style="{ borderLeft: '6px solid ' + pack.color }" style="background: #18191c; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
                     <h2 :style="{ color: pack.color }" style="font-size: 1.6rem; font-weight: 700; margin-top: 0; margin-bottom: 15px;">{{ pack.name }}</h2>
                     
-                    <div style="margin-bottom: 20px;">
-                        <span style="color: #8a8e94; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">Reward</span>
-                        <p style="font-size: 1.3rem; font-weight: 600; color: #00ffcc; margin: 2px 0 0 0;">+{{ pack.points }} points</p>
-                    </div>
-                    
                     <div>
                         <span style="color: #8a8e94; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;">Levels in Pack</span>
                         <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
@@ -33,71 +28,56 @@ export default {
             listData: [],
             packs: [
                 {
-                    name: "Neptune Pack 1",
+                    name: "Neptune pack 1",
                     color: "#CD7F32",
-                    points: 25,
                     levels: ["xStep V2", "Clutterfunk V2", "Electroman Adventures V2"]
                 },
                 {
                     name: "Digma Pack",
                     color: "#C0C0C0",
-                    points: 50,
                     levels: ["m tolot", "Speed Racer", "Blackfire Backfire"]
                 },
                 {
-                    name: "Nouement Pack",
+                    name: "Noument Pack",
                     color: "#C0C0C0",
-                    points: 75,
-                    levels: ["Nouement", "Unnerfed Nouement", "Hellishment"]
+                    levels: ["Noument", "Unnerfed noument", "Hellishment"]
                 },
                 {
                     name: "RobTop Pack",
                     color: "#FFD700",
-                    points: 100,
                     levels: ["Deadlocked", "Theory of Everything 2", "Clubstep"]
                 }
             ]
         };
     },
     async mounted() {
+        // Tímto si Packs vytáhnou aktuální a živý seznam levelů z List.js mozku aplikace
         try {
-            const res = await fetchList();
-            if (Array.isArray(res)) {
-                this.listData = res;
-            } else if (res && Array.isArray(res.list)) {
-                this.listData = res.list;
+            const listModule = await import('./List.js');
+            if (listModule && listModule.default) {
+                this.listData = listModule.default.data().list;
             }
         } catch (e) {
-            console.error(e);
+            console.error("Chyba při načítání Listu v Packs:", e);
         }
     },
     methods: {
         getLevelRank(levelName) {
-            if (!this.listData || this.listData.length === 0) {
-                return this.getBackupRank(levelName);
+            if (!this.listData || this.listData.length === 0 || !levelName) {
+                return "?";
             }
             
-            const index = this.listData.findIndex(l => {
-                if (!l) return false;
-                const nameToTest = typeof l === 'string' ? l : (l.name || l.level || '');
-                return nameToTest.toLowerCase().trim() === levelName.toLowerCase().trim();
-            });
-            
-            return index !== -1 ? index + 1 : this.getBackupRank(levelName);
-        },
-        getBackupRank(levelName) {
-            const backupRanks = {
-                "deadlocked": 3,
-                "theory of everything 2": 4,
-                "blackfire backfire": 5,
-                "speed racer": 8,
-                "clubstep": 7,
-                "electroman adventures v2": 11,
-                "xstep v2": 15,
-                "clutterfunk v2": 12,
-                "m tolot": 16
-            };
-            return backupRanks[levelName.toLowerCase().trim()] || "?";
+            // Najdeme v živém seznamu level se shodným názvem
+            const foundLevel = this.listData.find(l => 
+                l.name && l.name.toLowerCase().trim() === levelName.toLowerCase().trim()
+            );
+
+            // Pokud level najdeme a není to Legacy (který nemá rank), vrátíme jeho skutečnou pozici #
+            if (foundLevel) {
+                return foundLevel.type === 'legacy' ? '' : '#' + foundLevel.rank;
+            }
+
+            return "?";
         }
     }
 };

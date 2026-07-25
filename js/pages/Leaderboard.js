@@ -129,11 +129,9 @@ export default {
         const getOrCreatePlayer = (name) => {
             let displayName = name;
             
-            // Sjednocení na herní jméno Earl12
             if (name.toLowerCase() === 'stetkos') {
                 displayName = 'Earl12';
             }
-            // Sjednocení pro Krystofa
             if (name.toLowerCase() === 'krystof') {
                 displayName = 'Krystof';
             }
@@ -169,7 +167,7 @@ export default {
                     if (level.type === 'extended') player.extendedCount++;
                     if (level.type === 'legacy') player.legacyCount++;
 
-                   if (level.rank < player.hardestRank) {
+                    if (level.rank < player.hardestRank) {
                         player.hardest = level.name;
                         player.hardestRank = level.rank;
                     }
@@ -180,7 +178,7 @@ export default {
                             level: level.name,
                             link: level.verification || "#",
                             type: level.type,
-                            isVerified: false
+                            isVerified: true
                         });
                     }
                 }
@@ -200,7 +198,7 @@ export default {
                             if (level.type === 'extended') player.extendedCount++;
                             if (level.type === 'legacy') player.legacyCount++;
 
-                           if (level.rank < player.hardestRank) {
+                            if (level.rank < player.hardestRank) {
                                 player.hardest = level.name;
                                 player.hardestRank = level.rank;
                             }
@@ -214,29 +212,28 @@ export default {
                                     isVerified: false
                                 });
                             }
-                                               } else {
-                            // --- PROGRESS SYSTÉM PODLE TVÉHO VZORCE ---
+                        } else {
+                            // PROGRESS SYSTÉM
                             const currentPercent = parseInt(record.percent) || 0;
-                            
-                            // NOVÁ PODMÍNKA: Pokud je level z 'extended' listu, body za progress jsou natvrdo 0!
                             let finalProgressPoints = 0;
                             
                             if (level.type !== 'extended') {
-                                // Bodová mezera se počítá a odčítá jen pro Main List levely
                                 const gap = 200 - level.points;
                                 finalProgressPoints = Math.max(0, currentPercent - gap);
                             }
                             
-                            // Přičteme body (pro extended to přičte 0, takže nedostane nic)
                             player.total += finalProgressPoints;
 
-                            // Progress na webu přesto ukážeme, ať je vidět, že na tom levelu maká
                             player.progress.push({
                                 level: level.name,
                                 percent: currentPercent,
                                 link: record.link || "#"
                             });
                         }
+                    }
+                });
+            }
+        });
 
         // AUTOMATICKÁ KONTROLA COMPLETED PACKS
         if (packsModule && packsModule.data) {

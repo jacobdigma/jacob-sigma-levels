@@ -145,192 +145,61 @@ export default {
                 { rank: 28, name: "Platinum Adventure", author: "Jerry4", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" },{ user: "Krystof", percent: 100, link: "#" }] },
                 { rank: 29, name: "The Nightmare", author: "Jax", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
                 { rank: 30, name: "The Lightning Road", author: "Timeless Real", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] }
-            ]
+                       ]
         };
     },
     mounted() {
-        const levels = list.data().list;
-        
-        const activeLevels = levels.filter(l => l.type === 'main' || l.type === 'extended');
+        const activeLevels = this.list.filter(l => l.type === 'main' || l.type === 'extended');
         const totalActive = activeLevels.length;
-        levels.forEach(level => {
+
+        this.list.forEach(level => {
             if (level.type === 'legacy') {
                 level.points = 0;
             } else {
                 const position = activeLevels.indexOf(level);
-                const calculatedPoints = totalActive > 1 ? 200 - (position * (100 / (totalActive - 1))) : 200;
+                const calculatedPoints = totalActive > 1 
+                    ? 200 - (position * (100 / (totalActive - 1))) 
+                    : 200;
                 level.points = Math.round(calculatedPoints);
             }
         });
+    },
+    computed: {
+        filteredList() {
+            if (!this.search) {
+                let displayList = [];
+                let hasExtendedDivider = false;
+                let hasLegacyDivider = false;
 
-        const playersMap = {};
-
-        const getOrCreatePlayer = (name) => {
-            let displayName = name;
-            
-            // Sjednocení na herní jméno Earl12
-            if (name.toLowerCase() === 'stetkos') {
-                displayName = 'Earl12';
-            }
-            // Sjednocení pro Krystofa
-            if (name.toLowerCase() === 'krystof') {
-                displayName = 'Krystof';
-            }
-            
-            const lowerName = displayName.toLowerCase();
-            if (!playersMap[lowerName]) {
-                playersMap[lowerName] = {
-                    name: displayName,
-                    total: 0,
-                    mainCount: 0,
-                    extendedCount: 0,
-                    legacyCount: 0,
-                    hardest: "None",
-                    hardestRank: 9999,
-                    demons: [],
-                    progress: []
-                };
-            }
-            return playersMap[lowerName];
-        };
-
-        const allowedPlayers = ['trumandigma', 'earl12', 'stetkos', 'krystof'];
-
-        levels.forEach(level => {
-            // 1. KONTROLA VERIFIKÁTORA
-            if (level.verifier && level.verifier.trim() !== "") {
-                if (allowedPlayers.includes(level.verifier.toLowerCase())) {
-                    const player = getOrCreatePlayer(level.verifier);
-                    
-                    player.total += level.points;
-                    
-                    if (level.type === 'main') player.mainCount++;
-                    if (level.type === 'extended') player.extendedCount++;
-                    if (level.type === 'legacy') player.legacyCount++;
-
-                    if (level.rank < player.hardestRank) {
-                        player.hardest = level.name;
-                        player.hardestRank = level.rank;
+                this.list.forEach(level => {
+                    if (level.type === 'extended' && !hasExtendedDivider) {
+                        displayList.push({ isDivider: true, dividerText: "--- EXTENDED LIST ---" });
+                        hasExtendedDivider = true;
                     }
-
-                    const alreadyAdded = player.demons.some(d => d.level === level.name);
-                    if (!alreadyAdded) {
-                        player.demons.push({
-                            level: level.name,
-                            link: level.verification || "#",
-                            type: level.type,
-                            isVerified: true
-                        });
+                    if (level.type === 'legacy' && !hasLegacyDivider) {
+                        displayList.push({ isDivider: true, dividerText: "--- LEGACY LIST ---" });
+                        hasLegacyDivider = true;
                     }
-                }
-            }
-
-            // 2. KONTROLA REKORDŮ
-            if (level.records && level.records.length > 0) {
-                level.records.forEach(record => {
-                    if (!record.user) return;
-                    if (allowedPlayers.includes(record.user.toLowerCase())) {
-                        const player = getOrCreatePlayer(record.user);
-
-                        if (parseInt(record.percent) === 100) {
-                            player.total += level.points;
-                            
-                            if (level.type === 'main') player.mainCount++;
-                            if (level.type === 'extended') player.extendedCount++;
-                            if (level.type === 'legacy') player.legacyCount++;
-
-                            if (level.rank < player.hardestRank) {
-                                player.hardest = level.name;
-                                player.hardestRank = level.rank;
-                            }
-
-                            const alreadyAdded = player.demons.some(d => d.level === level.name);
-                            if (!alreadyAdded) {
-                                player.demons.push({
-                                    level: level.name,
-                                    link: record.link || "#",
-                                    type: level.type,
-                                    isVerified: false
-                                });
-                            }
-                        } else {
-                            // --- PROGRESS SYSTÉM PODLE TVÉHO VZORCE ---
-                            const currentPercent = parseInt(record.percent) || 0;
-                            
-                            // Pokud je level z 'extended' listu, body za progress jsou natvrdo 0!
-                            let finalProgressPoints = 0;
-                            
-                            if (level.type !== 'extended') {
-                                // Bodová mezera se počítá a odčítá jen pro Main List levely
-                                const gap = 200 - level.points;
-                                finalProgressPoints = Math.max(0, currentPercent - gap);
-                            }
-                            
-                            player.total += finalProgressPoints;
-
-                            player.progress.push({
-                                level: level.name,
-                                percent: currentPercent,
-                                link: record.link || "#"
-                            });
-                        }
-                    }
+                    displayList.push(level);
                 });
+                return displayList;
             }
-        });
-
-        // AUTOMATICKÁ KONTROLA COMPLETED PACKS
-        const allPacks = packsModule.data().packs;
-
-        Object.values(playersMap).forEach(player => {
-            player.completedPacks = [];
-            const completedLevelNames = player.demons.map(d => d.level.toLowerCase().trim());
-
-            allPacks.forEach(pack => {
-                const holdsAllLevels = pack.levels.every(packLevel => 
-                    completedLevelNames.includes(packLevel.toLowerCase().trim())
-                );
-
-                if (holdsAllLevels) {
-                    player.completedPacks.push({
-                        name: pack.name,
-                        color: pack.color || '#000000'
-                    });
-                }
-            });
-        });
-
-        this.rawLeaderboard = Object.values(playersMap).map(player => {
-            player.stats = `${player.mainCount} Main, ${player.extendedCount} Extended, ${player.legacyCount} Legacy`;
-            return player;
-        });
+            return this.list.filter(level => 
+                level.name && level.name.toLowerCase().includes(this.search.toLowerCase())
+            );
+        },
+        entry() {
+            return this.list[this.selected] || null;
+        }
     },
     methods: {
-        getLevelStyle(type) {
-            if (type === 'main') {
-                return {
-                    color: '#000000',
-                    fontWeight: 'bold',
-                    fontSize: '1.18rem',
-                    textDecoration: 'none'
-                };
-            }
-            if (type === 'legacy') {
-                return {
-                    color: '#9ca3af',
-                    fontWeight: 'normal',
-                    fontSize: '0.8rem',
-                    fontStyle: 'italic',
-                    textDecoration: 'none'
-                };
-            }
-            return {
-                color: '#000000',
-                fontWeight: 'normal',
-                fontSize: '0.9rem',
-                textDecoration: 'none'
-            };
+        getListTextColor(type) {
+            if (type === 'main') return '#000000';
+            if (type === 'extended') return '#4b5563';
+            if (type === 'legacy') return '#9ca3af';
+            return '#000000';
         }
     }
 };
+
 

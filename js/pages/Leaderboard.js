@@ -1,5 +1,6 @@
 import Spinner from '../components/Spinner.js';
-import list from './List.js'; // <-- TENTO ŘÁDEK SEM PŘIDEJ!
+import list from './List.js';
+import packsModule from './Packs.js';
 
 export default {
     components: { Spinner },
@@ -230,6 +231,32 @@ export default {
                     }
                 });
             }
+        });
+
+                // Naimportujeme si složení balíčků ze souboru Packs.js
+        const allPacks = packsModule.data().packs;
+
+        // Projdeme všechny vygenerované hráče a zkontrolujeme jejich balíčky
+        Object.values(playersMap).forEach(player => {
+            player.completedPacks = [];
+            
+            // Vytvoříme si seznam všech čistých názvů levelů, které hráč kdy splnil (beatnul nebo verifikoval)
+            const completedLevelNames = player.demons.map(d => d.level.toLowerCase().trim());
+
+            allPacks.forEach(pack => {
+                // Zkontrolujeme, zda seznam splněných levelů hráče obsahuje úplně všechny levely z tohoto balíčku
+                const holdsAllLevels = pack.levels.every(packLevel => 
+                    completedLevelNames.includes(packLevel.toLowerCase().trim())
+                );
+
+                // Pokud ano, balíček je kompletní a připíšeme mu ho s jeho barvou!
+                if (holdsAllLevels) {
+                    player.completedPacks.push({
+                        name: pack.name,
+                        color: pack.color || '#000000'
+                    });
+                }
+            });
         });
 
         this.rawLeaderboard = Object.values(playersMap).map(player => {

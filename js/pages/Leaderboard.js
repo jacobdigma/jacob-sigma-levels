@@ -263,12 +263,12 @@ export default {
                 }
             });
         });
-        this.rawLeaderboard = Object.values(playersMap).map(player => {
+                this.rawLeaderboard = Object.values(playersMap).map(player => {
             player.stats = `${player.mainCount} Main, ${player.extendedCount} Extended, ${player.legacyCount} Legacy`;
             return player;
         });
     },
-                    
+   
     methods: {
         getLevelStyle(type) {
             if (type === 'main') {

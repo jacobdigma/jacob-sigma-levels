@@ -124,7 +124,7 @@ export default {
                 { rank: 11, name: "Unnerfed noument", author: "Stetkos", verifier: "trumandigma", points: 160, type: "main", minimum: 75, verification: "#", records: [{ user: "Earl12", percent: 78, link: "" }] },
 
                 // --- EXTENDED LIST ---
-                { rank: 12, name: "Noument", author: "Earl12", verifier: "Earl12", points: 145, type: "extended", minimum: 75, verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [{ user: "trumandigma", percent: 97, link: "#" }] },
+                { rank: 12, name: "Noument", author: "Earl12", verifier: "Earl12", points: 145, type: "extended", minimum: 75, verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [ { user: "trumandigma", percent: 97, link: "#" } ] },
                 { rank: 13, name: "Electro Rand", author: "GmwadBoy", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=MZYw7jL9BnQ", records: [] },
                 { rank: 14, name: "Maymory", author: "ItsKiba", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=EKP5rGdOf_o", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
                 { rank: 15, name: "Theory of Every V2", author: "Neptune", verifier: "Earl12", points: 135, type: "extended", verification: "https://www.youtube.com/watch?v=d39W_TzuGLs", records: [] },

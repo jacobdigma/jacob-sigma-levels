@@ -196,19 +196,28 @@ export default {
     },
        methods: {
         // TATO FUNKCE CHYBĚLA A SHAZOVALA CELÝ STRÁNKU ČERVENĚ:
-               embed(url) {
+                       embed(url) {
             if (!url || url === '#') return '';
+            
+            // Pokud už odkaz obsahuje správnou embed strukturu, rovnou ho pustíme dál
             if (url.includes('/embed/')) return url;
             
-            // Bezpečné vytažení 11místného ID videa z jakékoliv YouTube adresy
-            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-            const match = url.match(regExp);
-            
-            if (match && match[2] && match[2].length === 11) {
-                return 'https://youtube.com' + match[2];
+            // Pokud je to klasický odkaz z vyhledávače s "watch?v=", vytáhneme bezpečně ID videa
+            if (url.includes('watch?v=')) {
+                const id = url.split('watch?v=')[1].split('&')[0];
+                return 'https://youtube.com' + id;
             }
-            return url;
+            
+            // Pokud je to zkrácený odkaz "youtu.be/", vytáhneme ID videa odtud
+            if (url.includes('youtu.be/')) {
+                const id = url.split('youtu.be/')[1].split('?')[0];
+                return 'https://youtube.com' + id;
+            }
+            
+            // Pokud v datech zůstalo jen samotné čisté ID, složíme ho natvrdo
+            return 'https://youtube.com' + url;
         },
+
 
         getListTextColor(type) {
             if (type === 'main') return '#000000';

@@ -268,7 +268,6 @@ export default {
             return player;
         });
     },
-   
     methods: {
         getLevelStyle(type) {
             if (type === 'main') {

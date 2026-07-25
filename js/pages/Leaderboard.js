@@ -73,6 +73,14 @@ export default {
                             <span v-if="idx < entry.progress.length - 1" style="color: #333; margin: 0 6px;"> - </span>
                         </template>
                     </div>
+                                        <!-- PACKS COMPLETED SEKCE -->
+                    <h2 style="color: #000000; font-size: 1.6rem; margin: 25px 0 15px 0; font-weight: 700; text-align: center;">Packs Completed</h2>
+                    <div v-if="!entry.completedPacks || entry.completedPacks.length === 0" style="color: #65676b; font-style: italic; text-align: center;">None</div>
+                    <div v-else style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+                        <div v-for="pack in entry.completedPacks" :key="pack.name" :style="{ color: pack.color, fontWeight: 'bold', fontSize: '1.1rem' }">
+                            {{ pack.name }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>

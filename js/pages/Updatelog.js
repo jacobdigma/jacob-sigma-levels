@@ -17,6 +17,7 @@ export default {
                          <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Added more pack functions.</li>
                         <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Fixed not loading videos.</li>
                         <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Made an entirely new point counting system</li>
+                        <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Removed Roulette</li>
                     </ul>
                 </div>
                   

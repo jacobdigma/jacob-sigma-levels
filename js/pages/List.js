@@ -191,23 +191,30 @@ export default {
         }
     },
     methods: {
-        embed(url) {
+                embed(url) {
             if (!url || url === '#') return '';
+            
+            // Pokud už odkaz obsahuje správnou embed strukturu, rovnou ho pustíme dál
             if (url.includes('/embed/')) return url;
             
+            // Pojistka pro případ, že odkaz obsahuje watch?v= (včetně variant bez https)
             if (url.includes('watch?v=')) {
-                const parts = url.split('watch?v=');
-                const id = parts[1].split('&')[0];
+                const parts = url.split('watch?v=')[1];
+                const id = parts.split('&')[0];
                 return 'https://youtube.com' + id;
             }
+            
+            // Pojistka pro případ, že odkaz obsahuje youtu.be/ (včetně variant bez https)
             if (url.includes('youtu.be/')) {
-                const parts = url.split('youtu.be/');
-                const id = parts[1].split('?')[0];
+                const parts = url.split('youtu.be/')[1];
+                const id = parts.split('?')[0];
                 return 'https://youtube.com' + id;
             }
-            // TADY MUSÍ BÝT TO LOMÍTKO A EMBED:
-            return 'https://youtube.com' + url;
+            
+            // Pokud v datech zůstalo jen samotné čisté ID, složíme ho natvrdo
+            return 'https://youtube.com' + url.trim();
         },
+
         getListTextColor(type) {
             if (type === 'main') return '#000000';
             if (type === 'extended') return '#4b5563';

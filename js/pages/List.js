@@ -56,20 +56,18 @@ export default {
                     </template>
                 </div>
             </div>
-            <!-- PROSTŘEDNÍ PANEL: Opravený pro dynamická videa a rekordy -->
+                        <!-- PROSTŘEDNÍ PANEL: Videa, tvůrci a rekordy -->
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
                 <div v-if="entry">
-                                        <div style="text-align: center; margin-bottom: 25px;">
+                    <div style="text-align: center; margin-bottom: 25px;">
                         <h1 style="color: #000000; font-size: 2.5rem; margin: 0 0 5px 0; font-weight: 800;">{{ entry.name }}</h1>
                         <p style="color: #65676b; margin: 0; font-size: 1.1rem; font-weight: bold;">by {{ entry.author }}</p>
-                        <!-- TENTO NOVÝ ŘÁDEK ZOBRAZÍ VERIFIKÁTORA -->
                         <p v-if="entry.verifier" style="color: #16a34a; margin: 3px 0 0 0; font-size: 1rem; font-weight: 700; text-transform: lowercase; font-style: italic;">verified by {{ entry.verifier }}</p>
                     </div>
 
-
-                    <!-- REALNÉ YOUTUBE VIDEO ZE SOUBORU LEVELŮ -->
+                    <!-- PŘEHRÁVAČ VIDEA -->
                     <div v-if="entry.verification && entry.verification !== '#'" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 8px; margin-bottom: 25px;">
-                       <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" :src="entry.verification.includes('://youtube.com') ? entry.verification : 'https://www.://youtube.com' + (entry.verification.includes('v=') ? entry.verification.split('v=')[1].split('&')[0] : entry.verification.split('youtu.be/')[1].split('?')[0])" allowfullscreen></iframe>
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" :src="embed(entry.verification)" allowfullscreen></iframe>
                     </div>
 
                     <!-- TYP LISTU A BODY -->
@@ -77,20 +75,18 @@ export default {
                         <div>
                             <p style="color: #65676b; font-size: 0.85rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">List Tier</p>
                             <h3 style="color: #2563eb; margin: 0; font-size: 1.6rem; font-weight: 800; text-transform: uppercase;">{{ entry.type || 'Main' }} list</h3>
-
                         </div>
                         <div>
                             <p style="color: #65676b; font-size: 0.85rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Points</p>
                             <h3 style="color: #10b981; margin: 0; font-size: 1.6rem; font-weight: 800;">{{ entry.points }}</h3>
-
                         </div>
                     </div>
 
                     <!-- REKORDY -->
-                    <h2 style="color: #000000; font-size: 1.6rem; margin: 25px 0 15px 0; font-weight: 700;">Records {{ entry.type === 'main' && entry.minimum ? '(' + entry.minimum + '%)' : '' }}</h2>
-                    <div v-if="!entry.records || entry.records.length === 0" style="color: #65676b; font-style: italic;">None</div>
+                    <h2 style="color: #000000; font-size: 1.6rem; margin: 25px 0 15px 0; font-weight: 700;">Records {{ entry.type === 'main' && entry.minimum ? '(' + entry.minimum + '%+)' : '' }}</h2>
+                    <div v-if="!entry.records || entry.records.filter(r => entry.type === 'main' && entry.minimum ? parseInt(r.percent) >= entry.minimum : true).length === 0" style="color: #65676b; font-style: italic;">None</div>
                     <div v-else style="display: flex; flex-direction: column; gap: 10px;">
-                        <div v-for="record in entry.records" :key="record.user" style="display: flex; justify-content: space-between; padding: 12px 15px; background: #f8f9fa; border: 1px solid #e1e4e8; border-radius: 4px; align-items: center;">
+                        <div v-for="record in (entry.type === 'main' && entry.minimum ? entry.records.filter(r => parseInt(r.percent) >= entry.minimum) : entry.records)" :key="record.user" style="display: flex; justify-content: space-between; padding: 12px 15px; background: #f8f9fa; border: 1px solid #e1e4e8; border-radius: 4px; align-items: center;">
                             <div>
                                 <span style="font-weight: bold; color: #000;">{{ record.user }}</span>
                                 <span style="color: #65676b; margin-left: 10px;">({{ record.percent }}%)</span>
@@ -105,7 +101,7 @@ export default {
                 </div>
             </div>
 
-
+        </main>
     `,
     data() {
         return {
@@ -194,31 +190,23 @@ export default {
             return this.list[this.selected] || null;
         }
     },
-       methods: {
-        // TATO FUNKCE CHYBĚLA A SHAZOVALA CELÝ STRÁNKU ČERVENĚ:
-                       embed(url) {
+    methods: {
+        embed(url) {
             if (!url || url === '#') return '';
-            
-            // Pokud už odkaz obsahuje správnou embed strukturu, rovnou ho pustíme dál
             if (url.includes('/embed/')) return url;
             
-            // Pokud je to klasický odkaz z vyhledávače s "watch?v=", vytáhneme bezpečně ID videa
             if (url.includes('watch?v=')) {
-                const id = url.split('watch?v=')[1].split('&')[0];
+                const parts = url.split('watch?v=');
+                const id = parts[1].split('&')[0];
                 return 'https://youtube.com' + id;
             }
-            
-            // Pokud je to zkrácený odkaz "youtu.be/", vytáhneme ID videa odtud
             if (url.includes('youtu.be/')) {
-                const id = url.split('youtu.be/')[1].split('?')[0];
+                const parts = url.split('youtu.be/');
+                const id = parts[1].split('?')[0];
                 return 'https://youtube.com' + id;
             }
-            
-            // Pokud v datech zůstalo jen samotné čisté ID, složíme ho natvrdo
             return 'https://youtube.com' + url;
         },
-
-
         getListTextColor(type) {
             if (type === 'main') return '#000000';
             if (type === 'extended') return '#4b5563';

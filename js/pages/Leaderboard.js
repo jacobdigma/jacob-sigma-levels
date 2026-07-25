@@ -230,7 +230,9 @@ export default {
                             player.progress.push({
                                 level: level.name,
                                 percent: currentPercent,
-                                link: record.link || "#"
+                                link: record.link || "#",
+                                type: level.type // <-- TENTO ŘÁDEK SEM PŘIDEJ!
+
                             });
                         }
                     }

@@ -75,8 +75,9 @@ export default {
             // Pokud level najdeme, zkontrolujeme jeho typ
             if (foundLevel) {
                 // OPRAVA: Pokud je to Legacy, vrátíme slovo Legacy, jinak klasické číslo pozice #
-                return foundLevel.type === 'legacy' ? 'Legacy' : '#' + foundLevel.rank;
+                return foundLevel.type === 'legacy' ? 'Legacy' : '' + foundLevel.rank;
             }
 
             return "?";
         }
+}

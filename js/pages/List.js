@@ -196,10 +196,20 @@ export default {
     },
        methods: {
         // TATO FUNKCE CHYBĚLA A SHAZOVALA CELÝ STRÁNKU ČERVENĚ:
-        embed(url) {
-            if (!url) return '';
+               embed(url) {
+            if (!url || url === '#') return '';
+            if (url.includes('/embed/')) return url;
+            
+            // Bezpečné vytažení 11místného ID videa z jakékoliv YouTube adresy
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            
+            if (match && match[2] && match[2].length === 11) {
+                return 'https://youtube.com' + match[2];
+            }
             return url;
         },
+
         getListTextColor(type) {
             if (type === 'main') return '#000000';
             if (type === 'extended') return '#4b5563';

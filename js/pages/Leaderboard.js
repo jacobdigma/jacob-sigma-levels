@@ -269,8 +269,7 @@ export default {
             return player;
      });
    },
-                    // <--- Přidejte sem chybějící složenou závorku "}"                                      
-methods: {
+                                                   
         getLevelStyle(type) {
             if (type === 'main') {
                 return {

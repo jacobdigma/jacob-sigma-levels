@@ -205,6 +205,7 @@ export default {
                 const id = parts[1].split('?')[0];
                 return 'https://youtube.com' + id;
             }
+            // TADY MUSÍ BÝT TO LOMÍTKO A EMBED:
             return 'https://youtube.com' + url;
         },
         getListTextColor(type) {

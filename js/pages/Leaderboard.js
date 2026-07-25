@@ -238,36 +238,34 @@ export default {
                             });
                         }
 
-                // Naimportujeme si složení balíčků ze souboru Packs.js
-        const allPacks = packsModule.data().packs;
+        // AUTOMATICKÁ KONTROLA COMPLETED PACKS
+        if (packsModule && packsModule.data) {
+            const allPacks = packsModule.data().packs;
 
-        // Projdeme všechny vygenerované hráče a zkontrolujeme jejich balíčky
-        Object.values(playersMap).forEach(player => {
-            player.completedPacks = [];
-            
-            // Vytvoříme si seznam všech čistých názvů levelů, které hráč kdy splnil (beatnul nebo verifikoval)
-            const completedLevelNames = player.demons.map(d => d.level.toLowerCase().trim());
+            Object.values(playersMap).forEach(player => {
+                player.completedPacks = [];
+                const completedLevelNames = player.demons.map(d => d.level.toLowerCase().trim());
 
-            allPacks.forEach(pack => {
-                // Zkontrolujeme, zda seznam splněných levelů hráče obsahuje úplně všechny levely z tohoto balíčku
-                const holdsAllLevels = pack.levels.every(packLevel => 
-                    completedLevelNames.includes(packLevel.toLowerCase().trim())
-                );
+                allPacks.forEach(pack => {
+                    const holdsAllLevels = pack.levels.every(packLevel => 
+                        completedLevelNames.includes(packLevel.toLowerCase().trim())
+                    );
 
-                // Pokud ano, balíček je kompletní a připíšeme mu ho s jeho barvou!
-                if (holdsAllLevels) {
-                    player.completedPacks.push({
-                        name: pack.name,
-                        color: pack.color || '#000000'
-                    });
-                }
+                    if (holdsAllLevels) {
+                        player.completedPacks.push({
+                            name: pack.name,
+                            color: pack.color || '#000000'
+                        });
+                    }
+                });
             });
-        });
-          this.rawLeaderboard = Object.values(playersMap).map(player => {
+        }
+
+        this.rawLeaderboard = Object.values(playersMap).map(player => {
             player.stats = player.mainCount + " Main, " + player.extendedCount + " Extended, " + player.legacyCount + " Legacy";
             return player;
         });
-};
+    },
     methods: {
         getLevelStyle(type) {
             if (type === 'main') {

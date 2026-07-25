@@ -10,8 +10,8 @@ export default {
                 <!-- VERZE 2.1.2 -->
                 <div style="margin-bottom: 35px; text-align: left;">
                     <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
-                        <h2 style="font-size: 1.6rem; font-weight: 800; color: #000000; margin: 0;">Version 2.1.1</h2>
-                        <span style="font-size: 0.85rem; color: #9ca3af; font-weight: 600;">19. 07. 2026</span>
+                        <h2 style="font-size: 1.6rem; font-weight: 800; color: #000000; margin: 0;">Version 2.1.2</h2>
+                        <span style="font-size: 0.85rem; color: #9ca3af; font-weight: 600;">25. 07. 2026</span>
                     </div>
                     <ul style="list-style-type: none; padding-left: 0; margin: 0; line-height: 1.8; color: #374151; font-weight: 500;">
                          <li style="margin-bottom: 6px;"><span style="color: #4b5563; margin-right: 8px;">▪</span> Added more pack functions.</li>

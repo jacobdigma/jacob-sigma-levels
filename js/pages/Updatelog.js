@@ -3,7 +3,7 @@ export default {
         <main style="background: #f4f2f5; padding: 20px; min-height: 100vh; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; text-align: center; box-sizing: border-box;">
             
             <h1 style="font-size: 2.8rem; font-weight: 900; color: #000000; margin: 20px 0 5px 0; text-transform: uppercase; letter-spacing: -1px;">Update Log</h1>
-            <p style="color: #65676b; font-size: 1.1rem; font-weight: 700; margin-bottom: 5px;">JDL newest version: v2.1.1</p>
+            <p style="color: #65676b; font-size: 1.1rem; font-weight: 700; margin-bottom: 5px;">JDL newest version: v2.1.2</p>
 
             <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
                 

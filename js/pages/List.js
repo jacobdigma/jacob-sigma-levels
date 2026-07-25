@@ -119,12 +119,12 @@ export default {
                 { rank: 6, name: "Theory of Everything 2", author: "RobTop", verifier: "trumandigma", points: 175, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=medoq_Znhaw", records: [] },
                 { rank: 7, name: "Blackfire Backfire", author: "kira9999", verifier: "trumandigma", points: 170, type: "main", minimum: 69, verification: "https://www.youtube.com/watch?v=2h1FgtfaP1k", records: [] },
                 { rank: 8, name: "Darkstep", author: "Alex", verifier: "trumandigma", points: 165, type: "main", minimum: 70, verification: "https://www.youtube.com/watch?v=6cFZYLraEJs", records: [] },
-                { rank: 9, name: "Unnerfed noument", author: "Stetkos", verifier: "trumandigma", points: 160, type: "main", minimum: 75, verification: "#", records: [{ user: "Earl12", percent: 78, link: "" }] },
-                { rank: 10, name: "Clubstep", author: "RobTop", verifier: "trumandigma", points: 155, type: "main", minimum: 78, verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [ { user: "Earl12", percent: 100, link: "#" } ] },
-                { rank: 11, name: "Speed Racer", author: "Zenthicalpha", verifier: "trumandigma", points: 150, type: "main", minimum: 71, verification: "https://www.youtube.com/watch?v=R8RsJVKKd8w", records: [] },
-                { rank: 12, name: "Noument", author: "Earl12", verifier: "Earl12", points: 145, type: "main", minimum: 75, verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [] },
+                { rank: 9, name: "Clubstep", author: "RobTop", verifier: "trumandigma", points: 155, type: "main", minimum: 78, verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [ { user: "Earl12", percent: 100, link: "#" } ] },
+                { rank: 10, name: "Speed Racer", author: "Zenthicalpha", verifier: "trumandigma", points: 150, type: "main", minimum: 71, verification: "https://www.youtube.com/watch?v=R8RsJVKKd8w", records: [] },
+                { rank: 11, name: "Unnerfed noument", author: "Stetkos", verifier: "trumandigma", points: 160, type: "main", minimum: 75, verification: "#", records: [{ user: "Earl12", percent: 78, link: "" }] },
 
                 // --- EXTENDED LIST ---
+                { rank: 12, name: "Noument", author: "Earl12", verifier: "Earl12", points: 145, type: "main", minimum: 75, verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [] },
                 { rank: 13, name: "Electro Rand", author: "GmwadBoy", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=MZYw7jL9BnQ", records: [] },
                 { rank: 14, name: "Maymory", author: "ItsKiba", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=EKP5rGdOf_o", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
                 { rank: 15, name: "Theory of Every V2", author: "Neptune", verifier: "Earl12", points: 135, type: "extended", verification: "https://www.youtube.com/watch?v=d39W_TzuGLs", records: [] },

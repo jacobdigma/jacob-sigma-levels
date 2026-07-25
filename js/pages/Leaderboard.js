@@ -53,10 +53,9 @@ export default {
                     <h2 style="color: #000000; font-size: 1.6rem; margin: 25px 0 15px 0; text-align: center; font-weight: 700;">Demons completed</h2>
                     <div v-if="entry.demons.length === 0" style="color: #65676b; font-style: italic; text-align: center;">None</div>
                     <div v-else style="line-height: 2.2; text-align: center; color: #000000; word-wrap: break-word; padding: 0 10px;">
-                        <template v-for="(demon, idx) in [...entry.demons].sort((a, b) => a.level.localeCompare(b.level))">
-                            <span style="display: inline-block;">
-                        <a :href="demon.link" target="_blank" :style="getLevelStyle(demon.type)">{{ demon.level }}</a>
-                        <span style="color: #2563eb; font-size: 0.75rem; font-weight: 700; margin-left: 8px; background: #dbeafe; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: middle;">Completed</span>
+                       <span v-for="(demon, idx) in [...entry.demons].sort((a, b) => a.level.localeCompare(b.level))" :key="idx" style="display: inline-block; margin-bottom: 5px;">
+    <a :href="demon.link" target="_blank" :style="getLevelStyle(demon.type)">{{ demon.level }}</a>
+</span>
 
                             </span>
                             <span v-if="idx < entry.demons.length - 1" style="color: #333; margin: 0 6px;"> - </span>

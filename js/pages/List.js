@@ -122,7 +122,7 @@ export default {
                 { rank: 7, name: "Blackfire Backfire", author: "kira9999", verifier: "trumandigma", points: 170, type: "main", minimum: 69, verification: "https://www.youtube.com/watch?v=2h1FgtfaP1k", records: [] },
                 { rank: 8, name: "Darkstep", author: "Alex", verifier: "trumandigma", points: 165, type: "main", minimum: 70, verification: "https://www.youtube.com/watch?v=6cFZYLraEJs", records: [] },
                 { rank: 9, name: "Speed Racer", author: "Zenthicalpha", verifier: "trumandigma", points: 150, type: "main", minimum: 71, verification: "https://www.youtube.com/watch?v=R8RsJVKKd8w", records: [] },
-                { rank: 10, name: "IceScream", author: "DarnocBlue", verifier: "Earl12", points: 160, type: "main", minimum: 74, verification: "https://www.youtube.com/watch?v=2pSl4YVCILc", records: [] },
+                { rank: 10, name: "IceStream", author: "DarnocBlue", verifier: "Earl12", points: 160, type: "main", minimum: 74, verification: "https://www.youtube.com/watch?v=2pSl4YVCILc", records: [] },
                 { rank: 11, name: "Unnerfed noument", author: "Earl12", verifier: "trumandigma", points: 160, type: "main", minimum: 75, verification: "#", records: [{ user: "Earl12", percent: 78, link: "" }] },
                 { rank: 12, name: "Clubstep", author: "RobTop", verifier: "trumandigma", points: 155, type: "main", minimum: 78, verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [ { user: "Earl12", percent: 100, link: "#" } ] },
                 // --- EXTENDED LIST ---

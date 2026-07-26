@@ -201,18 +201,18 @@ export default {
             if (url.includes('watch?v=')) {
                 const parts = url.split('watch?v=')[1];
                 const id = parts.split('&')[0];
-                return 'https://www.youtube.com/watch?v=' + id;
+                return 'https://youtube.com' + id;
             }
             
             // Pojistka pro případ, že odkaz obsahuje youtu.be/ (včetně variant bez https)
             if (url.includes('youtu.be/')) {
                 const parts = url.split('youtu.be/')[1];
                 const id = parts.split('?')[0];
-                return 'https://www.youtube.com/watch?v=' + id;
+                return 'https://youtube.com' + id;
             }
             
             // Pokud v datech zůstalo jen samotné čisté ID, složíme ho natvrdo
-            return 'https://www.youtube.com/watch?v=' + url.trim();
+           return 'https://youtube.com' + url.trim();
         },
 
         getListTextColor(type) {

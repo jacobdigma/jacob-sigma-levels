@@ -116,7 +116,7 @@ export default {
                 { rank: 1, name: "Verity", author: "Serponge", verifier: "trumandigma", points: 200, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=dmD8T5zht7A", records: [] },
                 { rank: 2, name: "Skeletal Shenanigans", author: "YoReid", verifier: "trumandigma", points: 195, type: "main", minimum: 64, verification: "https://www.youtube.com/watch?v=kO205r4sZKM", records: [] },
                 { rank: 3, name: "B", author: "MotleyOrc", verifier: "trumandigma", points: 190, type: "main", minimum: 61, verification: "https://www.youtube.com/watch?v=sjmc5HaGrYc", records: [] },
-                { rank: 4, name: "Deadlocked", author: "RobTop", verifier: "trumandigma", points: 180, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=reZj2Xbt05Q", records: [ { user: "Earl12", percent: 79, link: "https://www.youtube.com/watch?v=81Iryy_Wc5o" } ] },
+                { rank: 4, name: "Deadlocked", author: "RobTop", verifier: "trumandigma", points: 180, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=reZj2Xbt05Q", records: [ { user: "Earl12", percent: 91, link: "#" } ] },
                 { rank: 5, name: "Hellishment", author: "Earl12", verifier: "Earl12", points: 145, type: "main", minimum: 76, verification: "https://www.youtube.com/watch?v=8RJstOZvoUQ", records: [] },
                 { rank: 6, name: "Theory of Everything 2", author: "RobTop", verifier: "trumandigma", points: 175, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=medoq_Znhaw", records: [] },
                 { rank: 7, name: "Blackfire Backfire", author: "kira9999", verifier: "trumandigma", points: 170, type: "main", minimum: 69, verification: "https://www.youtube.com/watch?v=2h1FgtfaP1k", records: [] },
@@ -126,7 +126,7 @@ export default {
                 { rank: 11, name: "Unnerfed noument", author: "Stetkos", verifier: "trumandigma", points: 160, type: "main", minimum: 75, verification: "#", records: [{ user: "Earl12", percent: 78, link: "" }] },
 
                 // --- EXTENDED LIST ---
-                { rank: 12, name: "Noument", author: "Earl12", verifier: "Earl12", points: 145, type: "extended", minimum: 75, verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [ { user: "trumandigma", percent: 97, link: "#" } ] },
+                { rank: 12, name: "Noument", author: "Earl12", verifier: "Earl12", points: 145, type: "extended", minimum: 75, verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
                 { rank: 13, name: "Electro Rand", author: "GmwadBoy", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=MZYw7jL9BnQ", records: [] },
                 { rank: 14, name: "Maymory", author: "ItsKiba", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=EKP5rGdOf_o", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
                 { rank: 15, name: "Theory of Every V2", author: "Neptune", verifier: "Earl12", points: 135, type: "extended", verification: "https://www.youtube.com/watch?v=d39W_TzuGLs", records: [] },
@@ -136,17 +136,18 @@ export default {
                 { rank: 19, name: "iSpyWithMyLittleEye", author: "Voxicat", verifier: "trumandigma", points: 115, type: "extended", verification: "https://www.youtube.com/watch?v=Ow7nDnZTbDw", records: [] },
                 { rank: 20, name: "Crescendo", author: "MasK463", verifier: "Earl12", points: 110, type: "extended", verification: "https://www.youtube.com/watch?v=ndx5WJv-P3E", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
                 { rank: 21, name: "m tolot", author: "Earl12", verifier: "Earl12", points: 105, type: "extended", verification: "#", records: [] },
+                { rank: 22, name: "Insane Club", author: "5Duck", verifier: "Earl12", points: 105, type: "extended", verification: "#", records: [] },
 
                 // --- LEGACY LIST ---
-                { rank: 22, name: "xStep V2", author: "Neptune", verifier: "Earl12", points: 0, type: "legacy", verification: "https://www.youtube.com/watch?v=K9rBb0HVvMg", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
-                { rank: 23, name: "Shiver", author: "SpKale", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
-                { rank: 24, name: "Phjork", author: "Cerufiffy", verifier: "trumandigma", points: 0, type: "legacy", verification: "", records: [{ user: "Earl12", percent: 100, link: "#" }] },
-                { rank: 25, name: "Demon Forest", author: "Ketis", verifier: "trumandigma", points: 0, type: "legacy", verification: "", records: [{ user: "Earl12", percent: 100, link: "#" }] },
-                { rank: 26, name: "Demon Mixed", author: "RealOggy", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 27, name: "Hexagon Force", author: "RobTop", verifier: "trumandigma", points: 0, type: "legacy", verification: "", records: [] },
-                { rank: 28, name: "Platinum Adventure", author: "Jerry4", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" },{ user: "Krystof", percent: 100, link: "#" }] },
-                { rank: 29, name: "The Nightmare", author: "Jax", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
-                { rank: 30, name: "The Lightning Road", author: "Timeless Real", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] }
+                { rank: 23, name: "xStep V2", author: "Neptune", verifier: "Earl12", points: 0, type: "legacy", verification: "https://www.youtube.com/watch?v=K9rBb0HVvMg", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
+                { rank: 24, name: "Shiver", author: "SpKale", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                { rank: 25, name: "Phjork", author: "Cerufiffy", verifier: "trumandigma", points: 0, type: "legacy", verification: "", records: [{ user: "Earl12", percent: 100, link: "#" }] },
+                { rank: 26, name: "Demon Forest", author: "Ketis", verifier: "trumandigma", points: 0, type: "legacy", verification: "", records: [{ user: "Earl12", percent: 100, link: "#" }] },
+                { rank: 27, name: "Demon Mixed", author: "RealOggy", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 28, name: "Hexagon Force", author: "RobTop", verifier: "trumandigma", points: 0, type: "legacy", verification: "", records: [] },
+                { rank: 29, name: "Platinum Adventure", author: "Jerry4", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" },{ user: "Krystof", percent: 100, link: "#" }] },
+                { rank: 30, name: "The Nightmare", author: "Jax", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] },
+                { rank: 31, name: "The Lightning Road", author: "Timeless Real", verifier: "Earl12", points: 0, type: "legacy", verification: "", records: [{ user: "trumandigma", percent: 100, link: "#" }] }
                        ]
         };
     },

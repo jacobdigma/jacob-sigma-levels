@@ -113,7 +113,7 @@ export default {
             search: '',
             list: [
                 // --- MAIN LIST ---
-                { rank: 1, name: "Verity", author: "Serponge", verifier: "trumandigma", points: 200, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=dmD8T5zht7A", records: [] },
+                { rank: 1, name: "Verity", author: "Serponge", verifier: "trumandigma", points: 200, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=dmD8T5zht7A", records: [{ user: "Earl12", percent: 77, link: "#" }] },
                 { rank: 2, name: "Skeletal Shenanigans", author: "YoReid", verifier: "trumandigma", points: 195, type: "main", minimum: 64, verification: "https://www.youtube.com/watch?v=kO205r4sZKM", records: [] },
                 { rank: 3, name: "B", author: "MotleyOrc", verifier: "trumandigma", points: 190, type: "main", minimum: 61, verification: "https://www.youtube.com/watch?v=sjmc5HaGrYc", records: [] },
                 { rank: 4, name: "Deadlocked", author: "RobTop", verifier: "trumandigma", points: 180, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=reZj2Xbt05Q", records: [ { user: "Earl12", percent: 100, link: "#" } ] },

@@ -113,7 +113,7 @@ export default {
             search: '',
             list: [
                 // --- MAIN LIST ---
-                { rank: 1, name: "Verity", author: "Serponge", verifier: "trumandigma", points: 200, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=dmD8T5zht7A", records: [{ user: "Earl12", percent: 84, link: "#" }] },
+                { rank: 1, name: "Verity", author: "Serponge", verifier: "trumandigma", points: 200, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=dmD8T5zht7A", records: [{ user: "Earl12", percent: 100, link: "https://www.youtube.com/watch?v=2wWEXqaOIjQ" }] },
                 { rank: 2, name: "Skeletal Shenanigans", author: "YoReid", verifier: "trumandigma", points: 195, type: "main", minimum: 64, verification: "https://www.youtube.com/watch?v=kO205r4sZKM", records: [] },
                 { rank: 3, name: "B", author: "MotleyOrc", verifier: "trumandigma", points: 190, type: "main", minimum: 61, verification: "https://www.youtube.com/watch?v=sjmc5HaGrYc", records: [] },
                 { rank: 4, name: "Deadlocked", author: "RobTop", verifier: "trumandigma", points: 180, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=reZj2Xbt05Q", records: [ { user: "Earl12", percent: 100, link: "#" } ] },
@@ -128,9 +128,9 @@ export default {
                 // --- EXTENDED LIST ---
                 { rank: 13, name: "Noument", author: "Earl12", verifier: "Earl12", points: 145, type: "extended", minimum: 75, verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
                 { rank: 14, name: "Electro Rand", author: "GmwadBoy", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=MZYw7jL9BnQ", records: [] },
-                { rank: 15, name: "Maymory", author: "ItsKiba", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=EKP5rGdOf_o", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
-                { rank: 16, name: "Theory of Every V2", author: "Neptune", verifier: "Earl12", points: 135, type: "extended", verification: "https://www.youtube.com/watch?v=d39W_TzuGLs", records: [] },
-                { rank: 17, name: "Clutterfunk V2", author: "Neptune", verifier: "Earl12", points: 130, type: "extended", verification: "https://www.youtube.com/watch?v=Kkrp9G-vYeE", records: [ { user: "trumandigma", percent: 100, link: "https://www.youtube.com/watch?v=2kE93FgLRcs" } ] },
+                { rank: 15, name: "Clutterfunk V2", author: "Neptune", verifier: "Earl12", points: 130, type: "extended", verification: "https://www.youtube.com/watch?v=Kkrp9G-vYeE", records: [ { user: "trumandigma", percent: 100, link: "https://www.youtube.com/watch?v=2kE93FgLRcs" } ] },
+                { rank: 16, name: "Maymory", author: "ItsKiba", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=EKP5rGdOf_o", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
+                { rank: 17, name: "Theory of Every V2", author: "Neptune", verifier: "Earl12", points: 135, type: "extended", verification: "https://www.youtube.com/watch?v=d39W_TzuGLs", records: [] },
                 { rank: 18, name: "Electroman Adventures V2", author: "Neptune", verifier: "trumandigma", points: 125, type: "extended", verification: "https://www.youtube.com/watch?v=-LJ3Q-pWZdo", records: [] },
                 { rank: 19, name: "Electrodynamix", author: "RobTop", verifier: "trumandigma", points: 120, type: "extended", verification: "https://www.youtube.com/watch?v=fGjDZgluC60", records: [] },
                 { rank: 20, name: "iSpyWithMyLittleEye", author: "Voxicat", verifier: "trumandigma", points: 115, type: "extended", verification: "https://www.youtube.com/watch?v=Ow7nDnZTbDw", records: [] },

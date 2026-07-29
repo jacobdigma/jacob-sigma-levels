@@ -132,11 +132,11 @@ export default {
         const getOrCreatePlayer = (name) => {
             let displayName = name;
             
-            if (name.toLowerCase() === 'stetkos') {
-                displayName = 'Earl12';
+            if (name.toLowerCase() === 'Earl12') {
+                displayName = '[🇨🇿] Earl12';
             }
-            if (name.toLowerCase() === 'krystof') {
-                displayName = 'Krystof';
+            if (name.toLowerCase() === 'Krystof') {
+                displayName = '[🇨🇿] Krystof';
             }
             
             const lowerName = displayName.toLowerCase();

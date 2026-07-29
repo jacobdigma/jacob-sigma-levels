@@ -29,12 +29,12 @@ export default {
             <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
                 <div v-if="entry">
+                                       <!-- PROSTŘEDNÍ PANEL: VELKÉ JMÉNO S VELKOU REÁLNOU VLAJKOU -->
                     <h1 style="color: #000000; font-size: 2.5rem; margin: 0 0 15px 0; font-weight: 800; text-align: center;">
-                        <img v-if="entry.country" :src="'https://flagcdn.com' + entry.country.toLowerCase() + '.png'" :alt="entry.country" style="border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); display: inline-block; margin-right: 15px; vertical-align: middle;">
+                        <img v-if="entry.country" :src="'https://flagcdn.com' + entry.country.toLowerCase() + '.png'" width="32" height="24" alt="flag" style="border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); display: inline-block; margin-right: 15px; vertical-align: middle;">
                         <span style="vertical-align: middle;">{{ entry.name }}</span>
                     </h1>
 
-                    
                     <div style="display: flex; gap: 40px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8; justify-content: center; text-align: center;">
                         <div>
                             <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist rank</p>

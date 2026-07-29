@@ -125,8 +125,8 @@ export default {
                 { name: "Speed Racer", author: "Zenthicalpha", verifier: "trumandigma", points: 150, type: "main", minimum: 71, verification: "https://www.youtube.com/watch?v=R8RsJVKKd8w", records: [{ user: "Earl12", percent: 73, link: "#" }] },
                 { name: "IceStream", author: "DarnocBlue", verifier: "Earl12", points: 160, type: "main", minimum: 74, verification: "https://www.youtube.com/watch?v=2pSl4YVCILc", records: [] },
                 { name: "Unnerfed noument", author: "Earl12", verifier: "trumandigma", points: 160, type: "main", minimum: 75, verification: "#", records: [{ user: "Earl12", percent: 78, link: "" }] },
-                { name: "Clubstep", author: "RobTop", verifier: "trumandigma", points: 155, type: "main", minimum: 78, verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [ { user: "Earl12", percent: 100, link: "#" } ] },
                 // --- EXTENDED LIST ---
+                { name: "Clubstep", author: "RobTop", verifier: "trumandigma", points: 155, type: "extended", minimum: 78, verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [ { user: "Earl12", percent: 100, link: "#" } ] },
                 { rank: 13, name: "Noument", author: "Earl12", verifier: "Earl12", points: 145, type: "extended", minimum: 75, verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
                 { rank: 14, name: "Electro Rand", author: "GmwadBoy", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=MZYw7jL9BnQ", records: [] },
                 { rank: 15, name: "Clutterfunk V2", author: "Neptune", verifier: "Earl12", points: 130, type: "extended", verification: "https://www.youtube.com/watch?v=Kkrp9G-vYeE", records: [ { user: "trumandigma", percent: 100, link: "https://www.youtube.com/watch?v=2kE93FgLRcs" } ] },

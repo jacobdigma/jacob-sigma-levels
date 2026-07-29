@@ -113,19 +113,19 @@ export default {
             search: '',
             list: [
                 // --- MAIN LIST ---
-                { rank: 1, name: "Verity", author: "Serponge", verifier: "trumandigma", points: 200, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=dmD8T5zht7A", records: [{ user: "Earl12", percent: 100, link: "https://www.youtube.com/watch?v=2wWEXqaOIjQ" }] },
-                { rank: 2, name: "Skeletal Shenanigans", author: "YoReid", verifier: "trumandigma", points: 195, type: "main", minimum: 64, verification: "https://www.youtube.com/watch?v=kO205r4sZKM", records: [] },
-                { rank: 3, name: "Sirius", author: "FunnyGame", verifier: "trumandigma", points: 190, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=6AxuV3e_6E4", records: [] },
-                { rank: 3, name: "B", author: "MotleyOrc", verifier: "trumandigma", points: 190, type: "main", minimum: 61, verification: "https://www.youtube.com/watch?v=sjmc5HaGrYc", records: [] },
-                { rank: 4, name: "Deadlocked", author: "RobTop", verifier: "trumandigma", points: 180, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=reZj2Xbt05Q", records: [ { user: "Earl12", percent: 100, link: "#" } ] },
-                { rank: 5, name: "Hellishment", author: "Earl12", verifier: "Earl12", points: 145, type: "main", minimum: 81, verification: "https://www.youtube.com/watch?v=8RJstOZvoUQ", records: [{ user: "trumandigma", percent: 87, link: "#" }] },
-                { rank: 6, name: "Theory of Everything 2", author: "RobTop", verifier: "trumandigma", points: 175, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=medoq_Znhaw", records: [{ user: "Earl12", percent: 100, link: "#" }] },
-                { rank: 7, name: "Blackfire Backfire", author: "kira9999", verifier: "trumandigma", points: 170, type: "main", minimum: 69, verification: "https://www.youtube.com/watch?v=2h1FgtfaP1k", records: [] },
-                { rank: 8, name: "Darkstep", author: "Alex", verifier: "trumandigma", points: 165, type: "main", minimum: 70, verification: "https://www.youtube.com/watch?v=6cFZYLraEJs", records: [] },
-                { rank: 9, name: "Speed Racer", author: "Zenthicalpha", verifier: "trumandigma", points: 150, type: "main", minimum: 71, verification: "https://www.youtube.com/watch?v=R8RsJVKKd8w", records: [{ user: "Earl12", percent: 73, link: "#" }] },
-                { rank: 10, name: "IceStream", author: "DarnocBlue", verifier: "Earl12", points: 160, type: "main", minimum: 74, verification: "https://www.youtube.com/watch?v=2pSl4YVCILc", records: [] },
-                { rank: 11, name: "Unnerfed noument", author: "Earl12", verifier: "trumandigma", points: 160, type: "main", minimum: 75, verification: "#", records: [{ user: "Earl12", percent: 78, link: "" }] },
-                { rank: 12, name: "Clubstep", author: "RobTop", verifier: "trumandigma", points: 155, type: "main", minimum: 78, verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [ { user: "Earl12", percent: 100, link: "#" } ] },
+                { name: "Verity", author: "Serponge", verifier: "trumandigma", points: 200, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=dmD8T5zht7A", records: [{ user: "Earl12", percent: 100, link: "https://www.youtube.com/watch?v=2wWEXqaOIjQ" }] },
+                { name: "Skeletal Shenanigans", author: "YoReid", verifier: "trumandigma", points: 195, type: "main", minimum: 64, verification: "https://www.youtube.com/watch?v=kO205r4sZKM", records: [] },
+                { name: "Sirius", author: "FunnyGame", verifier: "trumandigma", points: 190, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=6AxuV3e_6E4", records: [] },
+                { name: "B", author: "MotleyOrc", verifier: "trumandigma", points: 190, type: "main", minimum: 61, verification: "https://www.youtube.com/watch?v=sjmc5HaGrYc", records: [] },
+                { name: "Deadlocked", author: "RobTop", verifier: "trumandigma", points: 180, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=reZj2Xbt05Q", records: [ { user: "Earl12", percent: 100, link: "#" } ] },
+                { name: "Hellishment", author: "Earl12", verifier: "Earl12", points: 145, type: "main", minimum: 81, verification: "https://www.youtube.com/watch?v=8RJstOZvoUQ", records: [{ user: "trumandigma", percent: 87, link: "#" }] },
+                { name: "Theory of Everything 2", author: "RobTop", verifier: "trumandigma", points: 175, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=medoq_Znhaw", records: [{ user: "Earl12", percent: 100, link: "#" }] },
+                { name: "Blackfire Backfire", author: "kira9999", verifier: "trumandigma", points: 170, type: "main", minimum: 69, verification: "https://www.youtube.com/watch?v=2h1FgtfaP1k", records: [] },
+                { name: "Darkstep", author: "Alex", verifier: "trumandigma", points: 165, type: "main", minimum: 70, verification: "https://www.youtube.com/watch?v=6cFZYLraEJs", records: [] },
+                { name: "Speed Racer", author: "Zenthicalpha", verifier: "trumandigma", points: 150, type: "main", minimum: 71, verification: "https://www.youtube.com/watch?v=R8RsJVKKd8w", records: [{ user: "Earl12", percent: 73, link: "#" }] },
+                { name: "IceStream", author: "DarnocBlue", verifier: "Earl12", points: 160, type: "main", minimum: 74, verification: "https://www.youtube.com/watch?v=2pSl4YVCILc", records: [] },
+                { name: "Unnerfed noument", author: "Earl12", verifier: "trumandigma", points: 160, type: "main", minimum: 75, verification: "#", records: [{ user: "Earl12", percent: 78, link: "" }] },
+                { name: "Clubstep", author: "RobTop", verifier: "trumandigma", points: 155, type: "main", minimum: 78, verification: "https://www.youtube.com/watch?v=gok5ShDXxg4", records: [ { user: "Earl12", percent: 100, link: "#" } ] },
                 // --- EXTENDED LIST ---
                 { rank: 13, name: "Noument", author: "Earl12", verifier: "Earl12", points: 145, type: "extended", minimum: 75, verification: "https://www.youtube.com/watch?v=W_rqtk3cipE", records: [ { user: "trumandigma", percent: 100, link: "#" } ] },
                 { rank: 14, name: "Electro Rand", author: "GmwadBoy", verifier: "Earl12", points: 140, type: "extended", verification: "https://www.youtube.com/watch?v=MZYw7jL9BnQ", records: [] },
@@ -152,14 +152,26 @@ export default {
                        ]
         };
     },
-    mounted() {
-        const activeLevels = this.list.filter(l => l.type === 'main' || l.type === 'extended');
+       mounted() {
+        // Vyfiltrujeme POUZE reálné levely (přeskočíme případné prázdné řádky)
+        const activeLevels = this.list.filter(l => l.name && (l.type === 'main' || l.type === 'extended'));
         const totalActive = activeLevels.length;
 
+        let currentRank = 1;
+
         this.list.forEach(level => {
+            // Pokud řádek nemá jméno, přeskočíme ho
+            if (!level.name) return;
+
             if (level.type === 'legacy') {
                 level.points = 0;
+                level.rank = 0; // Legacy levely nemají číselnou pozici
             } else {
+                // AUTOMATICKÝ RANK: Kód sám přiřadí aktuální číslo pozice
+                level.rank = currentRank;
+                currentRank++;
+
+                // AUTOMATICKÝ VÝPOČET BODŮ (Férové plynulé bodování)
                 const position = activeLevels.indexOf(level);
                 const calculatedPoints = totalActive > 1 
                     ? 200 - (position * (100 / (totalActive - 1))) 
@@ -168,6 +180,7 @@ export default {
             }
         });
     },
+
     computed: {
         filteredList() {
             if (!this.search) {

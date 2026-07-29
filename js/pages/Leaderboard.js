@@ -25,8 +25,6 @@ export default {
                             <!-- TENTO TEXT BUDE ČERNÝ A ZMODRÁ JEN PŘI KLIKNUTÍ -->
                             <span :style="{ fontWeight: '600', vertical-align: 'middle', color: leaderboard[selected] === player ? '#2563eb' : '#000000' }">{{ player.name }}</span>
                         </td>
-
-
                         <td style="padding: 12px 8px; text-align: right; color: #a0a7b1; font-weight: bold;">{{ player.total.toLocaleString() }}</td>
                         </td>
                 </table>

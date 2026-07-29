@@ -17,8 +17,9 @@ export default {
                         :style="{ cursor: 'pointer', background: leaderboard[selected] === player ? '#e6f0ff' : 'transparent', borderBottom: '1px solid #f0f0f0' }">
                                                 <td style="padding: 12px 8px; width: 40px; color: #a1a1a1; font-weight: bold; text-align: center;">#{{ leaderboard.indexOf(player) + 1 }}</td>
                         <!-- SPRÁVNÉ VLOŽENÍ VLAJEČKY DO BUNKY TABULKY -->
+                                               <!-- LEVÝ PANEL: JMÉNO S REÁLNOU VLAJKOU -->
                         <td style="padding: 12px 8px; text-align: left; color: #2563eb; font-weight: 600;">
-                            <img v-if="player.country" :src="'https://flagcdn.com' + player.country.toLowerCase() + '.png'" :alt="player.country" style="border-radius: 2px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); display: inline-block; margin-right: 8px; vertical-align: middle;">
+                            <img v-if="player.country" :src="'https://flagcdn.com' + player.country.toLowerCase() + '.png'" width="16" height="12" alt="flag" style="border-radius: 2px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); display: inline-block; margin-right: 8px; vertical-align: middle;">
                             <span style="vertical-align: middle;">{{ player.name }}</span>
                         </td>
                         <td style="padding: 12px 8px; text-align: right; color: #a0a7b1; font-weight: bold;">{{ player.total.toLocaleString() }}</td>

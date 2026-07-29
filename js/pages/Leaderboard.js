@@ -16,7 +16,11 @@ export default {
                     <tr v-for="(player, idx) in filteredLeaderboard" :key="idx" @click="selected = leaderboard.indexOf(player)"
                         :style="{ cursor: 'pointer', background: leaderboard[selected] === player ? '#e6f0ff' : 'transparent', borderBottom: '1px solid #f0f0f0' }">
                         <td style="padding: 12px 8px; width: 40px; color: #65676b; font-weight: bold;">#{{ leaderboard.indexOf(player) + 1 }}</td>
-                        <td style="padding: 12px 8px; text-align: left; color: #000000; font-weight: 600;">{{ player.name }}</td>
+                        <td style="padding: 12px 8px; text-align: left; color: #2563eb; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+    <img v-if="player.country" :src="'https://flagcdn.com' + player.country.toLowerCase() + '.png'" :alt="player.country" style="border-radius: 2px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); vertical-align: middle;">
+    {{ player.name }}
+</td>
+
                         <td style="padding: 12px 8px; text-align: right; color: #0070ff; font-weight: bold;">{{ player.total.toLocaleString() }}</td>
                     </tr>
                 </table>
@@ -25,7 +29,11 @@ export default {
             <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
                 <div v-if="entry">
-                    <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800; text-align: center;">{{ entry.name }}</h1>
+                    <h1 style="color: #000000; font-size: 2.5rem; margin: 0 0 15px 0; font-weight: 800; text-align: center; display: flex; align-items: center; justify-content: center; gap: 15px;">
+                    <img v-if="entry.country" :src="'https://flagcdn.com' + entry.country.toLowerCase() + '.png'" :alt="entry.country" style="border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); vertical-align: middle;">
+                    {{ entry.name }}
+                    </h1>
+
                     
                     <div style="display: flex; gap: 40px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8; justify-content: center; text-align: center;">
                         <div>

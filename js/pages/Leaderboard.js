@@ -18,10 +18,12 @@ export default {
                                                 <td style="padding: 12px 8px; width: 40px; color: #a1a1a1; font-weight: bold; text-align: center;">#{{ leaderboard.indexOf(player) + 1 }}</td>
                         <!-- SPRÁVNÉ VLOŽENÍ VLAJEČKY DO BUNKY TABULKY -->
                                                <!-- LEVÝ PANEL: JMÉNO S REÁLNOU VLAJKOU -->
+                                               <!-- LEVÝ PANEL: JMÉNO S EMOJI VLAJKOU -->
                         <td style="padding: 12px 8px; text-align: left; color: #2563eb; font-weight: 600;">
-                            <img v-if="player.country" :src="'https://flagcdn.com' + player.country.toLowerCase() + '.png'" width="16" height="12" alt="flag" style="border-radius: 2px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); display: inline-block; margin-right: 8px; vertical-align: middle;">
+                            <span v-if="player.country" style="margin-right: 8px; font-size: 1.1rem; vertical-align: middle;">{{ player.country.toLowerCase() === 'cz' ? '🇨🇿' : (player.country.toLowerCase() === 'sk' ? '🇸🇰' : (player.country.toLowerCase() === 'us' ? '🇺🇸' : '🏳️')) }}</span>
                             <span style="vertical-align: middle;">{{ player.name }}</span>
                         </td>
+
                         <td style="padding: 12px 8px; text-align: right; color: #a0a7b1; font-weight: bold;">{{ player.total.toLocaleString() }}</td>
                         </td>
                 </table>
@@ -30,9 +32,9 @@ export default {
             <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
                 <div v-if="entry">
-                                       <!-- PROSTŘEDNÍ PANEL: VELKÉ JMÉNO S VELKOU REÁLNOU VLAJKOU -->
+
                     <h1 style="color: #000000; font-size: 2.5rem; margin: 0 0 15px 0; font-weight: 800; text-align: center;">
-                        <img v-if="entry.country" :src="'https://flagcdn.com' + entry.country.toLowerCase() + '.png'" width="32" height="24" alt="flag" style="border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); display: inline-block; margin-right: 15px; vertical-align: middle;">
+                        <span v-if="entry.country" style="margin-right: 15px; font-size: 2.2rem; vertical-align: middle;">{{ entry.country.toLowerCase() === 'cz' ? '🇨🇿' : (entry.country.toLowerCase() === 'sk' ? '🇸🇰' : (entry.country.toLowerCase() === 'us' ? '🇺🇸' : '🏳️')) }}</span>
                         <span style="vertical-align: middle;">{{ entry.name }}</span>
                     </h1>
 

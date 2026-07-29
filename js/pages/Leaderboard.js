@@ -20,9 +20,9 @@ export default {
                                                <!-- LEVÝ PANEL: JMÉNO S REÁLNOU VLAJKOU -->
                                                <!-- LEVÝ PANEL: JMÉNO S EMOJI VLAJKOU -->
                                                <!-- LEVÝ PANEL: JMÉNO S VRÁCENÝMI BARVAMI TEXTU -->
+                                                <!-- LEVÝ PANEL: Čisté a bezpečné načítání -->
                         <td style="padding: 12px 8px; text-align: left;">
-                            <span v-if="player.country" style="margin-right: 8px; font-size: 1.1rem; vertical-align: middle;">{{ player.country.toLowerCase() === 'cz' ? '🇨🇿' : (player.country.toLowerCase() === 'sk' ? '🇸🇰' : (player.country.toLowerCase() === 'us' ? '🇺🇸' : '🏳️')) }}</span>
-                            <!-- TENTO TEXT BUDE ČERNÝ A ZMODRÁ JEN PŘI KLIKNUTÍ -->
+                            <span v-if="player.country" style="margin-right: 8px; font-size: 1.1rem; vertical-align: middle;">{{ getFlagEmoji(player.country) }}</span>
                             <span :style="{ fontWeight: '600', vertical-align: 'middle', color: leaderboard[selected] === player ? '#2563eb' : '#000000' }">{{ player.name }}</span>
                         </td>
                         <td style="padding: 12px 8px; text-align: right; color: #a0a7b1; font-weight: bold;">{{ player.total.toLocaleString() }}</td>
@@ -313,6 +313,13 @@ export default {
                 fontSize: '0.9rem',
                 textDecoration: 'none'
             };
+              getFlagEmoji(countryCode) {
+            if (!countryCode) return '🏳️';
+            const codePoints = countryCode
+                .toUpperCase()
+                .split('')
+                .map(char =>  127397 + char.charCodeAt(0));
+            return String.fromCodePoint(...codePoints);
         }
     }
 };

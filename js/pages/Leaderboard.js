@@ -15,28 +15,18 @@ export default {
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr v-for="(player, idx) in filteredLeaderboard" :key="idx" @click="selected = leaderboard.indexOf(player)"
                         :style="{ cursor: 'pointer', background: leaderboard[selected] === player ? '#e6f0ff' : 'transparent', borderBottom: '1px solid #f0f0f0' }">
-                                                <td style="padding: 12px 8px; width: 40px; color: #a1a1a1; font-weight: bold; text-align: center;">#{{ leaderboard.indexOf(player) + 1 }}</td>
-                        <!-- SPRÁVNÉ VLOŽENÍ VLAJEČKY DO BUNKY TABULKY -->
-                                        
-                        <td style="padding: 12px 8px; text-align: left;">
-                            <span v-if="player.country" style="margin-right: 8px; font-size: 1.1rem; vertical-align: middle;">{{ getFlagEmoji(player.country) }}</span>
-                            <span :style="{ fontWeight: '600', vertical-align: 'middle', color: leaderboard[selected] === player ? '#2563eb' : '#000000' }">{{ player.name }}</span>
-                        </td>
-                        <td style="padding: 12px 8px; text-align: right; color: #a0a7b1; font-weight: bold;">{{ player.total.toLocaleString() }}</td>
-                        </td>
+                        <td style="padding: 12px 8px; width: 40px; color: #65676b; font-weight: bold;">#{{ leaderboard.indexOf(player) + 1 }}</td>
+                        <td style="padding: 12px 8px; text-align: left; color: #000000; font-weight: 600;">{{ player.name }}</td>
+                        <td style="padding: 12px 8px; text-align: right; color: #0070ff; font-weight: bold;">{{ player.total.toLocaleString() }}</td>
+                    </tr>
                 </table>
             </div>
 
             <!-- PROSTŘEDNÍ PANEL: Detail hráče -->
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
                 <div v-if="entry">
-
-                                        <h1 style="color: #000000; font-size: 2.5rem; margin: 0 0 15px 0; font-weight: 800; text-align: center;">
-                        <span v-if="entry.country" style="margin-right: 15px; font-size: 2.2rem; vertical-align: middle;">{{ getFlagEmoji(entry.country) }}</span>
-                        <span style="vertical-align: middle;">{{ entry.name }}</span>
-                    </h1>
-
-
+                    <h1 style="color: #000000; font-size: 2.2rem; margin: 0 0 20px 0; font-weight: 800; text-align: center;">{{ entry.name }}</h1>
+                    
                     <div style="display: flex; gap: 40px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8; justify-content: center; text-align: center;">
                         <div>
                             <p style="color: #65676b; font-size: 0.9rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600;">Demonlist rank</p>
@@ -139,7 +129,7 @@ export default {
 
         const playersMap = {};
 
-               const getOrCreatePlayer = (name) => {
+        const getOrCreatePlayer = (name) => {
             let displayName = name;
             
             if (name.toLowerCase() === 'stetkos') {
@@ -160,17 +150,9 @@ export default {
                     hardest: "None",
                     hardestRank: 9999,
                     demons: [],
-                    progress: [],
-                    // 1. TADY MUSÍ BÝT TENTO ZÁKLADNÍ PARAMETR, ABY V-IF FUNGOVALO!
-                    country: 'cz'
+                    progress: []
                 };
             }
-
-            // 2. TADY MŮŽEŠ RUČNĚ UPRAVOVAT VLAJKY PODLE JMÉNA (cz, sk, us, de...)
-            if (lowerName === 'trumandigma') playersMap[lowerName].country = 'cz';
-            if (lowerName === 'earl12') playersMap[lowerName].country = 'cz'; 
-            if (lowerName === 'krystof') playersMap[lowerName].country = 'cz';
-
             return playersMap[lowerName];
         };
 
@@ -311,14 +293,6 @@ export default {
                 fontSize: '0.9rem',
                 textDecoration: 'none'
             };
-        },
-        getFlagEmoji(countryCode) {
-            if (!countryCode) return '🏳️';
-            const codePoints = countryCode
-                .toUpperCase()
-                .split('')
-                .map(char => 127397 + char.charCodeAt(0));
-            return String.fromPoint(...codePoints);
         }
     }
 };

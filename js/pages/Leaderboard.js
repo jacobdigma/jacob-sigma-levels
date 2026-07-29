@@ -19,10 +19,13 @@ export default {
                         <!-- SPRÁVNÉ VLOŽENÍ VLAJEČKY DO BUNKY TABULKY -->
                                                <!-- LEVÝ PANEL: JMÉNO S REÁLNOU VLAJKOU -->
                                                <!-- LEVÝ PANEL: JMÉNO S EMOJI VLAJKOU -->
-                        <td style="padding: 12px 8px; text-align: left; color: #2563eb; font-weight: 600;">
+                                               <!-- LEVÝ PANEL: JMÉNO S VRÁCENÝMI BARVAMI TEXTU -->
+                        <td style="padding: 12px 8px; text-align: left;">
                             <span v-if="player.country" style="margin-right: 8px; font-size: 1.1rem; vertical-align: middle;">{{ player.country.toLowerCase() === 'cz' ? '🇨🇿' : (player.country.toLowerCase() === 'sk' ? '🇸🇰' : (player.country.toLowerCase() === 'us' ? '🇺🇸' : '🏳️')) }}</span>
-                            <span style="vertical-align: middle;">{{ player.name }}</span>
+                            <!-- TENTO TEXT BUDE ČERNÝ A ZMODRÁ JEN PŘI KLIKNUTÍ -->
+                            <span :style="{ fontWeight: '600', vertical-align: 'middle', color: leaderboard[selected] === player ? '#2563eb' : '#000000' }">{{ player.name }}</span>
                         </td>
+
 
                         <td style="padding: 12px 8px; text-align: right; color: #a0a7b1; font-weight: bold;">{{ player.total.toLocaleString() }}</td>
                         </td>

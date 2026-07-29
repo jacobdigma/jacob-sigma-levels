@@ -137,7 +137,7 @@ export default {
 
         const playersMap = {};
 
-        const getOrCreatePlayer = (name) => {
+               const getOrCreatePlayer = (name) => {
             let displayName = name;
             
             if (name.toLowerCase() === 'stetkos') {
@@ -158,9 +158,17 @@ export default {
                     hardest: "None",
                     hardestRank: 9999,
                     demons: [],
-                    progress: []
+                    progress: [],
+                    // 1. TADY MUSÍ BÝT TENTO ZÁKLADNÍ PARAMETR, ABY V-IF FUNGOVALO!
+                    country: 'cz'
                 };
             }
+
+            // 2. TADY MŮŽEŠ RUČNĚ UPRAVOVAT VLAJKY PODLE JMÉNA (cz, sk, us, de...)
+            if (lowerName === 'trumandigma') playersMap[lowerName].country = 'cz';
+            if (lowerName === 'earl12') playersMap[lowerName].country = 'cz'; 
+            if (lowerName === 'krystof') playersMap[lowerName].country = 'cz';
+
             return playersMap[lowerName];
         };
 

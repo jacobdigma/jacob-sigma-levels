@@ -17,10 +17,7 @@ export default {
                         :style="{ cursor: 'pointer', background: leaderboard[selected] === player ? '#e6f0ff' : 'transparent', borderBottom: '1px solid #f0f0f0' }">
                                                 <td style="padding: 12px 8px; width: 40px; color: #a1a1a1; font-weight: bold; text-align: center;">#{{ leaderboard.indexOf(player) + 1 }}</td>
                         <!-- SPRÁVNÉ VLOŽENÍ VLAJEČKY DO BUNKY TABULKY -->
-                                               <!-- LEVÝ PANEL: JMÉNO S REÁLNOU VLAJKOU -->
-                                               <!-- LEVÝ PANEL: JMÉNO S EMOJI VLAJKOU -->
-                                               <!-- LEVÝ PANEL: JMÉNO S VRÁCENÝMI BARVAMI TEXTU -->
-                                                <!-- LEVÝ PANEL: Čisté a bezpečné načítání -->
+                                        
                         <td style="padding: 12px 8px; text-align: left;">
                             <span v-if="player.country" style="margin-right: 8px; font-size: 1.1rem; vertical-align: middle;">{{ getFlagEmoji(player.country) }}</span>
                             <span :style="{ fontWeight: '600', vertical-align: 'middle', color: leaderboard[selected] === player ? '#2563eb' : '#000000' }">{{ player.name }}</span>
@@ -34,10 +31,11 @@ export default {
             <div style="flex: 1; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; color: #000000; box-sizing: border-box;">
                 <div v-if="entry">
 
-                    <h1 style="color: #000000; font-size: 2.5rem; margin: 0 0 15px 0; font-weight: 800; text-align: center;">
-                        <span v-if="entry.country" style="margin-right: 15px; font-size: 2.2rem; vertical-align: middle;">{{ entry.country.toLowerCase() === 'cz' ? '🇨🇿' : (entry.country.toLowerCase() === 'sk' ? '🇸🇰' : (entry.country.toLowerCase() === 'us' ? '🇺🇸' : '🏳️')) }}</span>
+                                        <h1 style="color: #000000; font-size: 2.5rem; margin: 0 0 15px 0; font-weight: 800; text-align: center;">
+                        <span v-if="entry.country" style="margin-right: 15px; font-size: 2.2rem; vertical-align: middle;">{{ getFlagEmoji(entry.country) }}</span>
                         <span style="vertical-align: middle;">{{ entry.name }}</span>
                     </h1>
+
 
                     <div style="display: flex; gap: 40px; padding-bottom: 20px; border-bottom: 1px solid #e1e4e8; justify-content: center; text-align: center;">
                         <div>

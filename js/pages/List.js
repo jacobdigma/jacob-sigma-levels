@@ -115,6 +115,7 @@ export default {
                 // --- MAIN LIST ---
                 { rank: 1, name: "Verity", author: "Serponge", verifier: "trumandigma", points: 200, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=dmD8T5zht7A", records: [{ user: "Earl12", percent: 100, link: "https://www.youtube.com/watch?v=2wWEXqaOIjQ" }] },
                 { rank: 2, name: "Skeletal Shenanigans", author: "YoReid", verifier: "trumandigma", points: 195, type: "main", minimum: 64, verification: "https://www.youtube.com/watch?v=kO205r4sZKM", records: [] },
+                { rank: 3, name: "Sirius", author: "FunnyGame", verifier: "trumandigma", points: 190, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=6AxuV3e_6E4", records: [] },
                 { rank: 3, name: "B", author: "MotleyOrc", verifier: "trumandigma", points: 190, type: "main", minimum: 61, verification: "https://www.youtube.com/watch?v=sjmc5HaGrYc", records: [] },
                 { rank: 4, name: "Deadlocked", author: "RobTop", verifier: "trumandigma", points: 180, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=reZj2Xbt05Q", records: [ { user: "Earl12", percent: 100, link: "#" } ] },
                 { rank: 5, name: "Hellishment", author: "Earl12", verifier: "Earl12", points: 145, type: "main", minimum: 81, verification: "https://www.youtube.com/watch?v=8RJstOZvoUQ", records: [{ user: "trumandigma", percent: 87, link: "#" }] },

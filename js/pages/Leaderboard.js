@@ -313,14 +313,14 @@ export default {
                 fontSize: '0.9rem',
                 textDecoration: 'none'
             };
-              getFlagEmoji(countryCode) {
+        },
+        getFlagEmoji(countryCode) {
             if (!countryCode) return '🏳️';
             const codePoints = countryCode
                 .toUpperCase()
                 .split('')
-                .map(char =>  127397 + char.charCodeAt(0));
-            return String.fromCodePoint(...codePoints);
-         }
-              }
+                .map(char => 127397 + char.charCodeAt(0));
+            return String.fromPoint(...codePoints);
+        }
     }
 };

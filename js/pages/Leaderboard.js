@@ -171,7 +171,7 @@ export default {
             return playersMap[lowerName];
         };
 
-        const allowedPlayers = ['[🇨🇿] trumandigma', '[🇨🇿] Earl12', '[🇨🇿] stetkos', '[🇨🇿] Krystof'];
+        const allowedPlayers = ['[🇨🇿] trumandigma', '[🇨🇿] Earl12', '[🇨🇿] Krystof'];
 
         levels.forEach(level => {
             // 1. KONTROLA VERIFIKÁTORA

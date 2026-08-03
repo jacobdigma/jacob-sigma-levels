@@ -50,15 +50,30 @@ export default {
             ]
         };
     },
-    async mounted() {
-        // Tímto si Packs vytáhnou aktuální a živý seznam levelů z List.js mozku aplikace
-        try {
-            const listModule = await import('./List.js');
-            if (listModule && listModule.default) {
-                this.listData = listModule.default.data().list;
-            }
-        } catch (e) {
-            console.error("Chyba při načítání Listu v Packs:", e);
+    mounted() {
+        // Místo složitého importu souboru se podíváme přímo do živé paměti webu, 
+        // kde už má List.js všechny pozice a ranky dokonale spočítané!
+        if (this.$root && this.$root.$route) {
+            // Počkáme sekundu na načtení hlavní aplikace, abychom měli jistotu, že List už v paměti je
+            setTimeout(() => {
+                const mainList = list.data().list;
+                
+                // Přepočítáme ranky natvrdo přímo tady, ať máme absolutní jistotu
+                const activeLevels = mainList.filter(l => l.name && (l.type === 'main' || l.type === 'extended'));
+                let currentRank = 1;
+                
+                mainList.forEach(level => {
+                    if (!level.name) return;
+                    if (level.type === 'legacy') {
+                        level.rank = 0;
+                    } else {
+                        level.rank = currentRank;
+                        currentRank++;
+                    }
+                });
+                
+                this.listData = mainList;
+            }, 100);
         }
     },
     methods: {
@@ -67,20 +82,23 @@ export default {
                 return "?";
             }
             
-            // Najdeme level tak, že kompletně ignorujeme velká/malá písmena a skryté mezery
+            // Najdeme level v seznamu a kompletně ignorujeme skryté mezery a velká/malá písmena
             const foundLevel = this.listData.find(l => 
                 l.name && l.name.toLowerCase().trim() === levelName.toLowerCase().trim()
             );
 
+            // TADY JE TA OPRAVENÁ LOGIKA:
             if (foundLevel) {
-                // Pokud je rank 0, falešný nebo prázdný, ukážeme Legacy, jinak jeho pozici
-                if (foundLevel.type === 'legacy' || !foundLevel.rank) {
+                // Pokud má level v List.js natvrdo typ 'legacy', vrátíme Legacy
+                if (foundLevel.type === 'legacy') {
                     return 'Legacy';
                 }
-                return '#' + foundLevel.rank;
+                // Pokud má rank a je to Main/Extended, vrátíme jeho pozici se znakem #
+                if (foundLevel.rank) {
+                    return '#' + foundLevel.rank;
+                }
             }
 
-            return "#undefined";
+            return "Legacy";
         }
     }
-}

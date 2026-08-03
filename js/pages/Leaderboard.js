@@ -115,12 +115,25 @@ export default {
     mounted() {
         const levels = list.data().list;
         
-        const activeLevels = levels.filter(l => l.type === 'main' || l.type === 'extended');
+        // Vyfiltrujeme reálné levely pro přesný výpočet
+        const activeLevels = levels.filter(l => l.name && (l.type === 'main' || l.type === 'extended'));
         const totalActive = activeLevels.length;
+        
+        // --- TADY JE TEN AUTOMATICKÝ DOPOCET RANKŮ PRO ŽEBŘÍČEK ---
+        let currentRank = 1;
+
         levels.forEach(level => {
+            if (!level.name) return;
+
             if (level.type === 'legacy') {
                 level.points = 0;
+                level.rank = 9999; // Legacy dáme schválně vysoký rank, aby nepřebíjel Main levely v Hardestu
             } else {
+                // Každému aktivnímu levelu přiřadíme pozici podle pořadí v souboru
+                level.rank = currentRank;
+                currentRank++;
+
+                // Výpočet bodů zůstává stoprocentně stejný
                 const position = activeLevels.indexOf(level);
                 const calculatedPoints = totalActive > 1 ? 200 - (position * (100 / (totalActive - 1))) : 200;
                 level.points = Math.round(calculatedPoints);
@@ -128,6 +141,7 @@ export default {
         });
 
         const playersMap = {};
+
 
         const getOrCreatePlayer = (name) => {
             let displayName = name;

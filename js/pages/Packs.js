@@ -95,7 +95,7 @@ export default {
                 }
                 // Pokud má rank a je to Main/Extended, vrátíme jeho pozici se znakem #
                 if (foundLevel.rank) {
-                    return '#' + foundLevel.rank;
+                    return '' + foundLevel.rank;
                 }
             }
 

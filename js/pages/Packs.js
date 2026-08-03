@@ -62,23 +62,23 @@ export default {
         }
     },
     methods: {
-                getLevelRank(levelName) {
+        getLevelRank(levelName) {
             if (!this.listData || this.listData.length === 0 || !levelName) {
                 return "?";
             }
             
-            // Najdeme v živém seznamu level se shodným názvem
+            // Najdeme level tak, že kompletně ignorujeme velká/malá písmena a skryté mezery
             const foundLevel = this.listData.find(l => 
                 l.name && l.name.toLowerCase().trim() === levelName.toLowerCase().trim()
             );
 
-            // Pokud level najdeme, zkontrolujeme jeho typ
             if (foundLevel) {
-                // OPRAVA: Pokud je to Legacy, vrátíme slovo Legacy, jinak klasické číslo pozice #
-                return foundLevel.type === 'legacy' ? 'Legacy' : '' + foundLevel.rank;
+                // Pokud je rank 0, falešný nebo prázdný, ukážeme Legacy, jinak jeho pozici
+                if (foundLevel.type === 'legacy' || !foundLevel.rank) {
+                    return 'Legacy';
+                }
+                return '#' + foundLevel.rank;
             }
 
-            return "?";
+            return "#undefined";
         }
-    }
-}

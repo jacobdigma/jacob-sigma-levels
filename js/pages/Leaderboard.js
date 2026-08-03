@@ -232,24 +232,28 @@ export default {
                                     isVerified: false
                                 });
                             }
-                        } else {
-                            // PROGRESS SYSTÉM
+                                                } else {
+                            // --- PROGRESS SYSTÉM PODLE TVÉHO VZORCE ---
                             const currentPercent = parseInt(record.percent) || 0;
                             let finalProgressPoints = 0;
                             
-                            if (level.type !== 'extended') {
-                                const gap = 200 - level.points;
+                            // Body za progress dáváme pouze pro Main List!
+                            if (level.type === 'main') {
+                                // Pojistka: Pokud kód zrovna nemá z Listu vypočítané body, dáme výchozí nulu, ať to nespadne
+                                const levelPoints = parseInt(level.points) || 0;
+                                const gap = 200 - levelPoints;
                                 finalProgressPoints = Math.max(0, currentPercent - gap);
                             }
                             
+                            // Bezpečně přičteme body hráči
                             player.total += finalProgressPoints;
 
+                            // Zapíšeme progress do profilu pro zobrazení
                             player.progress.push({
                                 level: level.name,
                                 percent: currentPercent,
                                 link: record.link || "#",
-                                type: level.type // <-- TENTO ŘÁDEK SEM PŘIDEJ!
-
+                                type: level.type
                             });
                         }
                     }

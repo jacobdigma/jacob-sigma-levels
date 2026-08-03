@@ -184,7 +184,7 @@ export default {
                     if (level.type === 'extended') player.extendedCount++;
                     if (level.type === 'legacy') player.legacyCount++;
 
-                    if (level.rank < player.hardestRank) {
+                    if (level.rank <= player.hardestRank) {
                         player.hardest = level.name;
                         player.hardestRank = level.rank;
                     }
@@ -214,8 +214,8 @@ export default {
                             if (level.type === 'main') player.mainCount++;
                             if (level.type === 'extended') player.extendedCount++;
                             if (level.type === 'legacy') player.legacyCount++;
-
-                            if (level.rank < player.hardestRank) {
+                            
+                        if (level.rank <= player.hardestRank) {
                                 player.hardest = level.name;
                                 player.hardestRank = level.rank;
                             }

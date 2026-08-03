@@ -50,13 +50,12 @@ export default {
             ]
         };
     },
-    mounted() {
-        // Místo složitého importu souboru se podíváme přímo do živé paměti webu, 
-        // kde už má List.js všechny pozice a ranky dokonale spočítané!
-        if (this.$root && this.$root.$route) {
-            // Počkáme sekundu na načtení hlavní aplikace, abychom měli jistotu, že List už v paměti je
-            setTimeout(() => {
-                const mainList = list.data().list;
+    async mounted() {
+        try {
+            // Správný a bezpečný import přímo uvnitř mounted, aby list nebyl undefined
+            const listModule = await import('./List.js');
+            if (listModule && listModule.default) {
+                const mainList = listModule.default.data().list;
                 
                 // Přepočítáme ranky natvrdo přímo tady, ať máme absolutní jistotu
                 const activeLevels = mainList.filter(l => l.name && (l.type === 'main' || l.type === 'extended'));
@@ -73,7 +72,9 @@ export default {
                 });
                 
                 this.listData = mainList;
-            }, 100);
+            }
+        } catch (e) {
+            console.error("Chyba při načítání Listu v Packs:", e);
         }
     },
     methods: {
@@ -87,7 +88,6 @@ export default {
                 l.name && l.name.toLowerCase().trim() === levelName.toLowerCase().trim()
             );
 
-            // TADY JE TA OPRAVENÁ LOGIKA:
             if (foundLevel) {
                 // Pokud má level v List.js natvrdo typ 'legacy', vrátíme Legacy
                 if (foundLevel.type === 'legacy') {
@@ -102,4 +102,4 @@ export default {
             return "Legacy";
         }
     }
-}
+};

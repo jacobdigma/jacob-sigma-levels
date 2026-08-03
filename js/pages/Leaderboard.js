@@ -145,13 +145,21 @@ export default {
 
         const getOrCreatePlayer = (name) => {
             let displayName = name;
+            const inputName = name.toLowerCase().trim();
             
-            if (name.toLowerCase() === '[🇨🇿] Earl12') {
-                displayName = '[🇨🇿] Earl12';
+            // 1. KONTROLA PRO EARLA (Chytí 'stetkos' i 'earl12' z databáze a dá jim vlaječku)
+            if (inputName === 'stetkos' || inputName === 'earl12') {
+                displayName = '🇨🇿 Earl12';
+            }
+            
+            // 2. KONTROLA PRO KRYŠTOFA (Chytí čisté 'krystof' z databáze a dá mu vlaječku)
+            if (inputName === 'krystof') {
+                displayName = '🇨🇿 Krystof';
             }
 
-             if (name.toLowerCase() === '[🇨🇿] krystof') {
-                displayName = '[🇨🇿] Krystof';
+            // 3. KONTROLA PRO TEBE (Chytí 'trumandigma' a dá ti vlaječku)
+            if (inputName === 'trumandigma') {
+                displayName = '🇨🇿 trumandigma';
             }
             
             const lowerName = displayName.toLowerCase();
@@ -170,6 +178,7 @@ export default {
             }
             return playersMap[lowerName];
         };
+
 
         const allowedPlayers = ['[🇨🇿] trumandigma', '[🇨🇿] Earl12', '[🇨🇿] Krystof'];
 

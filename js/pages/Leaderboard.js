@@ -149,6 +149,10 @@ export default {
             if (name.toLowerCase() === '[🇨🇿] Earl12') {
                 displayName = '[🇨🇿] Earl12';
             }
+
+             if (name.toLowerCase() === '[🇨🇿] krystof') {
+                displayName = '[🇨🇿] Krystof';
+            }
             
             const lowerName = displayName.toLowerCase();
             if (!playersMap[lowerName]) {

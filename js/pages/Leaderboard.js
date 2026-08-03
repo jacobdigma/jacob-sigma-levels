@@ -147,25 +147,29 @@ export default {
             let displayName = name;
             const inputName = name.toLowerCase().trim();
             
-            // 1. KONTROLA PRO EARLA (Chytí 'stetkos' i 'earl12' z databáze a dá jim vlaječku)
+            // 1. KONTROLA PRO EARLA (Sjednotíme stetkos i earl12)
             if (inputName === 'stetkos' || inputName === 'earl12') {
                 displayName = '🇨🇿 Earl12';
             }
-            
-            // 2. KONTROLA PRO KRYŠTOFA (Chytí čisté 'krystof' z databáze a dá mu vlaječku)
-            if (inputName === 'krystof') {
+            // 2. KONTROLA PRO KRYŠTOFA
+            else if (inputName === 'krystof') {
                 displayName = '🇨🇿 Krystof';
             }
-
-            // 3. KONTROLA PRO TEBE (Chytí 'trumandigma' a dá ti vlaječku)
-            if (inputName === 'trumandigma') {
+            // 3. KONTROLA PRO TEBE
+            else if (inputName === 'trumandigma') {
                 displayName = '🇨🇿 trumandigma';
+            } else {
+                // Pojistka pro jakékoliv jiné jméno, co by se v budoucnu přidalo
+                displayName = '🇨🇿 ' + name;
             }
             
-            const lowerName = displayName.toLowerCase();
+            // Pro klíč v mapě použijeme ČISTÉ jméno malými písmeny bez vlaječky, 
+            // aby se nám to netlouklo s kontrolou v allowedPlayers!
+            const lowerName = name.toLowerCase().trim();
+            
             if (!playersMap[lowerName]) {
                 playersMap[lowerName] = {
-                    name: displayName,
+                    name: displayName, // Tady bude to pěkné jméno s vlaječkou pro zobrazení na webu
                     total: 0,
                     mainCount: 0,
                     extendedCount: 0,
@@ -179,8 +183,8 @@ export default {
             return playersMap[lowerName];
         };
 
-
-        const allowedPlayers = ['[🇨🇿] trumandigma', '[🇨🇿] Earl12', '[🇨🇿] Krystof'];
+        // SEM SE KÓD PODÍVÁ PŘI KONTROLE REKORDŮ - TADY TO MUSÍ BÝT ČISTÉ BEZ VLAJEČEK!
+        const allowedPlayers = ['trumandigma', 'earl12', 'stetkos', 'krystof'];
 
         levels.forEach(level => {
             // 1. KONTROLA VERIFIKÁTORA

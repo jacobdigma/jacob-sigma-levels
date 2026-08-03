@@ -182,7 +182,7 @@ export default {
         levels.forEach(level => {
             // 1. KONTROLA VERIFIKÁTORA
             if (level.verifier && level.verifier.trim() !== "") {
-                if (allowedPlayers.includes(level.verifier.toLowerCase())) {
+               if (allowedPlayers.includes(level.verifier.toLowerCase().trim())) {
                     const player = getOrCreatePlayer(level.verifier);
                     
                     player.total += level.points;
@@ -213,7 +213,7 @@ export default {
             if (level.records && level.records.length > 0) {
                 level.records.forEach(record => {
                     if (!record.user) return;
-                    if (allowedPlayers.includes(record.user.toLowerCase())) {
+                    if (allowedPlayers.includes(level.verifier.toLowerCase().trim())) {
                         const player = getOrCreatePlayer(record.user);
 
                         if (parseInt(record.percent) === 100) {

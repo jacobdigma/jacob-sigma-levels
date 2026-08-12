@@ -113,6 +113,7 @@ export default {
             search: '',
             list: [
                 // --- MAIN LIST ---
+                { name: "Veracity", author: "BlueLite", verifier: "🇻🇳 trumandigma", points: 200, type: "main", minimum: 68, verification: "https://www.youtube.com/watch?v=AvCHbKpv9m4", records: [] },
                 { name: "Verity", author: "Serponge", verifier: "🇻🇳 trumandigma", points: 200, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=dmD8T5zht7A", records: [{ user: "🇨🇿 Earl12", percent: 100, link: "https://www.youtube.com/watch?v=2wWEXqaOIjQ" }] },
                 { name: "Skeletal Shenanigans", author: "YoReid", verifier: "🇻🇳 trumandigma", points: 195, type: "main", minimum: 64, verification: "https://www.youtube.com/watch?v=kO205r4sZKM", records: [] },
                 { name: "Sirius", author: "FunnyGame", verifier: "🇻🇳 trumandigma", points: 190, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=6AxuV3e_6E4", records: [] },

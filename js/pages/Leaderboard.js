@@ -176,6 +176,7 @@ export default {
             '🇨🇿 earl12', 
             '🇨🇿 stetkos', 
             '🇨🇿 krystof'
+            '🇨🇿 Thomas'
         ];
 
 

@@ -175,8 +175,8 @@ export default {
             '🇻🇳 trumandigma', 
             '🇨🇿 earl12', 
             '🇨🇿 stetkos', 
-            '🇨🇿 krystof'
-            '🇨🇿 Thomas'
+            '🇨🇿 krystof',
+            '🇨🇿 Thomas',
             '🇨🇿 zubnikartacka'
         ];
 

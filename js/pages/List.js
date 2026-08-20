@@ -147,6 +147,7 @@ export default {
                 { name: "Hexagon Force", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 0, type: "main", verification: "", records: [] },
                 { name: "Platinum Adventure", author: "Jerry4", verifier: "🇨🇿 Earl12", points: 0, type: "main", verification: "", records: [{ user: "🇻🇳 trumandigma", percent: 100, link: "#" },{ user: "🇨🇿 Krystof", percent: 100, link: "#" }] },
                 { name: "Blast Processing V2", author: "Neptune", verifier: "🇨🇿 Earl12", points: 0, type: "main", verification: "", records: [] },
+                { name: "yStep", author: "TherealDarnoc", verifier: "🇨🇿 Earl12", points: 180, type: "main", minimum: 80, verification: "", records: [] },
                 { name: "ice cave", author: "Ketis", verifier: "🇨🇿 Earl12", points: 180, type: "main", minimum: 0, verification: "", records: [] },
                 { name: "The Nightmare", author: "Jax", verifier: "🇨🇿 Earl12", points: 0, type: "main", verification: "", records: [{ user: "🇻🇳 trumandigma", percent: 100, link: "#" }] },
                 { name: "The Lightning Road", author: "Timeless Real", verifier: "🇨🇿 Earl12", points: 0, type: "main", verification: "", records: [{ user: "🇻🇳 trumandigma", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" }] },

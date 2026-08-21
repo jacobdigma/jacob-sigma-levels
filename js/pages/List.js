@@ -145,6 +145,7 @@ export default {
                 { name: "Demon Forest", author: "Ketis", verifier: "🇻🇳 trumandigma", points: 0, type: "main", verification: "", records: [{ user: "🇨🇿 Earl12", percent: 100, link: "#" }] },
                 { name: "Demon Mixed", author: "RealOggy", verifier: "🇨🇿 Earl12", points: 0, type: "main", verification: "", records: [] },
                 { name: "Hexagon Force", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 0, type: "main", verification: "", records: [] },
+                { name: "Justice for Julinka", author: "🇨🇿 Earl12", verifier: "🇨🇿 Earl12", points: 0, type: "main", verification: "https://www.youtube.com/watch?v=Ppe3l-HoBLs", records: [] },
                 { name: "Platinum Adventure", author: "Jerry4", verifier: "🇨🇿 Earl12", points: 0, type: "main", verification: "", records: [{ user: "🇻🇳 trumandigma", percent: 100, link: "#" },{ user: "🇨🇿 Krystof", percent: 100, link: "#" }] },
                 { name: "Blast Processing V2", author: "Neptune", verifier: "🇨🇿 Earl12", points: 0, type: "main", verification: "", records: [] },
                 { name: "yStep", author: "TherealDarnoc", verifier: "🇨🇿 Earl12", points: 180, type: "main", minimum: 80, verification: "https://youtu.be/xO2j6OMTiLo?si=2OkvfRSOYy08VZ1f", records: [] },

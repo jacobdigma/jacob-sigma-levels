@@ -288,7 +288,7 @@ export default {
                     }
                 });
             }
-        );
+       
 
         // AUTOMATICKÁ KONTROLA COMPLETED PACKS
         if (packsModule && packsModule.data) {

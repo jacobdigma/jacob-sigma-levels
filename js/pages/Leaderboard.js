@@ -227,10 +227,12 @@ export default {
                             link: level.verification || "#",
                             type: level.type,
                             isVerified: true
-                        });
+                                                 });
+                        }
                     }
-                }
+                });
             }
+        });
 
             // 2. KONTROLA REKORDŮ
             if (level.records && level.records.length > 0) {

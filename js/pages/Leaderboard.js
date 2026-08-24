@@ -64,6 +64,17 @@ export default {
                             <span v-if="idx < entry.demons.length - 1" style="color: #333; margin: 0 6px;"> - </span>
                         </template>
                     </div>
+                                        <!-- DEMONS CREATED SEKCE -->
+                    <h2 style="font-size: 1.6rem; font-weight: 800; margin: 30px 0 15px 0;">Demons created</h2>
+                    <div v-if="!entry.created || entry.created.length === 0" style="color: #65676b; font-style: italic;">None</div>
+                    <div v-else style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 30px; line-height: 1.6;">
+                        <span v-for="(level, idx) in [...entry.created].sort((a, b) => a.name.localeCompare(b.name))" :key="idx" style="display: inline-block; margin-bottom: 5px;">
+                            <a :href="level.link" target="_blank" :style="getLevelStyle(level.type)">{{ level.name }}</a>
+                            <!-- Šedá pomlčka s mezerami za každý vytvořený level kromě posledního -->
+                            <span v-if="idx < entry.created.length - 1" style="color: #65676b; margin: 0 8px;">-</span>
+                        </span>
+                    </div>
+
 
                     <!-- PROGRESS SEKCE -->
                     <h2 style="color: #000000; font-size: 1.6rem; margin: 35px 0 15px 0; text-align: center; font-weight: 700;">Progress on</h2>

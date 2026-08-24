@@ -64,16 +64,17 @@ export default {
                             <span v-if="idx < entry.demons.length - 1" style="color: #333; margin: 0 6px;"> - </span>
                         </template>
                     </div>
-                                        <!-- DEMONS CREATED SEKCE -->
+                                       <!-- DEMONS CREATED SEKCE -->
                     <h2 style="font-size: 1.6rem; font-weight: 800; margin: 30px 0 15px 0;">Demons created</h2>
                     <div v-if="!entry.created || entry.created.length === 0" style="color: #65676b; font-style: italic;">None</div>
-                    <div v-else style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 30px; line-height: 1.6;">
-                        <span v-for="(level, idx) in [...entry.created].sort((a, b) => a.name.localeCompare(b.name))" :key="idx" style="display: inline-block; margin-bottom: 5px;">
+                    <!-- OPRAVENO: Přidán maximální rozsah a lepší formátování řádků -->
+                    <div v-else style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0px; margin-bottom: 30px; line-height: 1.6; max-width: 100%;">
+                        <span v-for="(level, idx) in [...entry.created].sort((a, b) => a.name.localeCompare(b.name))" :key="idx" style="display: inline-block; margin-bottom: 5px; white-space: nowrap;">
                             <a :href="level.link" target="_blank" :style="getLevelStyle(level.type)">{{ level.name }}</a>
-                            <!-- Šedá pomlčka s mezerami za každý vytvořený level kromě posledního -->
                             <span v-if="idx < entry.created.length - 1" style="color: #65676b; margin: 0 8px;">-</span>
                         </span>
                     </div>
+
 
 
                     <!-- PROGRESS SEKCE -->

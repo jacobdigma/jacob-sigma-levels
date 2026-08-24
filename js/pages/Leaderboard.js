@@ -310,8 +310,7 @@ export default {
                         });
                     }
                 });
-            });
-        }
+  
 
         this.rawLeaderboard = Object.values(playersMap).map(player => {
             player.stats = player.mainCount + " Main, " + player.extendedCount + " Extended, " + player.legacyCount + " Legacy";

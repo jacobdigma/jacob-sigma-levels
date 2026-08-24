@@ -195,18 +195,17 @@ export default {
 
 
                 // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
+               // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
         levels.forEach(level => {
             if (level.author && level.author.trim() !== "") {
-                // Najdeme hráče v žebříčku podle autora levelu (ignorujeme vlaječky přes allowedPlayers)
                 const authorClean = level.author.toLowerCase().trim();
                 
-                // Odstraníme případnou vlaječku z textu autora pro porovnání, pokud bys ji tam někdy napsal
+                // OPRAVENO: Čisté a bezpečné hledání v poli bez uletěných závorek
                 const matchedAllowed = allowedPlayers.find(p => authorClean.includes(p));
                 
                 if (matchedAllowed) {
                     const player = getOrCreatePlayer(matchedAllowed);
                     
-                    // Pojistka, ať se level nepřidá dvakrát
                     const alreadyAdded = player.created.some(c => c.name === level.name);
                     if (!alreadyAdded) {
                         player.created.push({
@@ -218,6 +217,7 @@ export default {
                 }
             }
         });
+
 
 
                     const alreadyAdded = player.demons.some(d => d.level === level.name);
@@ -341,7 +341,7 @@ export default {
                 fontWeight: 'normal',
                 fontSize: '0.9rem',
                 textDecoration: 'none'
-            });
+            };
         }
     }
-});
+};

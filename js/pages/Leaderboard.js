@@ -173,7 +173,8 @@ export default {
                     hardest: "None",
                     hardestRank: 9999,
                     demons: [],
-                    progress: []
+                    progress: [],
+                    created: []
                 };
             }
             return playersMap[lowerName];
@@ -193,22 +194,30 @@ export default {
         ];
 
 
+                // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
         levels.forEach(level => {
-            // 1. KONTROLA VERIFIKÁTORA
-            if (level.verifier && level.verifier.trim() !== "") {
-               if (allowedPlayers.includes(level.verifier.toLowerCase().trim())) {
-                    const player = getOrCreatePlayer(level.verifier);
+            if (level.author && level.author.trim() !== "") {
+                // Najdeme hráče v žebříčku podle autora levelu (ignorujeme vlaječky přes allowedPlayers)
+                const authorClean = level.author.toLowerCase().trim();
+                
+                // Odstraníme případnou vlaječku z textu autora pro porovnání, pokud bys ji tam někdy napsal
+                const matchedAllowed = allowedPlayers.find(p => authorClean.includes(p));
+                
+                if (matchedAllowed) {
+                    const player = getOrCreatePlayer(matchedAllowed);
                     
-                    player.total += level.points;
-                    
-                    if (level.type === 'main') player.mainCount++;
-                    if (level.type === 'extended') player.extendedCount++;
-                    if (level.type === 'legacy') player.legacyCount++;
-
-                    if (level.rank < player.hardestRank || (level.type === 'legacy' && player.hardest === "None")) {
-    player.hardest = level.name;
-    player.hardestRank = level.rank;
-}
+                    // Pojistka, ať se level nepřidá dvakrát
+                    const alreadyAdded = player.created.some(c => c.name === level.name);
+                    if (!alreadyAdded) {
+                        player.created.push({
+                            name: level.name,
+                            type: level.type,
+                            link: level.verification || "#"
+                        });
+                    }
+                }
+            }
+        });
 
 
                     const alreadyAdded = player.demons.some(d => d.level === level.name);

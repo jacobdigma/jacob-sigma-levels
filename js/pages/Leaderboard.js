@@ -196,33 +196,24 @@ export default {
 
                 // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
                // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
-            // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
+            const allowedPlayers = ['trumandigma', 'earl12', 'stetkos', 'krystof'];
+
         levels.forEach(level => {
-            if (level.author && level.author.trim() !== "") {
-                // Najdeme hráče v žebříčku podle autora levelu (ignorujeme vlaječky přes allowedPlayers)
-                const authorClean = level.author.toLowerCase().trim();
-                
-                // Odstraníme případnou vlaječku z textu autora pro porovnání, pokud bys ji tam někdy napsal
-                const matchedAllowed = allowedPlayers.find(p => authorClean.includes(p));
-                
-                if (matchedAllowed) {
-                    const player = getOrCreatePlayer(matchedAllowed);
+            // 1. KONTROLA VERIFIKÁTORA
+            if (level.verifier && level.verifier.trim() !== "") {
+                if (allowedPlayers.includes(level.verifier.toLowerCase())) {
+                    const player = getOrCreatePlayer(level.verifier);
                     
-                    // Pojistka, ať se level nepřidá dvakrát
-                    const alreadyAdded = player.created.some(c => c.name === level.name);
-                    if (!alreadyAdded) {
-                        player.created.push({
-                            name: level.name,
-                            type: level.type,
-                            link: level.verification || "#"
-                        });
+                    player.total += level.points;
+                    
+                    if (level.type === 'main') player.mainCount++;
+                    if (level.type === 'extended') player.extendedCount++;
+                    if (level.type === 'legacy') player.legacyCount++;
+
+                    if (level.rank < player.hardestRank) {
+                        player.hardest = level.name;
+                        player.hardestRank = level.rank;
                     }
-                }
-            }
-        });
-
-
-
 
                     const alreadyAdded = player.demons.some(d => d.level === level.name);
                     if (!alreadyAdded) {
@@ -231,12 +222,12 @@ export default {
                             link: level.verification || "#",
                             type: level.type,
                             isVerified: true
-                                                 });
-                        }
+                        });
                     }
-                });
+                }
             }
-        });
+        }); // <-- TENTO MODRÝ ŘÁDEK TI TEĎ SPRÁVNĚ UKONČÍ VERIFIKACE!
+
 
             // 2. KONTROLA REKORDŮ
             if (level.records && level.records.length > 0) {

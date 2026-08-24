@@ -165,7 +165,7 @@ export default {
                 { name: "Electroman Adventures", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "main", minimum: 73, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" },{ user: "🇨🇿 zubnikartacka", percent: 83, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Flappy Bird", author: "TherealDarnoc", verifier: "🇨🇿 Earl12", points: 180, type: "main", minimum: 80, verification: "", records: [] },
                 { name: "Geometrical Dominator", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "main", minimum: 80, verification: "", records: [ { user: "🇨🇿 Krystof", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
-                { name: "Time Machine", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "main", minimum: 80, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 86, link: "#" } ] },
+                { name: "Time Machine", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "main", minimum: 80, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 86, link: "#" } ] }
                 // --- EXTENDED LIST ---
                 // --- LEGACY LIST ---
                                 ]

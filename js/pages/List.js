@@ -168,7 +168,7 @@ export default {
                 { name: "Time Machine", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "main", minimum: 80, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 86, link: "#" } ] }
                 // --- EXTENDED LIST ---
                 // --- LEGACY LIST ---
-                ];
+                ]
         };
     },
        mounted() {
@@ -261,4 +261,3 @@ export default {
         }
     }
 };
-

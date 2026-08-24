@@ -196,37 +196,27 @@ export default {
 
                 // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
                // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
-            const allowedPlayers = ['trumandigma', 'earl12', 'stetkos', 'krystof'];
 
-        levels.forEach(level => {
-            // 1. KONTROLA VERIFIKÁTORA
-            if (level.verifier && level.verifier.trim() !== "") {
-                if (allowedPlayers.includes(level.verifier.toLowerCase())) {
-                    const player = getOrCreatePlayer(level.verifier);
-                    
-                    player.total += level.points;
-                    
-                    if (level.type === 'main') player.mainCount++;
-                    if (level.type === 'extended') player.extendedCount++;
-                    if (level.type === 'legacy') player.legacyCount++;
 
-                    if (level.rank < player.hardestRank) {
-                        player.hardest = level.name;
-                        player.hardestRank = level.rank;
-                    }
-
-                    const alreadyAdded = player.demons.some(d => d.level === level.name);
+               levels.forEach(level => {
+            if (level.author && level.author.trim() !== "") {
+                const authorClean = level.author.toLowerCase().trim();
+                const matchedAllowed = allowedPlayers.find(p => authorClean.includes(p.toLowerCase().trim()));
+                
+                if (matchedAllowed) {
+                    const player = getOrCreatePlayer(matchedAllowed);
+                    const alreadyAdded = player.created.some(c => c.name === level.name);
                     if (!alreadyAdded) {
-                        player.demons.push({
-                            level: level.name,
-                            link: level.verification || "#",
+                        player.created.push({
+                            name: level.name,
                             type: level.type,
-                            isVerified: true
+                            link: level.verification || "#"
                         });
                     }
                 }
             }
-        }); // <-- TENTO MODRÝ ŘÁDEK TI TEĎ SPRÁVNĚ UKONČÍ VERIFIKACE!
+        });
+
 
 
             // 2. KONTROLA REKORDŮ

@@ -341,7 +341,7 @@ export default {
                 fontWeight: 'normal',
                 fontSize: '0.9rem',
                 textDecoration: 'none'
-            };
+            });
         }
     }
 };

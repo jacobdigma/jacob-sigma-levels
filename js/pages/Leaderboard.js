@@ -173,7 +173,8 @@ export default {
                     hardest: "None",
                     hardestRank: 9999,
                     demons: [],
-                    progress: []
+                    progress: [],
+                     created: []
                 };
             }
             return playersMap[lowerName];

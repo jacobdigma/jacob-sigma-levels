@@ -177,7 +177,8 @@ export default {
             '🇨🇿 stetkos', 
             '🇨🇿 krystof',
             '🇨🇿 Thomas',
-            '🇨🇿 zubnikartacka'
+            '🇨🇿 zubnikartacka',
+            '🇲🇾 Cylio'
         ];
 
 

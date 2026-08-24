@@ -173,8 +173,7 @@ export default {
                     hardest: "None",
                     hardestRank: 9999,
                     demons: [],
-                    progress: [],
-                    created: []
+                    progress: []
                 };
             }
             return playersMap[lowerName];
@@ -194,30 +193,35 @@ export default {
         ];
 
 
-                // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
-               // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
+        levels.forEach(level => {
+            // 1. KONTROLA VERIFIKÁTORA
+            if (level.verifier && level.verifier.trim() !== "") {
+               if (allowedPlayers.includes(level.verifier.toLowerCase().trim())) {
+                    const player = getOrCreatePlayer(level.verifier);
+                    
+                    player.total += level.points;
+                    
+                    if (level.type === 'main') player.mainCount++;
+                    if (level.type === 'extended') player.extendedCount++;
+                    if (level.type === 'legacy') player.legacyCount++;
+
+                    if (level.rank < player.hardestRank || (level.type === 'legacy' && player.hardest === "None")) {
+    player.hardest = level.name;
+    player.hardestRank = level.rank;
+}
 
 
-               levels.forEach(level => {
-            if (level.author && level.author.trim() !== "") {
-                const authorClean = level.author.toLowerCase().trim();
-                const matchedAllowed = allowedPlayers.find(p => authorClean.includes(p.toLowerCase().trim()));
-                
-                if (matchedAllowed) {
-                    const player = getOrCreatePlayer(matchedAllowed);
-                    const alreadyAdded = player.created.some(c => c.name === level.name);
+                    const alreadyAdded = player.demons.some(d => d.level === level.name);
                     if (!alreadyAdded) {
-                        player.created.push({
-                            name: level.name,
+                        player.demons.push({
+                            level: level.name,
+                            link: level.verification || "#",
                             type: level.type,
-                            link: level.verification || "#"
+                            isVerified: true
                         });
                     }
                 }
             }
-        });
-
-
 
             // 2. KONTROLA REKORDŮ
             if (level.records && level.records.length > 0) {
@@ -275,7 +279,7 @@ export default {
                     }
                 });
             }
-       
+        });
 
         // AUTOMATICKÁ KONTROLA COMPLETED PACKS
         if (packsModule && packsModule.data) {
@@ -297,9 +301,10 @@ export default {
                         });
                     }
                 });
-  
+            });
+        }
 
-                  this.rawLeaderboard = Object.values(playersMap).map(player => {
+        this.rawLeaderboard = Object.values(playersMap).map(player => {
             player.stats = player.mainCount + " Main, " + player.extendedCount + " Extended, " + player.legacyCount + " Legacy";
             return player;
         });

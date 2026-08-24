@@ -169,6 +169,7 @@ export default {
                 // --- EXTENDED LIST ---
                 // --- LEGACY LIST ---
                 ]
+        ]
         };
     },
        mounted() {

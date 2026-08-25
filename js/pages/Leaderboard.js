@@ -227,29 +227,39 @@ export default {
                 }
             }
                     // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
+               // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
         levels.forEach(level => {
             if (level.author && level.author.trim() !== "") {
-                // Najdeme hráče v žebříčku podle autora levelu (ignorujeme vlaječky přes allowedPlayers)
                 const authorClean = level.author.toLowerCase().trim();
-                
-                // Odstraníme případnou vlaječku z textu autora pro porovnání, pokud bys ji tam někdy napsal
-                const matchedAllowed = allowedPlayers.find(p => authorClean.includes(p));
+                const matchedAllowed = allowedPlayers.find(p => authorClean.includes(p.toLowerCase().trim()));
                 
                 if (matchedAllowed) {
                     const player = getOrCreatePlayer(matchedAllowed);
                     
-                    // Pojistka, ať se level nepřidá dvakrát
-                    const alreadyAdded = player.created.some(c => c.name === level.name);
-                    if (!alreadyAdded) {
+                    // 1. ZÁPIS DO SEKCE CREATED (Vytvořené levely)
+                    const alreadyAddedCreated = player.created.some(c => c.name === level.name);
+                    if (!alreadyAddedCreated) {
                         player.created.push({
                             name: level.name,
                             type: level.type,
                             link: level.verification || "#"
                         });
                     }
+
+                    // 2. POJISTKA: ZÁPIS DO SEKCE COMPLETED (Aby autorovi level nezmizel z dokončených!)
+                    const alreadyAddedDemons = player.demons.some(d => d.level === level.name);
+                    if (!alreadyAddedDemons) {
+                        player.demons.push({
+                            level: level.name,
+                            link: level.verification || "#",
+                            type: level.type,
+                            isVerified: false
+                        });
+                    }
                 }
             }
         });
+
 
 
             // 2. KONTROLA REKORDŮ

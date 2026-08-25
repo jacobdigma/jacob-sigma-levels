@@ -265,7 +265,7 @@ export default {
                     }
                 }
             }
-        };
+        });
 
 
 

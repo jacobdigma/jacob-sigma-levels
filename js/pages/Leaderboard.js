@@ -228,8 +228,7 @@ export default {
                             type: level.type,
                             isVerified: false
                     }),
-                                }
-                }
+ 
             }
         });
                     // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)

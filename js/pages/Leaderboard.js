@@ -325,7 +325,7 @@ export default {
                         }
                     }
                 });
-            }
+            })
         });
 
         // AUTOMATICKÁ KONTROLA COMPLETED PACKS

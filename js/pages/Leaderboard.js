@@ -231,6 +231,7 @@ export default {
                     }
                 }
             }
+                    }
         });
 
                     // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)

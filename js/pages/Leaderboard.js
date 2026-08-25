@@ -320,12 +320,13 @@ export default {
                                 percent: currentPercent,
                                 link: record.link || "#",
                                 type: level.type
-                            });
-                        }
-                    })
-                });
-            })
-        });
+                   });
+            }
+        }
+    });
+}
+});
+
 
         // AUTOMATICKÁ KONTROLA COMPLETED PACKS
         if (packsModule && packsModule.data) {

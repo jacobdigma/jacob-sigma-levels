@@ -5,7 +5,7 @@ import packsModule from './Packs.js';
 export default {
     components: { Spinner },
     template: `
-                <main style="background: #f4f2f5; padding: 20px; min-height: 100vh; display: flex; gap: 20px; align-items: flex-start; font-family: Arial, sans-serif; box-sizing: border-box;">
+        <main style="background: #f0f2f5; padding: 20px; min-height: 100vh; display: flex; gap: 20px; align-items: flex-start; font-family: Arial, sans-serif; box-sizing: border-box;">
             
             <!-- LEVÝ PANEL: Seznam hráčů -->
             <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 15px; width: 320px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); box-sizing: border-box; flex-shrink: 0;">
@@ -197,17 +197,11 @@ export default {
         ];
 
 
-               levels.forEach(level => {
+        levels.forEach(level => {
             // 1. KONTROLA VERIFIKÁTORA
             if (level.verifier && level.verifier.trim() !== "") {
-                const verifierClean = level.verifier.toLowerCase().trim();
-                
-                // OPRAVENO: Kód ignoruje vlaječku v allowedPlayers a hledá čistou shodu jména!
-                const matchedAllowed = allowedPlayers.find(p => p.toLowerCase().trim().includes(verifierClean));
-
-                if (matchedAllowed) {
-                    // Profil založíme nebo načteme podle schváleného jména z žebříčku
-                    const player = getOrCreatePlayer(matchedAllowed);
+               if (allowedPlayers.includes(level.verifier.toLowerCase().trim())) {
+                    const player = getOrCreatePlayer(level.verifier);
                     
                     player.total += level.points;
                     
@@ -215,10 +209,11 @@ export default {
                     if (level.type === 'extended') player.extendedCount++;
                     if (level.type === 'legacy') player.legacyCount++;
 
-                    if (level.rank < player.hardestRank) {
-                        player.hardest = level.name;
-                        player.hardestRank = level.rank;
-                    }
+                    if (level.rank < player.hardestRank || (level.type === 'legacy' && player.hardest === "None")) {
+    player.hardest = level.name;
+    player.hardestRank = level.rank;
+}
+
 
                     const alreadyAdded = player.demons.some(d => d.level === level.name);
                     if (!alreadyAdded) {
@@ -226,47 +221,35 @@ export default {
                             level: level.name,
                             link: level.verification || "#",
                             type: level.type,
-                            isVerified: false
-                       });
+                            isVerified: true
+                        });
                     }
                 }
             }
-        });
-
                     // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
-               // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
         levels.forEach(level => {
             if (level.author && level.author.trim() !== "") {
+                // Najdeme hráče v žebříčku podle autora levelu (ignorujeme vlaječky přes allowedPlayers)
                 const authorClean = level.author.toLowerCase().trim();
-                const matchedAllowed = allowedPlayers.find(p => authorClean.includes(p.toLowerCase().trim()));
+                
+                // Odstraníme případnou vlaječku z textu autora pro porovnání, pokud bys ji tam někdy napsal
+                const matchedAllowed = allowedPlayers.find(p => authorClean.includes(p));
                 
                 if (matchedAllowed) {
                     const player = getOrCreatePlayer(matchedAllowed);
                     
-                    // 1. ZÁPIS DO SEKCE CREATED (Vytvořené levely)
-                    const alreadyAddedCreated = player.created.some(c => c.name === level.name);
-                    if (!alreadyAddedCreated) {
+                    // Pojistka, ať se level nepřidá dvakrát
+                    const alreadyAdded = player.created.some(c => c.name === level.name);
+                    if (!alreadyAdded) {
                         player.created.push({
                             name: level.name,
                             type: level.type,
                             link: level.verification || "#"
                         });
                     }
-
-                    // 2. POJISTKA: ZÁPIS DO SEKCE COMPLETED (Aby autorovi level nezmizel z dokončených!)
-                    const alreadyAddedDemons = player.demons.some(d => d.level === level.name);
-                    if (!alreadyAddedDemons) {
-                        player.demons.push({
-                            level: level.name,
-                            link: level.verification || "#",
-                            type: level.type,
-                            isVerified: false
-                         });
-                    }
                 }
             }
         });
-
 
 
             // 2. KONTROLA REKORDŮ
@@ -320,13 +303,12 @@ export default {
                                 percent: currentPercent,
                                 link: record.link || "#",
                                 type: level.type
-                   });
+                            });
+                        }
+                    }
+                });
             }
-        }
-    });
-}
-});
-
+        });
 
         // AUTOMATICKÁ KONTROLA COMPLETED PACKS
         if (packsModule && packsModule.data) {
@@ -351,31 +333,11 @@ export default {
             });
         }
 
-        // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
-        levels.forEach(level => {
-            if (level.author && level.author.trim() !== "") {
-                const authorClean = level.author.toLowerCase().trim();
-                const matchedAllowed = allowedPlayers.find(p => authorClean.includes(p.toLowerCase().trim()));
-                
-                if (matchedAllowed) {
-                    const player = getOrCreatePlayer(matchedAllowed);
-                    const alreadyAdded = player.created.some(c => c.name === level.name);
-                    if (!alreadyAdded) {
-                        player.created.push({
-                            name: level.name,
-                            type: level.type,
-                            link: level.verification || "#"
-                        });
-                    }
-                }
-            }
-        });
-
         this.rawLeaderboard = Object.values(playersMap).map(player => {
             player.stats = player.mainCount + " Main, " + player.extendedCount + " Extended, " + player.legacyCount + " Legacy";
             return player;
         });
-    }, // <-- Ukončí celou obří metodu mounted()
+    },
     methods: {
         getLevelStyle(type) {
             if (type === 'main') {
@@ -403,5 +365,4 @@ export default {
             };
         }
     }
-}
-}; // <-- TATO ZÁVORKA OPRAVÍ CHYBU Z ŘÁDKU 5 A UZAVŘE CELÝ SOUBOR!
+};

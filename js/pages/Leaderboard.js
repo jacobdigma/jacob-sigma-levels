@@ -228,6 +228,7 @@ export default {
                             type: level.type,
                             isVerified: false
                     }),
+                                }
                 }
             }
         });

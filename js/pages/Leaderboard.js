@@ -351,11 +351,31 @@ export default {
             });
         }
 
+        // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
+        levels.forEach(level => {
+            if (level.author && level.author.trim() !== "") {
+                const authorClean = level.author.toLowerCase().trim();
+                const matchedAllowed = allowedPlayers.find(p => authorClean.includes(p.toLowerCase().trim()));
+                
+                if (matchedAllowed) {
+                    const player = getOrCreatePlayer(matchedAllowed);
+                    const alreadyAdded = player.created.some(c => c.name === level.name);
+                    if (!alreadyAdded) {
+                        player.created.push({
+                            name: level.name,
+                            type: level.type,
+                            link: level.verification || "#"
+                        });
+                    }
+                }
+            }
+        });
+
         this.rawLeaderboard = Object.values(playersMap).map(player => {
             player.stats = player.mainCount + " Main, " + player.extendedCount + " Extended, " + player.legacyCount + " Legacy";
             return player;
         });
-    },
+    }, // <-- Ukončí celou obří metodu mounted()
     methods: {
         getLevelStyle(type) {
             if (type === 'main') {
@@ -383,4 +403,4 @@ export default {
             };
         }
     }
-};
+}; // <-- TATO ZÁVORKA OPRAVÍ CHYBU Z ŘÁDKU 5 A UZAVŘE CELÝ SOUBOR!

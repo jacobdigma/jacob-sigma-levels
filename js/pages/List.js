@@ -113,6 +113,7 @@ export default {
             search: '',
             list: [
                 // --- MAIN LIST ---
+                { name: "Poltergeist", author: "Andromeda", verifier: "🇲🇾 Cylio", points: 0, type: "main", verification: "", records: [] },
                 { name: "Veracity", author: "BlueLite", verifier: "🇻🇳 trumandigma", points: 200, type: "main", minimum: 68, verification: "https://www.youtube.com/watch?v=AvCHbKpv9m4", records: [] },
                 { name: "Verity", author: "Serponge", verifier: "🇻🇳 trumandigma", points: 200, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=dmD8T5zht7A", records: [{ user: "🇨🇿 Earl12", percent: 100, link: "https://www.youtube.com/watch?v=2wWEXqaOIjQ" }] },
                 { name: "Skeletal Shenanigans", author: "YoReid", verifier: "🇻🇳 trumandigma", points: 195, type: "main", minimum: 64, verification: "https://www.youtube.com/watch?v=kO205r4sZKM", records: [] },
@@ -120,7 +121,7 @@ export default {
                 { name: "B", author: "MotleyOrc", verifier: "🇻🇳 trumandigma", points: 190, type: "main", minimum: 61, verification: "https://www.youtube.com/watch?v=sjmc5HaGrYc", records: [{ user: "🇲🇾 Cylio", percent: 64, link: "#" }] },
                 { name: "ZXCircleS", author: "Wintter", verifier: "🇲🇾 Cylio", points: 0, type: "main", verification: "", records: [] },
                 { name: "Deadlocked", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=reZj2Xbt05Q", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" } ] },
-                { name: "Hellishment", author: "🇨🇿 Earl12", verifier: "🇨🇿 Earl12", points: 145, type: "main", minimum: 81, verification: "https://www.youtube.com/watch?v=8RJstOZvoUQ", records: [{ user: "🇻🇳 trumandigma", percent: 100, link: "#" }] },
+                { name: "Hellishment", author: "🇨🇿 Earl12", verifier: "🇨🇿 Earl12", points: 145, type: "main", minimum: 81, verification: "https://www.youtube.com/watch?v=8RJstOZvoUQ", records: [{ user: "🇻🇳 trumandigma", percent: 100, link: "#" }{ user: "🇲🇾 Cylio", percent: 100, link: "https://www.youtube.com/watch?v=pbiPSgZKpd8" }] },
                 { name: "Problematic", author: "Dharfin", verifier: "🇲🇾 Cylio", points: 0, type: "main", verification: "", records: [] },
                 { name: "Theory of Everything 2", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 175, type: "main", minimum: 72, verification: "https://www.youtube.com/watch?v=medoq_Znhaw", records: [{ user: "🇨🇿 Earl12", percent: 100, link: "#" }] },
                 { name: "Blackfire Backfire", author: "kira9999", verifier: "🇻🇳 trumandigma", points: 170, type: "main", minimum: 69, verification: "https://www.youtube.com/watch?v=2h1FgtfaP1k", records: [] },
@@ -162,7 +163,7 @@ export default {
                 { name: "Fingerdash", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "main", minimum: 80, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Xstep", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "main", minimum: 80, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" },{ user: "🇨🇿 zubnikartacka", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" }] },
                 { name: "Bloodbath but No", author: "Texic", verifier: "🇨🇿 Earl12", points: 0, type: "main", verification: "", records: [] },
-                { name: "Electroman Adventures", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "main", minimum: 73, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" },{ user: "🇨🇿 zubnikartacka", percent: 83, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
+                { name: "Electroman Adventures", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 73, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" },{ user: "🇨🇿 zubnikartacka", percent: 83, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Flappy Bird", author: "TherealDarnoc", verifier: "🇨🇿 Earl12", points: 180, type: "extended", minimum: 80, verification: "", records: [] },
                 { name: "Geometrical Dominator", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 80, verification: "", records: [ { user: "🇨🇿 Krystof", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Time Machine", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 80, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" }, { user: "🇲🇾 Cylio", percent: 86, link: "#" } ] },

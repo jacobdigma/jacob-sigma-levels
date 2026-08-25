@@ -403,4 +403,5 @@ export default {
             };
         }
     }
+}
 }; // <-- TATO ZÁVORKA OPRAVÍ CHYBU Z ŘÁDKU 5 A UZAVŘE CELÝ SOUBOR!

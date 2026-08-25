@@ -197,11 +197,17 @@ export default {
         ];
 
 
-        levels.forEach(level => {
+               levels.forEach(level => {
             // 1. KONTROLA VERIFIKÁTORA
             if (level.verifier && level.verifier.trim() !== "") {
-               if (allowedPlayers.includes(level.verifier.toLowerCase().trim())) {
-                    const player = getOrCreatePlayer(level.verifier);
+                const verifierClean = level.verifier.toLowerCase().trim();
+                
+                // OPRAVENO: Kód ignoruje vlaječku v allowedPlayers a hledá čistou shodu jména!
+                const matchedAllowed = allowedPlayers.find(p => p.toLowerCase().trim().includes(verifierClean));
+
+                if (matchedAllowed) {
+                    // Profil založíme nebo načteme podle schváleného jména z žebříčku
+                    const player = getOrCreatePlayer(matchedAllowed);
                     
                     player.total += level.points;
                     
@@ -209,11 +215,10 @@ export default {
                     if (level.type === 'extended') player.extendedCount++;
                     if (level.type === 'legacy') player.legacyCount++;
 
-                    if (level.rank < player.hardestRank || (level.type === 'legacy' && player.hardest === "None")) {
-    player.hardest = level.name;
-    player.hardestRank = level.rank;
-}
-
+                    if (level.rank < player.hardestRank) {
+                        player.hardest = level.name;
+                        player.hardestRank = level.rank;
+                    }
 
                     const alreadyAdded = player.demons.some(d => d.level === level.name);
                     if (!alreadyAdded) {
@@ -221,11 +226,13 @@ export default {
                             level: level.name,
                             link: level.verification || "#",
                             type: level.type,
-                            isVerified: true
+                            isVerified: false
                         });
                     }
                 }
             }
+        });
+
                     // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
                // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
         levels.forEach(level => {

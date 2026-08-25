@@ -227,11 +227,10 @@ export default {
                             link: level.verification || "#",
                             type: level.type,
                             isVerified: false
-                        });
+                       });
                     }
                 }
             }
-            }),
         });
 
                     // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)

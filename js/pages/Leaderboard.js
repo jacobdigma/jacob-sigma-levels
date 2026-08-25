@@ -227,7 +227,7 @@ export default {
                             link: level.verification || "#",
                             type: level.type,
                             isVerified: false
-                    }
+                    }),
                 }
             }
         });

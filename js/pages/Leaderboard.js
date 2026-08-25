@@ -323,7 +323,7 @@ export default {
                                 type: level.type
                             });
                         }
-                    }
+                    })
                 });
             })
         });

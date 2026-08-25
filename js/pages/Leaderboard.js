@@ -229,7 +229,7 @@ export default {
                             isVerified: false
                     }),
  
-            }
+            
         });
                     // AUTOMATICKÁ KONTROLA VYTVOŘENÝCH LEVELŮ (DEMONS CREATED)
         levels.forEach(level => {

@@ -161,8 +161,11 @@ export default {
             let displayName = name;
             
             // Jediná pojistka: pokud narazí na staré jméno stetkos (s vlajkou i bez), sjednotí ho na Earl12 s vlajkou
-            if (name.toLowerCase().includes('stetkos')) {
+        if (name.toLowerCase().includes('stetkos')) {
                 displayName = '🇨🇿 Earl12';
+            }
+                      if (name.toLowerCase().includes('🇲🇾 cylio')) {
+                displayName = '🇲🇾 Cylio';
             }
             
             const lowerName = displayName.toLowerCase().trim();

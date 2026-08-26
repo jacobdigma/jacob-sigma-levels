@@ -196,8 +196,8 @@ export default {
             '🇨🇿 krystof',
             '🇨🇿 Thomas',
             '🇨🇿 zubnikartacka',
-            '🇲🇾 Cylio'
-            '🇲🇾 cylio'
+            '🇲🇾 Cylio',
+            '🇲🇾 cylio',
         ];
 
 

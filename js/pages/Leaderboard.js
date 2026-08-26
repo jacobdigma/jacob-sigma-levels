@@ -197,6 +197,7 @@ export default {
             '🇨🇿 Thomas',
             '🇨🇿 zubnikartacka',
             '🇲🇾 Cylio'
+            '🇲🇾 cylio'
         ];
 
 

@@ -262,13 +262,19 @@ export default {
     },
 
     computed: {
-        filteredList() {
+                filteredList() {
+            // Pojistka: Pokud list vůbec neexistuje, vrátíme prázdné pole
+            if (!this.list) return [];
+
             if (!this.search) {
                 let displayList = [];
                 let hasExtendedDivider = false;
                 let hasLegacyDivider = false;
 
                 this.list.forEach(level => {
+                    // BEZPEČNOSTNÍ POJISTKA: Pokud je level prázdný nebo rozbitý, úplně ho přeskočíme
+                    if (!level || !level.type) return;
+
                     if (level.type === 'extended' && !hasExtendedDivider) {
                         displayList.push({ isDivider: true, dividerText: "--- EXTENDED LIST ---" });
                         hasExtendedDivider = true;
@@ -281,8 +287,10 @@ export default {
                 });
                 return displayList;
             }
+            
+            // Při vyhledávání rovnou odfiltrujeme jakékoliv prázdné objekty (undefined)
             return this.list.filter(level => 
-                level.name && level.name.toLowerCase().includes(this.search.toLowerCase())
+                level && level.name && level.name.toLowerCase().includes(this.search.toLowerCase())
             );
         },
         entry() {

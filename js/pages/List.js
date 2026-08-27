@@ -6,14 +6,69 @@ export default {
             template: `
         <main style="background: #f4f2f5; padding: 20px; min-height: 100vh; display: flex; gap: 20px; align-items: flex-start; font-family: Arial, sans-serif; box-sizing: border-box;">
 
-            <!-- LEVÝ PANEL: Kompletně předělaný seznam úrovní -->
-            <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 15px; width: 340px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); box-sizing: border-box; flex-shrink: 0; text-align: left;">
-                <div style="margin-bottom: 15px;">
-                    <input type="text" v-model="search" placeholder="Search level..." style="width: 100%; padding: 10px; border: 1px solid #ccd1d9; border-radius: 4px; background: #fff; color: #000; font-size: 0.95rem; box-sizing: border-box;">
-                </div>
+                       <!-- NOVÝ GRAFICKÝ LEVÝ PANEL: Karty s thumbnaily přesně podle obrázku -->
+            <div style="width: 480px; flex-shrink: 0; display: flex; flex-direction: column; gap: 15px; max-height: calc(100vh - 40px); overflow-y: auto; padding-right: 5px; box-sizing: border-box;">
                 
-                <div style="display: flex; flex-direction: column; gap: 4px;">
-                    <template v-for="(level, idx) in filteredList" :key="idx">
+                <!-- VYHLEDÁVACÍ POLÍČKO -->
+                <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+                    <input type="text" v-model="search" placeholder="Search level..." style="width: 100%; padding: 10px 12px; border: 1px solid #ccdid9; border-radius: 6px; background: #fff; color: #000; font-size: 0.95rem; box-sizing: border-box; outline: none;">
+                </div>
+
+                <!-- SMYČKA PRO GENEROVÁNÍ KARET LEVELŮ -->
+                <div v-for="(level, idx) in filteredList" :key="idx">
+                    
+                    <!-- POKUD JE ŘÁDEK ODDĚLOVAČ (DIVIDER) -->
+                    <div v-if="level.isDivider" style="text-align: center; padding: 15px 0; font-weight: 800; color: #6b7280; font-size: 0.95rem; letter-spacing: 1.5px; text-transform: uppercase;">
+                        {{ level.dividerText }}
+                    </div>
+
+                    <!-- REÁLNÁ KARTA LEVELU -->
+                    <div v-else @click="selected = list.indexOf(level)" 
+                         :style="{
+                             cursor: 'pointer',
+                             background: list[selected] === level ? '#f3f4f6' : '#ffffff',
+                             border: list[selected] === level ? '2px solid #2563eb' : '1px solid #e1e4e8',
+                             borderRadius: '8px',
+                             padding: '15px',
+                             boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                             display: 'flex',
+                             gap: '15px',
+                             alignItems: 'center',
+                             transition: 'all 0.15s ease',
+                             boxSizing: 'border-box'
+                         }">
+                        
+                        <!-- AUTOMATICKÝ THUMBNAIL Z YOUTUBE ODKAZU -->
+                        <div style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
+                            <img v-if="level.verification && level.verification !== '#'" 
+                                 :src="'https://youtube.com' + (level.verification.includes('v=') ? level.verification.split('v=').split('&') : (level.verification.includes('youtu.be/') ? level.verification.split('youtu.be/').split('?') : level.verification)) + '/mqdefault.jpg'" 
+                                 alt="thumbnail" 
+                                 style="width: 100%; height: 100%; object-fit: cover;">
+                            <div v-else style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #4b5563; font-size: 0.75rem; font-weight: bold;">No Video</div>
+                        </div>
+
+                        <!-- TEXTOVÉ INFORMACE VEDLE THUMBNAILU -->
+                        <div style="display: flex; flex-direction: column; text-align: left; gap: 2px; flex-content: 1;">
+                            <h3 style="margin: 0; font-size: 1.3rem; font-weight: 800; color: #000000; line-height: 1.2;">
+                                <span style="color: #65676b; font-weight: 600; font-size: 1.1rem; margin-right: 4px;">#{{ level.rank || idx + 1 }}</span> 
+                                {{ level.name }}
+                            </h3>
+                            <p style="margin: 0; font-size: 0.9rem; color: #4b5563; font-weight: 600;">
+                                published by <span style="color: #000000; font-weight: 700;">{{ level.author }}</span>
+                            </p>
+                            <!-- DATA O PROCENTECH A BODŮCH PŘESNĚ PODLE OBRÁZKU -->
+                            <p style="margin: 3px 0 0 0; font-size: 0.8rem; color: #6b7280; font-weight: 500;">
+                                <span style="font-weight: 600;">{{ level.minimum || 100 }}% ({{ level.minimum || 100 }}%)</span> 
+                                — 
+                                <span style="font-weight: 600; color: #10b981;">{{ level.points }} (100%) points</span>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
                         
                         <!-- ODSTAVEC: -- EXTENDED LIST -- -->
                         <div v-if="level.isDivider" style="text-align: center; color: #9ba3af; font-weight: bold; font-size: 0.85rem; padding: 15px 0 10px 0; letter-spacing: 1px; border-bottom: 1px dashed #e1e4e8; margin-bottom: 5px;">

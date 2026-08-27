@@ -41,11 +41,12 @@ export default {
                         <!-- AUTOMATICKÝ THUMBNAIL Z YOUTUBE ODKAZU -->
                         <div style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
                             <img v-if="level.verification && level.verification !== '#'" 
-                                 :src="'https://youtube.com' + (level.verification.includes('v=') ? level.verification.split('v=').split('&') : (level.verification.includes('youtu.be/') ? level.verification.split('youtu.be/').split('?') : level.verification)) + '/mqdefault.jpg'" 
+                                 :src="'https://youtube.com' + embed(level.verification).split('/embed/')[1] + '/mqdefault.jpg'" 
                                  alt="thumbnail" 
                                  style="width: 100%; height: 100%; object-fit: cover;">
                             <div v-else style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #4b5563; font-size: 0.75rem; font-weight: bold;">No Video</div>
                         </div>
+
 
                         <!-- TEXTOVÉ INFORMACE VEDLE THUMBNAILU -->
                         <div style="display: flex; flex-direction: column; text-align: left; gap: 2px; flex-content: 1;">

@@ -18,12 +18,13 @@ export default {
                 <div v-for="(level, idx) in filteredList" :key="idx">
                     
                     <!-- POKUD JE ŘÁDEK ODDĚLOVAČ (DIVIDER) -->
-                    <div v-if="level.isDivider" style="text-align: center; padding: 15px 0; font-weight: 800; color: #6b7280; font-size: 0.95rem; letter-spacing: 1.5px; text-transform: uppercase;">
+                    <div v-if="level && level.isDivider" style="text-align: center; padding: 15px 0; font-weight: 800; color: #6b7280; font-size: 0.95rem; letter-spacing: 1.5px; text-transform: uppercase;">
                         {{ level.dividerText }}
                     </div>
 
-                    <!-- REÁLNÁ KARTA LEVELU -->
-                    <div v-else @click="selected = list.indexOf(level)" 
+
+                                        <!-- REÁLNÁ KARTA LEVELU - POJIŠTĚNO PROTI UNDEFINED -->
+                    <div v-else-if="level" @click="selected = list.indexOf(level)" 
                          :style="{
                              cursor: 'pointer',
                              background: list[selected] === level ? '#f3f4f6' : '#ffffff',
@@ -37,6 +38,7 @@ export default {
                              transition: 'all 0.15s ease',
                              boxSizing: 'border-box'
                          }">
+
                         
                         <!-- AUTOMATICKÝ THUMBNAIL Z YOUTUBE ODKAZU -->
                         <div style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">

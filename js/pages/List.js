@@ -15,7 +15,7 @@ export default {
                 </div>
 
                 <!-- SMYČKA PRO GENEROVÁNÍ KARET LEVELŮ -->
-                <div v-for="(level, idx) in filteredList" :key="idx">
+               <div v-for="(level, idx) in filteredList" :key="idx">
                     
                     <!-- POKUD JE ŘÁDEK ODDĚLOVAČ (DIVIDER) -->
                     <div v-if="level && level.isDivider" style="text-align: center; padding: 15px 0; font-weight: 800; color: #6b7280; font-size: 0.95rem; letter-spacing: 1.5px; text-transform: uppercase;">
@@ -52,7 +52,7 @@ export default {
 
                             <!-- STAV B: ČEKÁ SE NA KLIKNUTÍ (VOLÁ FUNKCI PRO ID) -->
                             <div v-else-if="level && level.verification && level.verification.trim() !== '' && level.verification !== '#' && getYouTubeId(level.verification)" 
-                                 @click="if(!playingVideos.includes(level.name)) playingVideos.push(level.name)"
+                                @click="!playingVideos.includes(level.name) && playingVideos.push(level.name)"
                                  style="width: 100%; height: 100%; cursor: pointer; position: relative;">
                                 
                                 <img :src="'https://youtube.com' + getYouTubeId(level.verification) + '/mqdefault.jpg'" alt="thumb" style="width: 100%; height: 100%; object-fit: cover;">

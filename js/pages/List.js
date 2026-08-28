@@ -6,76 +6,14 @@ export default {
             template: `
         <main style="background: #f4f2f5; padding: 20px; min-height: 100vh; display: flex; gap: 20px; align-items: flex-start; font-family: Arial, sans-serif; box-sizing: border-box;">
 
-                       <!-- NOVÝ GRAFICKÝ LEVÝ PANEL: Karty s thumbnaily přesně podle obrázku -->
-            <div style="width: 480px; flex-shrink: 0; display: flex; flex-direction: column; gap: 15px; max-height: calc(100vh - 40px); overflow-y: auto; padding-right: 5px; box-sizing: border-box;">
+            <!-- LEVÝ PANEL: Kompletně předělaný seznam úrovní -->
+            <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 15px; width: 340px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); box-sizing: border-box; flex-shrink: 0; text-align: left;">
+                <div style="margin-bottom: 15px;">
+                    <input type="text" v-model="search" placeholder="Search level..." style="width: 100%; padding: 10px; border: 1px solid #ccd1d9; border-radius: 4px; background: #fff; color: #000; font-size: 0.95rem; box-sizing: border-box;">
+                </div>
                 
-                <!-- VYHLEDÁVACÍ POLÍČKO -->
-                <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px; padding: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
-                    <input type="text" v-model="search" placeholder="Search level..." style="width: 100%; padding: 10px 12px; border: 1px solid #ccdid9; border-radius: 6px; background: #fff; color: #000; font-size: 0.95rem; box-sizing: border-box; outline: none;">
-                </div>
-
-                               <!-- SMYČKA PRO GENEROVÁNÍ KARET LEVELŮ -->
-                <div v-for="(level, idx) in filteredList" :key="idx">
-                    
-                    <!-- ODDĚLOVAČ (DIVIDER) S KONTROLOU PROTI UNDEFINED -->
-                    <div v-if="level && level.isDivider" style="text-align: center; padding: 15px 0; font-weight: 800; color: #6b7280; font-size: 0.95rem; letter-spacing: 1.5px; text-transform: uppercase;">
-                        {{ level.dividerText }}
-                    </div>
-
-                    <!-- REÁLNÁ KARTA LEVELU S KONTROLOU PROTI UNDEFINED -->
-                    <div v-else-if="level" @click="selected = list.indexOf(level)" 
-                         :style="{
-                             cursor: 'pointer',
-                             background: list[selected] === level ? '#f3f4f6' : '#ffffff',
-                             border: list[selected] === level ? '2px solid #2563eb' : '1px solid #e1e4e8',
-                             borderRadius: '8px',
-                             padding: '15px',
-                             boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-                             display: 'flex',
-                             gap: '15px',
-                             alignItems: 'center',
-                             marginBottom: '10px',
-                             boxSizing: 'border-box'
-                         }">
-                        
-                        <!-- 100% BEZPEČNÝ PRÁZDNÝ BOX (BLANK BOX) BEZ VIDEÍ A OBRÁZKŮ -->
-                        <div style="width: 130px; height: 73px; border-radius: 6px; background: #e5e7eb; flex-shrink: 0; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);"></div>
-
-                        <!-- TEXTOVÉ INFORMACE VEDLE BOXU -->
-                        <div style="display: flex; flex-direction: column; text-align: left; gap: 2px;">
-                            <h3 style="margin: 0; font-size: 1.3rem; font-weight: 800; color: #000000; line-height: 1.2;">
-                                <span style="color: #65676b; font-weight: 600; font-size: 1.1rem; margin-right: 4px;">#{{ level.rank || idx + 1 }}</span> 
-                                {{ level.name }}
-                            </h3>
-                            <p style="margin: 0; font-size: 0.9rem; color: #4b5563; font-weight: 600;">
-                                published by <span style="color: #000000; font-weight: 700;">{{ level.author }}</span>
-                            </p>
-                            <p style="margin: 3px 0 0 0; font-size: 0.8rem; color: #6b7280; font-weight: 500;">
-                                <span style="font-weight: 600;">{{ level.minimum || 100 }}%</span> 
-                                — 
-                                <span style="font-weight: 600; color: #10b981;">{{ level.points }} pts</span>
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-
-                            <p style="margin: 0; font-size: 0.9rem; color: #4b5563; font-weight: 600;">
-                                published by <span style="color: #000000; font-weight: 700;">{{ level.author }}</span>
-                            </p>
-                            <!-- DATA O PROCENTECH A BODŮCH PŘESNĚ PODLE OBRÁZKU -->
-                            <p style="margin: 3px 0 0 0; font-size: 0.8rem; color: #6b7280; font-weight: 500;">
-                                <span style="font-weight: 600;">{{ level.minimum || 100 }}% ({{ level.minimum || 100 }}%)</span> 
-                                — 
-                                <span style="font-weight: 600; color: #10b981;">{{ level.points }} (100%) points</span>
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <template v-for="(level, idx) in filteredList" :key="idx">
                         
                         <!-- ODSTAVEC: -- EXTENDED LIST -- -->
                         <div v-if="level.isDivider" style="text-align: center; color: #9ba3af; font-weight: bold; font-size: 0.85rem; padding: 15px 0 10px 0; letter-spacing: 1px; border-bottom: 1px dashed #e1e4e8; margin-bottom: 5px;">
@@ -173,7 +111,6 @@ export default {
         return {
             selected: 0,
             search: '',
-            playingVideos: [], 
             list: [
                 // --- MAIN LIST ---
                 { name: "Poltergeist", author: "Andromeda", verifier: "🇲🇾 Cylio", points: 200, type: "main", minimum: 64, verification: "#", records: [] },
@@ -267,24 +204,29 @@ export default {
     },
 
     computed: {
-                       filteredList() {
-            // Pojistka: Pokud v datech vůbec nic není, vrátíme prázdné pole
-            if (!this.list || this.list.length === 0) return [];
-            
-            // NEPRŮSTŘELNÝ FILTR: Vezmeme POUZE ty řádky, které skutečně existují a mají jméno a autora
-            const cleanList = this.list.filter(level => level && level.name && level.author);
-
-            // Pokud zrovna nevyhledáváš, vrátíme čistý seznam
+        filteredList() {
             if (!this.search) {
-                return cleanList;
+                let displayList = [];
+                let hasExtendedDivider = false;
+                let hasLegacyDivider = false;
+
+                this.list.forEach(level => {
+                    if (level.type === 'extended' && !hasExtendedDivider) {
+                        displayList.push({ isDivider: true, dividerText: "--- EXTENDED LIST ---" });
+                        hasExtendedDivider = true;
+                    }
+                    if (level.type === 'legacy' && !hasLegacyDivider) {
+                        displayList.push({ isDivider: true, dividerText: "--- LEGACY LIST ---" });
+                        hasLegacyDivider = true;
+                    }
+                    displayList.push(level);
+                });
+                return displayList;
             }
-            
-            // Pokud vyhledáváš, bezpečně prohledáme očištěné jméno
-            return cleanList.filter(level => 
-                level.name.toLowerCase().includes(this.search.toLowerCase())
+            return this.list.filter(level => 
+                level.name && level.name.toLowerCase().includes(this.search.toLowerCase())
             );
         },
-
         entry() {
             return this.list[this.selected] || null;
         }
@@ -319,22 +261,6 @@ export default {
             if (type === 'extended') return '#4b5563';
             if (type === 'legacy') return '#9ca3af';
             return '#000000';
-        },
-                getYouTubeId(url) {
-            if (!url || url === '#') return '';
-            
-            // Nejdřív z odkazu uděláme jednotný embed tvar pomocí tvé funkce
-            const embedUrl = this.embed(url);
-            
-            if (embedUrl && embedUrl.includes('/embed/')) {
-                // Rozsekneme to a bezpečně vezmeme čisté 11místné ID videa
-                const parts = embedUrl.split('/embed/');
-                if (parts && parts.length > 1) {
-                    return parts.split('?');
-                }
-            }
-            return '';
-        },
-
+        }
     }
 };

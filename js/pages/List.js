@@ -38,41 +38,19 @@ export default {
                              transition: 'all 0.15s ease',
                              boxSizing: 'border-box'
                          }">
-
-                        
-                                                                     <!-- CHYTRÝ VIDEO BOX BEZ SLOŽITÝCH PODMÍNEK V ŠABLONĚ -->
-                        <div @click.stop="" style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
-                            
-                            <!-- STAV A: VIDEO HRAJE -->
-                            <iframe v-if="level && level.verification && level.verification.trim() !== '' && level.verification !== '#' && playingVideos.includes(level.name)"
-                                    :src="embed(level.verification) + '?autoplay=1&mute=0'" 
-                                    style="width: 100%; height: 100%; border: 0; position: absolute; top:0; left:0;" 
-                                    allow="autoplay; encrypted-media" allowfullscreen>
-                            </iframe>
-
-                            <!-- STAV B: ČEKÁ SE NA KLIKNUTÍ (VOLÁ FUNKCI PRO ID) -->
-                            <div v-else-if="level && level.verification && level.verification.trim() !== '' && level.verification !== '#' && getYouTubeId(level.verification)" 
-                                @click="!playingVideos.includes(level.name) && playingVideos.push(level.name)"
-                                 style="width: 100%; height: 100%; cursor: pointer; position: relative;">
-                                
-                                <img :src="'https://youtube.com' + getYouTubeId(level.verification) + '/mqdefault.jpg'" alt="thumb" style="width: 100%; height: 100%; object-fit: cover;">
-                                
-                                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center; transition: background 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.45)'" onmouseout="this.style.background='rgba(0,0,0,0.25)'">
-                                    <svg style="width: 24px; height: 24px; fill: #ffffff; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));" viewBox="0 0 24 24">
-                                        <path d="M8 5v14l11-7z"/>
-                                    </svg>
-                                </div>
-                            </div>
-
-                            <!-- STAV C: ŽÁDNÉ VIDEO -->
+                         
+                        <!-- STATICKÝ THUMBNAIL BOX (BEZPEČNÝ A RYCHLÝ) -->
+                        <div style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
+                            <!-- Obrázek se načte jen tehdy, pokud má level reálné video -->
+                            <img v-if="level && level.verification && level.verification.trim() !== '' && level.verification !== '#'" 
+                                 :src="'https://youtube.com' + (level.verification.includes('v=') ? level.verification.split('v=')[1].split('&')[0] : (level.verification.includes('youtu.be/') ? level.verification.split('youtu.be/')[1].split('?')[0] : level.verification)) + '/mqdefault.jpg'" 
+                                 alt="thumb" 
+                                 style="width: 100%; height: 100%; object-fit: cover;">
+                            <!-- Pokud video nemá, ukáže se čisté tmavé políčko s textem -->
                             <div v-else style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #4b5563; font-size: 0.75rem; font-weight: bold; background: #1a1a1a;">
                                 No Video
                             </div>
-
                         </div>
-
-
-
 
 
                         <!-- TEXTOVÉ INFORMACE VEDLE THUMBNAILU -->

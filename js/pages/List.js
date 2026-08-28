@@ -40,25 +40,23 @@ export default {
                          }">
 
                         
-                                               <!-- SMART VIDEO / THUMBNAIL BOX (PŘESNĚ JAKO POINTERCRATE) -->
+                                                                     <!-- CHYTRÝ VIDEO BOX BEZ SLOŽITÝCH PODMÍNEK V ŠABLONĚ -->
                         <div @click.stop="" style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
                             
-                            <!-- STAV A: VIDEO UŽ HRAJE (UKÁŽE SE ŽIVÉ EMBED OKNO) -->
+                            <!-- STAV A: VIDEO HRAJE -->
                             <iframe v-if="level && level.verification && level.verification.trim() !== '' && level.verification !== '#' && playingVideos.includes(level.name)"
                                     :src="embed(level.verification) + '?autoplay=1&mute=0'" 
                                     style="width: 100%; height: 100%; border: 0; position: absolute; top:0; left:0;" 
                                     allow="autoplay; encrypted-media" allowfullscreen>
                             </iframe>
 
-                            <!-- STAV B: ČEKÁ SE NA KLIKNUTÍ (UKÁŽE SE OBRÁZEK S IKONKOU PŘEHRÁVÁNÍ) -->
-                            <div v-else-if="level && level.verification && level.verification.trim() !== '' && level.verification !== '#' && embed(level.verification) && embed(level.verification).includes('/embed/')" 
+                            <!-- STAV B: ČEKÁ SE NA KLIKNUTÍ (VOLÁ FUNKCI PRO ID) -->
+                            <div v-else-if="level && level.verification && level.verification.trim() !== '' && level.verification !== '#' && getYouTubeId(level.verification)" 
                                  @click="if(!playingVideos.includes(level.name)) playingVideos.push(level.name)"
                                  style="width: 100%; height: 100%; cursor: pointer; position: relative;">
                                 
-                                <!-- Obrázek na pozadí -->
-                                <img :src="'https://youtube.com' + embed(level.verification).split('/embed/')[1].split('?')[0] + '/mqdefault.jpg'" alt="thumb" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img :src="'https://youtube.com' + getYouTubeId(level.verification) + '/mqdefault.jpg'" alt="thumb" style="width: 100%; height: 100%; object-fit: cover;">
                                 
-                                <!-- Pointercrate overlay s ikonkou přehrávače -->
                                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center; transition: background 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.45)'" onmouseout="this.style.background='rgba(0,0,0,0.25)'">
                                     <svg style="width: 24px; height: 24px; fill: #ffffff; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));" viewBox="0 0 24 24">
                                         <path d="M8 5v14l11-7z"/>
@@ -66,13 +64,12 @@ export default {
                                 </div>
                             </div>
 
-                            <!-- STAV C: LEVEL NEMÁ ŽÁDNÉ VIDEO NEBO JE TO PRÁZDNÉ / MŘÍŽKA -->
+                            <!-- STAV C: ŽÁDNÉ VIDEO -->
                             <div v-else style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #4b5563; font-size: 0.75rem; font-weight: bold; background: #1a1a1a;">
                                 No Video
                             </div>
 
                         </div>
-
 
 
 
@@ -356,6 +353,22 @@ export default {
             if (type === 'extended') return '#4b5563';
             if (type === 'legacy') return '#9ca3af';
             return '#000000';
-        }
+        },
+                getYouTubeId(url) {
+            if (!url || url === '#') return '';
+            
+            // Nejdřív z odkazu uděláme jednotný embed tvar pomocí tvé funkce
+            const embedUrl = this.embed(url);
+            
+            if (embedUrl && embedUrl.includes('/embed/')) {
+                // Rozsekneme to a bezpečně vezmeme čisté 11místné ID videa
+                const parts = embedUrl.split('/embed/');
+                if (parts && parts.length > 1) {
+                    return parts.split('?');
+                }
+            }
+            return '';
+        },
+
     }
 };

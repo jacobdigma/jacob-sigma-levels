@@ -40,7 +40,7 @@ export default {
                          }">
 
                         
-                                                <!-- SMART VIDEO / THUMBNAIL BOX (PŘESNĚ JAKO POINTERCRATE) -->
+                                               <!-- SMART VIDEO / THUMBNAIL BOX (PŘESNĚ JAKO POINTERCRATE) -->
                         <div @click.stop="" style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
                             
                             <!-- STAV A: VIDEO UŽ HRAJE (UKÁŽE SE ŽIVÉ EMBED OKNO) -->
@@ -72,6 +72,7 @@ export default {
                             </div>
 
                         </div>
+
 
 
 

@@ -14,16 +14,15 @@ export default {
                     <input type="text" v-model="search" placeholder="Search level..." style="width: 100%; padding: 10px 12px; border: 1px solid #ccdid9; border-radius: 6px; background: #fff; color: #000; font-size: 0.95rem; box-sizing: border-box; outline: none;">
                 </div>
 
-                <!-- SMYČKA PRO GENEROVÁNÍ KARET LEVELŮ -->
-               <div v-for="(level, idx) in filteredList" :key="idx">
+                               <!-- SMYČKA PRO GENEROVÁNÍ KARET LEVELŮ -->
+                <div v-for="(level, idx) in filteredList" :key="idx">
                     
-                    <!-- POKUD JE ŘÁDEK ODDĚLOVAČ (DIVIDER) -->
+                    <!-- ODDĚLOVAČ (DIVIDER) S KONTROLOU PROTI UNDEFINED -->
                     <div v-if="level && level.isDivider" style="text-align: center; padding: 15px 0; font-weight: 800; color: #6b7280; font-size: 0.95rem; letter-spacing: 1.5px; text-transform: uppercase;">
                         {{ level.dividerText }}
                     </div>
 
-
-                                        <!-- REÁLNÁ KARTA LEVELU - POJIŠTĚNO PROTI UNDEFINED -->
+                    <!-- REÁLNÁ KARTA LEVELU S KONTROLOU PROTI UNDEFINED -->
                     <div v-else-if="level" @click="selected = list.indexOf(level)" 
                          :style="{
                              cursor: 'pointer',
@@ -35,30 +34,32 @@ export default {
                              display: 'flex',
                              gap: '15px',
                              alignItems: 'center',
-                             transition: 'all 0.15s ease',
+                             marginBottom: '10px',
                              boxSizing: 'border-box'
                          }">
-                         
-                        <!-- STATICKÝ THUMBNAIL BOX (BEZPEČNÝ A RYCHLÝ) -->
-                        <div style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
-                            <!-- Obrázek se načte jen tehdy, pokud má level reálné video -->
-                            <img v-if="level && level.verification && level.verification.trim() !== '' && level.verification !== '#'" 
-                                 :src="'https://youtube.com' + (level.verification.includes('v=') ? level.verification.split('v=')[1].split('&')[0] : (level.verification.includes('youtu.be/') ? level.verification.split('youtu.be/')[1].split('?')[0] : level.verification)) + '/mqdefault.jpg'" 
-                                 alt="thumb" 
-                                 style="width: 100%; height: 100%; object-fit: cover;">
-                            <!-- Pokud video nemá, ukáže se čisté tmavé políčko s textem -->
-                            <div v-else style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #4b5563; font-size: 0.75rem; font-weight: bold; background: #1a1a1a;">
-                                No Video
-                            </div>
-                        </div>
+                        
+                        <!-- 100% BEZPEČNÝ PRÁZDNÝ BOX (BLANK BOX) BEZ VIDEÍ A OBRÁZKŮ -->
+                        <div style="width: 130px; height: 73px; border-radius: 6px; background: #e5e7eb; flex-shrink: 0; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);"></div>
 
-
-                        <!-- TEXTOVÉ INFORMACE VEDLE THUMBNAILU -->
-                        <div style="display: flex; flex-direction: column; text-align: left; gap: 2px; flex-content: 1;">
+                        <!-- TEXTOVÉ INFORMACE VEDLE BOXU -->
+                        <div style="display: flex; flex-direction: column; text-align: left; gap: 2px;">
                             <h3 style="margin: 0; font-size: 1.3rem; font-weight: 800; color: #000000; line-height: 1.2;">
                                 <span style="color: #65676b; font-weight: 600; font-size: 1.1rem; margin-right: 4px;">#{{ level.rank || idx + 1 }}</span> 
                                 {{ level.name }}
                             </h3>
+                            <p style="margin: 0; font-size: 0.9rem; color: #4b5563; font-weight: 600;">
+                                published by <span style="color: #000000; font-weight: 700;">{{ level.author }}</span>
+                            </p>
+                            <p style="margin: 3px 0 0 0; font-size: 0.8rem; color: #6b7280; font-weight: 500;">
+                                <span style="font-weight: 600;">{{ level.minimum || 100 }}%</span> 
+                                — 
+                                <span style="font-weight: 600; color: #10b981;">{{ level.points }} pts</span>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
                             <p style="margin: 0; font-size: 0.9rem; color: #4b5563; font-weight: 600;">
                                 published by <span style="color: #000000; font-weight: 700;">{{ level.author }}</span>
                             </p>

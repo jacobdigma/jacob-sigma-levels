@@ -267,37 +267,24 @@ export default {
     },
 
     computed: {
-                filteredList() {
-            // Pojistka: Pokud list vůbec neexistuje, vrátíme prázdné pole
-            if (!this.list) return [];
+                       filteredList() {
+            // Pojistka: Pokud v datech vůbec nic není, vrátíme prázdné pole
+            if (!this.list || this.list.length === 0) return [];
+            
+            // NEPRŮSTŘELNÝ FILTR: Vezmeme POUZE ty řádky, které skutečně existují a mají jméno a autora
+            const cleanList = this.list.filter(level => level && level.name && level.author);
 
+            // Pokud zrovna nevyhledáváš, vrátíme čistý seznam
             if (!this.search) {
-                let displayList = [];
-                let hasExtendedDivider = false;
-                let hasLegacyDivider = false;
-
-                this.list.forEach(level => {
-                    // BEZPEČNOSTNÍ POJISTKA: Pokud je level prázdný nebo rozbitý, úplně ho přeskočíme
-                    if (!level || !level.type) return;
-
-                    if (level.type === 'extended' && !hasExtendedDivider) {
-                        displayList.push({ isDivider: true, dividerText: "--- EXTENDED LIST ---" });
-                        hasExtendedDivider = true;
-                    }
-                    if (level.type === 'legacy' && !hasLegacyDivider) {
-                        displayList.push({ isDivider: true, dividerText: "--- LEGACY LIST ---" });
-                        hasLegacyDivider = true;
-                    }
-                    displayList.push(level);
-                });
-                return displayList;
+                return cleanList;
             }
             
-            // Při vyhledávání rovnou odfiltrujeme jakékoliv prázdné objekty (undefined)
-            return this.list.filter(level => 
-                level && level.name && level.name.toLowerCase().includes(this.search.toLowerCase())
+            // Pokud vyhledáváš, bezpečně prohledáme očištěné jméno
+            return cleanList.filter(level => 
+                level.name.toLowerCase().includes(this.search.toLowerCase())
             );
         },
+
         entry() {
             return this.list[this.selected] || null;
         }

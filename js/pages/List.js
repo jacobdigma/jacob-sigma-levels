@@ -40,12 +40,12 @@ export default {
                          }">
 
                         
-                                                 <!-- FINÁLNÍ AUTOMATICKÝ THUMBNAIL S POJISTKOU PROTI MŘÍŽKÁM -->
-                        <div style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
-                            <!-- Obrázek se pustí JEN když odkaz existuje, není to mřížka a obsahuje youtube id -->
-                            <img v-if="level && level.name && level.verification && level.verification !== '#' && embed(level.verification) && embed(level.verification).includes('/embed/')" 
+                                                <!-- FINÁLNÍ THUMBNAIL POJIŠTĚNÝ PROTI PRÁZDNÝM UVOZOVKÁM I MŘÍŽKÁM -->
+                        <div style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0;">
+                            <!-- Obrázek se pustí JEN když odkaz má délku, není to mřížka a embed vrátí platnou adresu -->
+                            <img v-if="level && level.name && level.verification && level.verification.trim() !== '' && level.verification !== '#' && embed(level.verification) && embed(level.verification).includes('/embed/')" 
                                  :src="'https://youtube.com' + embed(level.verification).split('/embed/')[1] + '/mqdefault.jpg'" 
-                                 alt="thumbnail" 
+                                 alt="thumb" 
                                  style="width: 100%; height: 100%; object-fit: cover;">
                             <div v-else style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #4b5563; font-size: 0.75rem; font-weight: bold;">No Video</div>
                         </div>

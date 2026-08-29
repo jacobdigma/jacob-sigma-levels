@@ -224,8 +224,8 @@ export default {
                 // AUTOMATICKÝ VÝPOČET BODŮ (Férové plynulé bodování)
                 const position = activeLevels.indexOf(level);
                 const calculatedPoints = totalActive > 1 
-                    ? 300 - (position * (100 / (totalActive - 1))) 
-                    : 300;
+                    ? 200 - (position * (100 / (totalActive - 1))) 
+                    : 200;
                 level.points = Math.round(calculatedPoints);
             }
         });

@@ -71,18 +71,7 @@ export default {
                             {{ level.dividerText }}
                         </div>
 
-                        <!-- KLASICKÝ ŘÁDEK LEVELU (Když to není dělicí čára) -->
-                        <div v-else @click="selected = list.indexOf(level)"
-                            :style="{ 
-                                cursor: 'pointer', 
-                                background: list[selected] === level ? '#0070ff' : 'transparent',
-                                borderRadius: '6px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                padding: '10px 12px',
-                                transition: 'background 0.2s'
-                            }">
-                            
+                       
                             <!-- ČÍSLOVÁNÍ: Buď #číslo, nebo text "Legacy" -->
                             <span :style="{ 
                                 width: level.type === 'legacy' ? '65px' : '45px', 

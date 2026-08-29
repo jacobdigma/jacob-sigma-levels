@@ -281,6 +281,34 @@ export default {
             // Pokud v datech zůstalo jen samotné čisté ID, složíme ho natvrdo
            return 'https://youtube.com' + url.trim();
         },
+                getYouTubeThumb(url) {
+            if (!url || typeof url !== 'string' || url === '#') return '';
+            
+            let videoId = '';
+            
+            // 1. Zkusíme klasický dlouhý odkaz (watch?v=ID)
+            if (url.includes('v=')) {
+                const afterV = url.split('v=')[1];
+                if (afterV) {
+                    videoId = afterV.split('&')[0];
+                }
+            } 
+            // 2. Zkusíme krátký odkaz z mobilu (youtu.be/ID)
+            else if (url.includes('youtu.be/')) {
+                const afterSlash = url.split('youtu.be/')[1];
+                if (afterSlash) {
+                    videoId = afterSlash.split('?')[0];
+                }
+            }
+            
+            // Pokud jsme ID našli a má správnou délku (cca 11 znaků), vrátíme adresu obrázku
+            if (videoId && videoId.trim() !== '') {
+                return 'https://youtube.com' + videoId.trim() + '/mqdefault.jpg';
+            }
+            
+            return '';
+        },
+
 
         getListTextColor(type) {
             if (type === 'main') return '#000000';

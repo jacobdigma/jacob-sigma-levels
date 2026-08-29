@@ -41,9 +41,9 @@ export default {
                                                <!-- GRAFICKÝ THUMBNAIL BOX (CHYTRÝ A NEPRŮSTŘELNÝ) -->
                         <div style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center;">
                             
-                            <!-- STAV A: REÁLNÝ YOUTUBE ODKAZ (BEZPEČNÉ VYTAŽENÍ OBRÁZKU) -->
-                            <img v-if="level && level.verification && level.verification.startsWith('https')" 
-                                 :src="'https://youtube.com' + (level.verification.includes('v=') ? level.verification.split('v=')[1].split('&')[0] : level.verification.split('youtu.be/')[1].split('?')[0]) + '/mqdefault.jpg'" 
+                                                       <!-- STAV A: REÁLNÝ YOUTUBE ODKAZ (FINÁLNÍ OPRAVA) -->
+                            <img v-if="level && level.verification && level.verification.startsWith('https') && embed(level.verification) && embed(level.verification).includes('/embed/')" 
+                                 :src="'https://youtube.com' + embed(level.verification).split('/embed/').split('?') + '/mqdefault.jpg'" 
                                  alt="thumb" 
                                  style="width: 100%; height: 100%; object-fit: cover;">
 
@@ -190,7 +190,7 @@ export default {
                 { name: "Fingerdash", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "main", minimum: 80, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Xstep", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 80, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" },{ user: "🇨🇿 zubnikartacka", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" }] },
                 { name: "Bloodbath but No", author: "Texic", verifier: "🇨🇿 Earl12", points: 0, type: "extended", verification: "", records: [] },
-                { name: "Electroman Adventures", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 73, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" },{ user: "🇨🇿 zubnikartacka", percent: 83, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
+                { name: "Electroman Adventures", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" },{ user: "🇨🇿 zubnikartacka", percent: 83, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Flappy Bird", author: "TherealDarnoc", verifier: "🇨🇿 Earl12", points: 180, type: "extended", minimum: 80, verification: "", records: [] },
                 { name: "Geometrical Dominator", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 80, verification: "", records: [ { user: "🇨🇿 Krystof", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Time Machine", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 80, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" }, { user: "🇲🇾 Cylio", percent: 86, link: "#" } ] },

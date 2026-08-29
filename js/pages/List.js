@@ -42,11 +42,12 @@ export default {
                         <div style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center;">
                             
                     
-                                                       <!-- STAV A: REÁLNÝ YOUTUBE ODKAZ (OPRAVENÉ INDEXY) -->
-                            <img v-if="level && level.verification && level.verification.startsWith('https')" 
-                                 :src="'https://youtube.com' + (level.verification.includes('v=') ? level.verification.split('v=')[1].split('&')[0] : level.verification.split('youtu.be/')[1].split('?')[0]) + '/mqdefault.jpg'" 
+                                                       <!-- STAV A: REÁLNÝ YOUTUBE ODKAZ (ZÁSAH DO ČERNÉHO) -->
+                            <img v-if="level && level.verification && level.verification.includes('v=')" 
+                                 :src="'https://youtube.com' + level.verification.split('v=')[1].split('&')[0] + '/mqdefault.jpg'" 
                                  alt="thumb" 
                                  style="width: 100%; height: 100%; object-fit: cover;">
+
 
                             
                             <!-- STAV B: MŘÍŽKA, PRÁZDNÉ UVOZOVKY NEBO ŽÁDNÉ VIDEO -->

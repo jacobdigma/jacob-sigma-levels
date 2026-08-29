@@ -149,7 +149,7 @@ export default {
 
                 // Výpočet bodů zůstává stoprocentně stejný
                 const position = activeLevels.indexOf(level);
-                const calculatedPoints = totalActive > 1 ? 200 - (position * (100 / (totalActive - 1))) : 200;
+                const calculatedPoints = totalActive > 1 ? 300 - (position * (100 / (totalActive - 1))) : 300;
                 level.points = Math.round(calculatedPoints);
             }
         });

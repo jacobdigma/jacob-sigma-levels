@@ -62,12 +62,7 @@ export default {
 
             </div>
 
-                
-                <div style="display: flex; flex-direction: column; gap: 4px;">
-                    <template v-for="(level, idx) in filteredList" :key="idx">
-                       
-                        
-
+               
                     </template>
                 </div>
             </div>

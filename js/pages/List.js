@@ -46,6 +46,7 @@ export default {
                                  :src="'https://youtube.com' + (level.verification.includes('v=') ? level.verification.split('v=')[1].split('&')[0] : level.verification.split('youtu.be/')[1].split('?')[0]) + '/mqdefault.jpg'" 
                                  alt="thumb" 
                                  style="width: 100%; height: 100%; object-fit: cover;">
+
                             
                             <!-- STAV B: MŘÍŽKA, PRÁZDNÉ UVOZOVKY NEBO ŽÁDNÉ VIDEO -->
                             <div v-else style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #4b5563; font-size: 0.75rem; font-weight: bold; background: #e5e7eb;">

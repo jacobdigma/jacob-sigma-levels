@@ -72,10 +72,7 @@ export default {
                         </div>
 
                        
-                         
-                                {{ level.name }}
-                            </span>
-                        </div>
+                        
 
                     </template>
                 </div>

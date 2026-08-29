@@ -294,7 +294,7 @@ export default {
                             if (level.type === 'main') {
                                 // Pojistka: Pokud kód zrovna nemá z Listu vypočítané body, dáme výchozí nulu, ať to nespadne
                                 const levelPoints = parseInt(level.points) || 0;
-                                const gap = 200 - levelPoints;
+                                const gap = 300 - levelPoints;
                                 finalProgressPoints = Math.max(0, currentPercent - gap);
                             }
                             

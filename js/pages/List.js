@@ -72,23 +72,7 @@ export default {
                         </div>
 
                        
-                            <!-- ČÍSLOVÁNÍ: Buď #číslo, nebo text "Legacy" -->
-                            <span :style="{ 
-                                width: level.type === 'legacy' ? '65px' : '45px', 
-                                fontWeight: 'bold', 
-                                color: list[selected] === level ? '#ffffff' : '#65676b',
-                                fontSize: level.type === 'legacy' ? '0.85rem' : '1rem'
-                            }">
-                                {{ level.type === 'legacy' ? 'Legacy' : '#' + level.rank }}
-                            </span>
-
-                            <!-- NÁZEV LEVELU SE SPECIFICKOU BARVOU PODLE TYPU -->
-                            <span :style="{ 
-                                fontWeight: level.type === 'main' ? 'bold' : 'normal', 
-                                color: list[selected] === level ? '#ffffff' : getListTextColor(level.type),
-                                fontSize: '1rem',
-                                flex: 1
-                            }">
+                         
                                 {{ level.name }}
                             </span>
                         </div>

@@ -281,33 +281,36 @@ export default {
             // Pokud v datech zůstalo jen samotné čisté ID, složíme ho natvrdo
            return 'https://youtube.com' + url.trim();
         },
-                getYouTubeThumb(url) {
+                 getYouTubeThumb(url) {
             if (!url || typeof url !== 'string' || url === '#') return '';
             
             let videoId = '';
             
-            // 1. Zkusíme klasický dlouhý odkaz (watch?v=ID)
+            // 1. Klasický dlouhý odkaz (watch?v=ID)
             if (url.includes('v=')) {
-                const afterV = url.split('v=')[1];
-                if (afterV) {
-                    videoId = afterV.split('&')[0];
+                const parts = url.split('v=');
+                if (parts && parts[1]) {
+                    // Odsekneme případné další parametry za znakem &
+                    videoId = parts[1].split('&')[0];
                 }
             } 
-            // 2. Zkusíme krátký odkaz z mobilu (youtu.be/ID)
+            // 2. Krátký odkaz z mobilu (youtu.be/ID)
             else if (url.includes('youtu.be/')) {
-                const afterSlash = url.split('youtu.be/')[1];
-                if (afterSlash) {
-                    videoId = afterSlash.split('?')[0];
+                const parts = url.split('youtu.be/');
+                if (parts && parts[1]) {
+                    // Odsekneme případné parametry za otazníkem
+                    videoId = parts[1].split('?')[0];
                 }
             }
             
-            // Pokud jsme ID našli a má správnou délku (cca 11 znaků), vrátíme adresu obrázku
+            // Pokud jsme ID úspěšně vysekli, vrátíme správnou adresu miniatury
             if (videoId && videoId.trim() !== '') {
                 return 'https://youtube.com' + videoId.trim() + '/mqdefault.jpg';
             }
             
             return '';
         },
+
 
 
         getListTextColor(type) {

@@ -194,6 +194,7 @@ export default {
                 { name: "Flappy Bird", author: "TherealDarnoc", verifier: "🇨🇿 Earl12", points: 180, type: "extended", minimum: 100, verification: "", records: [] },
                 { name: "Geometrical Dominator", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", records: [ { user: "🇨🇿 Krystof", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Time Machine", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" }, { user: "🇲🇾 Cylio", percent: 86, link: "#" } ] },
+                { name: "Cicada", author: "Arunaa", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "https://www.youtube.com/watch?v=0VQtjZnjNlI", records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" } ] },
                
 // --- EXTENDED LIST ---
 // --- LEGACY LIST ---

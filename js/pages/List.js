@@ -65,12 +65,6 @@ export default {
                 
                 <div style="display: flex; flex-direction: column; gap: 4px;">
                     <template v-for="(level, idx) in filteredList" :key="idx">
-                        
-                        <!-- ODSTAVEC: -- EXTENDED LIST -- -->
-                        <div v-if="level.isDivider" style="text-align: center; color: #9ba3af; font-weight: bold; font-size: 0.85rem; padding: 15px 0 10px 0; letter-spacing: 1px; border-bottom: 1px dashed #e1e4e8; margin-bottom: 5px;">
-                            {{ level.dividerText }}
-                        </div>
-
                        
                         
 

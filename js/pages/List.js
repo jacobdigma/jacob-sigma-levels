@@ -225,7 +225,7 @@ export default {
                 const position = activeLevels.indexOf(level);
                 const calculatedPoints = totalActive > 1 
                     ? 300 - (position * (100 / (totalActive - 1))) 
-                    : 200;
+                    : 300;
                 level.points = Math.round(calculatedPoints);
             }
         });

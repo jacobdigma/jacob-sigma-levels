@@ -38,16 +38,20 @@ export default {
                              boxSizing: 'border-box'
                          }">
                         
-                                               <!-- GRAFICKÝ THUMBNAIL BOX (CHYTRÝ A NEPRŮSTŘELNÝ) -->
+                          <!-- GRAFICKÝ THUMBNAIL BOX (FINÁLNÍ BEZPEČNÁ VERZE) -->
                         <div style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center;">
                             
-                    
-                                                       <!-- STAV A: REÁLNÝ YOUTUBE ODKAZ (ZÁSAH DO ČERNÉHO) -->
-                            <img v-if="level && level.verification && level.verification.includes('v=')" 
-                                 :src="'https://youtube.com' + level.verification.split('v=')[1].split('&')[0] + '/mqdefault.jpg'" 
+                            <!-- Obrázek volá chytrou JS funkci na spodku souboru -->
+                            <img v-if="level && level.verification && getYouTubeThumb(level.verification)" 
+                                 :src="getYouTubeThumb(level.verification)" 
                                  alt="thumb" 
                                  style="width: 100%; height: 100%; object-fit: cover;">
+                            
+                            <div v-else style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #4b5563; font-size: 0.75rem; font-weight: bold; background: #e5e7eb;">
+                                No Video
+                            </div>
 
+                        </div>
 
                             
                             <!-- STAV B: MŘÍŽKA, PRÁZDNÉ UVOZOVKY NEBO ŽÁDNÉ VIDEO -->

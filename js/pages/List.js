@@ -281,7 +281,7 @@ export default {
             // Pokud v datech zůstalo jen samotné čisté ID, složíme ho natvrdo
            return 'https://youtube.com' + url.trim();
         },
-                 getYouTubeThumb(url) {
+        getYouTubeThumb(url) {
             if (!url || typeof url !== 'string' || url === '#') return '';
             
             let videoId = '';
@@ -290,7 +290,7 @@ export default {
             if (url.includes('v=')) {
                 const parts = url.split('v=');
                 if (parts && parts[1]) {
-                    // Odsekneme případné další parametry za znakem &
+                    // [1] vezme text ZA "v=" a .split('&')[0] odřízne parametry jako playlisty
                     videoId = parts[1].split('&')[0];
                 }
             } 
@@ -298,20 +298,18 @@ export default {
             else if (url.includes('youtu.be/')) {
                 const parts = url.split('youtu.be/');
                 if (parts && parts[1]) {
-                    // Odsekneme případné parametry za otazníkem
+                    // [1] vezme text ZA lomítkem a .split('?')[0] odřízne případné otazníky
                     videoId = parts[1].split('?')[0];
                 }
             }
             
-            // Pokud jsme ID úspěšně vysekli, vrátíme správnou adresu miniatury
+            // Pokud jsme z textu úspěšně vysekli čisté ID, vrátíme hotovou adresu obrázku
             if (videoId && videoId.trim() !== '') {
                 return 'https://youtube.com' + videoId.trim() + '/mqdefault.jpg';
             }
             
             return '';
         },
-
-
 
         getListTextColor(type) {
             if (type === 'main') return '#000000';

@@ -149,7 +149,7 @@ export default {
 
                 // Výpočet bodů zůstává stoprocentně stejný
                 const position = activeLevels.indexOf(level);
-                const calculatedPoints = totalActive > 1 ? 300 - (position * (100 / (totalActive - 1))) : 300;
+                const calculatedPoints = totalActive > 1 ? 200 - (position * (100 / (totalActive - 1))) : 200;
                 level.points = Math.round(calculatedPoints);
             }
         });
@@ -294,7 +294,7 @@ export default {
                             if (level.type === 'main') {
                                 // Pojistka: Pokud kód zrovna nemá z Listu vypočítané body, dáme výchozí nulu, ať to nespadne
                                 const levelPoints = parseInt(level.points) || 0;
-                                const gap = 300 - levelPoints;
+                                const gap = 200 - levelPoints;
                                 finalProgressPoints = Math.max(0, currentPercent - gap);
                             }
                             

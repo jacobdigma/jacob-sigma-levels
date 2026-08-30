@@ -38,17 +38,17 @@ export default {
                              boxSizing: 'border-box'
                          }">
                         
-                                              <!-- GRAFICKÝ THUMBNAIL BOX (ČISTÉ STATICKÉ OBRÁZKY) -->
+                                                           <!-- GRAFICKÝ THUMBNAIL BOX (FINÁLNÍ NEPRŮSTŘELNÁ VERZE PRO GITHUB) -->
                         <div style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center;">
                             
-                            <!-- Kód se podívá do tvé složky assets a najde obrázek podle jména levelu -->
+                            <!-- Zkusí nejdřív malé .png -->
                             <img v-if="level && level.name" 
                                  :src="'./assets/' + level.name.toLowerCase().replace(/\s+/g, '') + '.png'" 
                                  alt="thumb" 
                                  style="width: 100%; height: 100%; object-fit: cover;"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                 onerror="this.onerror=null; this.src='./assets/' + level.name.toLowerCase().replace(/\s+/g, '') + '.PNG'; this.addEventListener('error', function(){ this.style.display='none'; this.nextElementSibling.style.display='flex'; });">
                             
-                            <!-- Záložní text, pokud obrázek ve složce ještě nemáš uložený -->
+                            <!-- Záložní text, pokud obrázek ve složce chybí úplně -->
                             <div style="display: none; width: 100%; height: 100%; align-items: center; justify-content: center; color: #4b5563; font-size: 0.75rem; font-weight: bold; background: #e5e7eb;">
                                 No Image
                             </div>

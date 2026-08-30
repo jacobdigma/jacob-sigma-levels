@@ -112,7 +112,21 @@ export default {
                         </div>
                     </div>
                 
-
+                <!-- PLACEMENT SEKCE: ORIGINAL A CURRENT PLACEMENT -->
+                    <div style="display: flex; gap: 48px; justify-content: center; text-align: center; border-bottom: 1px solid #e1e4e8; padding-bottom: 20px; margin-bottom: 20px; margin-top: 10px;">
+                        <div>
+                            <p style="color: #65676b; font-size: 0.85rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Original Placement</p>
+                            <h3 style="color: #4b5563; margin: 0; font-size: 1.6rem; font-weight: 800;">
+                                {{ entry.originalPlacement ? '#' + entry.originalPlacement : '—' }}
+                            </h3>
+                        </div>
+                        <div>
+                            <p style="color: #65676b; font-size: 0.85rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Current Placement</p>
+                            <h3 style="color: #2563eb; margin: 0; font-size: 1.6rem; font-weight: 800;">
+                                #{{ list.indexOf(entry) + 1 }}
+                            </h3>
+                        </div>
+                    </div>
 
                     <!-- REKORDY -->
                     <h2 style="color: #000000; font-size: 1.6rem; margin: 25px 0 15px 0; font-weight: 700;">Records {{ entry.type === 'main' && entry.minimum ? '(' + entry.minimum + '%)' : '' }}</h2>
@@ -128,21 +142,6 @@ export default {
                     </div>
                 </div>
 
-                                    <!-- PLACEMENT SEKCE: ORIGINAL A CURRENT PLACEMENT -->
-                    <div style="display: flex; gap: 48px; justify-content: center; text-align: center; border-bottom: 1px solid #e1e4e8; padding-bottom: 20px; margin-bottom: 20px; margin-top: 10px;">
-                        <div>
-                            <p style="color: #65676b; font-size: 0.85rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Original Placement</p>
-                            <h3 style="color: #4b5563; margin: 0; font-size: 1.6rem; font-weight: 800;">
-                                {{ entry.originalPlacement ? '#' + entry.originalPlacement : '—' }}
-                            </h3>
-                        </div>
-                        <div>
-                            <p style="color: #65676b; font-size: 0.85rem; margin: 0 0 5px 0; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Current Placement</p>
-                            <h3 style="color: #2563eb; margin: 0; font-size: 1.6rem; font-weight: 800;">
-                                #{{ list.indexOf(entry) + 1 }}
-                            </h3>
-                        </div>
-                    </div>
 
                 <div v-else style="display: flex; justify-content: center; align-items: center; min-height: 200px;">
                     <p style="color: #65676b; font-style: italic;">Select a level to view details</p>

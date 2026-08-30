@@ -38,20 +38,23 @@ export default {
                              boxSizing: 'border-box'
                          }">
                         
-                          <!-- GRAFICKÝ THUMBNAIL BOX (FINÁLNÍ BEZPEČNÁ VERZE) -->
+                                              <!-- GRAFICKÝ THUMBNAIL BOX (ČISTÉ STATICKÉ OBRÁZKY) -->
                         <div style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center;">
                             
-                            <!-- Obrázek volá chytrou JS funkci na spodku souboru -->
-                            <img v-if="level && level.verification && getYouTubeThumb(level.verification)" 
-                                 :src="getYouTubeThumb(level.verification)" 
+                            <!-- Kód se podívá do tvé složky assets a najde obrázek podle jména levelu -->
+                            <img v-if="level && level.name" 
+                                 :src="'./assets/' + level.name.toLowerCase().replace(/\s+/g, '') + '.png'" 
                                  alt="thumb" 
-                                 style="width: 100%; height: 100%; object-fit: cover;">
+                                 style="width: 100%; height: 100%; object-fit: cover;"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             
-                            <div v-else style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #4b5563; font-size: 0.75rem; font-weight: bold; background: #e5e7eb;">
-                                No Video
+                            <!-- Záložní text, pokud obrázek ve složce ještě nemáš uložený -->
+                            <div style="display: none; width: 100%; height: 100%; align-items: center; justify-content: center; color: #4b5563; font-size: 0.75rem; font-weight: bold; background: #e5e7eb;">
+                                No Image
                             </div>
 
                         </div>
+
 
                         
 

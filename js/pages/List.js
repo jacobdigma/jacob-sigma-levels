@@ -37,26 +37,22 @@ export default {
                              marginBottom: '5px',
                              boxSizing: 'border-box'
                          }">
-                        
-                                                 <!-- GRAFICKÝ THUMBNAIL BOX (FINÁLNÍ OPRAVENÁ VERZE) -->
+                                                <!-- GRAFICKÝ THUMBNAIL BOX (FINÁLNÍ VERZE S PODPOROU PRO MEZERY V NÁZVU) -->
                         <div style="width: 130px; height: 73px; border-radius: 6px; overflow: hidden; background: #000; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center;">
                             
-                                                        <!-- Přidali jsme ?v=1, což natvrdo donutí prohlížeč stáhnout nový obrázek z GitHubu -->
+                            <!-- Kód teď bere jméno přesně tak, jak ho máš v databázi, jen malými písmeny a s mezerami -->
                             <img v-if="level && level.name" 
-                                 :src="'./assets/' + level.name.toLowerCase().replace(/\s+/g, '') + '.png?v=1'" 
+                                 :src="'./assets/' + level.name.toLowerCase() + '.png'" 
                                  alt="thumb" 
                                  style="width: 100%; height: 100%; object-fit: cover;"
                                  @error="$event.target.style.display='none'; $event.target.nextElementSibling.style.display='flex';">
-
                             
-                            <!-- Záložní text, pokud obrázek chybí -->
+                            <!-- Záložní text -->
                             <div style="display: none; width: 100%; height: 100%; align-items: center; justify-content: center; color: #4b5563; font-size: 0.75rem; font-weight: bold; background: #e5e7eb;">
                                 No Image
                             </div>
 
                         </div>
-
-
 
                         
 

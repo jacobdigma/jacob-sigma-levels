@@ -44,7 +44,7 @@ export default {
                 },
                 {
                     name: "RobTop Pack",
-                    color: "#0096FF",
+                    color: "#FFD700",
                     levels: ["Deadlocked", "Theory of Everything 2", "Clubstep"]
                 },
                 {

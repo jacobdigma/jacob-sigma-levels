@@ -46,6 +46,11 @@ export default {
                     name: "RobTop Pack",
                     color: "#0096FF",
                     levels: ["Deadlocked", "Theory of Everything 2", "Clubstep"]
+                },
+                {
+                    name: "Verity Pack",
+                    color: "#0096FF",
+                    levels: ["Verity", "Veracity", "Verity Circles"]
                 }
             ]
         };

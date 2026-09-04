@@ -49,7 +49,7 @@ export default {
                 },
                 {
                     name: "Verity Pack",
-                    color: "#FFD700",
+                    color: "#ADD8E6",
                     levels: ["Verity", "Veracity", "Verity Circles"]
                 }
             ]

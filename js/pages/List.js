@@ -209,7 +209,7 @@ export default {
 
             // --- EXTENDED LIST ---      
                 
-                { name: "Theory of Everything", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 90, verification: "", originalPlacement: 46, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
+                { name: "Theory of Everything", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", originalPlacement: 46, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Dash", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", originalPlacement: 47, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Fingerdash", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", originalPlacement: 48, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Xstep", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", originalPlacement: 50, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" },{ user: "🇨🇿 zubnikartacka", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" }] },

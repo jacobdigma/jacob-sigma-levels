@@ -206,7 +206,10 @@ export default {
                 { name: "The Nightmare", author: "Jax", verifier: "🇨🇿 Earl12", points: 0, type: "main", minimum: 81, verification: "", originalPlacement: 27, records: [{ user: "🇻🇳 trumandigma", percent: 100, link: "#" }] },
                 { name: "The Lightning Road", author: "Timeless Real", verifier: "🇨🇿 Earl12", points: 0, type: "main", minimum: 78, verification: "", originalPlacement: 22, records: [{ user: "🇻🇳 trumandigma", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" }] },
                 { name: "Clutterfunk", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "main", minimum: 69, verification: "", originalPlacement: 45, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
-                { name: "Theory of Everything", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "main", minimum: 90, verification: "", originalPlacement: 46, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
+
+            // --- EXTENDED LIST ---      
+                
+                { name: "Theory of Everything", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 90, verification: "", originalPlacement: 46, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Dash", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", originalPlacement: 47, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Fingerdash", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", originalPlacement: 48, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Xstep", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", originalPlacement: 50, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" },{ user: "🇨🇿 zubnikartacka", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" }] },
@@ -216,8 +219,7 @@ export default {
                 { name: "Geometrical Dominator", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", originalPlacement: 54, records: [ { user: "🇨🇿 Krystof", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Time Machine", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", originalPlacement: 55, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" }, { user: "🇲🇾 Cylio", percent: 86, link: "#" } ] },
                 { name: "Cicada", author: "Arunaa", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "https://www.youtube.com/watch?v=0VQtjZnjNlI", originalPlacement: 57, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" } ] },
-               
-// --- EXTENDED LIST ---
+            
 // --- LEGACY LIST ---
             ]
         };

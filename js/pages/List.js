@@ -206,10 +206,8 @@ export default {
                 { name: "iS", author: "Grenate", verifier: "🇻🇳 trumandigma", points: 0, type: "main", minimum: 70, verification: "", originalPlacement: 42, records: [{ user: "🇲🇾 Cylio", percent: 100, link: "#" },{ user: "🇨🇿 Earl12", percent: 100, link: "#" }] },
                 { name: "The Nightmare", author: "Jax", verifier: "🇨🇿 Earl12", points: 0, type: "main", minimum: 81, verification: "", originalPlacement: 27, records: [{ user: "🇻🇳 trumandigma", percent: 100, link: "#" }] },
                 { name: "The Lightning Road", author: "Timeless Real", verifier: "🇨🇿 Earl12", points: 0, type: "main", minimum: 78, verification: "", originalPlacement: 22, records: [{ user: "🇻🇳 trumandigma", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" }] },
-                { name: "Clutterfunk", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "main", minimum: 69, verification: "", originalPlacement: 45, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
-
-            // --- EXTENDED LIST ---      
-                
+            // --- EXTENDED LIST ---              
+                { name: "Clutterfunk", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 69, verification: "", originalPlacement: 45, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },             
                 { name: "Theory of Everything", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", originalPlacement: 46, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Dash", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", originalPlacement: 47, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇨🇿 Thomas", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },
                 { name: "Fingerdash", author: "RobTop", verifier: "🇻🇳 trumandigma", points: 180, type: "extended", minimum: 100, verification: "", originalPlacement: 48, records: [ { user: "🇨🇿 Earl12", percent: 100, link: "#" },{ user: "🇲🇾 Cylio", percent: 100, link: "#" } ] },

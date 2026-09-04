@@ -157,6 +157,7 @@ export default {
             list: [
                 // --- MAIN LIST ---
                 { name: "Poltergeist", author: "Andromeda", verifier: "🇲🇾 Cylio", points: 200, type: "main", minimum: 59, verification: "https://www.youtube.com/watch?v=63sr55FXqsI", originalPlacement: 1, records: [] },
+                { name: "Nine Circles", author: "Zobros", verifier: "🇻🇳 trumandigma", points: 200, type: "main", minimum: 69, verification: "https://www.youtube.com/watch?v=dOdPoU1ncOc", originalPlacement: 2, records: [] },
                 { name: "Jawbreaker", author: "ZenthicAlpha", verifier: "🇨🇿 Earl12", points: 200, type: "main", minimum: 62, verification: "https://www.youtube.com/watch?v=lyzBbyVT4-Y", originalPlacement: 2, records: [] },
                 { name: "Veracity", author: "BlueLite", verifier: "🇻🇳 trumandigma", points: 200, type: "main", minimum: 68, verification: "https://www.youtube.com/watch?v=AvCHbKpv9m4", originalPlacement: 1, records: [] },
                 { name: "Verity", author: "Serponge", verifier: "🇻🇳 trumandigma", points: 200, type: "main", minimum: 73, verification: "https://www.youtube.com/watch?v=dmD8T5zht7A", originalPlacement: 1, records: [{ user: "🇨🇿 Earl12", percent: 100, link: "https://www.youtube.com/watch?v=2wWEXqaOIjQ" }] },
